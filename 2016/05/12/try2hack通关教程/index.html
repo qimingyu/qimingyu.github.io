@@ -1,0 +1,972 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络攻击,try2hack," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="初衷既然学完了WebGoat系列教程，下面来综合实战演练一下，同时也是检测一下自己的学习成果如何。找了这样的一个网站，try2hack，这是一个专门用来做网络攻击练习的网站，虽然比较老了，但用来做练习还是可以的。该网站一共有13道关卡，难度是逐步递增的，下面我们逐一开始挑战。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="try2hack通关教程">
+<meta property="og:url" content="http://qimingyu.github.io/2016/05/12/try2hack通关教程/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="初衷既然学完了WebGoat系列教程，下面来综合实战演练一下，同时也是检测一下自己的学习成果如何。找了这样的一个网站，try2hack，这是一个专门用来做网络攻击练习的网站，虽然比较老了，但用来做练习还是可以的。该网站一共有13道关卡，难度是逐步递增的，下面我们逐一开始挑战。">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/5.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/6.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/7.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/8.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/9.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/10.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/11.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/12.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/13.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/33.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/34.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/35.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/36.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/37.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/14.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/15.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/16.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/17.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/18.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/38.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/39.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/48.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/40.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/19.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/41.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/42.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/43.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/44.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/45.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/46.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/47.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/20.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/21.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/22.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/23.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/24.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/25.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/26.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/27.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/28.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/29.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/30.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/31.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/try2hack/32.png">
+<meta property="og:updated_time" content="2016-05-17T07:42:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="try2hack通关教程">
+<meta name="twitter:description" content="初衷既然学完了WebGoat系列教程，下面来综合实战演练一下，同时也是检测一下自己的学习成果如何。找了这样的一个网站，try2hack，这是一个专门用来做网络攻击练习的网站，虽然比较老了，但用来做练习还是可以的。该网站一共有13道关卡，难度是逐步递增的，下面我们逐一开始挑战。">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/try2hack/2.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> try2hack通关教程 | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                try2hack通关教程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-12T11:25:36+08:00" content="2016-05-12">
+              2016-05-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用安全/" itemprop="url" rel="index">
+                    <span itemprop="name">应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/12/try2hack通关教程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/try2hack通关教程/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>既然学完了WebGoat系列教程，下面来综合实战演练一下，同时也是检测一下自己的学习成果如何。<br>找了这样的一个网站，<a href="http://www.try2hack.nl/" target="_blank" rel="external">try2hack</a>，这是一个专门用来做网络攻击练习的网站，虽然比较老了，但用来做练习还是可以的。该网站一共有13道关卡，难度是逐步递增的，下面我们逐一开始挑战。<br><a id="more"></a></p>
+<h2 id="实战攻击"><a href="#实战攻击" class="headerlink" title="实战攻击"></a>实战攻击</h2><p>这是该网站开始的页面：<br><img src="/images/try2hack/2.png" alt="2"></p>
+<h3 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h3><p>这是第一关，网址：<a href="http://www.try2hack.nl/levels/" target="_blank" rel="external">http://www.try2hack.nl/levels/</a><br><img src="/images/try2hack/3.png" alt="3"><br>上图要求我们输入密码然后通过。我试着随便输入了两次密码，均弹出如下提示：<br><img src="/images/try2hack/4.png" alt="4"></p>
+<p>点击确定之后就跳转到了<a href="http://www.disney.com/" target="_blank" rel="external">迪斯尼</a>的网站。此时burpsuit才拦截到浏览器发给服务器的包。也就是说验证过程是在拦截到包之前发生的。<br>由此推断这是一个客户端的验证程序，并且是用JS验证密码的。我们知道所有在客户端进行的验证程序都是不安全的。果然，当查看该页面的源代码，看到了如下JS的代码片段：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="xml"><span class="comment">&lt;!--</span><br><span class="line">  function Try(passwd) &#123;   </span><br><span class="line">    if (passwd =="h4x0r") &#123;</span><br><span class="line">      alert("Alright! On to level 2...");   </span><br><span class="line">      location.href = "level2-xfdgnh.xhtml";</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      alert("The password is incorrect. Please don't try again.");</span><br><span class="line">      location.href = "http://www.disney.com/";</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  //--&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>由IF判断语句可以看出密码为h4x0r，于是输入密码：h4x0r，然后提交：<br><img src="/images/try2hack/1.png" alt="1"><br>第一关就轻松通过了。<br><strong>总结：这一关主要考查Html的页面源代码和JS。</strong></p>
+<h3 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h3><p>网址：<a href="http://www.try2hack.nl/levels/level2-xfdgnh.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level2-xfdgnh.xhtml</a><br>第二关的页面如下：<br><img src="/images/try2hack/5.png" alt="5"><br>可以看出是需要我们输入用户名和密码，然后提交。但有一个问题就是当我们输入用户名和密码之后，点击下面第三个提交的按钮却没有反应。<br>于是我们打开burpsuit抓包试试，点击下面第三个按钮，burpsuit抓不到任何数据，也就是说这个按钮没有提交任何数据给服务器。那么我们需要看看该按钮所对应的function是什么了。结果在该页面单击鼠标右键希望查看该页面源代码的时候，页面却弹出了这样一个提示：<br><img src="/images/try2hack/6.png" alt="6"><br>也就是说在该页面鼠标右键是禁止点击的。观察到页面弹出提示的同时，输入用户名和密码的部分也消失了，同时burpsuit捕获到了数据包。不要紧，我们还有firebug，按F12打开firebug，可以看到如下代码，并且发现整个页面都处于JS的function中，原来如此！<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="xml"><span class="comment">&lt;!--</span><br><span class="line">  passwd="ItIsSoEasy";</span><br><span class="line">  function disable_right_click(e) &#123;</span><br><span class="line">    var browser = navigator.appName.substring ( 0, 9 );</span><br><span class="line">    var event_number = 0;</span><br><span class="line">    if (browser=="Microsoft")</span><br><span class="line">      event_number = event.button;</span><br><span class="line">    else</span><br><span class="line">      event_number = e.which;</span><br><span class="line">    if ( event_number==2 || event_number==3 || event_number==4) &#123;</span><br><span class="line">      alert ("Right/middle mousebutton is disabled");</span><br><span class="line">      return (false);</span><br><span class="line">    &#125;</span><br><span class="line">    return (true);</span><br><span class="line">  &#125;</span><br><span class="line">  function check_mousekey () &#123;</span><br><span class="line">    var mouse_key = 93;</span><br><span class="line">    var keycode = event.keyCode;</span><br><span class="line">    if ( keycode == mouse_key )</span><br><span class="line">      alert ( "Mouse Key Is Disabled" );</span><br><span class="line">  &#125;</span><br><span class="line">  function trap_page_mouse_key_events () &#123;</span><br><span class="line">    var browser = navigator.appName.substring ( 0, 9 );</span><br><span class="line">    document.onmousedown = disable_right_click;</span><br><span class="line">    if ( browser == "Microsoft" )</span><br><span class="line">      document.onkeydown = check_mousekey;</span><br><span class="line">    else</span><br><span class="line">      document.captureEvents( Event.MOUSEDOWN );</span><br><span class="line">  &#125;</span><br><span class="line">  window.onload = trap_page_mouse_key_events;</span><br><span class="line">  //--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>以上这段JS的目的是定义我们不能使用鼠标右键，这个问题可以很容易的解决：我们只需用burpsuit拦截服务器的响应，修改响应代码并去掉该JS中的第一段Function代码，然后让在浏览器端正常加载就可以了。可是这样做了之后，虽然可以正常查看页面源代码了，可是通过查看页面源代码好像无所收获。然后我们继续通过burpsuit观察：<br><img src="/images/try2hack/7.png" alt="7"><br>以上是加载该页面时拦截到的两个请求，可看到该页面是分两步加载的。第二部分是一个flash文件，而这个flash文件正是我们输入用户名和密码的地方。现在单独分析该flash文件，根据URL把该flash文件下载到本地，用记事本打开发现是乱码。于是考虑可能需要反编译该flash文件，看看它对应的源码是什么。接着然后我们找了一个能提供<a href="http://www.showmycode.com/" target="_blank" rel="external">在线反编译的网站</a>，在该网站中将我们flash的URL输入进去，出现如下反编译后的结果：<br><img src="/images/try2hack/8.png" alt="8"><br>可以看到该函数是一个判断语句，当用户名为：try2hack，密码为：irtehh4x0r! 时通过，于是输入之后，第二关就过了。<br><strong>总结：这一关主要考查网页flash文件的反编译。</strong></p>
+<h3 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h3><p>网址：<a href="http://www.try2hack.nl/levels/level3-.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level3-.xhtml</a><br>刚刚进入第三关，展现在眼前的就是这样一个页面：<br><img src="/images/try2hack/9.png" alt="9"><br>尝试随便输入几个密码，输入错误之后，又进入了迪斯尼的页面。。。<br>并且发现从第二关跳到第三关的过程中burpsuit居然拦截不到任何请求，因此估计这又是一个客户端的JS验证。观察到第二关通过时所跳转的URL为：</p>
+<blockquote>
+<p><a href="http://www.try2hack.nl/levels/level3-.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level3-.xhtml</a></p>
+</blockquote>
+<p>发现用浏览器打开该URL后，右键居然看不到源代码。好吧，我把你用迅雷下载下来再用记事本打开总看的到源代码吧，果然，源代码是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="xml"><span class="comment">&lt;!--</span><br><span class="line">  pwd = prompt("Please enter the password for level 3:","");</span><br><span class="line">  if (pwd==PASSWORD)&#123;</span><br><span class="line">    alert("Allright!\nEntering Level 4 ...");</span><br><span class="line">    location.href = CORRECTSITE;</span><br><span class="line">  &#125;</span><br><span class="line">  else &#123;</span><br><span class="line">    alert("WRONG!\nBack to disneyland !!!");</span><br><span class="line">    location.href = WRONGSITE;</span><br><span class="line">  &#125;</span><br><span class="line">  PASSWORD="AbCdE";</span><br><span class="line">  CORRECTSITE="level4-sfvfxc.xhtml";</span><br><span class="line">  WRONGSITE="http://www.disney.com";</span><br><span class="line">  //--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>输入密码：AbCdE，居然显示不对？！然后我就很疑惑了，其值是不是在程序运行过程中有修改呢？于是我在这段脚本里面设断点，希望能够通过firebug调试观察password的值，可是设好断点，点击之后，根本不在断点处停下来，这是怎么回事？于是我猜想，这说明我们点击确定的代码根本没有运行到这里就被判断了。然后再看看firebug里面的脚本：<br><img src="/images/try2hack/10.png" alt="10"><br>居然有两个脚本，点开另外一个脚本，显示如下内容：<br><img src="/images/try2hack/11.png" alt="11"><br>我感觉我被欺骗了，也就是说，真正运行的是后面这段脚本！输入密码：try2hackrawks，果然顺利通过。<br>但这里有一个疑问，后面这一段应该称不上脚本，也就是说最终的判断还是在level3-.xhtml中实现的，那这里JavaScript里面的密码是如何被赋值到level3-.xhtml中的呢？我猜想JavaScript中应该是一个预先的预定义值，相当于初始化变量，然后其实后面的语句其实是对password变量值的修改，也就是说程序时通过第一次的值进行验证的。<br>为了检验我的猜想，再次设断点，运行，停下来了，原来之前停不下来是因为断点位置没有设好，那么下图则看的很清晰了：<br><img src="/images/try2hack/12.png" alt="12"><br><strong>总结：这一关主要考查获取页面源代码和JS运行原理和流程。</strong></p>
+<h3 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h3><p>网址：<a href="http://www.try2hack.nl/levels/level4-kdnvxs.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level4-kdnvxs.xhtml</a><br>来到第四关，展现在眼前的居然是一片白板！？纳尼？<br><img src="/images/try2hack/13.png" alt="13"><br>查看页面源代码显示如下：<br><img src="/images/try2hack/33.png" alt="33"><br>以上代码绿色部分表示除IE外其他浏览器都能识别，详细说明见<a href="http://www.cnblogs.com/thinkingthigh/archive/2013/06/19/3144239.html" target="_blank" rel="external">这里</a>。从该代码可以看出这是一个Java Applet的小程序，并且该小程序的URL地址为：<a href="http://try2hack.nl/levels/PasswdLevel4.class" target="_blank" rel="external">http://try2hack.nl/levels/PasswdLevel4.class</a>  。而页面之所以不显示出来，是因为我们没有装Java runtime environment。但是后来即使装了，也是这样的报错：<br><img src="/images/try2hack/34.png" alt="34"><br>为了解决这个错误，我把谷歌百度翻了个底朝天，并且至少试了四种不同的浏览器，最后依然没有解决。但总体上该报错应该是版本问题，现在很少有浏览器支持Applet了，还有一个可能性是需要小程序有正式的签名，不得而知。把该.class文件下载下来，反编译后得到源码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.applet.Applet;</span><br><span class="line"><span class="keyword">import</span> java.applet.AppletContext;</span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.MalformedURLException;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.EventObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PasswdLevel4</span> <span class="keyword">extends</span> <span class="title">Applet</span></span><br><span class="line">    <span class="keyword">implements</span> <span class="title">ActionListener</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> URL finalurl;</span><br><span class="line">    String infile;</span><br><span class="line">    String inuser[];</span><br><span class="line">    <span class="keyword">int</span> totno;</span><br><span class="line">    InputStream countConn;</span><br><span class="line">    BufferedReader countData;</span><br><span class="line">    URL inURL;</span><br><span class="line">    TextField txtlogin;</span><br><span class="line">    Label label1;</span><br><span class="line">    Label label2;</span><br><span class="line">    Label label3;</span><br><span class="line">    TextField txtpass;</span><br><span class="line">    Label lblstatus;</span><br><span class="line">    Button ButOk;</span><br><span class="line">    Button ButReset;</span><br><span class="line">    Label lbltitle;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PasswdLevel4</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        inuser = <span class="keyword">new</span> String[<span class="number">22</span>];</span><br><span class="line">        totno = <span class="number">0</span>;</span><br><span class="line">        countConn = <span class="keyword">null</span>;</span><br><span class="line">        countData = <span class="keyword">null</span>;</span><br><span class="line">        inURL = <span class="keyword">null</span>;</span><br><span class="line">        txtlogin = <span class="keyword">new</span> TextField();</span><br><span class="line">        label1 = <span class="keyword">new</span> Label();</span><br><span class="line">        label2 = <span class="keyword">new</span> Label();</span><br><span class="line">        label3 = <span class="keyword">new</span> Label();</span><br><span class="line">        txtpass = <span class="keyword">new</span> TextField();</span><br><span class="line">        lblstatus = <span class="keyword">new</span> Label();</span><br><span class="line">        ButOk = <span class="keyword">new</span> Button();</span><br><span class="line">        ButReset = <span class="keyword">new</span> Button();</span><br><span class="line">        lbltitle = <span class="keyword">new</span> Label();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ButOk_ActionPerformed</span><span class="params">(ActionEvent actionevent)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= totno / <span class="number">2</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(txtlogin.getText().trim().toUpperCase().intern() == inuser[<span class="number">2</span> * (i - <span class="number">1</span>) + <span class="number">2</span>].trim().toUpperCase().intern() &amp;&amp; txtpass.getText().trim().toUpperCase().intern() == inuser[<span class="number">2</span> * (i - <span class="number">1</span>) + <span class="number">3</span>].trim().toUpperCase().intern())</span><br><span class="line">            &#123;</span><br><span class="line">                lblstatus.setText(<span class="string">"Login Success, Loading.."</span>);</span><br><span class="line">                flag = <span class="keyword">true</span>;</span><br><span class="line">                String s = inuser[<span class="number">1</span>].trim().intern();</span><br><span class="line">                String s1 = getParameter(<span class="string">"targetframe"</span>);</span><br><span class="line">                <span class="keyword">if</span>(s1 == <span class="keyword">null</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    s1 = <span class="string">"_self"</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">try</span></span><br><span class="line">                &#123;</span><br><span class="line">                    finalurl = <span class="keyword">new</span> URL(getCodeBase(), s);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">catch</span>(MalformedURLException _ex)</span><br><span class="line">                &#123;</span><br><span class="line">                    lblstatus.setText(<span class="string">"Bad URL"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                getAppletContext().showDocument(finalurl, s1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!flag)</span><br><span class="line">        &#123;</span><br><span class="line">            lblstatus.setText(<span class="string">"Invaild Login or Password"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ButReset_ActionPerformed</span><span class="params">(ActionEvent actionevent)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        txtlogin.setText(<span class="string">""</span>);</span><br><span class="line">        txtpass.setText(<span class="string">""</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent actionevent)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        Object obj = actionevent.getSource();</span><br><span class="line">        <span class="keyword">if</span>(obj == ButOk)</span><br><span class="line">        &#123;</span><br><span class="line">            ButOk_ActionPerformed(actionevent);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(obj == ButReset)</span><br><span class="line">        &#123;</span><br><span class="line">            ButReset_ActionPerformed(actionevent);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        ButOk.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">        ButReset.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">        txtlogin.setVisible(<span class="keyword">false</span>);</span><br><span class="line">        txtpass.setVisible(<span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inFile</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            countConn = inURL.openStream();</span><br><span class="line">            countData = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(countConn));</span><br><span class="line">            String s;</span><br><span class="line">            <span class="keyword">while</span>((s = countData.readLine()) != <span class="keyword">null</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(totno &lt; <span class="number">21</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    totno = totno + <span class="number">1</span>;</span><br><span class="line">                    inuser[totno] = s;</span><br><span class="line">                    s = <span class="string">""</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    lblstatus.setText(<span class="string">"Cannot Exceed 10 users, Applet fail start!"</span>);</span><br><span class="line">                    destroy();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(IOException ioexception)</span><br><span class="line">        &#123;</span><br><span class="line">            getAppletContext().showStatus(<span class="string">"IO Error:"</span> + ioexception.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            countConn.close();</span><br><span class="line">            countData.close();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(IOException ioexception1)</span><br><span class="line">        &#123;</span><br><span class="line">            getAppletContext().showStatus(<span class="string">"IO Error:"</span> + ioexception1.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        setLayout(<span class="keyword">null</span>);</span><br><span class="line">        setSize(<span class="number">361</span>, <span class="number">191</span>);</span><br><span class="line">        add(txtlogin);</span><br><span class="line">        txtlogin.setBounds(<span class="number">156</span>, <span class="number">72</span>, <span class="number">132</span>, <span class="number">24</span>);</span><br><span class="line">        label1.setText(<span class="string">"Please Enter Login Name &amp; Password"</span>);</span><br><span class="line">        label1.setAlignment(<span class="number">1</span>);</span><br><span class="line">        add(label1);</span><br><span class="line">        label1.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        label1.setBounds(<span class="number">41</span>, <span class="number">36</span>, <span class="number">280</span>, <span class="number">24</span>);</span><br><span class="line">        label2.setText(<span class="string">"Login"</span>);</span><br><span class="line">        add(label2);</span><br><span class="line">        label2.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        label2.setBounds(<span class="number">75</span>, <span class="number">72</span>, <span class="number">36</span>, <span class="number">24</span>);</span><br><span class="line">        label3.setText(<span class="string">"Password"</span>);</span><br><span class="line">        add(label3);</span><br><span class="line">        add(txtpass);</span><br><span class="line">        txtpass.setEchoChar(<span class="string">'*'</span>);</span><br><span class="line">        txtpass.setBounds(<span class="number">156</span>, <span class="number">108</span>, <span class="number">132</span>, <span class="number">24</span>);</span><br><span class="line">        lblstatus.setAlignment(<span class="number">1</span>);</span><br><span class="line">        label3.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        label3.setBounds(<span class="number">75</span>, <span class="number">108</span>, <span class="number">57</span>, <span class="number">21</span>);</span><br><span class="line">        add(lblstatus);</span><br><span class="line">        lblstatus.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        lblstatus.setBounds(<span class="number">14</span>, <span class="number">132</span>, <span class="number">344</span>, <span class="number">24</span>);</span><br><span class="line">        ButOk.setLabel(<span class="string">"OK"</span>);</span><br><span class="line">        add(ButOk);</span><br><span class="line">        ButOk.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        ButOk.setBounds(<span class="number">105</span>, <span class="number">156</span>, <span class="number">59</span>, <span class="number">23</span>);</span><br><span class="line">        ButReset.setLabel(<span class="string">"Reset"</span>);</span><br><span class="line">        add(ButReset);</span><br><span class="line">        ButReset.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        ButReset.setBounds(<span class="number">204</span>, <span class="number">156</span>, <span class="number">59</span>, <span class="number">23</span>);</span><br><span class="line">        lbltitle.setAlignment(<span class="number">1</span>);</span><br><span class="line">        add(lbltitle);</span><br><span class="line">        lbltitle.setFont(<span class="keyword">new</span> Font(<span class="string">"Dialog"</span>, <span class="number">1</span>, <span class="number">12</span>));</span><br><span class="line">        lbltitle.setBounds(<span class="number">12</span>, <span class="number">14</span>, <span class="number">336</span>, <span class="number">24</span>);</span><br><span class="line">        String s = getParameter(<span class="string">"title"</span>);</span><br><span class="line">        lbltitle.setText(s);</span><br><span class="line">        ButOk.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">        ButReset.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">        infile = <span class="keyword">new</span> String(<span class="string">"level4"</span>);</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            inURL = <span class="keyword">new</span> URL(getCodeBase(), infile);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(MalformedURLException _ex)</span><br><span class="line">        &#123;</span><br><span class="line">            getAppletContext().showStatus(<span class="string">"Bad Counter URL:"</span> + inURL);</span><br><span class="line">        &#125;</span><br><span class="line">        inFile();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了将该class文件嵌入进去html，我自己又写了一个PasswdLevel.html，代码如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">applet</span> <span class="attr">code</span>=<span class="string">"PasswdLevel4.class"</span> <span class="attr">width</span>=<span class="string">500</span> <span class="attr">height</span>=<span class="string">500</span>&gt;</span> <span class="tag">&lt;/<span class="name">applet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这时可以用如下命令查看该Applet小程序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appletviewer PasswdLevel4.html</span><br></pre></td></tr></table></figure></p>
+<p>提示无法进行初始化，然后仔细看java源代码，发现程序读进去了一个level4的文件，于是按照URL地址:<a href="http://try2hack.nl/levels/level4" target="_blank" rel="external">http://try2hack.nl/levels/level4</a> 将该文件下载下来。此时的文档结构目录为：<br><img src="/images/try2hack/35.png" alt="35"><br>此时再用上面的命令查看，则终于显示出来了：<br><img src="/images/try2hack/36.png" alt="36"><br>这里需要输入的用户名密码就是level4里面的用户名和密码，因为程序要验证，而就是通过这个文件读进去的，文件打开后内容如下：<br><img src="/images/try2hack/37.png" alt="37"><br>因此输入用户名：appletking，密码：pieceofcake，该关就通过了。<br><strong>总结：这一关主要考查Java的反编译和Applet程序嵌入网页的机制。</strong></p>
+<h3 id="Level-5"><a href="#Level-5" class="headerlink" title="Level 5"></a>Level 5</h3><p>网址：<a href="http://www.try2hack.nl/levels/level5-fdvbdf.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level5-fdvbdf.xhtml</a><br>来到第五关：<br><img src="/images/try2hack/14.png" alt="14"><br>该关要求下载一个东西，然后输入正确的用户名和密码。<br>下载下来之后，发现是一个exe的可执行文件，然而该可执行文件在win64位机器上面跑不起来，提示不兼容。于是在win32的虚拟机运行该文件，提示缺少VBRUN300.DLL，于是又去网上下载这个dll，安装后再打开该软件，呈现如下界面：<br><img src="/images/try2hack/15.png" alt="15"><br>尝试输入几个用户名和密码，均提示不正确，因此这绝对是一个软件的破解了，软件逆向之后找到验证的部分就行了。于是奠出我们的神器Ollydbg。Ollydbg逆向的时候却提示这不是一个有效的可执行文件。<br>于是查资料发现这是一个VB3.0程序，比较老，需要用专门的VB3.0反编译工具而不能用OD。于是又得去找专门的VB3.0的反编译工具，在这里我不得不吐槽一下国内软件的下载环境，这是像坨屎一样垃圾，不是有毒就是给你装一堆稀巴烂的软件，真是深恶痛绝！把时间都浪费在这些事情上面，给初学者带来巨大的麻烦！<br>最终下载的是VB3.0 Decompile，下载下来之后又学了半天怎么用，最后把我们的exe文件导入，选择输出地址之后，得到了两个文件。一个文件是main.txt,另一个文件是Level5.bat。<br>显示内容分别如下：<br>main.txt:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Global Const gc0006 = <span class="string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,:;-*+=~|&amp;!_$#@()[]&#123;&#125;&lt;\/&gt;"</span></span><br><span class="line">Global Const gc000A = <span class="string">"http://www.try2hack.nl/levels/level6-ksghvb.xhtml"</span></span><br></pre></td></tr></table></figure></p>
+<p>Level5.bat:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">If  edtUsername = Mid(gc0006, <span class="number">56</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">28</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">35</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">3</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">44</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">11</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">13</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">21</span>, <span class="number">1</span>) Then</span><br><span class="line">  If  edtPassword = Mid(gc0006, <span class="number">45</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">48</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">25</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">32</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">15</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">40</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">25</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">14</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">19</span>, <span class="number">1</span>) Then</span><br><span class="line">    MsgBox <span class="string">"Level 6 can be found at: "</span> &amp; Left$(gc000A, <span class="number">37</span>) &amp; Mid(gc0006, <span class="number">21</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">14</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">29</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">32</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">12</span>, <span class="number">1</span>) &amp; Mid(gc0006, <span class="number">14</span>, <span class="number">1</span>) &amp; Mid(gc000A, <span class="number">44</span>, <span class="number">6</span>), <span class="number">0</span>, <span class="string">"Horray!"</span></span><br><span class="line">    End</span><br><span class="line">  End If</span><br><span class="line">End If</span><br></pre></td></tr></table></figure></p>
+<p>很明显，这相当于把用户名和密码告诉我们了，按照程序照着对应的字符去找就行了，最后输入用户名：Try2Hack，密码：ILoveDodi，得到如下界面就过关了。<br><img src="/images/try2hack/16.png" alt="16"><br><strong>总结：这一关主要考查VB3.0程序的反编译。</strong></p>
+<h3 id="Level-6"><a href="#Level-6" class="headerlink" title="Level 6"></a>Level 6</h3><p>网址：<a href="http://www.try2hack.nl/levels/level6-kdsvbd.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level6-kdsvbd.xhtml</a><br>来到第六关，这次变成了VB6.0程序：<br><img src="/images/try2hack/17.png" alt="17"><br>下载下来之后打开，360杀毒软件也真是狠，报告有木马，一定要删除刚下载的文件，最后把所有360程序全部关闭了。才能把程序打开。结果打开程序又出现问题，提示缺少两个组件，分别下载安装MSWINSCK.OCX和RICHTX32.OCX后才总算打开了：<br><img src="/images/try2hack/18.png" alt="18"><br>可以逆向吗？OD打开后看到的景象真是惨不忍睹：<br><img src="/images/try2hack/38.png" alt="38"><br>应该是加壳了，如果直接脱壳的话，应该能解出来，但我对这块不熟。<br>观察发现该客户端软件需要连接服务器进行验证，有网络的发包过程，因此可以截取其数据包进行观察。这里存在一个问题就是如果用burpsuit进行截取的话，软件的请求格式由于不是正规的http协议，无法解析。因此考虑用Wireshark，抓包如下：<br><img src="/images/try2hack/39.png" alt="39"><br>可以看到中间的http协议增加了一个中间层，是加密的数据，提取出来如下所示：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(ENCRYPTION TYPE)</span><br><span class="line"><span class="function">B*C*N**<span class="title">N</span></span><br><span class="line"></span><br><span class="line"><span class="params">(USERNAME)</span></span><br><span class="line">aaabb aaaaa aaaab abbab ababb <span class="title">aaaab</span></span><br><span class="line"></span><br><span class="line"><span class="params">(PASSWORD)</span></span><br><span class="line">aabaa abbaa aaaba baaaa babba abbba baaba abaaa abbab abbaa baaaa aaaaa babaa abaab <span class="title">baaab</span></span><br><span class="line"></span><br><span class="line"><span class="params">(PAGE)</span></span><br><span class="line">babab aabab abaab abbab aabbb aaaba</span></span><br></pre></td></tr></table></figure></p>
+<p>谷歌之后这里采用的是培根加密，具体介绍参见：<a href="http://h2g2.com/edited_entry/A9837183" target="_blank" rel="external">http://h2g2.com/edited_entry/A9837183</a><br>根据如下密码表对应进行一一解密：<br><img src="/images/try2hack/48.png" alt="48"><br>最后解密出来的结果为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户名：dabomb </span><br><span class="line">密码：encryptionrawks </span><br><span class="line">URL：xfkohc</span><br></pre></td></tr></table></figure></p>
+<p>输入之后就通过了：<br><img src="/images/try2hack/40.png" alt="40"><br><strong>总结：这一节主要考查软件的脱壳或者从中间抓包截取数据和对一些加解密算法的了解</strong></p>
+<h3 id="Level-7"><a href="#Level-7" class="headerlink" title="Level 7"></a>Level 7</h3><p>网址：<a href="http://www.try2hack.nl/levels/level7-xfkohc.php" target="_blank" rel="external">http://www.try2hack.nl/levels/level7-xfkohc.php</a><br><img src="/images/try2hack/19.png" alt="19"><br>打开之后它要求我们用IE7.66版本的浏览器。可以人为修改请求头进行欺骗。<br>第一步正常请求头应为：<br><img src="/images/try2hack/41.png" alt="41"><br>修改为IE7.66，如下（注意User-Agent字段）：<br><img src="/images/try2hack/42.png" alt="42"><br>结果显示：<br><img src="/images/try2hack/43.png" alt="43"><br>服务器传过来要求操作系统为Linux系统，继续修改，在请求头中增加Linux：<br><img src="/images/try2hack/44.png" alt="44"><br>反馈如下，服务器对跳转页面还有要求：<br><img src="/images/try2hack/45.png" alt="45"><br>继续改，增加一个Referer字段，如下：<br><img src="/images/try2hack/46.png" alt="46"><br>最后得到结果如下：<br><img src="/images/try2hack/47.png" alt="47"><br>通过了。<br><strong>总结：该关主要考查对http请求头的构造和理解，其实都是可以伪装的。</strong></p>
+<h3 id="Level-8"><a href="#Level-8" class="headerlink" title="Level 8"></a>Level 8</h3><p>网址：<a href="http://try2hack.nl/levels/level8-balnrg.xhtml" target="_blank" rel="external">http://try2hack.nl/levels/level8-balnrg.xhtml</a><br>第八关要求输入用户名和密码：<br><img src="/images/try2hack/20.png" alt="20"><br>查看页面源代码：<br><img src="/images/try2hack/21.png" alt="21"><br>因此这是一个phf漏洞的利用，具体介绍可参见<a href="https://pt.wikipedia.org/wiki/Phf" target="_blank" rel="external">维基百科</a>。<br>利用过程为输入如下URL：</p>
+<blockquote>
+<p><a href="http://try2hack.nl/cgi-bin/phf?Qalias=%0A/bin/cat%20/etc/passwd" target="_blank" rel="external">http://try2hack.nl/cgi-bin/phf?Qalias=%0A/bin/cat%20/etc/passwd</a></p>
+</blockquote>
+<p>得到一份如下的文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root:khXGN7s.ldaJI:<span class="number">0</span>:<span class="number">0</span>::<span class="number">0</span>:<span class="number">0</span>:Charlie &amp;:<span class="regexp">/root:/u</span>sr/local/bin/bash</span><br><span class="line">daemon:*:<span class="number">1</span>:<span class="number">1</span>::<span class="number">0</span>:<span class="number">0</span>:Owner <span class="keyword">of</span> many system processes:<span class="regexp">/root:/</span>sbin/nologin</span><br><span class="line">operator:*:<span class="number">2</span>:<span class="number">5</span>::<span class="number">0</span>:<span class="number">0</span>:System Operator:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">bin:*:<span class="number">3</span>:<span class="number">7</span>::<span class="number">0</span>:<span class="number">0</span>:Binaries Commands and Source:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">tty:*:<span class="number">4</span>:<span class="number">65533</span>::<span class="number">0</span>:<span class="number">0</span>:Tty Sandbox:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">kmem:*:<span class="number">5</span>:<span class="number">65533</span>::<span class="number">0</span>:<span class="number">0</span>:KMem Sandbox:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">games:*:<span class="number">7</span>:<span class="number">13</span>::<span class="number">0</span>:<span class="number">0</span>:Games pseudo-user:<span class="regexp">/usr/g</span>ames:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">news:*:<span class="number">8</span>:<span class="number">8</span>::<span class="number">0</span>:<span class="number">0</span>:News Subsystem:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">man:*:<span class="number">9</span>:<span class="number">9</span>::<span class="number">0</span>:<span class="number">0</span>:Mister Man Pages:<span class="regexp">/usr/</span>share/man:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">sshd:*:<span class="number">22</span>:<span class="number">22</span>::<span class="number">0</span>:<span class="number">0</span>:Secure Shell Daemon:<span class="regexp">/var/</span>empty:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">smmsp:*:<span class="number">25</span>:<span class="number">25</span>::<span class="number">0</span>:<span class="number">0</span>:Sendmail Submission User:<span class="regexp">/var/</span>spool/clientmqueue:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">mailnull:*:<span class="number">26</span>:<span class="number">26</span>::<span class="number">0</span>:<span class="number">0</span>:Sendmail Default User:<span class="regexp">/var/</span>spool/mqueue:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">bind:*:<span class="number">53</span>:<span class="number">53</span>::<span class="number">0</span>:<span class="number">0</span>:Bind Sandbox:<span class="regexp">/:/</span>sbin/nologin</span><br><span class="line">uucp:*:<span class="number">66</span>:<span class="number">66</span>::<span class="number">0</span>:<span class="number">0</span>:UUCP pseudo-user:<span class="regexp">/var/</span>spool/uucppublic:<span class="regexp">/usr/</span>libexec/uucp/uucico xten:*:<span class="number">67</span>:<span class="number">67</span>::<span class="number">0</span>:<span class="number">0</span>:X<span class="number">-10</span> daemon:<span class="regexp">/usr/</span>local/xten:<span class="regexp">/sbin/</span>nologin</span><br><span class="line">pop:*:<span class="number">68</span>:<span class="number">6</span>::<span class="number">0</span>:<span class="number">0</span>:Post Office Owner:<span class="regexp">/nonexistent:/</span>sbin/nologin</span><br><span class="line">www:*:<span class="number">80</span>:<span class="number">80</span>::<span class="number">0</span>:<span class="number">0</span>:World Wide Web Owner:<span class="regexp">/nonexistent:/</span>sbin/nologin</span><br><span class="line">nobody:*:<span class="number">65534</span>:<span class="number">65534</span>::<span class="number">0</span>:<span class="number">0</span>:Unprivileged user:<span class="regexp">/nonexistent:/</span>sbin/nologin</span><br></pre></td></tr></table></figure>
+<p>如果搞过密码档的话，这些东西就是经过系统加密的网站注册用户资料文档，其中冒号前面是用户名，用户名是不加密的，冒号后面就是该用户的密码，不过已经被系统加密。绝大部分Unix系统都使用DES加密方式，经过处理的密码应该是13位。注意看第一条记录，这样就只需解密用户root对应的密码“khXGN7s.ldaJI”就行了。<br>用什么解密呢？网上大部分的在线DES加密解密网站都是需要我们自己输入密钥的，因此这些网站对我们破解该密码一点卵用都没有，知道密钥了我还要你破解个毛线啊！后来我找了半天，终于找到了这个软件：<a href="http://www.openwall.com/john/" target="_blank" rel="external">John the Ripper password cracker</a>，具体用法请<a href="http://blog.sina.com.cn/s/blog_8cb5c0e501015w0k.html" target="_blank" rel="external">参考此文</a>。<br>最后我用的是穷举模式进行的破解，得到结果如下：<br><img src="/images/try2hack/22.png" alt="22"><br>可以看到用户名是：root，密码是：arse，顺利通过。<br><strong>总结：该关主要考查对pfh漏洞的利用以及EDS密码的破解。</strong></p>
+<h3 id="Level-9"><a href="#Level-9" class="headerlink" title="Level 9"></a>Level 9</h3><p>网址：<a href="http://try2hack.nl/levels/level9-gnapei.xhtml" target="_blank" rel="external">http://try2hack.nl/levels/level9-gnapei.xhtml</a><br>这是第九关：<br><img src="/images/try2hack/23.png" alt="23"><br>同样是输入用户名和密码。<br>用burpsuit拦截后分析，观察到其请求头如下：<br><img src="/images/try2hack/24.png" alt="24"><br>观察cookie，会发现其很有特色，分别是用户名、密码和是否被验证的标志位。<br>按照会话管理的常理来说，一般会话的cookie检验通过了的话，是不需要检验浏览器提交的用户名和密码了的，于是我第一次是在cookie中将请求是否验证标志位由no改为了yes，提交之后，显示失败。可知服务器还是需要用户名和密码的，这里的用户名和密码输入可以和cookie一样，并且把验证标志位改为yes，再次尝试：<br><img src="/images/try2hack/25.png" alt="25"><br>提交之后就顺利通过了。<br><strong>总结：这关考查我们的cookie绕过。</strong></p>
+<h3 id="Level-10"><a href="#Level-10" class="headerlink" title="Level 10"></a>Level 10</h3><p>这一关开始页面如下：<br><img src="/images/try2hack/26.png" alt="26"><br>要求我们下载一个IRC的客户端软件，然后登陆irc.mediamonks.net服务器的#try2hack.level10房间。<br>这里我搞了很久，登陆进去之后如下图所示：<br><img src="/images/try2hack/27.png" alt="27"><br>这么多0和1构成的字符串，是二进制的，首先想到的二进制解密，但非常蛋疼的是，这个IRC聊天软件居然不能复制，只能先保存成图片，然后进行文字识别。找了半天，终于找到<a href="http://www.onlineocr.net/" target="_blank" rel="external">这个网站</a>提供在线的文字识别，然后又到<a href="http://www.nickciske.com/tools/binary.php" target="_blank" rel="external">这个网站</a>进行二进制文件的解密。解密出来的字符串为：</p>
+<blockquote>
+<p>Nice job. Now type ‘/msg TRY2HACK showbug’ to see the bug</p>
+</blockquote>
+<p>输入之后，给出的回复如下：<br><img src="/images/try2hack/28.png" alt="28"></p>
+<p>这看起来像一段脚本，感觉又被加密了的，这是用<a href="http://baike.baidu.com/link?url=23yqs5jB0i4dwPhnIBYzF-Ud3_vNCizdFZ0-Qet11fK0zfP28Xc_A2g0rkhtyI4w9kXTuw0bBz0bVVZAMuqXWK" target="_blank" rel="external">ROT13</a>进行加密的，ROT13加密常被应用于聊天中或网路论坛用作隐藏八卦、妙句、脏话等。<br>在<a href="http://rot13.de/index.php" target="_blank" rel="external">这个网站</a>中将这段文字在线解密得到如下结果：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bind ctcr - PING ctcr:pingreply</span><br><span class="line">proc ctcr:pingreply &#123;nick uhost hand dest key arg&#125; </span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">set</span> dur [expr [unixtime] - $arg]</span><br><span class="line">	putserv <span class="string">"NOTICE $nick :Your ping reply took $dur seconds"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这应该是一个活动主机检测的脚本。然后后面我也不知道该怎么做了，国外有人给出了<a href="https://github.com/dsolstad/walkthrough-try2hack.nl/blob/master/level10.md" target="_blank" rel="external">解决方案</a>，但我没有看懂。如果有人弄懂了，欢迎<a href="http://qimingyu.github.io/resumeofChinese/">联系我</a>。</p>
+<h3 id="Level-11"><a href="#Level-11" class="headerlink" title="Level 11"></a>Level 11</h3><p>网址：<a href="http://www.try2hack.nl/levels/level11-vmituh.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level11-vmituh.xhtml</a><br>第十一关开始的页面如下：<br><img src="/images/try2hack/29.png" alt="29"><br>上面的字符串和数字均是随机生成的<br>它的要求就是在5秒内输入指定位数的字母对应的ASCII码的十进制值的乘积的前5位数字。<br>首先想到的是修改response，然后修改页面属性。使其把时间延长至无限，再手工算出来，填进去，这是一个解决方案。另一个解决方案是写一段脚本，自动计算后填进去。具体代码后面再给出。<br><strong>总结：这部分考查我们写一段小脚本的能力。</strong></p>
+<h3 id="Level-12"><a href="#Level-12" class="headerlink" title="Level 12"></a>Level 12</h3><p>网址：<a href="http://www.try2hack.nl/levels/level12-kvdsju.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level12-kvdsju.xhtml</a><br>显示页面为：<br><img src="/images/try2hack/30.png" alt="30"><br>下载之后发现是一个以.pyc为后缀名的文件。pyc是python的字节码文件，因此需要反编译查看源码，在<a href="http://tool.lu/pyc/" target="_blank" rel="external">这个网站</a>可以进行python的在线反编译。<br>反编译后得到如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> md5 <span class="keyword">import</span> new</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Enter username:'</span></span><br><span class="line">username = raw_input()</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Enter password:'</span></span><br><span class="line">password = raw_input()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    x = chr(int(password[<span class="number">0</span>:<span class="number">3</span>]) / <span class="number">3</span> - <span class="number">100</span>)</span><br><span class="line">    x += chr((int(password[<span class="number">0</span>:<span class="number">3</span>]) / <span class="number">12</span> + <span class="number">3</span>) * <span class="number">2</span>)</span><br><span class="line">    x += chr((int(password[<span class="number">0</span>:<span class="number">3</span>]) - <span class="number">700</span>) + <span class="number">173</span>)</span><br><span class="line">    x += chr((int(password[<span class="number">0</span>:<span class="number">3</span>]) - <span class="number">148</span>) / <span class="number">4</span> - <span class="number">21</span>)</span><br><span class="line">    x += chr((int(password[<span class="number">0</span>:<span class="number">3</span>]) - <span class="number">327</span>) / <span class="number">3</span> - <span class="number">10</span>)</span><br><span class="line">    x += chr(int(password[<span class="number">0</span>:<span class="number">3</span>]) - <span class="number">534</span>)</span><br><span class="line">    x += chr(((int(password[<span class="number">0</span>:<span class="number">3</span>]) + <span class="number">52</span>) / <span class="number">70</span>) * <span class="number">10</span>)</span><br><span class="line">    x += chr(int(password[<span class="number">0</span>:<span class="number">3</span>]) ** <span class="number">2</span> - <span class="number">640</span> * int(password[<span class="number">0</span>:<span class="number">3</span>]) - <span class="number">5083</span>)</span><br><span class="line">    x += chr(int(password[<span class="number">0</span>:<span class="number">3</span>]) * <span class="number">5</span> - <span class="number">3126</span>)</span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">if</span> new(username).hexdigest() == <span class="string">'3e3a378c63aa1'</span> + x[<span class="number">7</span>:<span class="number">8</span>] + <span class="string">'55e3e9'</span> + x[<span class="number">4</span>:<span class="number">5</span>] + <span class="string">'e9d2bdcd6a1'</span> <span class="keyword">and</span> password[<span class="number">3</span>:<span class="number">12</span>] == x:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Well done. Enter the valid username and password on the form online.'</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Wrong username and/or password'</span></span><br><span class="line"><span class="keyword">except</span> NameError:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Wrong username and/or password'</span></span><br></pre></td></tr></table></figure>
+<p>由于Python版本不一样，以上代码稍加修改后就能正常运行了。<br>MD5是消息摘要算法，提供消息的完整性保护。这段代码的意思是密码自生成并且自检验，只要符合算法规则的用户名和密码都是合理的。<br><strong>总结：这部分考查Python反编译和算法。</strong></p>
+<h3 id="Level-13"><a href="#Level-13" class="headerlink" title="Level 13"></a>Level 13</h3><p>网址：<a href="http://www.try2hack.nl/levels/level13-olwehfdow.xhtml" target="_blank" rel="external">http://www.try2hack.nl/levels/level13-olwehfdow.xhtml</a><br>终于来到最后一关了，显示页面如下：<br><img src="/images/try2hack/31.png" alt="31"><br>显示需要下载文件，这个文件比较大，有60多兆。<br>Sleuth Kit是一个用来分析磁盘映像和恢复文件的开源取证工具。<br>这是Linux的一个文件系统，我们需要挂载该文件系统。<br>最后得到密码为：f1ff950850ac2f1f51fa82d839f0bd1b<br>然后出现如下页面：<br><img src="/images/try2hack/32.png" alt="32"><br>已经全部通关了。<br><strong>总结：这部分考查对Linux系统的了解。</strong></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Web攻击学无止境，关键在于把基本知识掌握之后，要熟悉很多常见的漏洞及利用方式，然后再加以创造性的综合利用，渗透工程师是一门非常需要积累和经验的工作。而做一名安全构架师，则更是任重而道远。这是需要花时间和精力去认真修炼打磨的。积累自己的势能。<br>这个try2hack网站太老了，很多技术都已经过时，不过用来训练思维还是不错的。<br>任何语言都是可以反编译的。还需要提高自己逆向的能力以及加强对底层的了解。<br>基础还不够，必须要精通一门语言才行，例如第十一关，写一段小代码都要写半天。<br>最后，Level10-13还有待修改完善，以及原理还有待弄懂。未完，待续。  </p>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/05/12/try2hack通关教程/">http://qimingyu.github.io/2016/05/12/try2hack通关教程/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络攻击/" rel="tag">#网络攻击</a>
+          
+            <a href="/tags/try2hack/" rel="tag">#try2hack</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/10/Webgoat之Report_Card（完结篇）/" rel="next" title="Webgoat之Report Card（完结篇）">
+                <i class="fa fa-chevron-left"></i> Webgoat之Report Card（完结篇）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/27/关于两份实习offer的选择与比较/" rel="prev" title="关于两份实习offer的选择与比较">
+                关于两份实习offer的选择与比较 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/12/try2hack通关教程/"
+           data-title="try2hack通关教程" data-url="http://qimingyu.github.io/2016/05/12/try2hack通关教程/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初衷"><span class="nav-number">1.</span> <span class="nav-text">初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战攻击"><span class="nav-number">2.</span> <span class="nav-text">实战攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-1"><span class="nav-number">2.1.</span> <span class="nav-text">Level 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-2"><span class="nav-number">2.2.</span> <span class="nav-text">Level 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-3"><span class="nav-number">2.3.</span> <span class="nav-text">Level 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-4"><span class="nav-number">2.4.</span> <span class="nav-text">Level 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-5"><span class="nav-number">2.5.</span> <span class="nav-text">Level 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-6"><span class="nav-number">2.6.</span> <span class="nav-text">Level 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-7"><span class="nav-number">2.7.</span> <span class="nav-text">Level 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-8"><span class="nav-number">2.8.</span> <span class="nav-text">Level 8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-9"><span class="nav-number">2.9.</span> <span class="nav-text">Level 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-10"><span class="nav-number">2.10.</span> <span class="nav-text">Level 10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-11"><span class="nav-number">2.11.</span> <span class="nav-text">Level 11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-12"><span class="nav-number">2.12.</span> <span class="nav-text">Level 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-13"><span class="nav-number">2.13.</span> <span class="nav-text">Level 13</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,945 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络渗透,WebGoat,注入攻击," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Command Injection这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webgoat之Injection Flaws">
+<meta property="og:url" content="http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="Command Injection这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/6.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/7.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/5.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/8.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_web_services/9.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/10.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/11.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/12.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/16.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/17.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/20.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/21.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/19.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/18.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/13.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/14.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/15.png">
+<meta property="og:updated_time" content="2016-05-09T09:27:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Webgoat之Injection Flaws">
+<meta name="twitter:description" content="Command Injection这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_injection_flaws/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Webgoat之Injection Flaws | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Webgoat之Injection Flaws
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T14:32:01+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用安全/" itemprop="url" rel="index">
+                    <span itemprop="name">应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/06/Webgoat之Injection_Flaws/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/06/Webgoat之Injection_Flaws/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Command-Injection"><a href="#Command-Injection" class="headerlink" title="Command Injection"></a>Command Injection</h2><p>这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：<br><img src="/images/webgoat_injection_flaws/1.png" alt="1"></p>
+<a id="more"></a>
+<p>该页面就是一个选择所需查看的文档，然后下方显示文档内容的页面。其存在的漏洞就是后台可以执行用户输入的命令，当我们拦截之后，修改参数如下：<br><img src="/images/webgoat_injection_flaws/2.png" alt="2"><br>可以看到把我们服务器所开端口情况全部显示出来了：<br><img src="/images/webgoat_injection_flaws/3.png" alt="3"></p>
+<h2 id="Blind-SQL-Injection"><a href="#Blind-SQL-Injection" class="headerlink" title="Blind SQL Injection"></a>Blind SQL Injection</h2><p>这一节主要讲盲注入，某些SQL注入是没有明确返回信息的，只能通过条件的“真”和“假”进行判断。攻击者必须充分利用查询语句，构造子查询语句。<br>如下图：<br><img src="/images/webgoat_injection_flaws/4.png" alt="4"><br>这个输入框输入不同的数字他会给不同的反应。它会提示你Account Number是正确的还是错误的。<br>输入如下代码：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">101 and ( ascii( substr(<span class="keyword">select</span> first_name <span class="keyword">from</span> <span class="keyword">user_data</span> <span class="keyword">where</span> userid=<span class="number">15613</span>,<span class="number">1</span>,<span class="number">1</span>) ) &lt; <span class="number">77</span> )</span><br></pre></td></tr></table></figure></p>
+<p>从user_data数据库表中把userid字段等于15613的名字找出来，然后求其字符子串，从第一个字符开始截取，截取一个字符长度，这样得到的是名字的一个字母，然后求其ascii值，与77比较，整条语句判断真假。<br>就这样一个个试，可以得到第一个字母是J，第二个字母是o,最后得到Joesph输入，返回正确。</p>
+<h2 id="Numeric-SQL-Injection"><a href="#Numeric-SQL-Injection" class="headerlink" title="Numeric SQL Injection"></a>Numeric SQL Injection</h2><p>这节讲数字型注入攻击，如下图这是一个选择城市，然后出来相应天气预报的页面：<br><img src="/images/webgoat_injection_flaws/6.png" alt="6"><br>通过截取数据分析发现，所提交的是城市的数字代码，我们把state字段改为如下即可以了：<br><img src="/images/webgoat_injection_flaws/7.png" alt="7"><br>最后攻击成功：<br><img src="/images/webgoat_injection_flaws/5.png" alt="5"></p>
+<h2 id="Log-Spoofing"><a href="#Log-Spoofing" class="headerlink" title="Log Spoofing"></a>Log Spoofing</h2><p>这节讲登陆欺骗，如图所示，这是一个登陆的页面，下面灰色部分是后台日志：<br><img src="/images/webgoat_injection_flaws/8.png" alt="8"><br>现在是要求欺骗后台日志，也就是说一个人明明没有登陆进去，但它要在后台日志记录中显示登陆进去了。<br>因此可以插入如下内容：</p>
+<blockquote>
+<p>Smith%0d%0aLogin Succeeded for username: admin</p>
+</blockquote>
+<p>最后日志上面会显示成这样：<br><img src="/images/webgoat_web_services/9.png" alt="9"><br>这主要是说用户注入内容到后台日志中了。<br>而当输入如下内容时：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin &lt;script&gt;alert(<span class="built_in">document</span>.cookie)&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>页面会显示如下：<br><img src="/images/webgoat_injection_flaws/10.png" alt="10"></p>
+<h2 id="XPATH-Injection"><a href="#XPATH-Injection" class="headerlink" title="XPATH Injection"></a>XPATH Injection</h2><p>如下图所示，下面页面是输入账户名和密码查询工资的页面：<br><img src="/images/webgoat_injection_flaws/11.png" alt="11"><br>我们的目标是看到其他员工的工资。XPATH 注入类似于SQL注入。通过未验证的输入创建一个XPATH 查询。<br>一般的XPATH查询，其页面代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> dir = s.getContext().getRealPath(<span class="string">"/lessons/XPATHInjection/EmployeesData.xml"</span>);</span><br><span class="line">File d = <span class="keyword">new</span> File(dir);</span><br><span class="line">XPathFactory factory = XPathFactory.newInstance();</span><br><span class="line">XPath xPath = factory.newXPath();</span><br><span class="line">InputSource inputSource = <span class="keyword">new</span> InputSource(<span class="keyword">new</span> FileInputStream(d));</span><br><span class="line"><span class="built_in">String</span> expression = <span class="string">"/employees/employee[loginID/text()='"</span> + username + <span class="string">"' and passwd/text()='"</span> + password + <span class="string">"']"</span>;</span><br><span class="line">nodes = (NodeList) xPath.evaluate(expression, inputSource, XPathConstants.NODESET);</span><br></pre></td></tr></table></figure></p>
+<p>当我们在浏览器中输入如下内容时：</p>
+<blockquote>
+<p>Smith’ or 1=1 or ‘a’=’a</p>
+</blockquote>
+<p>则服务器获取的数据为：</p>
+<blockquote>
+<p>expression = “/employees/employee[loginID/text()=’Smith’ or 1=1 or ‘a’=’a’ and passwd/text()=’password’]”</p>
+</blockquote>
+<p>服务器解析后的结果为：</p>
+<blockquote>
+<p>expression = “/employees/employee[ ( loginID/text()=’Smith’ or 1=1 ) OR ( ‘a’=’a’ and passwd/text()=’password’ ) ]”</p>
+</blockquote>
+<p>浏览器显示页面为：<br><img src="/images/webgoat_injection_flaws/12.png" alt="12"><br>攻击成功。</p>
+<h2 id="SQL-Injection"><a href="#SQL-Injection" class="headerlink" title="SQL Injection"></a>SQL Injection</h2><h3 id="Stage-1"><a href="#Stage-1" class="headerlink" title="Stage 1"></a>Stage 1</h3><p>第一步是字符串注入，要求以Neville的用户名，密码不知道的情况下登陆：<br><img src="/images/webgoat_injection_flaws/16.png" alt="16"><br>因此需要拦截之后修改（一定要拦截后修改，因为直接在浏览器输入会有转义）：<br><img src="/images/webgoat_injection_flaws/17.png" alt="17"><br>这样就可以顺利进入了。</p>
+<h3 id="Stage-2"><a href="#Stage-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>这部分需要我们使用参数化查询阻止SQL注入。但是这部分内容只有在开发版上才能完成，我用的是标准版。<br>应该修改webgoat/lessons/SQLInjection/ViewProfile.java文件中的getEmployeeProfile方法，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">String query = <span class="string">"SELECT employee.* "</span>+ <span class="string">"FROM employee,ownership WHERE employee.userid = ownership.employee_id and "</span>+ <span class="string">"ownership.employer_id = ? and ownership.employee_id = ?"</span>;</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	Connection connection = WebSession.getConnections(s);</span><br><span class="line">	PreparedStatement statement = connection.prepareStatement(query,</span><br><span class="line">	ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);</span><br><span class="line">	statement.setString(<span class="number">1</span>, userId);</span><br><span class="line">	statement.setString(<span class="number">2</span>, subjectUserId);</span><br><span class="line">	ResultSet answer_results = statement.executeQuery();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这一节需要我们以普通用户的身份看到老板的简介：<br><img src="/images/webgoat_injection_flaws/20.png" alt="20"><br>先以普通用户Larry的身份登陆进去：<br><img src="/images/webgoat_injection_flaws/21.png" alt="21"><br>再点击ViewProfile进行抓包，后修改：<br><img src="/images/webgoat_injection_flaws/19.png" alt="19"><br>最后提交看到老板简介：<br><img src="/images/webgoat_injection_flaws/18.png" alt="18"></p>
+<h3 id="Stage-4"><a href="#Stage-4" class="headerlink" title="Stage 4"></a>Stage 4</h3><p>这部分需要通过参数化查询防止这类攻击，与Stage 2的方法差不多。</p>
+<h2 id="String-SQL-Injection"><a href="#String-SQL-Injection" class="headerlink" title="String SQL Injection"></a>String SQL Injection</h2><p>如下图所示是一个输入姓名查银行卡的页面：<br><img src="/images/webgoat_injection_flaws/13.png" alt="13"><br>要求我们把所有人的银行卡信息都显示出来。输入如下代码：</p>
+<blockquote>
+<p>Smith’ or 1=1 –</p>
+</blockquote>
+<p>成功了：<br><img src="/images/webgoat_injection_flaws/14.png" alt="14"></p>
+<h2 id="Database-Backdoors"><a href="#Database-Backdoors" class="headerlink" title="Database Backdoors"></a>Database Backdoors</h2><p>这一节讲的数据库后门攻击。数据库通常作为一个Web应用程序的后端来使用。此外，它也用来作为存储的媒介。它也可以被用来作为存储恶意活动的地方，如触发器。触发器是在数据库管理系统上调用另一个数据库操作，如insert, select, update or delete。举个例子：攻击者可以创建一个触发器，该触发器在创建新用户时，将每个新用户的Email地址设置为攻击者的地址。<br>正常情况下在如下页面输入工号，进行查询一些信息：<br><img src="/images/webgoat_injection_flaws/15.png" alt="15"><br>后来发现客户端输入的查询语句没有在服务器端进行验证。<br>当我们输入如下代码时：</p>
+<blockquote>
+<p>101; update employee set salary=10000</p>
+</blockquote>
+<p>服务器为我们执行了更新。<br>因此我们可以创建如下触发器：</p>
+<blockquote>
+<p>101;CREATE TRIGGER myBackDoor BEFORE INSERT ON employee FOR EACH ROW BEGIN UPDATE employee SET email=’john@hackme.com’ WHERE userid = NEW.userid</p>
+</blockquote>
+<p>使没创建一个新用户的时候，自动为其填充为我们所希望的邮箱。</p>
+<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>SQL注入需要对数据库熟悉，并且对后台代码了解，内容还是比较多的。  </p>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/">http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
+          
+            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+          
+            <a href="/tags/注入攻击/" rel="tag">#注入攻击</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/05/Webgoat之Web_Services/" rel="next" title="Webgoat之Web Services">
+                <i class="fa fa-chevron-left"></i> Webgoat之Web Services
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/10/Webgoat之Report_Card（完结篇）/" rel="prev" title="Webgoat之Report Card（完结篇）">
+                Webgoat之Report Card（完结篇） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/06/Webgoat之Injection_Flaws/"
+           data-title="Webgoat之Injection Flaws" data-url="http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-Injection"><span class="nav-number">1.</span> <span class="nav-text">Command Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blind-SQL-Injection"><span class="nav-number">2.</span> <span class="nav-text">Blind SQL Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numeric-SQL-Injection"><span class="nav-number">3.</span> <span class="nav-text">Numeric SQL Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Log-Spoofing"><span class="nav-number">4.</span> <span class="nav-text">Log Spoofing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPATH-Injection"><span class="nav-number">5.</span> <span class="nav-text">XPATH Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL-Injection"><span class="nav-number">6.</span> <span class="nav-text">SQL Injection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-1"><span class="nav-number">6.1.</span> <span class="nav-text">Stage 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-2"><span class="nav-number">6.2.</span> <span class="nav-text">Stage 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-3"><span class="nav-number">6.3.</span> <span class="nav-text">Stage 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-4"><span class="nav-number">6.4.</span> <span class="nav-text">Stage 4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-SQL-Injection"><span class="nav-number">7.</span> <span class="nav-text">String SQL Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Database-Backdoors"><span class="nav-number">8.</span> <span class="nav-text">Database Backdoors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">9.</span> <span class="nav-text">Summarize</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络渗透,WebGoat,访问控制," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Using an Access Control MatrixRBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebGoat之Access Control">
+<meta property="og:url" content="http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="Using an Access Control MatrixRBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/8.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/5.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/6.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/7.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/9.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/10.png">
+<meta property="og:updated_time" content="2016-05-19T09:52:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebGoat之Access Control">
+<meta name="twitter:description" content="Using an Access Control MatrixRBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_access_control/8.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> WebGoat之Access Control | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WebGoat之Access Control
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-25T10:03:10+08:00" content="2016-04-25">
+              2016-04-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用安全/" itemprop="url" rel="index">
+                    <span itemprop="name">应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/25/Webgoat之Access_Control/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/25/Webgoat之Access_Control/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Using-an-Access-Control-Matrix"><a href="#Using-an-Access-Control-Matrix" class="headerlink" title="Using an Access Control Matrix"></a>Using an Access Control Matrix</h2><p>RBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：<br><img src="/images/webgoat_access_control/8.png" alt="8"><br><a id="more"></a></p>
+<p>如下图，表示成功：<br><img src="/images/webgoat_access_control/1.png" alt="1"><br>这里插一段话，既然提到了基于角色的访问控制，那就要明白水平权限和垂直权限的意思。之前都学到了这里，却没有继续深入水平权限与垂直权限，在百度二面的时候，问到这个居然是完全懵逼的状态。</p>
+<blockquote>
+<p>基于角色的访问控制按角色权限高低可分为两类：垂直权限控制和水平权限控制。<br>  垂直权限控制作用在两类不同权限的角色之间，例如A是普通用户，B是管理员用户，那么B就拥有更多的可访问资源，这些资源包括某个URL下的资源、系统中的某个接口调用等。对于垂直权限控制，各编程平台都会有一些框架可以利用，因为垂直权限控制易于抽象，与具体业务耦合较少。Java Web开发程序员可以利用Spring Security，通过一些配置即可完成系统中的垂直权限控制需求(可基于URL和基于Method)。<br>  水平权限控制是作用与相同的角色之间的。例如A、B都是社交网站的用户，他们对该网站上的资源拥有同样的权限，但是各自又都有一些私有数据，类似私信列表、好友列表。因为构造一个获取其他用户私有页面的URL(REST风格，很好构造)是很简单的，所以A用户可能只要改下URL中的ID等信息就能得到B用户的URL，这个环节不做权限控制显然不合理，而这里又很容易被疏忽掉。试想动辄上百个接口或URL，对每个都要做这样的水平权限判断，漏掉任何一个都会造成潜在漏洞。此外，这类漏洞自动化工具还不好扫描，不易察觉。因为水平权限控制判断的依据已经是数据级别的，所以一般框架较难处理这类情况，程序架构好点的可以通过拦截器对同类接口参数进行过滤和判断。否则，也只能具体接口具体判断了。</p>
+</blockquote>
+<h2 id="Bypass-a-Path-Based-Access-Control-Scheme"><a href="#Bypass-a-Path-Based-Access-Control-Scheme" class="headerlink" title="Bypass a Path Based Access Control Scheme"></a>Bypass a Path Based Access Control Scheme</h2><p>绕过路径访问控制。<br>这个任务就是要读取我们一般不能读的文件，如下图所示：<br><img src="/images/webgoat_access_control/2.png" alt="2"></p>
+<p>一般就是从左边选择一个文件，然后点击“View File”，在页面最下面会给出文件内容，重点在于它给出了我们读取文件的目录位置：</p>
+<blockquote>
+<p>F:\WebGoat-OWASP_Standard-5.2\WebGoat-5.2\tomcat\webapps\WebGoat\lesson_plan\ConcurrencyCart.html</p>
+</blockquote>
+<p>而我们的目标文件位置为：</p>
+<blockquote>
+<p>tomcat\conf\tomcat-users.xml</p>
+</blockquote>
+<p>也就是说要从上面的位置读到下面的位置，采用相对路径去读取。</p>
+<p>通过打开burpsuite，拦截浏览器发送给服务器端的数据，并修改，再传送，如下图所示：<br><img src="/images/webgoat_access_control/3.png" alt="3"><br>可以看到File那一栏的参数是可以修改的。<br>修改为如下值：</p>
+<blockquote>
+<p>../../../conf/tomcat-users.xml</p>
+</blockquote>
+<p><img src="/images/webgoat_access_control/4.png" alt="4"><br>成功之后可以看到，读取的是tomcat的一份很重要的配置文件。</p>
+<h2 id="Role-Based-Access-Control"><a href="#Role-Based-Access-Control" class="headerlink" title="Role Based Access Control"></a>Role Based Access Control</h2><p>关于基于角色的访问控制，具体实验过程分为如下四步：</p>
+<h3 id="Bypass-Business-Layer-Access-Control"><a href="#Bypass-Business-Layer-Access-Control" class="headerlink" title="Bypass Business Layer Access Control"></a>Bypass Business Layer Access Control</h3><p>这一步要求我们绕过业务层访问控制。它给出了很多人的用户名和密码，可以用他们的用户名和密码登陆系统，但是每个人在该系统中的权限不一样，因此能够进行的操作也不一样。其中HR是能够删除任意员工的简介的，首先用HR的账号登陆之后，删除一个员工的简介，用burpsuit抓取提交的post参数，得到如下结果：<br><img src="/images/webgoat_access_control/5.png" alt="5"></p>
+<p>然后登陆一个普通用户的账户，他只有查看和搜索用户的权限，在其查看用户的时候，截取其提交数据，与前面比较，如下所示：<br><img src="/images/webgoat_access_control/6.png" alt="6"><br>修改提交的参数的值，将“ViewProfile”改为“DeleteProfile”，执行成功:</p>
+<p><img src="/images/webgoat_access_control/7.png" alt="7"></p>
+<p>这个之所以能够进行越权操作的根本原因在于，网站把用户权限的校验放在了前台，用户一旦登陆进去之后的操作，就没有再进行验证了。导致用户可以越权操作。</p>
+<h3 id="Add-Business-Layer-Access-Control"><a href="#Add-Business-Layer-Access-Control" class="headerlink" title="Add Business Layer Access Control"></a>Add Business Layer Access Control</h3><p>这一步要求我们在原始代码中增加一个业务访问控制层。关于这里相对应的代码在RoleBasedAccessControl.java文件中，相应路径为：</p>
+<blockquote>
+<p>F:\WebGoat-OWASP_Standard-5.2\WebGoat-5.2\tomcat\webapps\WebGoat\JavaSource\org\owasp\webgoat\lessons\RoleBasedAccessControl\RoleBasedAccessControl.java</p>
+</blockquote>
+<p>其中有一个handleRequest()函数，这个函数就是用来处理用户操作传过来的请求。其中主要的代码片段为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">	DefaultLessonAction action = (DefaultLessonAction) getAction(requestedActionName);</span><br><span class="line">	<span class="keyword">if</span> (action != <span class="keyword">null</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// System.out.println("RoleBasedAccessControl.handleRequest() dispatching to: " +</span></span><br><span class="line">		<span class="comment">// action.getActionName());</span></span><br><span class="line">		<span class="keyword">if</span> (!action.requiresAuthentication())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">// Access to Login does not require authentication.</span></span><br><span class="line">			action.handleRequest(s);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//***************CODE HERE*************************</span></span><br><span class="line">			</span><br><span class="line">				</span><br><span class="line">			<span class="comment">//*************************************************</span></span><br><span class="line">			<span class="keyword">if</span> (action.isAuthenticated(s))</span><br><span class="line">			&#123;</span><br><span class="line">				action.handleRequest(s);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> UnauthenticatedException();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		setCurrentAction(s, ERROR_ACTION);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就是在“code here”那里添加代码，客户端传到服务器的action如果不为空的话，有两种情况，一种是不需要进行权限验证的，例如登陆操作，另一种是需要进行权限验证的，例如删除，查看等。在这里需要添加我们的一段代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!isAuthorized(s,getUserId(s),requestedActionName)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我用的是WebGoat5.2标准版，因此无法实际实施查看效果，只有开发版的才可以。</p>
+<h3 id="Bypass-Data-Layer-Access-Control"><a href="#Bypass-Data-Layer-Access-Control" class="headerlink" title="Bypass Data Layer Access Control"></a>Bypass Data Layer Access Control</h3><p>这里需要绕过数据访问控制层，需要利用Tom的身份越权访问另一名员工的信息。这里同样是通过“ViewProfile”按钮，然后截取修改提交参数的id字段，达到越权访问的目的。</p>
+<h3 id="Add-Data-Layer-Access-Control"><a href="#Add-Data-Layer-Access-Control" class="headerlink" title="Add Data Layer Access Control"></a>Add Data Layer Access Control</h3><p>这一步需要添加数据访问控制层以修复上一步的漏洞。这里需要在与第二步一样的地方，添加如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!action.isAuthorizedForEmployee(s, getUserId(s),s.getParser().getIntParameter(RoleBasedAccessControl.EMPLOYEE_ID, <span class="number">0</span>)))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Remote-Admin-Access"><a href="#Remote-Admin-Access" class="headerlink" title="Remote Admin Access"></a>Remote Admin Access</h2><p>远程原理员访问。应用程序通常会有一个管理界面，这个界面一般用户无法访问到，只有具有特权的用户才能访问。很多网站开发人员在脚本中预留了相关的参数接口，一旦该参数被后台程序确认，则访问者的权限会被放大，浏览到先前不能访问的资源，如：程序调试日志、隐藏功能菜单等。在URL里面加上一个参数admin=true，例如：</p>
+<blockquote>
+<p><a href="http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true" target="_blank" rel="external">http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true</a></p>
+</blockquote>
+<p>这就是URL里面隐藏参数的识别。此时，在左侧栏的“Admin Function”，子功能下增加了另三个功能，如下图所示：<br><img src="/images/webgoat_access_control/9.png" alt="9"></p>
+<p>然后通过发送请求的时候，在URL上加参数，如下图所示：<br><img src="/images/webgoat_access_control/10.png" alt="10"></p>
+<p>最后均可成功显示。</p>
+<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>这一节主要讲Web应用程序的访问控制，之前在本科学过访问控制，大概知道有很多种不同类型的访问控制模型。直到今天，才真正理解了访问控制的作用，看来凡事不实际操作，永远只是停留在表层的，继续努力！  </p>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/">http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
+          
+            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+          
+            <a href="/tags/访问控制/" rel="tag">#访问控制</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/18/Webgoat之Http_Splitting攻击/" rel="next" title="WebGoat之Http Splitting攻击">
+                <i class="fa fa-chevron-left"></i> WebGoat之Http Splitting攻击
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/26/Webgoat之AJAX_Security/" rel="prev" title="WebGoat之AJAX Security">
+                WebGoat之AJAX Security <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/25/Webgoat之Access_Control/"
+           data-title="WebGoat之Access Control" data-url="http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-an-Access-Control-Matrix"><span class="nav-number">1.</span> <span class="nav-text">Using an Access Control Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bypass-a-Path-Based-Access-Control-Scheme"><span class="nav-number">2.</span> <span class="nav-text">Bypass a Path Based Access Control Scheme</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Role-Based-Access-Control"><span class="nav-number">3.</span> <span class="nav-text">Role Based Access Control</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypass-Business-Layer-Access-Control"><span class="nav-number">3.1.</span> <span class="nav-text">Bypass Business Layer Access Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Business-Layer-Access-Control"><span class="nav-number">3.2.</span> <span class="nav-text">Add Business Layer Access Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bypass-Data-Layer-Access-Control"><span class="nav-number">3.3.</span> <span class="nav-text">Bypass Data Layer Access Control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-Data-Layer-Access-Control"><span class="nav-number">3.4.</span> <span class="nav-text">Add Data Layer Access Control</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remote-Admin-Access"><span class="nav-number">4.</span> <span class="nav-text">Remote Admin Access</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">5.</span> <span class="nav-text">Summarize</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

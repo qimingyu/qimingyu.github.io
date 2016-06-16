@@ -1,0 +1,912 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo,架构,NexT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="初衷　　20多岁的时候，应该着手思考如何建立自己的个人品牌了。这个个人品牌不依附于任何公司或机构存在，他是你个人独有的价值，任何人都抢不走。因此，我一直想构建一个自己的博客平台，用于积累自己的思考，展示自己的进步与个人价值。比起同龄人来说，开始记录博客，特别是技术博客，还是晚了一点。不过现在开始也还算是刚刚好。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本博客架构">
+<meta property="og:url" content="http://qimingyu.github.io/2016/03/11/本博客架构/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="初衷　　20多岁的时候，应该着手思考如何建立自己的个人品牌了。这个个人品牌不依附于任何公司或机构存在，他是你个人独有的价值，任何人都抢不走。因此，我一直想构建一个自己的博客平台，用于积累自己的思考，展示自己的进步与个人价值。比起同龄人来说，开始记录博客，特别是技术博客，还是晚了一点。不过现在开始也还算是刚刚好。">
+<meta property="og:image" content="http://qimingyu.github.io/images/first_blog/boke.jpeg">
+<meta property="og:image" content="http://qimingyu.github.io/images/first_blog/jishu.png">
+<meta property="og:updated_time" content="2016-04-12T15:16:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="本博客架构">
+<meta name="twitter:description" content="初衷　　20多岁的时候，应该着手思考如何建立自己的个人品牌了。这个个人品牌不依附于任何公司或机构存在，他是你个人独有的价值，任何人都抢不走。因此，我一直想构建一个自己的博客平台，用于积累自己的思考，展示自己的进步与个人价值。比起同龄人来说，开始记录博客，特别是技术博客，还是晚了一点。不过现在开始也还算是刚刚好。">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/first_blog/boke.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 本博客架构 | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                本博客架构
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-11T10:01:07+08:00" content="2016-03-11">
+              2016-03-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网站技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网站技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/11/本博客架构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/本博客架构/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/first_blog/boke.jpeg" alt="boke"></p>
+<h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>　　20多岁的时候，应该着手思考如何建立自己的个人品牌了。这个个人品牌不依附于任何公司或机构存在，他是你个人独有的价值，任何人都抢不走。因此，我一直想构建一个自己的博客平台，用于积累自己的思考，展示自己的进步与个人价值。比起同龄人来说，开始记录博客，特别是技术博客，还是晚了一点。不过现在开始也还算是刚刚好。<br><a id="more"></a>　　</p>
+<p>　　大约有一年多的筹划，最先接触这个是我的好朋友<a href="http://www.tianjun.ml/" target="_blank" rel="external">Tian Jun</a>的博客，后来又接触了很多人的个人博客，于是开始有这个想法——搭建自己的博客平台并写技术博客。后来尝试利用科大给的空间和域名模仿别人做了一个<a href="http://home.ustc.edu.cn/~sa614405/" target="_blank" rel="external">静态网页的站点</a>，根本写不了博客，当时也还什么都不懂，于是就搭建在哪里了。后来看见网上有简易搭建个人博客系统的，又去申请折腾了一番，<a href="http://qimingyu.weebly.com/" target="_blank" rel="external">在这里</a>。这些都终于没有成功，每每浏览网站看见别人踏实的技术博客，心中总有一丝丝的羡慕嫉妒恨，哈哈。当然，这期间自己也陆陆续续的收集了一些优秀的个人博客站点。</p>
+<h2 id="激励"><a href="#激励" class="headerlink" title="激励"></a>激励</h2><p>　　真正刺激我下决定一定要做自己的技术博客是在去年的暑假时候，当时是阿里巴巴的2015校园招聘，我当时只是研一，于是抱着试一试的态度投了安全工程师岗位的简历（Web方向）。后来居然一路顺利的通过了前面三轮，最终到了终面，地点是上海。当时有两个人，一个是HR，一个是技术。在一个多小时的面试时间里，我居然还自我感觉良好，现在看来，当时是有很多不足的。一种无知者无畏的勇气，哈哈。结果肯定是没过，不过面试结束时，技术的人给了我一个意见是：<strong>还需要更专注，有自己的技术博客，关注技术发展</strong>。这点我倒是印象深刻的记下来了。后来实验室师兄们陆续找到工作了，他们的意见也与此差不多：<strong>刷题与技术博客</strong>。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>　　等到我这学期终于开始找工作了，首先是着手准备自己的简历，无意间看到了一本书<a href="http://yuedu.baidu.com/ebook/c71ae9f3a0116c175e0e483b?fr=aladdin&amp;key=%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E8%AF%BB%E7%9A%84%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92%E4%B9%A6" target="_blank" rel="external">《程序员必读的职业生涯规划书》</a>，里面提到在线简历，并且是用Markdown语言写的，我瞬间觉得牛逼到爆，于是花了一天时间做了自己在线版的简历，然后又很想把这个简历放在自己的博客上，于是开始搭建自己的博客系统。</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>　　本博客最终是基于GitHub+hexo+NexT搭建的，博客搭建过程走了很多弯路，下面我直接给出整理后的博客系统内核。</p>
+<h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><ul>
+<li>安装Node.js  </li>
+</ul>
+<p>　　hexo是一个很方便生成博文的工作，但它是基于Node.js的，因此要用hexo，必须先安装Node.js。</p>
+<ul>
+<li>安装Git for Windows</li>
+</ul>
+<p>　　Git for Windows是一个客户端，是用来在本地电脑直接连接云端的GitHub账户用的，并且它的命令行操作非常的方便。</p>
+<ul>
+<li>安装hexo</li>
+</ul>
+<p>　　采用命令行就可以安装了</p>
+<pre><code>1    npm install -g hexo
+</code></pre><p>　　然后需要利用hexo初始化一下，会自动创建网站所需的所有文件</p>
+<pre><code>1    hexo init
+</code></pre><p>　　以上所有准备工作都已经做好了</p>
+<h3 id="主题选择阶段"><a href="#主题选择阶段" class="headerlink" title="主题选择阶段"></a>主题选择阶段</h3><p>　　我采用的是GitHub上面Star最高的一套主题，确实相当的优秀。<a href="http://theme-next.iissnan.com/" target="_blank" rel="external">NexT使用文档</a>有详细的介绍和安装方法。最花时间的是配置部分。配置部分有两个文件，并且名称一样，都是_config.yml。所不同的，一个是站点配置文件，一个是主题配置文件，它们所在文件夹不一样，在themes下的是主题配置文件，在外面的是全站的配置文件，不要搞混。</p>
+<ul>
+<li>站点文件配置</li>
+</ul>
+<p>　　该文件配置的是全站的设置，当主题改变时，这些设置是不会变的。我的具体配置如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 站点设置</span></span><br><span class="line">title: 戚名钰的博客</span><br><span class="line">subtitle: 专注信安，十年磨一剑</span><br><span class="line">description: 做一名合格的安全工程师</span><br><span class="line">author: 戚名钰</span><br><span class="line">language: zh-Hans</span><br><span class="line">email: mingyuqi.java@qq.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 头像设置</span></span><br><span class="line">avatar: /images/avatar.png</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多说评论设置</span></span><br><span class="line">duoshuo_shortname: qimingyu</span><br><span class="line"></span><br><span class="line"><span class="comment"># 百度统计设置</span></span><br><span class="line">baidu_analytics: <span class="number">0</span>c5bfe2b28edd6628f3b2177186e0772</span><br><span class="line"></span><br><span class="line"><span class="comment"># 站点主题设置</span></span><br><span class="line">theme: next</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上传github设置</span></span><br><span class="line">deploy:</span><br><span class="line"> 	type: git</span><br><span class="line"> 	repository: https:<span class="comment">//github.com/qimingyu/qimingyu.github.io.git</span></span><br><span class="line"> 	branch: master</span><br><span class="line">  </span><br><span class="line"><span class="comment"># 目录设置</span></span><br><span class="line">source_dir: source</span><br><span class="line">public_dir: <span class="keyword">public</span></span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写作设置</span></span><br><span class="line">new_post_name: :title.md </span><br><span class="line">default_layout: post</span><br><span class="line">titlecase: <span class="keyword">false</span> </span><br><span class="line">external_link: <span class="keyword">true</span> </span><br><span class="line">filename_case: <span class="number">0</span></span><br><span class="line">render_drafts: <span class="keyword">false</span></span><br><span class="line">post_asset_folder: <span class="keyword">false</span></span><br><span class="line">relative_link: <span class="keyword">false</span></span><br><span class="line">future: <span class="keyword">true</span></span><br><span class="line">highlight:</span><br><span class="line"> 	enable: <span class="keyword">true</span></span><br><span class="line"> 	line_number: <span class="keyword">true</span></span><br><span class="line"> 	auto_detect: <span class="keyword">false</span></span><br><span class="line"> 	tab_replace:</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分类和标签设置</span></span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line"></span><br><span class="line"><span class="comment">#日期时间格式设置</span></span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line"></span><br><span class="line"><span class="comment">#分页设置</span></span><br><span class="line">per_page: <span class="number">10</span></span><br><span class="line">pagination_dir: page</span><br><span class="line"></span><br><span class="line"><span class="comment">#友情链接设置</span></span><br><span class="line">links_title: 友情链接</span><br><span class="line">links:</span><br><span class="line"> 	MacTalk: http:<span class="comment">//macshuo.com/</span></span><br><span class="line"> 	Tian Jun: http:<span class="comment">//www.tianjun.ml/</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>主题文件配置 </li>
+</ul>
+<p>　　主题文件配置如下所示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图标设置</span></span><br><span class="line">favicon: /favicon.ico</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题设置</span></span><br><span class="line">scheme: Pisces</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主题关键词</span></span><br><span class="line">keywords: <span class="string">"Hexo, NexT"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置RRS链接，默认显示</span></span><br><span class="line">rss:</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置建站日期</span></span><br><span class="line">since: <span class="number">2016</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#菜单设置</span></span><br><span class="line">menu:</span><br><span class="line"> 		home: /</span><br><span class="line"> 		categories: /categories</span><br><span class="line"> 		about: /about</span><br><span class="line"> 		archives: /archives</span><br><span class="line"> 		tags: /tags</span><br><span class="line"></span><br><span class="line"><span class="comment">#菜单图标设置</span></span><br><span class="line">menu_icons:</span><br><span class="line"> 		enable: <span class="keyword">true</span></span><br><span class="line"> 		home: home</span><br><span class="line"> 		about: user</span><br><span class="line"> 		categories: th</span><br><span class="line"> 		tags: tags</span><br><span class="line"> 		archives: archive</span><br><span class="line"></span><br><span class="line"><span class="comment"># 社交链接设置</span></span><br><span class="line">social:</span><br><span class="line"> 	  GitHub: https:<span class="comment">//github.com/qimingyu</span></span><br><span class="line"> 	  Facebook: https:<span class="comment">//www.facebook.com/profile.php?id=100005196408914</span></span><br><span class="line"> 	  Weibo: http:<span class="comment">//weibo.com/u/2608780242?refer_flag=1005050010_&amp;is_all=1</span></span><br><span class="line"> 	  知乎: https:<span class="comment">//www.zhihu.com/people/qi-ming-yu-45</span></span><br><span class="line"> 	  豆瓣: https:<span class="comment">//www.douban.com/people/qimy/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 社交图标设置</span></span><br><span class="line">social_icons:</span><br><span class="line"> 		enable: <span class="keyword">true</span></span><br><span class="line"> 		GitHub: github</span><br><span class="line"> 		Twitter: twitter</span><br><span class="line"> 		Weibo: weibo</span><br><span class="line"></span><br><span class="line"><span class="comment"># TOC in the Sidebar</span></span><br><span class="line">toc:</span><br><span class="line"> 		enable: <span class="keyword">true</span></span><br><span class="line"> 	<span class="comment"># Automatically add list number to toc.</span></span><br><span class="line"> 		number: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line">sidebar:</span><br><span class="line"> 		<span class="comment"># Sidebar Position, available value: left | right</span></span><br><span class="line"> 		position: left</span><br><span class="line"> 		display: post</span><br><span class="line"></span><br><span class="line"><span class="comment"># Custom Logo.</span></span><br><span class="line"><span class="comment"># !!Only available for Default Scheme currently.</span></span><br><span class="line"><span class="comment"># Options:</span></span><br><span class="line"><span class="comment">#   enabled: [true/false] - Replace with specific image</span></span><br><span class="line"><span class="comment">#   image: url-of-image   - Images's url</span></span><br><span class="line">custom_logo:</span><br><span class="line"> 		enabled: <span class="keyword">false</span></span><br><span class="line"> 		image:</span><br><span class="line"></span><br><span class="line"><span class="comment">#代码高亮设置</span></span><br><span class="line">highlight_theme: normal</span><br><span class="line"></span><br><span class="line"><span class="comment"># Automatically scroll page to section which is under &lt;!-- more --&gt; mark.</span></span><br><span class="line">scroll_to_more: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Automatically Excerpt</span></span><br><span class="line">auto_excerpt:</span><br><span class="line"> 		enable: <span class="keyword">true</span></span><br><span class="line"> 		length: <span class="number">150</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Use Lato font</span></span><br><span class="line">use_font_lato: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数学公式显示</span></span><br><span class="line">mathjax: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#分享设置</span></span><br><span class="line">duoshuo_share: <span class="keyword">true</span></span><br><span class="line">baidushare: <span class="keyword">true</span></span><br><span class="line">jiathis: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#多说热评文章设置</span></span><br><span class="line">duoshuo_hotartical: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Motion</span></span><br><span class="line">use_motion: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Fancybox</span></span><br><span class="line">fancybox: <span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Static files</span></span><br><span class="line">vendors: vendors</span><br><span class="line">css: css</span><br><span class="line">js: js</span><br><span class="line">images: images</span><br><span class="line"></span><br><span class="line"><span class="comment"># Theme version</span></span><br><span class="line">version: <span class="number">0.5</span><span class="number">.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="完善修复阶段"><a href="#完善修复阶段" class="headerlink" title="完善修复阶段"></a>完善修复阶段</h3><p>　　在<a href="http://service.ibruce.info/" target="_blank" rel="external">不蒜子</a>那里增加了一个网站计数的代码，图片效果如下所示：<br><img src="/images/first_blog/jishu.png" alt="jishu"></p>
+<p>　　至此，整个博客系统呈现出现在的样子。其中所有站点文件为了实现同步，全部放在DropBox中。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>　　个人博客，形式神马都是浮云，关键还是要内容吸引人，要有料才行。今后继续加油吧！  </p>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/03/11/本博客架构/">http://qimingyu.github.io/2016/03/11/本博客架构/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+            <a href="/tags/架构/" rel="tag">#架构</a>
+          
+            <a href="/tags/NexT/" rel="tag">#NexT</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/12/摩根士丹利（中国）IKM在线笔试试题及解析/" rel="prev" title="摩根士丹利（中国）IKM在线笔试试题及解析">
+                摩根士丹利（中国）IKM在线笔试试题及解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/11/本博客架构/"
+           data-title="本博客架构" data-url="http://qimingyu.github.io/2016/03/11/本博客架构/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初衷"><span class="nav-number">1.</span> <span class="nav-text">初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激励"><span class="nav-number">2.</span> <span class="nav-text">激励</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">3.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过程"><span class="nav-number">4.</span> <span class="nav-text">过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备阶段"><span class="nav-number">4.1.</span> <span class="nav-text">准备阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题选择阶段"><span class="nav-number">4.2.</span> <span class="nav-text">主题选择阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完善修复阶段"><span class="nav-number">4.3.</span> <span class="nav-text">完善修复阶段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

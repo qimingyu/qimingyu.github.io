@@ -1,0 +1,928 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络渗透,WebGoat,Http Splitting," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="攻击效果与目标HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebGoat之Http Splitting攻击">
+<meta property="og:url" content="http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="攻击效果与目标HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/5.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/6.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/7.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/8.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/9.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/10.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/11.png">
+<meta property="og:updated_time" content="2016-04-25T02:26:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebGoat之Http Splitting攻击">
+<meta name="twitter:description" content="攻击效果与目标HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_splitting/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> WebGoat之Http Splitting攻击 | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WebGoat之Http Splitting攻击
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-18T09:25:50+08:00" content="2016-04-18">
+              2016-04-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用安全/" itemprop="url" rel="index">
+                    <span itemprop="name">应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/18/Webgoat之Http_Splitting攻击/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/Webgoat之Http_Splitting攻击/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="攻击效果与目标"><a href="#攻击效果与目标" class="headerlink" title="攻击效果与目标"></a>攻击效果与目标</h2><p>HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。</p>
+<a id="more"></a>
+<h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>HTTP请求是基于“请求-响应”的请求，当浏览器发出请求，服务器返回响应，浏览器根据响应再发出请求，依次类推。但有一种服务器端的响应是重定位响应，相应的代码为302，当浏览器收到这个响应的时候，会重新向服务器发送get或者post请求去请求一个新的网页。</p>
+<h2 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h2><h3 id="设置浏览器代理"><a href="#设置浏览器代理" class="headerlink" title="设置浏览器代理"></a>设置浏览器代理</h3><p><img src="/images/webgoat_splitting/1.png" alt="1"><br>同样burpsuite也要打开8008的侦听端口：<br><img src="/images/webgoat_splitting/2.png" alt="2"><br>这样就实现了通过burpsuite抓取浏览器的所有数据。</p>
+<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><p><img src="/images/webgoat_splitting/3.png" alt="3"><br>这是我们在浏览器端输入“en”，点击go之后，浏览器传输给服务端的请求数据：<br><img src="/images/webgoat_splitting/4.png" alt="4"><br>可以看到我们的参数“en”传过去了，此时的数据传到了中间代理件burpsuite中，点击forward，burpsuite将这些数据发送给真正的服务器。<br>再继续看服务器传过来的应答：<br><img src="/images/webgoat_splitting/5.png" alt="5"><br>这是服务器针对这条请求传给浏览器的应答，可见是“302 Move temporarity”表示浏览器端请求的资源被重定向了，需要浏览器再次向服务器发送以后的请求。注意这里服务器传过来的Location：</p>
+<blockquote>
+<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en" target="_blank" rel="external">http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en</a></p>
+</blockquote>
+<p>我们之前的请求地址是：</p>
+<blockquote>
+<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100" target="_blank" rel="external">http://localhost/WebGoat/attack?Screen=2&amp;menu=100</a></p>
+</blockquote>
+<p>可见我们在前一个页面输入的参数，作为响应被服务器传回来了。<br>由于这是一个302响应，当浏览器接到这个响应时，会根据收到的响应自动再发送一个请求到服务器：<br><img src="/images/webgoat_splitting/6.png" alt="6"><br>服务器在传回其相应：<br><img src="/images/webgoat_splitting/7.png" alt="7"></p>
+<p>整个过程存在的漏洞是什么？</p>
+<p>在url编码中，%0d和%0a分别代表回到行首和换行，加起来就是回车的作用。</p>
+<h3 id="攻击过程"><a href="#攻击过程" class="headerlink" title="攻击过程"></a>攻击过程</h3><p>当构造这个字符串输入的时候：</p>
+<blockquote>
+<p>en%0d%0aContent-Length:%200%0d%0a%0d%0aHTTP/1.1%20200%20OK%0d%0aContent-Type:%20text/html%0d%0aContent-Length:%2047%0d%0a%0d%0a<html>Insert undesireable content here</html></p>
+</blockquote>
+<p>传给服务器端的参数变为了：<br><img src="/images/webgoat_splitting/8.png" alt="8"></p>
+<p>服务器端的响应变成了：<br><img src="/images/webgoat_splitting/9.png" alt="9"></p>
+<p>通过解码之后，可知道这个响应实际为：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Moved Temporarily    </span><br><span class="line">Server: Apache-Coyote/1.1    </span><br><span class="line">Location: http://localhost/WebGoat/attack?Screen=3&amp;menu=100&amp;fromRedirect=yes&amp;language=en    </span><br><span class="line">  </span><br><span class="line">Content-length: 0    </span><br><span class="line">HTTP/1.1 200 OK    </span><br><span class="line">Content-Type: text/html;    </span><br><span class="line">Content-length: 47    </span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>insert undersireable content here<span class="tag">&lt;/<span class="name">html</span>&gt;</span>   </span><br><span class="line">  </span><br><span class="line">   </span><br><span class="line">Content-Type: text/html;charset=ISO-8859-1    </span><br><span class="line">Content-length: 0    </span><br><span class="line">Date: Thu, 21 Apr 2016 09:45:28 GMT </span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure></p>
+<p>再与正常的响应进行比较（上图5）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Moved Temporarily    </span><br><span class="line">Server: Apache-Coyote/1.1    </span><br><span class="line">Location: http://localhost/WebGoat/attack?Screen=3&amp;menu=100&amp;fromRedirect=yes&amp;language=en    </span><br><span class="line">Content-Type: text/html;charset=ISO-8859-1    </span><br><span class="line">Content-length: 0    </span><br><span class="line">Date: Thu, 21 Apr 2016 08:54:24 GMT </span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+<p>这个响应是服务器端传给浏览器端的，这是一个重定向响应，且Content-length=0，浏览器看到这一行会认为这个重定向响应已经结束了。</p>
+<p>此时浏览器再次发送请求到服务器：<br><img src="/images/webgoat_splitting/10.png" alt="10"><br>注意这里它的请求地址。<br>最后服务器的响应：<br><img src="/images/webgoat_splitting/11.png" alt="11"></p>
+<p>需要说明的是，这是因为现在的主流Web服务器比如IIS，Apache HTTP Server以及WebGoat使用的Tomcat等等都有对这个问题作过改进，服务器会对即将发送出去的HTTP响应头里面每一项的值都会做一定的编码或者转换，以避免这个问题。比如Tomcat就响应头中的每一项的值都做过了URLEncode，从而保证即使Web应用存在HTTP应答拆分的漏洞，Web服务器上也从底层平台的角度保证了尽可能避免HTTP应答拆分漏洞带来的威胁。所以如果想要在自己的实验室环境中重现对HTTP应答拆分漏洞的成功利用，可以尝试安装比较老的Web服务器版本，比如Tomcat 4.1.24之前的版本。</p>
+<h3 id="缓存中毒"><a href="#缓存中毒" class="headerlink" title="缓存中毒"></a>缓存中毒</h3><p>我们可以利用这个漏洞进一步进行缓存中毒的攻击，为了做到这一点，我们需要在前面提交的参数中，自己伪造的HTTP响应头中添加一个Last-Modified字段，并且把它的值设为一个未来的值。这样当浏览器在下次请求同一个页面的时候发送If-Modified-Since字段并且这个值是一个未来的值，服务器在发现这个值大于该页面最后修改时间之后将返回HTTP的304响应码表示该页面没有更新过，从而达到了污染受害者缓存的目的。下面就是我们希望的能够污染受害者缓存的服务器响应。我们希望得到的响应是这样的：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Moved Temporarily    </span><br><span class="line">Server: Apache-Coyote/1.1    </span><br><span class="line">Location: http://localhost/WebGoat/attack?Screen=3&amp;menu=100&amp;fromRedirect=yes&amp;language=en </span><br><span class="line"></span><br><span class="line">Content-length: 0</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-Type: text/html;</span><br><span class="line">Last-Modified: Thu, 01 Jan 2099 12:00:00 GMT </span><br><span class="line">Content-length: 19</span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span>hacked<span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line">Content-Type: text/html;charset=ISO-8859-1    </span><br><span class="line">Content-length: 0    </span><br><span class="line">Date: Thu, 21 Apr 2016 09:45:28 GMT </span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure></p>
+<p>从en到<html>按照url编码，之后得到：</html></p>
+<blockquote>
+<p>en%0d%0aContent-length%3a+0%0d%0a%0d%0aHTTP%2f1.1+200+OK%0d%0aContent-Type%3a+text%2fhtml%3b%0d%0aLast-Modified%3a+Thu%2c+01+Jan+2099+12%3a00%3a00+GMT+%0d%0aContent-length%3a+19%0d%0a%0d%0a%26lt%3bhtml%26gt%3bhacked%26lt%3b%2fhtml%26gt%3b</p>
+</blockquote>
+<p>以上就是需要的提交的数据，造成缓存中毒了。</p>
+<h2 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h2><p>防御CRLF攻击，就是检查用户输入，进行过滤。</p>
+<p>附参考资料：</p>
+<ol>
+<li><a href="http://blog.techbeta.me/2015/12/wireshark-Loopback/" target="_blank" rel="external">解决wireshark抓取本地包的问题</a></li>
+</ol>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/">http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
+          
+            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+          
+            <a href="/tags/Http-Splitting/" rel="tag">#Http Splitting</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/14/关于OWASP_Moble_Top10_Risks/" rel="next" title="关于OWASP Moble Top10 Risks">
+                <i class="fa fa-chevron-left"></i> 关于OWASP Moble Top10 Risks
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/25/Webgoat之Access_Control/" rel="prev" title="WebGoat之Access Control">
+                WebGoat之Access Control <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/18/Webgoat之Http_Splitting攻击/"
+           data-title="WebGoat之Http Splitting攻击" data-url="http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击效果与目标"><span class="nav-number">1.</span> <span class="nav-text">攻击效果与目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击原理"><span class="nav-number">2.</span> <span class="nav-text">攻击原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实战演练"><span class="nav-number">3.</span> <span class="nav-text">实战演练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置浏览器代理"><span class="nav-number">3.1.</span> <span class="nav-text">设置浏览器代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞发现"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞发现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击过程"><span class="nav-number">3.3.</span> <span class="nav-text">攻击过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存中毒"><span class="nav-number">3.4.</span> <span class="nav-text">缓存中毒</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何防御"><span class="nav-number">4.</span> <span class="nav-text">如何防御</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

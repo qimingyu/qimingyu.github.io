@@ -1,0 +1,985 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux内核," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="开始
+跟踪分析Linux内核的启动过程
+使用gdb跟踪调试内核从start_kernel到init进程启动
+
+环境搭建使用自己的Linux系统环境搭建MenuOS12345678910111213141516171819202122# 下载内核源代码编译内核cd ~/LinuxKernel/wget https://www.kernel.org/pub/linux/kernel/v3.x/linu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内核分析（三）">
+<meta property="og:url" content="http://qimingyu.github.io/2016/04/02/Linux内核分析（三）/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="开始
+跟踪分析Linux内核的启动过程
+使用gdb跟踪调试内核从start_kernel到init进程启动
+
+环境搭建使用自己的Linux系统环境搭建MenuOS12345678910111213141516171819202122# 下载内核源代码编译内核cd ~/LinuxKernel/wget https://www.kernel.org/pub/linux/kernel/v3.x/linu">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/5.jpeg">
+<meta property="og:image" content="http://qimingyu.github.io/images/sixth_blog/6.png">
+<meta property="og:updated_time" content="2016-04-03T13:16:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux内核分析（三）">
+<meta name="twitter:description" content="开始
+跟踪分析Linux内核的启动过程
+使用gdb跟踪调试内核从start_kernel到init进程启动
+
+环境搭建使用自己的Linux系统环境搭建MenuOS12345678910111213141516171819202122# 下载内核源代码编译内核cd ~/LinuxKernel/wget https://www.kernel.org/pub/linux/kernel/v3.x/linu">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/sixth_blog/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Linux内核分析（三） | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux内核分析（三）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-02T15:54:36+08:00" content="2016-04-02">
+              2016-04-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/系统理解/" itemprop="url" rel="index">
+                    <span itemprop="name">系统理解</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/02/Linux内核分析（三）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/02/Linux内核分析（三）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><ul>
+<li>跟踪分析Linux内核的启动过程</li>
+<li>使用gdb跟踪调试内核从start_kernel到init进程启动</li>
+</ul>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="使用自己的Linux系统环境搭建MenuOS"><a href="#使用自己的Linux系统环境搭建MenuOS" class="headerlink" title="使用自己的Linux系统环境搭建MenuOS"></a>使用自己的Linux系统环境搭建MenuOS</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 下载内核源代码编译内核</span></span><br><span class="line">cd ~/LinuxKernel/</span><br><span class="line">wget https:<span class="comment">//www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.6.tar.xz #wget是下载工具</span></span><br><span class="line">xz -d linux<span class="number">-3.18</span><span class="number">.6</span>.tar.xz  <span class="meta">#解压</span></span><br><span class="line">tar -xvf linux<span class="number">-3.18</span><span class="number">.6</span>.tar  <span class="meta">#解压</span></span><br><span class="line">cd linux<span class="number">-3.18</span><span class="number">.6</span></span><br><span class="line">make i386_defconfig</span><br><span class="line">make <span class="meta"># 一般要编译很长时间，少则20分钟多则数小时</span></span><br><span class="line"> </span><br><span class="line"><span class="meta"># 制作根文件系统</span></span><br><span class="line">cd ~/LinuxKernel/</span><br><span class="line">mkdir rootfs</span><br><span class="line">git clone https:<span class="comment">//github.com/mengning/menu.git  # 如果被墙，可以使用附件menu.zip </span></span><br><span class="line">cd menu</span><br><span class="line">gcc -o init linktable.c menu.c test.c -m32 -<span class="keyword">static</span> –lpthread</span><br><span class="line">cd ../rootfs</span><br><span class="line">cp ../menu/init ./</span><br><span class="line">find . | cpio -o -Hnewc |gzip <span class="number">-9</span> &gt; ../rootfs.img</span><br><span class="line"> </span><br><span class="line"><span class="meta"># 启动MenuOS系统</span></span><br><span class="line">cd ~/LinuxKernel/</span><br><span class="line">qemu -kernel linux<span class="number">-3.18</span><span class="number">.6</span>/arch/x86/boot/bzImage -initrd rootfs.img</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="重新配置编译Linux使之携带调试信息"><a href="#重新配置编译Linux使之携带调试信息" class="headerlink" title="重新配置编译Linux使之携带调试信息"></a>重新配置编译Linux使之携带调试信息</h3><p>在原来配置的基础上，在linux-3.18.6目录文件中，使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ make menuconfig</span><br></pre></td></tr></table></figure></p>
+<p>注意这里可能会报错：</p>
+<blockquote>
+<p>fatal error: curses.h: No such file or directory</p>
+</blockquote>
+<p>这时需要安装一个ncurses库(ubuntu系统默认没有安装)，命令为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ sudo apt-get install libncurses5-dev</span><br></pre></td></tr></table></figure></p>
+<p>直到出现如下图所示界面：<br><img src="/images/sixth_blog/1.png" alt="1"><br>选择如下两个配置：</p>
+<ul>
+<li>kernel hacking—&gt;</li>
+<li>[*] compile the kernel with debug info</li>
+</ul>
+<p>详细操作过程如下图所示：<br><img src="/images/sixth_blog/2.png" alt="2"><br><img src="/images/sixth_blog/3.png" alt="3"><br>此时输入y，再save<br><img src="/images/sixth_blog/4.png" alt="4"><br>注意最后保存的时候不用重命名，否则后面make无效。<br>然后输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ make</span><br></pre></td></tr></table></figure></p>
+<p>进行重新编译，此时编译时间会较长。</p>
+<h3 id="使用gdb跟踪调试内核"><a href="#使用gdb跟踪调试内核" class="headerlink" title="使用gdb跟踪调试内核"></a>使用gdb跟踪调试内核</h3><p>编译好之后我们就可以用gdb进行跟踪调试了，先输入如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ qemu -kernel linux-3.18.6/arch/x86/boot/bzImage -initrd rootfs.img -s -S</span><br></pre></td></tr></table></figure></p>
+<p>关于-s和-S选项的说明：</p>
+<ul>
+<li>-S freeze CPU at startup (use ’c’ to start execution)</li>
+<li>-s shorthand for -gdb tcp::1234 若不想使用1234端口，则可以使用-gdb tcp:xxxx来取代-s选项</li>
+</ul>
+<p>另开一个shell窗口，打开gdb：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gdb -q #-q 阻止打印gdb的相关信息</span><br><span class="line">（gdb）file linux-3.18.6/vmlinux # 在gdb界面中targe remote之前加载符号表</span><br><span class="line">（gdb）target remote:1234 # 建立gdb和gdbserver之间的连接,按c 让qemu上的Linux继续运行</span><br><span class="line">（gdb）break start_kernel # 断点的设置可以在target remote之前，也可以在之后</span><br></pre></td></tr></table></figure></p>
+<p>相关gdb调试命令如下：</p>
+<blockquote>
+<p>(1) clear #清除所有断点<br>(2) delete [linenum] #清除代码中行数为linenum的断点<br>(3) disable [linenum] #取消断点,可通过enable恢复<br>(4) step [count] #单步调试count步,会进入调用的函数中<br>(5) next [count] #单步调试count步,不会进入调用的函数<br>(6) finish #当前函数执行到返回<br>(7) information frame #显示栈信息<br>(8) search &lt; regexp&gt; #搜索源代码<br>(9) print &lt; var&gt;/&lt; register&gt;/&lt; memory&gt; #查看数据<br>(10) information registers #查看所有寄存器信息</p>
+</blockquote>
+<h2 id="Linux内核代码目录结构"><a href="#Linux内核代码目录结构" class="headerlink" title="Linux内核代码目录结构"></a>Linux内核代码目录结构</h2><p>以下为Linux内核代码目录结构：（注意要与Linux文件系统目录结构相区别）</p>
+<ul>
+<li><strong>arch</strong>目录包括了所有和体系结构相关的核心代码。它下面的每一个子目录都代表一种Linux支持的体系结构，例如i386就是Intel CPU及与之相兼容体系结构的子目录。PC机一般都基于此目录。</li>
+<li><strong>include</strong>目录包括编译核心所需要的大部分头文件，例如与平台无关的头文件在include/linux子目录下。</li>
+<li><strong>init</strong>目录包含核心的初始化代码（不是系统的引导代码），有main.c和Version.c两个文件。这是研究核心如何工作的好起点。</li>
+<li><strong>mm</strong>目录包含了所有的内存管理代码。与具体硬件体系结构相关的内存管理代码位于arch/*/mm目录下。</li>
+<li><strong>drivers</strong>目录中是系统中所有的设备驱动程序。它又进一步划分成几类设备驱动，每一种有对应的子目录，如声卡的驱动对应于drivers/sound。</li>
+<li><strong>ipc</strong>目录包含了核心进程间的通信代码。</li>
+<li><strong>modules</strong>目录存放了已建好的、可动态加载的模块。</li>
+<li><strong>fs</strong>目录存放Linux支持的文件系统代码。不同的文件系统有不同的子目录对应，如ext3文件系统对应的就是ext3子目录。</li>
+<li><strong>Kernel</strong>内核管理的核心代码放在这里。</li>
+<li><strong>net</strong>目录里是核心的网络部分代码，其每个子目录对应于网络的一个方面。</li>
+<li><strong>lib</strong>目录包含了核心的库代码。</li>
+<li><strong>scripts</strong>目录包含用于配置核心的脚本文件。</li>
+<li><strong>documentation</strong>目录下是一些文档，是对每个目录作用的具体说明。</li>
+</ul>
+<p>一般在每个目录下都有一个.depend文件和一个Makefile文件。这两个文件都是编译时使用的辅助文件。仔细阅读这两个文件对弄清各个文件之间的联系和依托关系很有帮助。另外有的目录下还有Readme文件，它是对该目录下文件的一些说明，同样有利于对内核源码的理解。 </p>
+<h2 id="跟踪分析"><a href="#跟踪分析" class="headerlink" title="跟踪分析"></a>跟踪分析</h2><p>那么，在内核启动的过程中：</p>
+<ul>
+<li>start_kernel()到init进程启动的过程究竟是怎样的呢？</li>
+<li>操作系统是如何从内核态过渡到用户态的呢？</li>
+</ul>
+<p>跟踪分析如下：</p>
+<h3 id="第一步：0号进程的创建"><a href="#第一步：0号进程的创建" class="headerlink" title="第一步：0号进程的创建"></a>第一步：0号进程的创建</h3><p>linux-3.18.6/init/main.c中的start_kernel()函数是入口函数，主要做一些初始化的工作，其全部注释代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br></pre></td><td class="code"><pre><span class="line">asmlinkage __visible void __init start_kernel(void)</span><br><span class="line">&#123;</span><br><span class="line">	//命令行，存放bootloader传递过来的参数</span><br><span class="line">	char *command_line;</span><br><span class="line">	char *after_dashes;</span><br><span class="line"></span><br><span class="line">	//初始化内核调试模块</span><br><span class="line">	lockdep_init();</span><br><span class="line">	//init_task即手工创建的PCB</span><br><span class="line">	set_task_stack_end_magic(&amp;init_task);</span><br><span class="line">	//获取当前CPU的硬件ID</span><br><span class="line">	smp_setup_processor_id();</span><br><span class="line">	//初始化哈希桶</span><br><span class="line">	debug_objects_early_init();</span><br><span class="line">	//防止栈溢出</span><br><span class="line">	boot_init_stack_canary();</span><br><span class="line">	//初始化cgroups</span><br><span class="line">	cgroup_init_early();</span><br><span class="line">	//关闭当前CPU的所有中断</span><br><span class="line">	local_irq_disable();</span><br><span class="line">	//系统中断标志</span><br><span class="line">	early_boot_irqs_disabled = true;</span><br><span class="line">	//激活当前CPU</span><br><span class="line">	boot_cpu_init();</span><br><span class="line">	//初始化高端内存映射表</span><br><span class="line">	page_address_init();</span><br><span class="line">	//输出各种信息</span><br><span class="line">	pr_notice("%s", linux_banner);</span><br><span class="line">	//内核构架相关初始化函数</span><br><span class="line">	setup_arch(&amp;command_line);</span><br><span class="line">	//每一个任务都有一个mm_struct结构来管理内存空间</span><br><span class="line">	mm_init_cpumask(&amp;init_mm);</span><br><span class="line">	//对cmdline进行备份和保存</span><br><span class="line">	setup_command_line(command_line);</span><br><span class="line">	//设置最多有多少个nr_cpu_ids结构</span><br><span class="line">	setup_nr_cpu_ids();</span><br><span class="line">	//为系统中每个CPU的per_cpu变量申请空间</span><br><span class="line">	setup_per_cpu_areas();</span><br><span class="line">	//为SMP系统里引导CPU(boot-cpu)进行准备工作</span><br><span class="line">	smp_prepare_boot_cpu();	/* arch-specific boot-cpu hooks */</span><br><span class="line">	//设置内存管理相关的node</span><br><span class="line">	build_all_zonelists(NULL, NULL);</span><br><span class="line">	//设置内存页分配通知器</span><br><span class="line">	page_alloc_init();</span><br><span class="line"></span><br><span class="line">	pr_notice("Kernel command line: %s\n", boot_command_line);</span><br><span class="line">	//解析cmdline中的启动参数</span><br><span class="line">	parse_early_param();</span><br><span class="line">	//对传入内核参数进行解释</span><br><span class="line">	after_dashes = parse_args("Booting kernel",</span><br><span class="line">				  static_command_line, __start___param,</span><br><span class="line">				  __stop___param - __start___param,</span><br><span class="line">				  -1, -1, &amp;unknown_bootoption);</span><br><span class="line">	if (!IS_ERR_OR_NULL(after_dashes))</span><br><span class="line">		parse_args("Setting init args", after_dashes, NULL, 0, -1, -1,</span><br><span class="line">			   set_init_arg);</span><br><span class="line"></span><br><span class="line">	jump_label_init();</span><br><span class="line"></span><br><span class="line">	//使用bootmeme分配一个记录启动信息的缓冲区</span><br><span class="line">	setup_log_buf(0);</span><br><span class="line">	//进程ID的HASH表初始化</span><br><span class="line">	pidhash_init();</span><br><span class="line">	//前期虚拟文件系统(vfs)的缓存初始化</span><br><span class="line">	vfs_caches_init_early();</span><br><span class="line">	//对内核异常表(exception table)按照异常向量号大小进行排序，以便加速访问</span><br><span class="line">	sort_main_extable();</span><br><span class="line">	//对内核陷阱异常进行初始化</span><br><span class="line">	trap_init();</span><br><span class="line">	//标记哪些内存可以使用</span><br><span class="line">	mm_init();</span><br><span class="line">	//对进程调度器的数据结构进行初始化</span><br><span class="line">	sched_init();</span><br><span class="line">	//关闭优先级调度</span><br><span class="line">	preempt_disable();</span><br><span class="line">	//这段代码主要判断是否过早打开中断，如果是这样，就会提示，并把中断关闭</span><br><span class="line">	if (WARN(!irqs_disabled(),</span><br><span class="line">		 "Interrupts were enabled *very* early, fixing it\n"))</span><br><span class="line">		local_irq_disable();</span><br><span class="line">	//为IDR机制分配缓存</span><br><span class="line">	idr_init_cache();</span><br><span class="line">	//初始化直接读拷贝更新的锁机制</span><br><span class="line">	rcu_init();</span><br><span class="line">	context_tracking_init();</span><br><span class="line">	//内核radis 树算法初始化</span><br><span class="line">	radix_tree_init();</span><br><span class="line">	//前期外部中断描述符初始化，主要初始化数据结构</span><br><span class="line">	early_irq_init();</span><br><span class="line">	//对应架构特定的中断初始化函数</span><br><span class="line">	init_IRQ();</span><br><span class="line">	//初始化内核时钟系统</span><br><span class="line">	tick_init();</span><br><span class="line">	rcu_init_nohz();</span><br><span class="line">	//初始化引导CPU的时钟相关的数据结构</span><br><span class="line">	init_timers();</span><br><span class="line">	//初始化高精度的定时器</span><br><span class="line">	hrtimers_init();</span><br><span class="line">	//初始化软件中断</span><br><span class="line">	softirq_init();</span><br><span class="line">	//初始化系统时钟计时</span><br><span class="line">	timekeeping_init();</span><br><span class="line">	//初始化系统时钟</span><br><span class="line">	time_init();</span><br><span class="line">	sched_clock_postinit();</span><br><span class="line">	//CPU性能监视机制初始化</span><br><span class="line">	perf_event_init();	</span><br><span class="line">	//为内核性能参数分配内存空间</span><br><span class="line">	profile_init();</span><br><span class="line">	//初始化所有CPU的call_single_queue</span><br><span class="line">	call_function_init();</span><br><span class="line">	WARN(!irqs_disabled(), "Interrupts were enabled early\n");</span><br><span class="line">	early_boot_irqs_disabled = false;</span><br><span class="line">	local_irq_enable();</span><br><span class="line">	//这是内核内存缓存(slab分配器)的后期初始化</span><br><span class="line">	kmem_cache_init_late();</span><br><span class="line">	//初始化控制台</span><br><span class="line">	console_init();</span><br><span class="line">	if (panic_later)</span><br><span class="line">		panic("Too many boot %s vars at `%s'", panic_later,</span><br><span class="line">		      panic_param);</span><br><span class="line">	//打印锁的依赖信息</span><br><span class="line">	lockdep_info();</span><br><span class="line">	//测试锁的API是否使用正常</span><br><span class="line">	locking_selftest();</span><br><span class="line"></span><br><span class="line">#ifdef CONFIG_BLK_DEV_INITRD</span><br><span class="line">	if (initrd_start &amp;&amp; !initrd_below_start_ok &amp;&amp;</span><br><span class="line">	    page_to_pfn(virt_to_page((void *)initrd_start)) &lt; min_low_pfn) &#123;</span><br><span class="line">		pr_crit("initrd overwritten (0x%08lx &lt; 0x%08lx) - disabling it.\n",</span><br><span class="line">		    page_to_pfn(virt_to_page((void *)initrd_start)),</span><br><span class="line">		    min_low_pfn);</span><br><span class="line">		initrd_start = 0;</span><br><span class="line">	&#125;</span><br><span class="line">#endif</span><br><span class="line">	page_cgroup_init();</span><br><span class="line">	debug_objects_mem_init();</span><br><span class="line">	kmemleak_init();</span><br><span class="line">	setup_per_cpu_pageset();</span><br><span class="line">	numa_policy_init();</span><br><span class="line">	if (late_time_init)</span><br><span class="line">		late_time_init();</span><br><span class="line">	sched_clock_init();</span><br><span class="line">	calibrate_delay();</span><br><span class="line">	pidmap_init();</span><br><span class="line">	anon_vma_init();</span><br><span class="line">	acpi_early_init();</span><br><span class="line">#ifdef CONFIG_X86</span><br><span class="line">	if (efi_enabled(EFI_RUNTIME_SERVICES))</span><br><span class="line">		efi_enter_virtual_mode();</span><br><span class="line">#endif</span><br><span class="line">#ifdef CONFIG_X86_ESPFIX64</span><br><span class="line">	/* Should be run before the first non-init thread is created */</span><br><span class="line">	init_espfix_bsp();</span><br><span class="line">#endif</span><br><span class="line">	thread_info_cache_init();</span><br><span class="line">	cred_init();</span><br><span class="line">	fork_init(totalram_pages);</span><br><span class="line">	proc_caches_init();	</span><br><span class="line">	//初始化文件系统的缓冲区</span><br><span class="line">	buffer_init();</span><br><span class="line">	//初始化内核密钥管理系统</span><br><span class="line">	key_init();</span><br><span class="line">	//初始化内核安全管理框架</span><br><span class="line">	security_init();</span><br><span class="line">	dbg_late_init();</span><br><span class="line">	vfs_caches_init(totalram_pages);</span><br><span class="line">	signals_init();</span><br><span class="line">	/* rootfs populating might need page-writeback */</span><br><span class="line">	page_writeback_init();</span><br><span class="line">	proc_root_init();</span><br><span class="line">	cgroup_init();</span><br><span class="line">	cpuset_init();</span><br><span class="line">	taskstats_init_early();</span><br><span class="line">	delayacct_init();</span><br><span class="line">	check_bugs();</span><br><span class="line">	sfi_init_late();</span><br><span class="line">	if (efi_enabled(EFI_RUNTIME_SERVICES)) &#123;</span><br><span class="line">		efi_late_init();</span><br><span class="line">		efi_free_boot_services();</span><br><span class="line">	&#125;</span><br><span class="line">	ftrace_init();</span><br><span class="line">	rest_init();//剩余的初始化</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码整体执行流程大致为：<br><img src="/images/sixth_blog/5.jpeg" alt="5"><br>首先来看start_kernel()里面的第二句</p>
+<blockquote>
+<p>   set_task_stack_end_magic(&amp;init_task);</p>
+</blockquote>
+<p>init_task在文件linux-3.18.6/init/init_task.c中定义如下：</p>
+<blockquote>
+<p>  struct task_struct init_task = INIT_TASK(init_task);</p>
+</blockquote>
+<p>可见它其实就是一个task_struct，与用户进程的task_struct一样。相当于<a href="http://qimingyu.github.io/2016/03/28/Linux%E5%86%85%E6%A0%B8%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89/">《Linux内核分析(二)》</a>中的PCB结构体。<br>init_task中保存了一个进程的所有基本信息，如进程状态，栈起始地址，进程号pid等，其特殊之处在于它的pid=0，也就是通常所说的0号进程，0号进程就是我们这样通过手工创建出来的。也就是start_kernel()创建了0号进程。<br>0号进程的任务范围是从最早的汇编代码一直到start_kernel()的执行结束。</p>
+<h3 id="第二步：1号进程的创建"><a href="#第二步：1号进程的创建" class="headerlink" title="第二步：1号进程的创建"></a>第二步：1号进程的创建</h3><p>再来看start_kernel()里面的最后一句rest_init()，该函数的定义同样在linux-3.18.6/init/main.c文件中，在rest_init()函数中有这样一句话：</p>
+<blockquote>
+<p>kernel_thread(kernel_init, NULL, CLONE_FS);</p>
+</blockquote>
+<p>其中kernel_thread()的源码在文件linux-3.18.6/kernel/fork.c中定义，如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> kernel_thread(<span class="keyword">int</span> (*fn)(<span class="keyword">void</span> *), <span class="keyword">void</span> *arg, <span class="keyword">unsigned</span> <span class="keyword">long</span> flags)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> do_fork(flags|CLONE_VM|CLONE_UNTRACED, (<span class="keyword">unsigned</span> <span class="keyword">long</span>)fn,</span><br><span class="line">		(<span class="keyword">unsigned</span> <span class="keyword">long</span>)arg, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里相当于fork出了新进程来执行kernel_init()函数。<br>而kernel_init()函数的定义在文件linux-3.18.6/init/main.c中定义，如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建的内核线程运行本函数，在本函数里面启动run_init_process</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">ref <span class="title">kernel_init</span><span class="params">(<span class="keyword">void</span> *unused)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	kernel_init_freeable();</span><br><span class="line">	async_synchronize_full();</span><br><span class="line">	free_initmem();</span><br><span class="line">	mark_rodata_ro();</span><br><span class="line">	system_state = SYSTEM_RUNNING;</span><br><span class="line">	numa_default_policy();</span><br><span class="line">	flush_delayed_fput();</span><br><span class="line">	<span class="keyword">if</span> (ramdisk_execute_command) &#123;</span><br><span class="line">	<span class="comment">//启动run_init_process</span></span><br><span class="line">		ret = run_init_process(ramdisk_execute_command);</span><br><span class="line">		<span class="keyword">if</span> (!ret)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		pr_err(<span class="string">"Failed to execute %s (error %d)\n"</span>,</span><br><span class="line">		       ramdisk_execute_command, ret);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (execute_command) &#123;</span><br><span class="line">		ret = run_init_process(execute_command);</span><br><span class="line">		<span class="keyword">if</span> (!ret)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		pr_err(<span class="string">"Failed to execute %s (error %d).  Attempting defaults...\n"</span>,</span><br><span class="line">			execute_command, ret);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*try_to_run_init_process()通过嵌入汇编构造一个</span><br><span class="line">	类似用户态代码一样的sys_execve()调用，其参数就是</span><br><span class="line">	要执行的可执行文件名。</span><br><span class="line">	*/</span></span><br><span class="line">	<span class="comment">/*这里是内核初始化结束并开始用户态初始化的阴阳界</span><br><span class="line">	*/</span></span><br><span class="line">	<span class="keyword">if</span> (!try_to_run_init_process(<span class="string">"/sbin/init"</span>) ||</span><br><span class="line">	    !try_to_run_init_process(<span class="string">"/etc/init"</span>) ||</span><br><span class="line">	    !try_to_run_init_process(<span class="string">"/bin/init"</span>) ||</span><br><span class="line">	    !try_to_run_init_process(<span class="string">"/bin/sh"</span>))</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	panic(<span class="string">"No working init found.  Try passing init= option to kernel. "</span></span><br><span class="line">	      <span class="string">"See Linux Documentation/init.txt for guidance."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码的最后部分，实际就是通过execve()执行磁盘文件上的init程序。而这里的init程序，就是用户态程序了，也就是大名鼎鼎的1号进程。由此实现了内核态向用户态的转化。<br>PS：在做实验的过程中，我纠结了很久的一个问题是磁盘上的init可执行文件从哪儿来的？<br>后来明白了，menu只是挂载的文件系统，在环境搭建部分，有一个命令：</p>
+<blockquote>
+<p>gcc -o init linktable.c menu.c test.c -m32 -static –lpthread</p>
+</blockquote>
+<p>由此生成的init可执行程序，也就是内核系统加载好之后，开始读取用户态的init可执行文件了。因此手工生成的MenuOS会有几个简单的命令，这是由init进程提供的。</p>
+<h3 id="第三步：0号进程的转变"><a href="#第三步：0号进程的转变" class="headerlink" title="第三步：0号进程的转变"></a>第三步：0号进程的转变</h3><p>在linux-3.18.6/init/main.c文件中看rest_init()函数的代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> noinline <span class="keyword">void</span> __<span class="function">init_refok <span class="title">rest_init</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> pid;</span><br><span class="line">	rcu_scheduler_starting();</span><br><span class="line">	<span class="comment">//很重要，创建一个内核线程，PID=1，创建好了，但不能去调度它</span></span><br><span class="line">	kernel_thread(kernel_init, <span class="literal">NULL</span>, CLONE_FS);</span><br><span class="line">	numa_default_policy();</span><br><span class="line">	<span class="comment">//很重要，创建第二个内核线程，PID=2，负责管理和调度其它内核线程。</span></span><br><span class="line">	pid = kernel_thread(kthreadd, <span class="literal">NULL</span>, CLONE_FS | CLONE_FILES);</span><br><span class="line">	rcu_read_lock();</span><br><span class="line">	kthreadd_task = find_task_by_pid_ns(pid, &amp;init_pid_ns);</span><br><span class="line">	rcu_read_unlock();</span><br><span class="line">	complete(&amp;kthreadd_done);</span><br><span class="line">	init_idle_bootup_task(current);</span><br><span class="line">	schedule_preempt_disabled();</span><br><span class="line">	cpu_startup_entry(CPUHP_ONLINE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>rest_init()在创建了1号、2号进程之后，系统可以正式对外工作了。之后执行最后一行代码：</p>
+<blockquote>
+<p>cpu_startup_entry(CPUHP_ONLINE);</p>
+</blockquote>
+<p>cpu_startup_entry()函数的定义在文件linux-3.18.6/kernel/sched/idle.c中，如下所示：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cpu_startup_entry</span><span class="params">(<span class="keyword">enum</span> cpuhp_state state)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_X86</span></span><br><span class="line">    boot_init_stack_canary();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    arch_cpu_idle_prepare();</span><br><span class="line">    cpu_idle_loop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中，cpu_idle_loop()实际是一个while无限循环，也就是说，0号进程在fork了1号进程并且做了其余的启动工作之后，最后“进化”成为了idle进程。完成其使命，并一直处于内核态中无线循环。</p>
+<h3 id="整体流程"><a href="#整体流程" class="headerlink" title="整体流程"></a>整体流程</h3><p> <img src="/images/sixth_blog/6.png" alt="6"></p>
+<h2 id="Linux启动过程总结"><a href="#Linux启动过程总结" class="headerlink" title="Linux启动过程总结"></a>Linux启动过程总结</h2><ol>
+<li>当计算机系统加电（Power on PC）后，CPU由CS:EIP = FFFF:0000H处取指令，BIOS代码被调用执行。BIOS例行程序检测完硬件并完成相应的初始化之后就会寻找可引导介质，找到后把引导程序加载到指定内存区域后，就把控制权交给了引导程序BootLoader。BootLoader指定kernel、initrd和root所在的分区和目录来启动操作系统。</li>
+<li>Linux内核初始化在平台相关的汇编代码执行完毕后会跳转到start_kernel()函数，开始c代码的内核初始化。也就是说start_kernel()是内核汇编和C语言的交接点，在该函数以前，内核代码都是用汇编写的，完成一些最基本的初始化与环境设置工作，比如为后面C代码的运行设置stack环境等，在start_kernel()中Linux将完成整个系统内核的初始化。内核初始化的最后一步就是启动init进程，这是所有用户态进程的祖先。</li>
+<li>而init程序的执行常规分成如下三种：</li>
+</ol>
+<ul>
+<li>在系统启动阶段，操作系统内核部分初始化阶段的结尾，将运行init这个第一个用户态的程序（它将作为所有用户态进程的共同祖先），它将依据/etc/inittab配置文件来对系统进行用户态的初始化。</li>
+<li>在系统运行当中root用户可以运行init命令把系统切换到不同的运行级别（runlevel）。比如当前运行级别是3（Console界面的Full multiuser mode），而root想维护系统，他可以运行如下命令： /$: init 1 /，切换到Single user mode，即单用户模式，有点像Windows下的安全模式。用户启动的init命令并不真正运行runlevel切换的工作，只是通过pipe(管道)把命令打包成request，然后传递给作为daemon进程运行的init。</li>
+<li>在系统起来以后，init作为一个daemon进程运行，一是监控/etc/inittab配置文件中的相关命令的执行，二就是通过pipe(管道)接受2中发来的切换runlevel的request(请求)并处理之。</li>
+</ul>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/02/Linux内核分析（三）/">http://qimingyu.github.io/2016/04/02/Linux内核分析（三）/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux内核/" rel="tag">#Linux内核</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/28/Linux内核分析（二）/" rel="next" title="Linux内核分析（二）">
+                <i class="fa fa-chevron-left"></i> Linux内核分析（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/腾讯2016春招安全岗笔试题解析/" rel="prev" title="腾讯2016春招安全岗笔试题解析">
+                腾讯2016春招安全岗笔试题解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/02/Linux内核分析（三）/"
+           data-title="Linux内核分析（三）" data-url="http://qimingyu.github.io/2016/04/02/Linux内核分析（三）/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自己的Linux系统环境搭建MenuOS"><span class="nav-number">2.1.</span> <span class="nav-text">使用自己的Linux系统环境搭建MenuOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新配置编译Linux使之携带调试信息"><span class="nav-number">2.2.</span> <span class="nav-text">重新配置编译Linux使之携带调试信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用gdb跟踪调试内核"><span class="nav-number">2.3.</span> <span class="nav-text">使用gdb跟踪调试内核</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux内核代码目录结构"><span class="nav-number">3.</span> <span class="nav-text">Linux内核代码目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跟踪分析"><span class="nav-number">4.</span> <span class="nav-text">跟踪分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：0号进程的创建"><span class="nav-number">4.1.</span> <span class="nav-text">第一步：0号进程的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：1号进程的创建"><span class="nav-number">4.2.</span> <span class="nav-text">第二步：1号进程的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：0号进程的转变"><span class="nav-number">4.3.</span> <span class="nav-text">第三步：0号进程的转变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整体流程"><span class="nav-number">4.4.</span> <span class="nav-text">整体流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux启动过程总结"><span class="nav-number">5.</span> <span class="nav-text">Linux启动过程总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

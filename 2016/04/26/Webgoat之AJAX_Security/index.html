@@ -1,0 +1,1005 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络渗透,WebGoat,AJAX," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="DOM-Based cross-site scripting基于DOM的跨站点脚本。DOM是文档对象模型，它是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。W3C DOM标准被分为3个不同的部分：
+
+核心DOM-针对任何结构化文档的标准模型
+XML DOM-针对XML文档的标准模型
+HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebGoat之AJAX Security">
+<meta property="og:url" content="http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="DOM-Based cross-site scripting基于DOM的跨站点脚本。DOM是文档对象模型，它是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。W3C DOM标准被分为3个不同的部分：
+
+核心DOM-针对任何结构化文档的标准模型
+XML DOM-针对XML文档的标准模型
+HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修改">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/1.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/2.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/6.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/3.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/4.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/5.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/7.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/8.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/9.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/10.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/11.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/12.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/13.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/14.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/15.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/17.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/18.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/16.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/19.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/20.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/21.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/22.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/23.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/24.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/25.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/26.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/27.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/28.png">
+<meta property="og:updated_time" content="2016-05-03T11:15:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebGoat之AJAX Security">
+<meta name="twitter:description" content="DOM-Based cross-site scripting基于DOM的跨站点脚本。DOM是文档对象模型，它是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。W3C DOM标准被分为3个不同的部分：
+
+核心DOM-针对任何结构化文档的标准模型
+XML DOM-针对XML文档的标准模型
+HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修改">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> WebGoat之AJAX Security | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WebGoat之AJAX Security
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T08:55:07+08:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用安全/" itemprop="url" rel="index">
+                    <span itemprop="name">应用安全</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/26/Webgoat之AJAX_Security/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/Webgoat之AJAX_Security/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="DOM-Based-cross-site-scripting"><a href="#DOM-Based-cross-site-scripting" class="headerlink" title="DOM-Based cross-site scripting"></a>DOM-Based cross-site scripting</h2><p>基于DOM的跨站点脚本。DOM是文档对象模型，它是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。W3C DOM标准被分为3个不同的部分：</p>
+<ul>
+<li>核心DOM-针对任何结构化文档的标准模型</li>
+<li>XML DOM-针对XML文档的标准模型</li>
+<li>HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修改、添加或HTML元素的标准）</li>
+</ul>
+<a id="more"></a>
+<p>由于它允许动态修改网页内容，这样就可以被攻击者用来进行恶意代码注入。而这种恶意代码注入一般是未经验证的用户的输入直接修改了客户端的页面。HTML DOM实体中可随时插入新的HTML语句或JavaScript语句，因此很容易被恶意代码利用，从而来改变页面显示内容或执行恶意代码。HTML标记语言中很多标签的特殊属性参数中允许插入JS代码，如：IMG/IFRAME等。<br>如下图所示:</p>
+<p><img src="/images/webgoat_ajax_security/1.png" alt="1"></p>
+<p>发现当你在输入框输入什么时，页面上方就会显示出什么。</p>
+<h3 id="Stage-1"><a href="#Stage-1" class="headerlink" title="Stage 1"></a>Stage 1</h3><p>因此这部分课程要求我们构造恶意代码输入，使用图片OWASP IMAGE（localhost:8080/WebGoat/images/logos/owasp.jpg)来改变原来Web页面的显示方式。</p>
+<p>在输入框中输入如下内容：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IMG SRC=<span class="string">"images/logos/owasp.jpg"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>就会显示其图片：</p>
+<p><img src="/images/webgoat_ajax_security/2.png" alt="2"></p>
+<p>这是一个反射型的XSS。<br>关于反射型XSS和存储型XSS，插播以下内容：</p>
+<blockquote>
+<p>相同点：两者的本质问题都是让对方浏览器执行你插入的js代码。<br>不同点：存储型的XSS代码放在了服务器中，具有持久性；反射型的XSS需要用户点击交互才能执行，非持久化。前者是枪直接打就行了，后者是地雷，需要别人踩才能触发。</p>
+</blockquote>
+<h3 id="Stage-2"><a href="#Stage-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>这部分是要用image标签创建一个JavaScript Alert对话框出来。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=;;alert(<span class="string">'xss'</span>)/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>得到网页弹出其对话框</p>
+<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这部分要求用iframe标签创建JavaScript Alert对话框。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"javascript:alert('xss');"</span>&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></p>
+<p>得到网页的输入框</p>
+<h3 id="Stage-4"><a href="#Stage-4" class="headerlink" title="Stage 4"></a>Stage 4</h3><p>要求在提交数据中创建虚假的输入框，骗取用户的密码。<br>在输入框中输入如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Please enter your password:&lt;BR&gt;&lt;input type = "password" name="pass"/&gt;&lt;button</span><br><span class="line">onClick="javascript:alert('I have your password: ' +</span><br><span class="line">pass.value);"&gt;Submit&lt;/button&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br><span class="line">&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br></pre></td></tr></table></figure></p>
+<p>得到如下界面：<br><img src="/images/webgoat_ajax_security/6.png" alt="6"></p>
+<h3 id="Stage-5"><a href="#Stage-5" class="headerlink" title="Stage 5"></a>Stage 5</h3><p>这部分需要我们修复该漏洞。可以在tomcat\webapps\WebGoat\javascript中找到相关的脚本文件。编辑DOMXSS.js文件，将如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">displayGreeting</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (name != <span class="string">''</span>)&#123;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"greeting"</span>).innerHTML=<span class="string">"Hello, "</span> + name + <span class="string">"!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">displayGreeting</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (name != <span class="string">''</span>)&#123;</span><br><span class="line">		<span class="built_in">document</span>.getElementById(<span class="string">"greeting"</span>).innerHTML=<span class="string">"Hello, "</span> + escapeHTML(name); + <span class="string">"!"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中，escapeHTML()为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escapeHTML</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">   <span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(str);</span><br><span class="line">   div.appendChild(text);</span><br><span class="line">   <span class="keyword">return</span> div.innerHTML;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后成功了。</p>
+<h2 id="Client-Side-Filtering"><a href="#Client-Side-Filtering" class="headerlink" title="Client Side Filtering"></a>Client Side Filtering</h2><p>客户端过滤。</p>
+<h3 id="Stage-1-1"><a href="#Stage-1-1" class="headerlink" title="Stage 1"></a>Stage 1</h3><p>这部分假设我是公司财务系统中的一员，我可以看到所有人的工资信息，但只有经理的工资信息我是没有权限看到的，需要我想办法看到经理的工资并提交。</p>
+<p>这部分的漏洞是在于服务器收到客户端的请求后，向客户端发送了过多的数据，虽然有一部分被隐藏起来了，普通页面看不到，但是仍然可以通过Firebug找到。如下图所示：</p>
+<p><img src="/images/webgoat_ajax_security/3.png" alt="3"></p>
+<p>以上是其页面相应的选择框，其对应的页面源代码为：<br><img src="/images/webgoat_ajax_security/4.png" alt="4"></p>
+<p>而显示出来的结果，表格内容，其对应的页面源代码为：<br><img src="/images/webgoat_ajax_security/5.png" alt="5"></p>
+<p>由此看到了相对应的权限外的信息。</p>
+<h3 id="Stage-2-1"><a href="#Stage-2-1" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>这部分需要修补这个漏洞，让服务器只返回应该返回的信息。<br>这个漏洞的主要问题是服务端将所有数据返回给客户端，尽管这些敏感数据被隐藏了，但仍然可以被发现。因此该漏洞的填补是在XPath查询中增加一个过滤器。<br>在tomcat\webapps\WebGoat\lessons\Ajax\clientSideFiltering.jsp中，将源代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee/UserID | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee/FirstName | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee/LastName | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee/SSN | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee/Salary "</span>);</span><br><span class="line"><span class="built_in">String</span> expression = sb.toString();</span><br></pre></td></tr></table></figure></p>
+<p>修改为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee[Managers/Manager/text() = "</span> + userId + <span class="string">"]/UserID | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee[Managers/Manager/text() = "</span> + userId + <span class="string">"]/FirstName | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee[Managers/Manager/text() = "</span> + userId + <span class="string">"]/LastName | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee[Managers/Manager/text() = "</span> + userId + <span class="string">"]/SSN | "</span>);</span><br><span class="line">sb.append(<span class="string">"/Employees/Employee[Managers/Manager/text() = "</span> + userId + <span class="string">"]/Salary "</span>);</span><br><span class="line"><span class="built_in">String</span> expression = sb.toString();</span><br></pre></td></tr></table></figure></p>
+<p>此时，客户端显示的代码如下：<br><img src="/images/webgoat_ajax_security/7.png" alt="7"><br>可看到，不该看到的内容，已经被很好的隐藏起来了。</p>
+<h2 id="Same-Origin-Policy-Protection"><a href="#Same-Origin-Policy-Protection" class="headerlink" title="Same Origin Policy Protection"></a>Same Origin Policy Protection</h2><p>同源策略保护。同源策略是指，域名，协议，端口相同。它是客户端脚本，尤其是JavaScript的重要安全度量标准。它阻止从一个源加载的文档/脚本用来获取或设置另一个源加载的文档的属性。<br>AJAX技术的一项关键元素是XMLHttpRequest（XHR），该技术允许客户端向服务器端发起异步调用。然而，作为一项安全措施，这些请求最好只能从客户端原始页面向服务端发起访问。<br>这部分的主要目的是让我们熟悉同源策略。开始的时候是如下图所示的：<br><img src="/images/webgoat_ajax_security/8.png" alt="8"><br>可以看到，下面该页面下面依次有两个超链接，第一个是链接符合同源策略的，第二个链接是不符合同源策略的。<br>XMLHttp只能向同源服务器发送请求，任何向非同源服务端发送数据的尝试都将失败。</p>
+<h2 id="DOM-Injection"><a href="#DOM-Injection" class="headerlink" title="DOM Injection"></a>DOM Injection</h2><p><img src="/images/webgoat_ajax_security/9.png" alt="9"><br>可以看到该课程是要求我们输入激活码，然后网站拿去验证，我们的目标就是激活被禁用的按钮。我们首先需要理解激活码的验证过程。<br>浏览器与服务器通过Ajax技术实现XML通信。首先查看HTML源代码，发现代码中使用了XMLHttpRequest：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> keyField = <span class="built_in">document</span>.getElementById(<span class="string">'key'</span>);</span><br><span class="line">	<span class="keyword">var</span> url = <span class="string">'attack Screen=80&amp;menu=1150&amp;from=ajax&amp;key='</span> +</span><br><span class="line">	<span class="built_in">encodeURIComponent</span>(keyField.value);</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest !=<span class="string">'undefined'</span>) &#123;</span><br><span class="line">		req = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) &#123;</span><br><span class="line">		req = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	req.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">	req.onreadystatechange = callback;</span><br><span class="line">	req.send(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (req.readyState == <span class="number">4</span>) &#123;</span><br><span class="line">		<span class="keyword">if</span> (req.status == <span class="number">200</span>) &#123;</span><br><span class="line">			<span class="keyword">var</span> message = req.responseText;</span><br><span class="line">			<span class="built_in">eval</span>(message);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到XML响应给客户端浏览器的内容包括激活按钮的JavaScript语句，我们可以拦截服务器的响应，并修改其响应。<br>在链接传入请求：</p>
+<p><img src="/images/webgoat_ajax_security/10.png" alt="10"></p>
+<p>修改burpsuit的默认设置，开启响应拦截：<br><img src="/images/webgoat_ajax_security/11.png" alt="11"></p>
+<p>请求拦截后，依次点击:Action ——&gt; Do intercept ——&gt; Response to this request<br>设置拦截该请求的响应后，点击Forward，拦截到如下服务器的响应：<br><img src="/images/webgoat_ajax_security/12.png" alt="12"></p>
+<p>修改该响应，找到submit这里，</p>
+<p><img src="/images/webgoat_ajax_security/13.png" alt="13"></p>
+<p>之后修改，去掉“disabled”字段，然后forward，可见浏览器显示的激活按钮已经可以按动了！</p>
+<h2 id="XML-Injection"><a href="#XML-Injection" class="headerlink" title="XML Injection"></a>XML Injection</h2><p>AJAX应用程序使用XML与服务端进行信息交互。但该XML内容能够被非法用户轻易拦截并篡改。该课程进入之后是如下页面：</p>
+<p><img src="/images/webgoat_ajax_security/14.png" alt="14"></p>
+<p>这是一个积分兑换奖品的页面。<br>上面显示的是每件商品所对应的积分值。我的编号是：836239，当输入这个编号后，浏览器页面可以看到：<br><img src="/images/webgoat_ajax_security/15.png" alt="15"></p>
+<p>我的积分是100分，下面是我能够兑换到的商品列表，我可以选择性勾选后，点击提交。</p>
+<p>那么现在就是要求我们找到漏洞，使能够尽可能的买更多的东西，甚至能够超过我的所有积分的商品。</p>
+<p>我们可以猜测这件事情，在服务器端的处理逻辑是这样的：当客户输入其编号后，提交给服务器，服务器在后台进行查询，首先查到该客户的积分，然后把低于该积分的商品全部返回给客户端，由客户端进行选择后提交，由于之前已经进行过判断了，所以这里服务器没有再进行验证，因此我们把高于我们积分的商品勾选提交的时候，服务器有可能是通过的。</p>
+<p>同样我们用burpsuit拦截服务器返回的消息，如下：<br><img src="/images/webgoat_ajax_security/17.png" alt="17"></p>
+<p>然后修改为如下：</p>
+<p><img src="/images/webgoat_ajax_security/18.png" alt="18"><br>此时，客户端显示为如下：</p>
+<p><img src="/images/webgoat_ajax_security/16.png" alt="16"><br>最后两个也是可以勾选提交的了。</p>
+<h2 id="JSON-Injection"><a href="#JSON-Injection" class="headerlink" title="JSON Injection"></a>JSON Injection</h2><p>JSON是JavaScript对象表示法，是存储和交换信息的语法。类似于XML，但JSON比XML更小、更快、更易解析。对于AJAX应用程序来说，JSON比XML更快更易使用。<br>开始的时候页面是这样的：<br><img src="/images/webgoat_ajax_security/19.png" alt="19"><br>这是一个关于机票的页面，输入出发地和目的地，浏览器和服务器之间实现Ajax通信，返回机票价格和路线信息，供客户选择，如下所示：<br><img src="/images/webgoat_ajax_security/20.png" alt="20"><br>可以看到有两条路线，一条便宜的，但中途会停。一条贵的，是直达的。我们的目标就是用便宜的钱坐直达的飞机。</p>
+<p>与上一个课程一样，同样是拦截服务器端返回的信息并修改。<br>原始请求返回信息为：</p>
+<p><img src="/images/webgoat_ajax_security/21.png" alt="21"></p>
+<p>拦截修改后为：<br><img src="/images/webgoat_ajax_security/22.png" alt="22"><br>价格由600改为100，嘻嘻。。</p>
+<p>页面显示为：<br><img src="/images/webgoat_ajax_security/23.png" alt="23"></p>
+<h2 id="Slient-Transactions-Attacks"><a href="#Slient-Transactions-Attacks" class="headerlink" title="Slient Transactions Attacks"></a>Slient Transactions Attacks</h2><p>静默交易攻击。</p>
+<p>进去之后看到：<br><img src="/images/webgoat_ajax_security/24.png" alt="24"><br>这是一个银行转账的页面，上面显示了我的金额，目标账户和转账额度，当点击“Confirm”后，我的金额就转出去了，会减少相应的数值。<br>通过查看页面源代码，可以看到如下重要代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processData</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 	<span class="keyword">var</span> accountNo = <span class="built_in">document</span>.getElementById(<span class="string">'newAccount'</span>).value;</span><br><span class="line"> 	<span class="keyword">var</span> amount = <span class="built_in">document</span>.getElementById(<span class="string">'amount'</span>).value;</span><br><span class="line"> 	<span class="keyword">if</span> ( accountNo == <span class="string">''</span>)&#123;</span><br><span class="line"> 		alert(<span class="string">'Please enter a valid account number to transfer to.'</span>)</span><br><span class="line"> 		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">else</span> <span class="keyword">if</span> ( amount == <span class="string">''</span>)&#123;</span><br><span class="line"> 		alert(<span class="string">'Please enter a valid amount to transfer.'</span>)</span><br><span class="line"> 		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> balanceValue = <span class="built_in">document</span>.getElementById(<span class="string">'balanceID'</span>).innerHTML;</span><br><span class="line">	balanceValue = balanceValue.replace( <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'$'</span>) , <span class="string">''</span>);</span><br><span class="line">	<span class="keyword">if</span> ( <span class="built_in">parseFloat</span>(amount) &gt; <span class="built_in">parseFloat</span>(balanceValue) ) &#123;</span><br><span class="line"> 		alert(<span class="string">'You can not transfer more funds than what is available in your balance.'</span>)</span><br><span class="line"> 		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="built_in">document</span>.getElementById(<span class="string">'confirm'</span>).value  = <span class="string">'Transferring'</span></span><br><span class="line">	submitData(accountNo, amount);<span class="comment">//转账</span></span><br><span class="line"> 	<span class="built_in">document</span>.getElementById(<span class="string">'confirm'</span>).value  = <span class="string">'Confirm'</span></span><br><span class="line">	balanceValue = <span class="built_in">parseFloat</span>(balanceValue) - <span class="built_in">parseFloat</span>(amount);</span><br><span class="line">	balanceValue = balanceValue.toFixed(<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">document</span>.getElementById(<span class="string">'balanceID'</span>).innerHTML = balanceValue + <span class="string">'$'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">submitData</span>(<span class="params">accountNo, balance</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> url = <span class="string">'attack?Screen=40&amp;menu=400&amp;from=ajax&amp;newAccount='</span>+ accountNo+ <span class="string">'&amp;amount='</span> + balance +<span class="string">'&amp;confirm='</span> + <span class="built_in">document</span>.getElementById(<span class="string">'confirm'</span>).value; </span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">'undefined'</span>) &#123;</span><br><span class="line">		req = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) &#123;</span><br><span class="line">		req = <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">   	req.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">   	req.onreadystatechange = callback;</span><br><span class="line">   	req.send(<span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (req.readyState == <span class="number">4</span>) &#123; </span><br><span class="line">        <span class="keyword">if</span> (req.status == <span class="number">200</span>) &#123; </span><br><span class="line">            <span class="keyword">var</span> result =  req.responseText ;</span><br><span class="line">			<span class="keyword">var</span> resultsDiv = <span class="built_in">document</span>.getElementById(<span class="string">'resultsDiv'</span>);</span><br><span class="line">			resultsDiv.innerHTML = <span class="string">''</span>;</span><br><span class="line">			resultsDiv.innerHTML = result;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>有两个关键函数，一个是processData(),一个是submitData()。<br>当用户输入账户名和额度后，点击“Confirm”，在转账交易前，会首先调用processData()来判断用户的输入以及转账额度是否合理等，然后调用函数submitData(accountNo, amount)进行转账，而该函数实际上是向后台提交转账所需的重要信息：目标账号和转账金额。<br>如果通过浏览器直接执行submitData(accountNo，balance)函数，那么就可以绕过客户端验证，不需要任何额外的确认和用户数字签名。这里指的是用浏览器直接执行，而不是系统给定的“Confirm”按钮。在浏览器地址栏输入如下内容：</p>
+<blockquote>
+<p>javascript:submitData(1,1)</p>
+</blockquote>
+<p>转账成功：</p>
+<p><img src="/images/webgoat_ajax_security/25.png" alt="25"></p>
+<h2 id="Dangerous-Use-of-Eval"><a href="#Dangerous-Use-of-Eval" class="headerlink" title="Dangerous Use of Eval"></a>Dangerous Use of Eval</h2><p>危险指令使用。eval()函数可以编译并执行任何JS代码。这隐藏了一个潜在的安全问题。进入之后看到如下页面：</p>
+<p><img src="/images/webgoat_ajax_security/26.png" alt="26"><br>这是一个购物的网页，要求通过alert()函数显示出document.cookie，3位数的授权码会进入服务器进行验证，因此可以针对该授权码进行特别构造。<br>输入如下内容：</p>
+<blockquote>
+<p>123’);alert(document.cookie);(‘</p>
+</blockquote>
+<p>则服务器收到并返回的JavaScript结果是：</p>
+<blockquote>
+<p>eval(‘123’);<br>  alert(document.cookie);<br>  (‘’);</p>
+</blockquote>
+<h2 id="Insecure-Client-Storage"><a href="#Insecure-Client-Storage" class="headerlink" title="Insecure Client Storage"></a>Insecure Client Storage</h2><p>不安全的客户端存储。在服务器端验证所有的用户输入信息是很好的，但是在客户端输入的任何验证信息都存在被逆向分析的脆弱性。记住，客户端的任何数据都不能被视为机密！</p>
+<h3 id="Stage-1-2"><a href="#Stage-1-2" class="headerlink" title="Stage 1"></a>Stage 1</h3><p>进去之后，显示页面是这样的：</p>
+<p><img src="/images/webgoat_ajax_security/27.png" alt="27"></p>
+<p>要求我们发现意外的购物优惠码。这就要求我们跟踪购物优惠码的执行过程，按F12打开firebug进行JS的调试。点击进入“脚本”，然后设置断点，在对应输入框里面随便输入某一个值，脚本自动运行到断点处停下来。如下图所示：<br><img src="/images/webgoat_ajax_security/28.png" alt="28"><br>此时查看变量decrypted的值为：PLATINUM</p>
+<p>这就是我们发现的优惠码。</p>
+<h3 id="Stage-2-2"><a href="#Stage-2-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>要求我们绕过客户端的验证，提交订单却不花钱。这个需要在客户端修改价格，利用firebug，在HTML中找到readonly=””,删除该属性，则可在页面上随意修改商品价格，然后提交免费的订单！</p>
+<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>这一节主要是Ajax安全，有很多内容，在客户端修改，拦截服务器的响应修改等，非常实用，并且拓宽了自己的知识面。</p>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/">http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
+          
+            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+          
+            <a href="/tags/AJAX/" rel="tag">#AJAX</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/25/Webgoat之Access_Control/" rel="next" title="WebGoat之Access Control">
+                <i class="fa fa-chevron-left"></i> WebGoat之Access Control
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/26/Webgoat之Code_Quality/" rel="prev" title="WebGoat之Code Quality">
+                WebGoat之Code Quality <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/26/Webgoat之AJAX_Security/"
+           data-title="WebGoat之AJAX Security" data-url="http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.ml/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-Based-cross-site-scripting"><span class="nav-number">1.</span> <span class="nav-text">DOM-Based cross-site scripting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-1"><span class="nav-number">1.1.</span> <span class="nav-text">Stage 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-2"><span class="nav-number">1.2.</span> <span class="nav-text">Stage 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-3"><span class="nav-number">1.3.</span> <span class="nav-text">Stage 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-4"><span class="nav-number">1.4.</span> <span class="nav-text">Stage 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-5"><span class="nav-number">1.5.</span> <span class="nav-text">Stage 5</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Client-Side-Filtering"><span class="nav-number">2.</span> <span class="nav-text">Client Side Filtering</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-1-1"><span class="nav-number">2.1.</span> <span class="nav-text">Stage 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-2-1"><span class="nav-number">2.2.</span> <span class="nav-text">Stage 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Same-Origin-Policy-Protection"><span class="nav-number">3.</span> <span class="nav-text">Same Origin Policy Protection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-Injection"><span class="nav-number">4.</span> <span class="nav-text">DOM Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML-Injection"><span class="nav-number">5.</span> <span class="nav-text">XML Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON-Injection"><span class="nav-number">6.</span> <span class="nav-text">JSON Injection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Slient-Transactions-Attacks"><span class="nav-number">7.</span> <span class="nav-text">Slient Transactions Attacks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dangerous-Use-of-Eval"><span class="nav-number">8.</span> <span class="nav-text">Dangerous Use of Eval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insecure-Client-Storage"><span class="nav-number">9.</span> <span class="nav-text">Insecure Client Storage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-1-2"><span class="nav-number">9.1.</span> <span class="nav-text">Stage 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-2-2"><span class="nav-number">9.2.</span> <span class="nav-text">Stage 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">10.</span> <span class="nav-text">Summarize</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>
