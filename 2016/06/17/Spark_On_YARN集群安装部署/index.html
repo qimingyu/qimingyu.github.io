@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="spark,hadoop,威胁情报," />
+  <meta name="keywords" content="hadoop,spark,威胁情报," />
 
 
 
@@ -71,7 +71,7 @@
 <meta property="og:image" content="http://qimingyu.github.io/images/spark_on_yarn/3.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/spark_on_yarn/5.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/spark_on_yarn/6.png">
-<meta property="og:updated_time" content="2016-06-27T05:38:09.609Z">
+<meta property="og:updated_time" content="2016-06-27T14:04:26.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark On YARN集群安装部署">
 <meta name="twitter:description" content="项目要求做威胁情报分析和病毒扫描。因此需要搭建spark的大数据平台，各种坑都被我走了一遍，心伤的很。这里写出来，让同行少走弯路。">
@@ -351,7 +351,7 @@
 <h2 id="安装SCala"><a href="#安装SCala" class="headerlink" title="安装SCala"></a>安装SCala</h2><p>过程与安装Java一样，在文件.bashrc里面继续添加如下内容：<br><img src="/images/spark_on_yarn/3.png" alt="3"><br>下列命令验证SCala是否安装成功：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala -version</span><br></pre></td></tr></table></figure></p>
 <p>出来正常的东西表示安装成功。<br>采样同样的方法，将scala文件也分发给所有的主机。</p>
 <h2 id="安装hadoop"><a href="#安装hadoop" class="headerlink" title="安装hadoop"></a>安装hadoop</h2><p>hadoop的安装过程也是下载压缩包之后，解压，然后配置，分发给其他主机。<br>其配置过程与本文所给出的参考文献一样。</p>
-<p>配置hdfs-site.xml，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;yq01-softwareresearch-cymirr00.yq01.baidu.com:8810&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/name&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/data&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line"> &lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
+<p>配置hdfs-site.xml，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;yq01-softwareresearch-cymirr00.yq01.baidu.com:8810&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;yq01-softwareresearch-cymirr00.yq01.baidu.com:8811&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/name&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/data&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line"> &lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
 <p>第一个配置的是hdfs的网站，默认应该是50070，由于服务器只有8000到9000之间的端口允许访问，因此改为8810。</p>
 <p>配置文件mapred-site.xml，如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">       &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">       &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></p>
 <p>目的是指定框架名，告诉MapReduce它将作为YARN的应用程序运行。</p>
@@ -377,9 +377,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/spark/" rel="tag">#spark</a>
-          
             <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+          
+            <a href="/tags/spark/" rel="tag">#spark</a>
           
             <a href="/tags/威胁情报/" rel="tag">#威胁情报</a>
           
@@ -398,8 +398,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/24/我对威胁情报的一些看法/" rel="prev" title="我对威胁情报的一些看法">
-                我对威胁情报的一些看法 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/24/我对威胁情报的一些看法/" rel="prev" title="我对“威胁情报”的一些看法">
+                我对“威胁情报”的一些看法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -498,7 +498,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -515,7 +515,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
