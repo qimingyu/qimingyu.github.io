@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2016-06-28T06:47:16.473Z</updated>
+  <updated>2016-06-29T12:14:24.395Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>为博客更新了域名</title>
+    <link href="http://qimingyu.github.io/2016/06/29/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E4%BA%86%E5%9F%9F%E5%90%8D/"/>
+    <id>http://qimingyu.github.io/2016/06/29/为博客更新了域名/</id>
+    <published>2016-06-29T11:50:13.000Z</published>
+    <updated>2016-06-29T12:14:24.395Z</updated>
+    
+    <content type="html">&lt;p&gt;之前的域名是：qimingyu.github.com，现在更新为：qimingyu.com。也就是说花了45元特意去注册了一个域名，使用期限是一年。&lt;/p&gt;
+&lt;p&gt;起因是最近搞威胁情报接触到Whois服务，whois服务是输入域名地址或IP地址，返回给你相应的一些注册信息的服务。然后就研究了一下域名，联想到之前看到有人专门靠倒卖域名赚钱的，这其实也是一个产业，相当于抢注域名，然后养域名，静静等待买家的出现，最后转手卖掉赚钱。&lt;/p&gt;
+&lt;p&gt;域名本身没有什么价值，就是网络世界的唯一标识而已。但凡是稀缺性的东西就会有价值，所以有些域名也是天价，例如：sex.com，拍了几百万美金。后来我发现在com下，输入自己的名字拼音居然没有被注册，要知道顶级域名com下，稍微有点价值的都应该被别人注册了，感谢父母啊，给我取了一个不错的名字，哈哈。&lt;/p&gt;
+&lt;p&gt;其实给网站重新搞域名也是折腾了半天的，这里稍微记录一下。重点是更新域名后，原来的域名也是可以访问的。&lt;/p&gt;
+&lt;p&gt;先是买一个域名，我是通过阿里云在万网上买的，然后进入其管理页面，加上以下三条域名解析记录：&lt;br&gt;&lt;img src=&quot;/images/2016_6_29/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后在source文件中增加一个CNAME的文件，里面写：qimingyu.com，然后通过hexo g生成之后，hexo d再推送到远端。这样就搞定了。&lt;/p&gt;
+&lt;p&gt;不过45元其实还包括很多服务，邮箱什么的，还有阿里云的一整套其他东西，后面再慢慢了解吧。  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&quot;&gt;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前的域名是：qimingyu.github.com，现在更新为：qimingyu.com。也就是说花了45元特意去注册了一个域名，使用期限是一年。&lt;/p&gt;
+&lt;p&gt;起因是最近搞威胁情报接触到Whois服务，whois服务是输入域名地址或IP地址，返回给你相应的一些注册信息的
+    
+    </summary>
+    
+      <category term="网站技术" scheme="http://qimingyu.github.io/categories/%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="域名" scheme="http://qimingyu.github.io/tags/%E5%9F%9F%E5%90%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>不要重复造轮子</title>
@@ -103,9 +135,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -187,9 +219,9 @@
     
       <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
-      <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
     
       <category term="微步在线" scheme="http://qimingyu.github.io/tags/%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF/"/>
     
@@ -923,45 +955,6 @@
       <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="通信安全" scheme="http://qimingyu.github.io/tags/%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之Insecure Configuration</title>
-    <link href="http://qimingyu.github.io/2016/04/27/Webgoat%E4%B9%8BInsecure_Configuration/"/>
-    <id>http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Configuration/</id>
-    <published>2016-04-27T01:31:12.000Z</published>
-    <updated>2016-04-27T02:07:18.000Z</updated>
-    
-    <content type="html">&lt;p&gt;这节主要是讲不安全的配置所带来的威胁。&lt;/p&gt;
-&lt;h2 id=&quot;Forced-Browsing&quot;&gt;&lt;a href=&quot;#Forced-Browsing&quot; class=&quot;headerlink&quot; title=&quot;Forced Browsing&quot;&gt;&lt;/a&gt;Forced Browsing&lt;/h2&gt;&lt;p&gt;强制浏览是指黑客用来访问获取那些没有被引用，但仍然允许被访问的资源。其中一种方法是操纵浏览器中的URL，删除结尾部分，直到找到一个不受保护的目录。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;如果想访问一个受限制的页面，需要能够猜测URL访问页面，如“/admin”，该课程要求我们猜测找到WebGoat的配置页面。&lt;/p&gt;
-&lt;p&gt;最后在URL的地址里面输入：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;http://localhost:8080/WebGoat/conf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/WebGoat/conf&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;获得配置页面如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_insecure_configuration/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;这个攻击的关键是要猜测对正确的URL地址以获得对资源的访问，因此需要对站点的一般目录结构比较熟悉。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Configuration/&quot;&gt;http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Configuration/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这节主要是讲不安全的配置所带来的威胁。&lt;/p&gt;
-&lt;h2 id=&quot;Forced-Browsing&quot;&gt;&lt;a href=&quot;#Forced-Browsing&quot; class=&quot;headerlink&quot; title=&quot;Forced Browsing&quot;&gt;&lt;/a&gt;Forced Browsing&lt;/h2&gt;&lt;p&gt;强制浏览是指黑客用来访问获取那些没有被引用，但仍然允许被访问的资源。其中一种方法是操纵浏览器中的URL，删除结尾部分，直到找到一个不受保护的目录。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="配置" scheme="http://qimingyu.github.io/tags/%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
