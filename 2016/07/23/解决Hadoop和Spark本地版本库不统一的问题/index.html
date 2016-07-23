@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="网络渗透,WebGoat,参数篡改," />
+  <meta name="keywords" content="Hadoop,Spark,版本库," />
 
 
 
@@ -59,23 +59,19 @@
 
 
 
-<meta name="description" content="Exploit Hidden Fields这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。">
+<meta name="description" content="就是报以下这个警告的，也不知道对运行程序究竟会产生什么样的影响，但看着就是不爽，还耽误了我几天时间，把它给解决了，这里记一下，方便以后查找。1unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+先是运行Hadoop的时候报该错误，当时发现是由于Ha">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Webgoat之Parameter Tampering">
-<meta property="og:url" content="http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/index.html">
+<meta property="og:title" content="解决Hadoop和Spark本地版本库不统一的问题">
+<meta property="og:url" content="http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="Exploit Hidden Fields这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/1.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/2.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/3.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/4.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/5.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/webgoat_xss/5.png">
-<meta property="og:updated_time" content="2016-05-04T09:54:18.000Z">
+<meta property="og:description" content="就是报以下这个警告的，也不知道对运行程序究竟会产生什么样的影响，但看着就是不爽，还耽误了我几天时间，把它给解决了，这里记一下，方便以后查找。1unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+先是运行Hadoop的时候报该错误，当时发现是由于Ha">
+<meta property="og:updated_time" content="2016-07-23T12:42:38.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Webgoat之Parameter Tampering">
-<meta name="twitter:description" content="Exploit Hidden Fields这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。">
-<meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_xss/1.png">
+<meta name="twitter:title" content="解决Hadoop和Spark本地版本库不统一的问题">
+<meta name="twitter:description" content="就是报以下这个警告的，也不知道对运行程序究竟会产生什么样的影响，但看着就是不爽，还耽误了我几天时间，把它给解决了，这里记一下，方便以后查找。1unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+先是运行Hadoop的时候报该错误，当时发现是由于Ha">
 
 
 
@@ -93,7 +89,7 @@
   };
 </script>
 
-  <title> Webgoat之Parameter Tampering | 戚名钰的博客 </title>
+  <title> 解决Hadoop和Spark本地版本库不统一的问题 | 戚名钰的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +240,7 @@
             
             
               
-                Webgoat之Parameter Tampering
+                解决Hadoop和Spark本地版本库不统一的问题
               
             
           </h1>
@@ -256,8 +252,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-04T15:58:31+08:00" content="2016-05-04">
-              2016-05-04
+            <time itemprop="dateCreated" datetime="2016-07-23T20:40:34+08:00" content="2016-07-23">
+              2016-07-23
             </time>
           </span>
 
@@ -270,8 +266,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/应用安全/" itemprop="url" rel="index">
-                    <span itemprop="name">应用安全</span>
+                  <a href="/categories/云安全/" itemprop="url" rel="index">
+                    <span itemprop="name">云安全</span>
                   </a>
                 </span>
 
@@ -286,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/04/Webgoat之Parameter_Tampering/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/04/Webgoat之Parameter_Tampering/" itemprop="commentsCount"></span>
+                <a href="/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,26 +305,14 @@
       
 
       
-        <h2 id="Exploit-Hidden-Fields"><a href="#Exploit-Hidden-Fields" class="headerlink" title="Exploit Hidden Fields"></a>Exploit Hidden Fields</h2><p>这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。<br><img src="/images/webgoat_xss/1.png" alt="1"><br>用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。</p>
-<a id="more"></a>
-<h2 id="Exploit-Unchecked-Email"><a href="#Exploit-Unchecked-Email" class="headerlink" title="Exploit Unchecked Email"></a>Exploit Unchecked Email</h2><p>多数网站都允许一个非验证的用户给别人发送电子邮件。如下所示：<br><img src="/images/webgoat_xss/2.png" alt="2"></p>
-<p>这是一个网站的页面。可以看到上面是一个可选项，当输入自己的email用户名和密码时，就是用自己的邮箱去发送评论。当默认时，就是用网站的邮箱发送评论。有两个要求，第一个是发送一封具有XSS攻击的邮件。第二个是修改默认的收件人，使其能够发送给你想发送的人。相当于用第三方网站的邮箱给别人发送恶意邮件，爽滋滋。</p>
-<p>邮件内容为：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(<span class="string">"XSS"</span>)&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>点发送就完成了第一个要求。然后用burpsuit抓包，修改默认收件人，如下图所示：</p>
-<p><img src="/images/webgoat_xss/3.png" alt="3"></p>
-<p>最后点击发送就成功了。</p>
-<h2 id="Bypass-Client-Side-JS-Validation"><a href="#Bypass-Client-Side-JS-Validation" class="headerlink" title="Bypass Client Side JS Validation"></a>Bypass Client Side JS Validation</h2><p>这节讲的是绕过客户端的JS验证。有时我们需要在浏览器中输入一些数据，这些数据一定要符合一定的规则或要求，例如大小写，位数等。而所有这些输入的验证应该同时在客户端和服务器端进行验证才是安全的。单纯的客户端验证不应该被认为是一种安全的方法验证参数。攻击者可以用各种方法轻易的绕过这种机制。任何客户端验证都应该复制到服务器端。这将大大减少不安全的参数在应用程序中使用的可能性。</p>
-<p>这部分内容要求我们绕过客户端的验证机制，破坏这些规则，从而向服务器输入不允许输入的字符。<br><img src="/images/webgoat_xss/4.png" alt="4"></p>
-<p>有两种方案可以做到：</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>该方案的思路主要是通过中间人修改客户端数据的方式来绕过验证<br>用burpsuit拦截后分别修改，再提交，如下图所示：<br><img src="/images/webgoat_xss/5.png" alt="5"><br>这是因为在浏览器的输入是符合规范的，然后点击提交，点击提交的时候，触发了客户端的JS验证输入合法性的函数，函数判断是OK的，之后再发送（如果这里JS判断不OK，是不会进行下一步发送的，burpsuit也就不会拦截到），而发送之后会被burpsuit拦截掉了，然后修改。</p>
-<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>该方案的思路主要是修改客户端的代码，使其不能验证，来绕过。<br>我们通过firebug查看submit按钮对应的函数是validate()：<br><img src="/images/webgoat_xss/5.png" alt="5"></p>
-<p>该函数的定义是在一段JS脚本中，通过查看页面源代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;SCRIPT&gt;</span><br><span class="line">regex1=<span class="regexp">/^[a-z]&#123;3&#125;$/</span>;</span><br><span class="line">regex2=<span class="regexp">/^[0-9]&#123;3&#125;$/</span>;</span><br><span class="line">regex3=<span class="regexp">/^[a-zA-Z0-9 ]*$/</span>;</span><br><span class="line">regex4=<span class="regexp">/^(one|two|three|four|five|six|seven|eight|nine)$/</span>;</span><br><span class="line">regex5=<span class="regexp">/^\d&#123;5&#125;$/</span>;</span><br><span class="line">regex6=<span class="regexp">/^\d&#123;5&#125;(-\d&#123;4&#125;)?$/</span>;</span><br><span class="line">regex7=<span class="regexp">/^[2-9]\d&#123;2&#125;-?\d&#123;3&#125;-?\d&#123;4&#125;$/</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">validate</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">msg=<span class="string">'JavaScript found form errors'</span>; err=<span class="number">0</span>; </span><br><span class="line"><span class="keyword">if</span> (!regex1.test(<span class="built_in">document</span>.form.field1.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field1'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex2.test(<span class="built_in">document</span>.form.field2.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field2'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex3.test(<span class="built_in">document</span>.form.field3.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field3'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex4.test(<span class="built_in">document</span>.form.field4.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field4'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex5.test(<span class="built_in">document</span>.form.field5.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field5'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex6.test(<span class="built_in">document</span>.form.field6.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field6'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> (!regex7.test(<span class="built_in">document</span>.form.field7.value)) &#123;err+=<span class="number">1</span>; msg+=<span class="string">'\n  bad field7'</span>;&#125;</span><br><span class="line"><span class="keyword">if</span> ( err &gt; <span class="number">0</span> ) alert(msg);</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">document</span>.form.submit();<span class="comment">//验证完后符合，才发送</span></span><br><span class="line">&#125; </span><br><span class="line">&lt;<span class="regexp">/SCRIPT&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>以上JS代码定义了该按钮的功能，可知如果直接在html中删除如下代码，该按钮就不能运行了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onclick=<span class="string">"validate()"</span></span><br></pre></td></tr></table></figure>
-<p>因此需要更细粒度一点。我们在刷新该页面的时候，针对服务器传回来的响应进行拦截之后，将判断验证部分的JS代码全部删掉，这样同样也绕过了客户端的验证。</p>
-<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>关于网络渗透一定要有中间人的意识，数据随时都有可能被中间人修改的。在基础扎实的基础上，思维要开阔。  </p>
+        <p>就是报以下这个警告的，也不知道对运行程序究竟会产生什么样的影响，但看着就是不爽，还耽误了我几天时间，把它给解决了，这里记一下，方便以后查找。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unable to load native-hadoop library <span class="keyword">for</span> your platform... using <span class="built_in">builtin</span>-java classes <span class="built_in">where</span> applicable</span><br></pre></td></tr></table></figure></p>
+<p>先是运行Hadoop的时候报该错误，当时发现是由于Hadoop所需要的版本库和系统本地的glibc的版本库不一致导致的，但是有一个问题是系统本地库的地址是在根目录的lib和lib64下面，由于对服务器没有root权限，是无法修改该库的版本的，因此到这里，网上说的大部分解决方案都不行了。</p>
+<p>既然不能修改本地库，那就考虑修改环境变量中的PATH，PATH路径要保证读的库地址要在本地库地址路径的前面，因为PATH只要找到结果就会返回，那么我们就把路径/home/work/lacol/加进去并放在前面。</p>
+<p>我们需要自己编译一个合适的版本库，例如编译到/home/work/local/glibc目录中，然后把该目录同步到其他相同的服务器，然后用软链接，注意在集群上批量执行该命令：<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /home/work/local/glibc/libc.so /home/work/local/lib64/libc.so.<span class="number">6</span></span><br></pre></td></tr></table></figure></p>
+<p>以上就解决了Hadoop的版本库的问题，可是打开Spark，发现Spark还报版本库的错误，网上给的<a href="http://stackoverflow.com/questions/30369380/hadoop-unable-to-load-native-hadoop-library-for-your-platform-error-on-docker" target="_blank" rel="external">该解决方案</a>并不能解决该问题，后来在spark-env.sh中增加了<code>lib64</code>的地址，最终边为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$SPARK_SUBMIT_LIBRARY_PATH:$HADOOP_HOME/lib/native:/home/work/local/lib/:/home/work/local/lib64/</span><br></pre></td></tr></table></figure></p>
+<p>再SCP到所有集群上面，遂解决。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/">http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/</a></p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>本文永久链接：<a href="http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/">http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/</a></p>
 
       
     </div>
@@ -343,11 +327,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
+            <a href="/tags/Hadoop/" rel="tag">#Hadoop</a>
           
-            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+            <a href="/tags/Spark/" rel="tag">#Spark</a>
           
-            <a href="/tags/参数篡改/" rel="tag">#参数篡改</a>
+            <a href="/tags/版本库/" rel="tag">#版本库</a>
           
         </div>
       
@@ -356,17 +340,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/04/Webgoat之XSS/" rel="next" title="Webgoat之XSS">
-                <i class="fa fa-chevron-left"></i> Webgoat之XSS
+              <a href="/2016/06/29/为博客更新了域名/" rel="next" title="为博客更新了域名">
+                <i class="fa fa-chevron-left"></i> 为博客更新了域名
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/04/Webgoat之Session_Management_Flaws/" rel="prev" title="Webgoat之Session Management Flaws">
-                Webgoat之Session Management Flaws <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -418,8 +398,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/04/Webgoat之Parameter_Tampering/"
-           data-title="Webgoat之Parameter Tampering" data-url="http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/">
+      <div class="ds-thread" data-thread-key="2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/"
+           data-title="解决Hadoop和Spark本地版本库不统一的问题" data-url="http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/">
       </div>
     
   </div>
@@ -574,7 +554,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploit-Hidden-Fields"><span class="nav-number">1.</span> <span class="nav-text">Exploit Hidden Fields</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exploit-Unchecked-Email"><span class="nav-number">2.</span> <span class="nav-text">Exploit Unchecked Email</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bypass-Client-Side-JS-Validation"><span class="nav-number">3.</span> <span class="nav-text">Bypass Client Side JS Validation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">3.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">3.2.</span> <span class="nav-text">方案二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">4.</span> <span class="nav-text">Summarize</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
