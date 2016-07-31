@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2016-07-31T07:43:21.973Z</updated>
+  <updated>2016-07-31T07:48:13.129Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://qimingyu.github.io/2016/07/31/%E5%9F%BA%E4%BA%8EWIFI%E7%9A%84%E6%89%8B%E6%9C%BA%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B/"/>
     <id>http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/</id>
     <published>2016-07-31T07:13:34.000Z</published>
-    <updated>2016-07-31T07:43:21.973Z</updated>
+    <updated>2016-07-31T07:48:13.129Z</updated>
     
     <content type="html">&lt;p&gt;这是去年（2015年）暑假我们团队参加“华为杯”全国大学生智能设计竞赛获得&lt;a href=&quot;http://sse.ustc.edu.cn/pages/xxll.php?newsid=1198&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;全国一等奖&lt;/a&gt;的参赛项目的介绍。该项目由于是团队劳动成果，因此具体代码和详细设计文档这里暂不给出，如有需要可联系本人索取。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/2016-07-31/0001.jpg&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0002.jpg&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0003.jpg&quot; alt=&quot;3&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0004.jpg&quot; alt=&quot;4&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0005.jpg&quot; alt=&quot;5&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0006.jpg&quot; alt=&quot;6&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0007.jpg&quot; alt=&quot;7&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0008.jpg&quot; alt=&quot;8&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0009.jpg&quot; alt=&quot;9&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0010.jpg&quot; alt=&quot;10&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0011.jpg&quot; alt=&quot;11&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0012.jpg&quot; alt=&quot;12&quot;&gt;  &lt;/p&gt;
@@ -33,6 +33,8 @@
       &lt;p&gt;这是去年（2015年）暑假我们团队参加“华为杯”全国大学生智能设计竞赛获得&lt;a href=&quot;http://sse.ustc.edu.cn/pages/xxll.php?newsid=1198&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;全国一等奖&lt;/a&gt;
     
     </summary>
+    
+      <category term="笔试面经" scheme="http://qimingyu.github.io/categories/%E7%AC%94%E8%AF%95%E9%9D%A2%E7%BB%8F/"/>
     
     
       <category term="华为杯" scheme="http://qimingyu.github.io/tags/%E5%8D%8E%E4%B8%BA%E6%9D%AF/"/>
@@ -197,11 +199,11 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
-      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
