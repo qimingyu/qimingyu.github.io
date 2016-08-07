@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2016-08-07T09:48:17.874Z</updated>
+  <updated>2016-08-07T09:57:14.308Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://qimingyu.github.io/2016/08/07/MongoDB%E5%92%8CHDFS%E8%BD%AC%E5%AD%98Redis/"/>
     <id>http://qimingyu.github.io/2016/08/07/MongoDB和HDFS转存Redis/</id>
     <published>2016-08-07T09:41:53.000Z</published>
-    <updated>2016-08-07T09:48:17.874Z</updated>
+    <updated>2016-08-07T09:57:14.308Z</updated>
     
     <content type="html">&lt;h3 id=&quot;总体需求：&quot;&gt;&lt;a href=&quot;#总体需求：&quot; class=&quot;headerlink&quot; title=&quot;总体需求：&quot;&gt;&lt;/a&gt;总体需求：&lt;/h3&gt;&lt;p&gt;我们在河图上面提供的接口需要由原来的第一版升级为第二版。&lt;br&gt;第一版接口采用的是如下图所示的方案：&lt;br&gt;&lt;img src=&quot;/images/2016_8_7/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;由上图所知，我们的第一版API接口设计，当前只对请求的query做了Cache，也就是之前有请求的数据能够在Redis中命中，快速响应，而对于未命中的query，需要查询恶意IP数据库（MongoDB），ElasticSearch，然后计算出结果Score，并返回给调用者，最后再对查询结果做Cache。&lt;br&gt;这样做的缺点是：后期需求量上来之后，我们所能提供的每秒查询率不够。&lt;br&gt;现在需要升级第二版，需要对我们的数据做全量Cache，即需要将来源于三个不同地方的数据按统一格式全部存到Reids中，并要考虑每天的增量数据。&lt;/p&gt;
 &lt;h3 id=&quot;问题难点：&quot;&gt;&lt;a href=&quot;#问题难点：&quot; class=&quot;headerlink&quot; title=&quot;问题难点：&quot;&gt;&lt;/a&gt;问题难点：&lt;/h3&gt;&lt;p&gt;目前数据主要来源于如下三个数据库：&lt;/p&gt;
@@ -101,6 +101,8 @@
       <category term="Redis" scheme="http://qimingyu.github.io/tags/Redis/"/>
     
       <category term="Spark" scheme="http://qimingyu.github.io/tags/Spark/"/>
+    
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
   </entry>
   
@@ -488,9 +490,9 @@
     
       <category term="hadoop" scheme="http://qimingyu.github.io/tags/hadoop/"/>
     
-      <category term="spark" scheme="http://qimingyu.github.io/tags/spark/"/>
-    
       <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
+    
+      <category term="spark" scheme="http://qimingyu.github.io/tags/spark/"/>
     
   </entry>
   
