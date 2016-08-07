@@ -363,7 +363,7 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
 </blockquote>
 <h3 id="Stage-2"><a href="#Stage-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>这部分是要用image标签创建一个JavaScript Alert对话框出来。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=;;alert(<span class="string">'xss'</span>)/&gt;</span><br></pre></td></tr></table></figure></p>
 <p>得到网页弹出其对话框</p>
-<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这部分要求用iframe标签创建JavaScript Alert对话框。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"javascript:alert('xss');"</span>&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这部分要求用iframe标签创建JavaScript Alert对话框。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"javascript:alert('xss');"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>得到网页的输入框</p>
 <h3 id="Stage-4"><a href="#Stage-4" class="headerlink" title="Stage 4"></a>Stage 4</h3><p>要求在提交数据中创建虚假的输入框，骗取用户的密码。<br>在输入框中输入如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Please enter your password:&lt;BR&gt;&lt;input type = "password" name="pass"/&gt;&lt;button</span><br><span class="line">onClick="javascript:alert('I have your password: ' +</span><br><span class="line">pass.value);"&gt;Submit&lt;/button&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br><span class="line">&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br></pre></td></tr></table></figure></p>
 <p>得到如下界面：<br><img src="/images/webgoat_ajax_security/6.png" alt="6"></p>
@@ -566,7 +566,7 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">43</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -583,7 +583,7 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
