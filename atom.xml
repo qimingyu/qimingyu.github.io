@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2016-08-08T03:43:34.327Z</updated>
+  <updated>2016-08-08T03:50:55.017Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>MongoDB和HDFS转存Redis</title>
+    <title>MongoDB和HDFS数据库迁移至Redis</title>
     <link href="http://qimingyu.github.io/2016/08/07/MongoDB%E5%92%8CHDFS%E8%BD%AC%E5%AD%98Redis/"/>
     <id>http://qimingyu.github.io/2016/08/07/MongoDB和HDFS转存Redis/</id>
     <published>2016-08-07T09:41:53.000Z</published>
-    <updated>2016-08-08T03:43:34.327Z</updated>
+    <updated>2016-08-08T03:50:55.017Z</updated>
     
     <content type="html">&lt;h3 id=&quot;总体需求：&quot;&gt;&lt;a href=&quot;#总体需求：&quot; class=&quot;headerlink&quot; title=&quot;总体需求：&quot;&gt;&lt;/a&gt;总体需求：&lt;/h3&gt;&lt;p&gt;在企业级Saas服务中，产品对外提供的查询接口如果每秒查询率不够的话，会经不起业务增长的需求，造成响应缓慢或者直接宕机的情况。因此在业务量不多的时候一般公司的接口设计如下：&lt;br&gt;第一版接口采用的是如下图所示的方案：&lt;br&gt;&lt;img src=&quot;/images/2016_8_7/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;由上图所知，也就是说只对请求的query做了Cache，也就是之前有请求的数据能够在Redis中命中，快速响应，而对于未命中的query，需要查询恶意IP数据库（MongoDB），ElasticSearch，然后计算出结果Score，并返回给调用者，最后再对查询结果做Cache。&lt;br&gt;这样做的缺点是：后期需求量上来之后，公司产品所能提供的每秒查询率会不够。&lt;br&gt;现在接口需要升级第二版，需要对我们的数据做全量Cache，即需要将来源于三个不同地方的数据按统一格式全部存到Reids中，并要考虑每天的增量数据。&lt;/p&gt;
 &lt;h3 id=&quot;问题难点：&quot;&gt;&lt;a href=&quot;#问题难点：&quot; class=&quot;headerlink&quot; title=&quot;问题难点：&quot;&gt;&lt;/a&gt;问题难点：&lt;/h3&gt;&lt;p&gt;目前数据主要来源于如下三个数据库：&lt;/p&gt;
@@ -322,9 +322,9 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
