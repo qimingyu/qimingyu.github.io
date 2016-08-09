@@ -372,7 +372,7 @@
     <link href="http://qimingyu.github.io/2016/06/24/%E6%88%91%E5%AF%B9%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9C%8B%E6%B3%95/"/>
     <id>http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/</id>
     <published>2016-06-24T02:29:24.000Z</published>
-    <updated>2016-06-27T08:27:52.754Z</updated>
+    <updated>2016-08-09T03:29:39.766Z</updated>
     
     <content type="html">&lt;h2 id=&quot;什么是“威胁情报”&quot;&gt;&lt;a href=&quot;#什么是“威胁情报”&quot; class=&quot;headerlink&quot; title=&quot;什么是“威胁情报”&quot;&gt;&lt;/a&gt;什么是“威胁情报”&lt;/h2&gt;&lt;p&gt;威胁情报分为如下5个部分：&lt;br&gt;&lt;img src=&quot;/images/threat_intelligence/1.JPG&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -392,7 +392,23 @@
 &lt;li&gt;沟通交流能力（PPT与展示，思路清晰）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;关于校招&quot;&gt;&lt;a href=&quot;#关于校招&quot; class=&quot;headerlink&quot; title=&quot;关于校招&quot;&gt;&lt;/a&gt;关于校招&lt;/h2&gt;&lt;p&gt;把自己全身心的投入到产品当中，全身心的解决问题，了解行业发展。我觉得这个应该才是王道。不要停止思考，至于校招offer，以及毕业论文，我觉得这应该是顺带解决完成的事情，而不要把后者作为单一的目标。社会往往喜欢有实际价值并且能够解决问题，提出创意的人。而你的创意，包括论文的创新，应该来自于实际工作中的问题，所面临的难点与痛点，这才是真正有价值的。&lt;/p&gt;
-&lt;p&gt;好好学习，唯一的安全感来自于自身，以及自己所确立的价值观。  &lt;/p&gt;
+&lt;p&gt;好好学习，唯一的安全感来自于自身，以及自己所确立的价值观。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;8月9日更新&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;目前的威胁情报平台是跟业务息息相关的，我们目前与两个部门紧密合作，一个是大搜，另一个是金融和钱包部门，威胁情报相当于是把安全融入到了业务中，紧紧跟随随业务推进的。&lt;/p&gt;
+&lt;p&gt;我们从其他部门获取数据，数据来源有：移动端（百度钱包的安全SDK数据）、网络端（DNS数据，恶意IP数据，Whois历史记录数据，泛域数据）、恶意邮件数据，这些数据来源之后我们对其进行初步清洗，然后按照标准格式进行入库，入库之后，进行数据分析和处理，再输出到各大业务之中，确保其他业务的安全。&lt;/p&gt;
+&lt;p&gt;而为了做好“威胁情报”这一件事，需要掌握的相关知识大概整理如下。要学习的知识和掌握的技能：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;知道怎么从别人的数据库中取出数据（懂各种不同数据的操作及大概原理）&lt;/li&gt;
+&lt;li&gt;知道怎么预处理这些获取到的数据，并且入我们自己的威胁情报数据库中（基于大数据的操作，Spark平台的编程）&lt;/li&gt;
+&lt;li&gt;利用机器学习算法进行分析（会各大机器学习算法及大概原理，熟练使用第三方函数包，MLlib，Sparking Water等）&lt;/li&gt;
+&lt;li&gt;将得到的结果输出给其他业务，提供Saas的企业级服务接口给别人（Python或其他编程语言的熟练使用，写接口）&lt;/li&gt;
+&lt;li&gt;有一定的安全分析能力及安全基础知识（加密解密，逆向，网络安全OWASP，系统安全等）&lt;/li&gt;
+&lt;li&gt;熟练操作Linux系统&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可见对相关从业人员的要求之高，然而更重要的，对于创业型企业来考虑（如果拿威胁情报作为创业项目的话），他们更重要的是没有数据来源渠道，因此，这个方向的创业，门槛还是相当高的，小企业不要轻易尝试。但不可否认的是，在安全领域而言，威胁情报确实是未来的一个趋势。&lt;/p&gt;
+&lt;p&gt;还有一点是，我们在做事情或者写程序的时候，一定要考虑上层的架构。也就是说虽然是做的下层的事，但有时往往上层架构搭的不好，导致下面会非常混乱。因此，一定要从架构师的角度去思考问题。专注于一个领域，做好一件事，这就是本事。  &lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&quot;&gt;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&lt;/a&gt;&lt;/p&gt;
 </content>
