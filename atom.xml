@@ -324,9 +324,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -372,7 +372,7 @@
     <link href="http://qimingyu.github.io/2016/06/24/%E6%88%91%E5%AF%B9%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9C%8B%E6%B3%95/"/>
     <id>http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/</id>
     <published>2016-06-24T02:29:24.000Z</published>
-    <updated>2016-08-09T03:29:39.766Z</updated>
+    <updated>2016-08-09T03:32:48.301Z</updated>
     
     <content type="html">&lt;h2 id=&quot;什么是“威胁情报”&quot;&gt;&lt;a href=&quot;#什么是“威胁情报”&quot; class=&quot;headerlink&quot; title=&quot;什么是“威胁情报”&quot;&gt;&lt;/a&gt;什么是“威胁情报”&lt;/h2&gt;&lt;p&gt;威胁情报分为如下5个部分：&lt;br&gt;&lt;img src=&quot;/images/threat_intelligence/1.JPG&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -393,7 +393,7 @@
 &lt;/ul&gt;
 &lt;h2 id=&quot;关于校招&quot;&gt;&lt;a href=&quot;#关于校招&quot; class=&quot;headerlink&quot; title=&quot;关于校招&quot;&gt;&lt;/a&gt;关于校招&lt;/h2&gt;&lt;p&gt;把自己全身心的投入到产品当中，全身心的解决问题，了解行业发展。我觉得这个应该才是王道。不要停止思考，至于校招offer，以及毕业论文，我觉得这应该是顺带解决完成的事情，而不要把后者作为单一的目标。社会往往喜欢有实际价值并且能够解决问题，提出创意的人。而你的创意，包括论文的创新，应该来自于实际工作中的问题，所面临的难点与痛点，这才是真正有价值的。&lt;/p&gt;
 &lt;p&gt;好好学习，唯一的安全感来自于自身，以及自己所确立的价值观。&lt;/p&gt;
-&lt;hr&gt;
+&lt;h2 id=&quot;更新一&quot;&gt;&lt;a href=&quot;#更新一&quot; class=&quot;headerlink&quot; title=&quot;更新一&quot;&gt;&lt;/a&gt;更新一&lt;/h2&gt;&lt;hr&gt;
 &lt;p&gt;8月9日更新&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;目前的威胁情报平台是跟业务息息相关的，我们目前与两个部门紧密合作，一个是大搜，另一个是金融和钱包部门，威胁情报相当于是把安全融入到了业务中，紧紧跟随随业务推进的。&lt;/p&gt;
