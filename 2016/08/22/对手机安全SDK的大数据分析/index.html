@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://qimingyu.github.io/images/2016-8-22/1471487554476.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/2016-8-22/1471487383165.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/2016-8-22/1471487775636.png">
-<meta property="og:updated_time" content="2016-08-22T14:56:39.684Z">
+<meta property="og:updated_time" content="2016-08-22T15:20:28.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对手机安全SDK的大数据分析">
 <meta name="twitter:description" content="1.前言由于很多东西没有说清楚，浪费了大量时间搞明白数据怎么来的以及各个数据的意义等，整个流程不清晰，数据怎么来的？怎么上报的？给我的数据已经经过哪些处理？现在是怎样的？这些信息都是模糊的，直接接手做这件事，就显得的非常乱，然后就是一点一点摸，终于才搞的差不多。
@@ -331,7 +331,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">count</span>(<span class="keyword">DISTINCT</span> cuid) <span class="keyword">AS</span> cuid_number <span class="keyword">FROM</span> mobile_cuid_0725</span><br></pre></td></tr></table></figure>
 <p>是<code>179410</code>条记录，去重之后的CUID是179410条记录，这是黑CUID。（这里的数据与徐超汇报PPT里面的数据不一致，经确认，以这个数据为准）</p>
 <p><code>data_security_lab_shadow</code>数据是安全SDK上报的数据，有白有黑，需要和<code>mobile_cuid_0725</code>里面的CUID进行比对，规定在<code>mobile_cuid_0725</code>数据库中出现过的CUID为黑，没有在<code>mobile_cuid_0725</code>出现过的CUID为白，把<code>data_security_lab_shadow</code>中的数据分为了两类。</p>
-<p>在进行CUID对比的过程中，<code>data_security_lab_shadow</code>中的CUID和<code>mobile_cuid_0725</code>中的CUID还不一样，<br>前者的格式为：<br><img src="images/2016-8-22/1471090027900.png" alt="Alt text"></p>
+<p>在进行CUID对比的过程中，<code>data_security_lab_shadow</code>中的CUID和<code>mobile_cuid_0725</code>中的CUID还不一样，<br>前者的格式为：<br><img src="images/2016-8-22/1471090027900.png" alt="1"></p>
 <p>后者的格式为：<br><img src="images/2016-8-22/1471089442503.png" alt="Alt text"></p>
 <p>因此查询过程中还要对前者的CUID进行切割，取前面的与后者进行比较，同时还要将其转化为大写。</p>
 <p>前者的黑CUID要完全去重：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> cuid  <span class="keyword">FROM</span> mobile_cuid_0725</span><br></pre></td></tr></table></figure></p>
