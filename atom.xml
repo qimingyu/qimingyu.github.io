@@ -331,6 +331,8 @@
       <category term="云安全" scheme="http://qimingyu.github.io/categories/%E4%BA%91%E5%AE%89%E5%85%A8/"/>
     
     
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
+    
       <category term="MongoDB" scheme="http://qimingyu.github.io/tags/MongoDB/"/>
     
       <category term="HDFS" scheme="http://qimingyu.github.io/tags/HDFS/"/>
@@ -338,8 +340,6 @@
       <category term="Redis" scheme="http://qimingyu.github.io/tags/Redis/"/>
     
       <category term="Spark" scheme="http://qimingyu.github.io/tags/Spark/"/>
-    
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
   </entry>
   
@@ -741,11 +741,11 @@
       <category term="云安全" scheme="http://qimingyu.github.io/categories/%E4%BA%91%E5%AE%89%E5%85%A8/"/>
     
     
+      <category term="spark" scheme="http://qimingyu.github.io/tags/spark/"/>
+    
       <category term="hadoop" scheme="http://qimingyu.github.io/tags/hadoop/"/>
     
       <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
-      <category term="spark" scheme="http://qimingyu.github.io/tags/spark/"/>
     
   </entry>
   
