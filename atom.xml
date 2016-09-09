@@ -283,43 +283,6 @@
   </entry>
   
   <entry>
-    <title>Hadoop集群的权限控制</title>
-    <link href="http://qimingyu.github.io/2016/06/24/Hadoop%E9%9B%86%E7%BE%A4%E7%9A%84%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/"/>
-    <id>http://qimingyu.github.io/2016/06/24/Hadoop集群的权限控制/</id>
-    <published>2016-06-24T03:54:20.000Z</published>
-    <updated>2016-06-27T06:26:26.501Z</updated>
-    
-    <content type="html">&lt;p&gt;调研了好多文章，Hadoop的权限管理和控制都写的好复杂，还要借助第三方的认证，本人认为这些都太麻烦了。既然只是业务需要，不如搞个简单版本的。&lt;/p&gt;
-&lt;p&gt;直到看了这篇文章&lt;a href=&quot;http://shiyanjun.cn/archives/994.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;基于Hadoop SLA认证机制实现权限控制&lt;/a&gt;，豁然开朗。&lt;/p&gt;
-&lt;p&gt;业务需求其实很简单：做好两个方面的权限控制就行了：一个是HDFS，另一个是Yarn。而这两个方面的权限是基于CentOS本身的用户及用户组概念的。&lt;/p&gt;
-&lt;p&gt;Hadoop SLA基于Hadoop的各种服务（基于协议来划分）与Linux系统的用户、用户组来实现。Hadoop通过制定接口协议的方式来实现节点之间服务调用的逻辑，这样每一个协议所指定的一组服务就是一个认证单元，再基于底层Linux系统的用户和用户组来限制用户（可能是节点服务）有权限执行某一种协议所包含的操作集合。&lt;/p&gt;
-&lt;p&gt;先在hadoop的配置文件core-site.xml中增加如下属性配置：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;name&amp;gt;hadoop.security.authorization&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;lt;value&amp;gt;true&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后重启集群，接着修改配置文件/etc/hadoop/hadoop-policy.xml中的部分配置项，具体修改内容如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;name&amp;gt;security.client.protocol.acl&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;value&amp;gt;work&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;description&amp;gt;ACL for ClientProtocol, which is used by user code&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       via the DistributedFileSystem.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       The ACL is a comma-separated list of user and group names. The user and&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       group list is separated by a blank. For e.g. &quot;alice,bob users,wheel&quot;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       A special value of &quot;*&quot; means all users are allowed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;/description&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;name&amp;gt;security.refresh.policy.protocol.acl&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;value&amp;gt;work&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;description&amp;gt;ACL for RefreshAuthorizationPolicyProtocol, used by the&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       dfsadmin and mradmin commands to refresh the security policy in-effect.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       The ACL is a comma-separated list of user and group names. The user and&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       group list is separated by a blank. For e.g. &quot;alice,bob users,wheel&quot;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       A special value of &quot;*&quot; means all users are allowed.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;/description&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;name&amp;gt;security.job.client.protocol.acl&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;value&amp;gt;work&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;description&amp;gt;ACL for MRClientProtocol, used by job clients to&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       communciate with the MR ApplicationMaster to query job status etc.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       The ACL is a comma-separated list of user and group names. The user and&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       group list is separated by a blank. For e.g. &quot;alice,bob users,wheel&quot;.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	       A special value of &quot;*&quot; means all users are allowed.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;lt;/description&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;然后将该配置文件同步到整个集群的所有节点上。&lt;/p&gt;
-&lt;p&gt;最后执行如下命令，使其生效：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;./hdfs dfsadmin -refreshServiceAcl&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;./yarn rmadmin -refreshServiceAcl&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;权限控制就搞定了，不过这是基于服务的权限控制。可用就行。需要说明的是，由于目前没有root权限，等到需要的时候再具体配置这块就行。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/24/Hadoop集群的权限控制/&quot;&gt;http://qimingyu.github.io/2016/06/24/Hadoop集群的权限控制/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;调研了好多文章，Hadoop的权限管理和控制都写的好复杂，还要借助第三方的认证，本人认为这些都太麻烦了。既然只是业务需要，不如搞个简单版本的。&lt;/p&gt;
-&lt;p&gt;直到看了这篇文章&lt;a href=&quot;http://shiyanjun.cn/archives/994.html&quot; ta
-    
-    </summary>
-    
-      <category term="云安全" scheme="http://qimingyu.github.io/categories/%E4%BA%91%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="hadoop" scheme="http://qimingyu.github.io/tags/hadoop/"/>
-    
-      <category term="权限控制" scheme="http://qimingyu.github.io/tags/%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>我对“威胁情报”的一些看法</title>
     <link href="http://qimingyu.github.io/2016/06/24/%E6%88%91%E5%AF%B9%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9C%8B%E6%B3%95/"/>
     <id>http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/</id>
@@ -376,91 +339,11 @@
     
       <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
     
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
+    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
       <category term="微步在线" scheme="http://qimingyu.github.io/tags/%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark On YARN集群安装部署</title>
-    <link href="http://qimingyu.github.io/2016/06/17/Spark_On_YARN%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/"/>
-    <id>http://qimingyu.github.io/2016/06/17/Spark_On_YARN集群安装部署/</id>
-    <published>2016-06-17T13:22:32.000Z</published>
-    <updated>2016-08-08T03:46:18.295Z</updated>
-    
-    <content type="html">&lt;p&gt;项目要求做威胁情报分析和病毒扫描。因此需要搭建spark的大数据平台，各种坑都被我走了一遍，心伤的很。这里写出来，让同行少走弯路。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;基本知识&quot;&gt;&lt;a href=&quot;#基本知识&quot; class=&quot;headerlink&quot; title=&quot;基本知识&quot;&gt;&lt;/a&gt;基本知识&lt;/h2&gt;&lt;p&gt;突然接触Spark，对我来说完全是全新的平台，并且也是第一次接触计算机集群的概念。&lt;/p&gt;
-&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;搭建过程其实还有很多东西没有弄懂，慢慢补充。考虑实际情况，我所面临的限制条件如下：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;公司的服务器，没有给root权限，只有work权限。（导致安装软件遇到各种问题）&lt;/li&gt;
-&lt;li&gt;服务器没有连外网。（不能直接通过服务器下载东西）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;本文讲述在这两点下如何搭建Yarn的Spark大数据平台。软件版本为：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;服务器版本：Centos 6.4&lt;/li&gt;
-&lt;li&gt;Java版本：1.8.0_91&lt;/li&gt;
-&lt;li&gt;SCala版本：2.10.4&lt;/li&gt;
-&lt;li&gt;hadoop版本：2.6.0&lt;/li&gt;
-&lt;li&gt;spark版本：1.6.1&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;（版本的选择也很重要，不然会有各种莫名其妙的错误）&lt;/p&gt;
-&lt;h2 id=&quot;SSH免密码登录&quot;&gt;&lt;a href=&quot;#SSH免密码登录&quot; class=&quot;headerlink&quot; title=&quot;SSH免密码登录&quot;&gt;&lt;/a&gt;SSH免密码登录&lt;/h2&gt;&lt;p&gt;这一步的原理是用SSH协议，产生一对公私密钥，然后把私钥留在自己电脑上，公钥发给别人，当电脑B想要登陆电脑Ａ时，本来是需要输入用户名和密码的，但Ｂ有Ａ的公钥的话，就不用输入这些了，而可以直接登陆。&lt;br&gt;因此在一个计算机集群上，这一步可以理解为让集群中的任意一台计算机拥有该集群里面其他所有计算机的公钥。具体实现如下：&lt;br&gt;我这里一共有21台主机，构成计算机集群。他们的主机名分别如下：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;yq01&lt;/li&gt;
-&lt;li&gt;yq02&lt;/li&gt;
-&lt;li&gt;yq03&lt;/li&gt;
-&lt;li&gt;……&lt;/li&gt;
-&lt;li&gt;yq20&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;选第一台电脑为主机，其余为工作机。&lt;br&gt;因此在每一台电脑上执行操作：&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;ssh-keygen -t rsa&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;然后是一路回车，直到发现在指定的目录中生成了一对公私密钥。然后把机子上产生的id_rsa.pub发送给我们的第一台主机：&lt;/p&gt;
-&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scp ~/.ssh/id_rsa.pub work@yq01:~/.ssh/id_rsa.pub.slave1   &lt;span class=&quot;comment&quot;&gt;//注意slave后面命名的数字编号&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;在其余20台机器上都执行完以上步骤后，会发现主机上面文件.ssh目录中多了很多的公钥，分别为slave1到slave20的。然后在主机上把这些公钥文件全部加在用于认证的文件authorized_keys中：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cat ~/.ssh/id_rsa.pub* &amp;gt;&amp;gt; ~/.ssh/authorized_keys&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后把主机中的authorized_keys文件分发给每个工作机：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scp ~/.ssh/authorized_keys work@yq01:~/.ssh/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这样21台机器相互之间都可以用SSH免密码登录了。&lt;/p&gt;
-&lt;h2 id=&quot;安装Java&quot;&gt;&lt;a href=&quot;#安装Java&quot; class=&quot;headerlink&quot; title=&quot;安装Java&quot;&gt;&lt;/a&gt;安装Java&lt;/h2&gt;&lt;p&gt;由于远程服务器均不能联网，因此安装所有软件全部都是在本地下载压缩包之后，然后通过命令&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;rz -e&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;传输到服务器端的。&lt;br&gt;注意这里有一个很大的坑，就是传输文件的时候，如下图所示：&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;最下面那个以ASCII传输的勾选框一定不要勾选。&lt;br&gt;传输过去之后进行解压缩，命令格式为：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;tar -zxvf  test.tar.gz  -C  ~/java/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;后面是指解压缩到指定路径。&lt;br&gt;解压缩之后，需要配置环境变量，这里也是很大的一个坑。当前工作目录下有一个隐藏文件夹.bashrc，就是在这里面进行配置的。配置之后，用如下命令：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;source .bashrc&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;进行环境变量的更新，source命令表示执行当前指定文件。&lt;br&gt;环境变量还可以通过命令env进行查看。注意PATH里面的值，系统是从前往后寻找的，因此我们配的话，要放在前面。文件.bashrc里面加入如下内容：&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/2.png&quot; alt=&quot;2&quot;&gt;&lt;/p&gt;
-&lt;p&gt;下列命令验证Java是否安装成功：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;java -version&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;javac&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;java&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;分别出来正常的东西表示安装成功。&lt;br&gt;在一台电脑上装成功之后，将该java文件夹发送给其余所有电脑。写如下脚本文件scpjava：&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;用如下命令执行：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;source scpjava&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这样其他主机上面都多了一个java文件。&lt;/p&gt;
-&lt;h2 id=&quot;安装SCala&quot;&gt;&lt;a href=&quot;#安装SCala&quot; class=&quot;headerlink&quot; title=&quot;安装SCala&quot;&gt;&lt;/a&gt;安装SCala&lt;/h2&gt;&lt;p&gt;过程与安装Java一样，在文件.bashrc里面继续添加如下内容：&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;下列命令验证SCala是否安装成功：&lt;br&gt;&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;scala -version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;出来正常的东西表示安装成功。&lt;br&gt;采样同样的方法，将scala文件也分发给所有的主机。&lt;/p&gt;
-&lt;h2 id=&quot;安装hadoop&quot;&gt;&lt;a href=&quot;#安装hadoop&quot; class=&quot;headerlink&quot; title=&quot;安装hadoop&quot;&gt;&lt;/a&gt;安装hadoop&lt;/h2&gt;&lt;p&gt;hadoop的安装过程也是下载压缩包之后，解压，然后配置，分发给其他主机。&lt;br&gt;其配置过程与本文所给出的参考文献一样。&lt;/p&gt;
-&lt;p&gt;配置core-site.xml,如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         # 指定NameNode主机名和请求端口号&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;fs.defaultFS&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;hdfs://yq01:9000/&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         # 文件系统依赖的基础配置&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;hadoop.tmp.dir&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;file:/home/work/hadoop/hadoop-2.6.0/tmp&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;配置hdfs-site.xml，如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;dfs.namenode.http-address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;yq01:8810&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;dfs.namenode.secondary.http-address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;yq01:8811&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;dfs.namenode.name.dir&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         # NameNode存储命名空间和相关元数据信息的本地文件系统目录&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/name&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;dfs.datanode.data.dir&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         # DataNode节点存储HDFS文件的本地文件系统目录&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;file:/home/work/hadoop/hadoop-2.6.0/dfs/data&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         # 文件备份数量&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;name&amp;gt;dfs.replication&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;         &amp;lt;value&amp;gt;3&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; &amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;第一个配置的是hdfs的网站，默认应该是50070，由于服务器只有8000到9000之间的端口允许访问，因此改为8810。&lt;/p&gt;
-&lt;p&gt;配置文件mapred-site.xml，如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  #  目的是指定框架名，告诉MapReduce它将作为YARN的应用程序运行。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;mapreduce.framework.name&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yarn&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;配置文件yarn-site.xml，如下：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.nodemanager.aux-services&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      # 告诉NodeManager需要实现一个名为mapreduce.shuffle的辅助服务&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;mapreduce_shuffle&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      # 特定的类名实现该方法&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;org.apache.hadoop.mapred.ShuffleHandler&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.resourcemanager.address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yq01:8032&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.resourcemanager.scheduler.address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yq01:8030&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.resourcemanager.resource-tracker.address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yq01:8035&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.resourcemanager.admin.address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yq01:8033&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;name&amp;gt;yarn.resourcemanager.webapp.address&amp;lt;/name&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &amp;lt;value&amp;gt;yq01:8088&amp;lt;/value&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;lt;/property&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;前面两个是告诉NodeManger需要实现一个名为mapreduce.shuffle的辅助服务，并给它一个类名作为实现该服务的方法。这个特定的配置告诉MapReduce怎么去shuffle。后面五个配置的是相应的一些地址。&lt;/p&gt;
-&lt;h2 id=&quot;安装Spark&quot;&gt;&lt;a href=&quot;#安装Spark&quot; class=&quot;headerlink&quot; title=&quot;安装Spark&quot;&gt;&lt;/a&gt;安装Spark&lt;/h2&gt;&lt;p&gt;其安装配置过程与所给出的参考文献一样。&lt;/p&gt;
-&lt;h2 id=&quot;最后结果&quot;&gt;&lt;a href=&quot;#最后结果&quot; class=&quot;headerlink&quot; title=&quot;最后结果&quot;&gt;&lt;/a&gt;最后结果&lt;/h2&gt;&lt;p&gt;全都配通了，上图：&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/spark_on_yarn/6.png&quot; alt=&quot;6&quot;&gt;&lt;/p&gt;
-&lt;p&gt;还要继续考虑授权的问题，以及一些其他方面的熟悉和了解。&lt;/p&gt;
-&lt;h2 id=&quot;参考文章&quot;&gt;&lt;a href=&quot;#参考文章&quot; class=&quot;headerlink&quot; title=&quot;参考文章&quot;&gt;&lt;/a&gt;参考文章&lt;/h2&gt;&lt;p&gt;【1】&lt;a href=&quot;http://wuchong.me/blog/2015/04/04/spark-on-yarn-cluster-deploy/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Spark On YARN 集群安装部署&lt;/a&gt; &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/17/Spark_On_YARN集群安装部署/&quot;&gt;http://qimingyu.github.io/2016/06/17/Spark_On_YARN集群安装部署/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;项目要求做威胁情报分析和病毒扫描。因此需要搭建spark的大数据平台，各种坑都被我走了一遍，心伤的很。这里写出来，让同行少走弯路。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="云安全" scheme="http://qimingyu.github.io/categories/%E4%BA%91%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="hadoop" scheme="http://qimingyu.github.io/tags/hadoop/"/>
-    
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
-      <category term="spark" scheme="http://qimingyu.github.io/tags/spark/"/>
     
   </entry>
   
@@ -536,11 +419,11 @@
     
       <category term="百度" scheme="http://qimingyu.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
       <category term="高通" scheme="http://qimingyu.github.io/tags/%E9%AB%98%E9%80%9A/"/>
     
       <category term="可信计算" scheme="http://qimingyu.github.io/tags/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/"/>
+    
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
   </entry>
   
@@ -897,6 +780,112 @@
       <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="参数篡改" scheme="http://qimingyu.github.io/tags/%E5%8F%82%E6%95%B0%E7%AF%A1%E6%94%B9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Webgoat之XSS</title>
+    <link href="http://qimingyu.github.io/2016/05/04/Webgoat%E4%B9%8BXSS/"/>
+    <id>http://qimingyu.github.io/2016/05/04/Webgoat之XSS/</id>
+    <published>2016-05-04T06:37:39.000Z</published>
+    <updated>2016-05-10T03:21:33.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Phishing-with-XSS&quot;&gt;&lt;a href=&quot;#Phishing-with-XSS&quot; class=&quot;headerlink&quot; title=&quot;Phishing with XSS&quot;&gt;&lt;/a&gt;Phishing with XSS&lt;/h2&gt;&lt;p&gt;如下所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;这是一个标准的输入搜索框，点击搜索之后，会在下方分别呈现要求和搜索结果。&lt;br&gt;要求注入html和js代码，搜集证书，并把其发送给一个网站。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Stored-XSS-Attacks&quot;&gt;&lt;a href=&quot;#Stored-XSS-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Stored XSS Attacks&quot;&gt;&lt;/a&gt;Stored XSS Attacks&lt;/h2&gt;&lt;p&gt;这节讲存储型的XSS攻击。如图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;该页面就像模拟一个贴吧一样。注入代码之后会被存储到后台，然后会被显示出来，浏览器显示的时候会执行该脚本。&lt;/p&gt;
+&lt;h2 id=&quot;Reflected-XSS-Attacks&quot;&gt;&lt;a href=&quot;#Reflected-XSS-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Reflected XSS Attacks&quot;&gt;&lt;/a&gt;Reflected XSS Attacks&lt;/h2&gt;&lt;p&gt;这节讲反射型的XSS。就是不经过服务器，直接在浏览器端输入JS脚本后显示出来了。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/8.png&quot; alt=&quot;8&quot;&gt;&lt;br&gt;如图是购物篮页面，直接在enter your three digit access code添加代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt; alert(&lt;span class=&quot;string&quot;&gt;&#39;XSS&#39;&lt;/span&gt;) &amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后点击update或purchase，不经过服务器，先在浏览器端显示出来了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/9.png&quot; alt=&quot;9&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Cross-Site-Request-Forgery&quot;&gt;&lt;a href=&quot;#Cross-Site-Request-Forgery&quot; class=&quot;headerlink&quot; title=&quot;Cross Site Request Forgery&quot;&gt;&lt;/a&gt;Cross Site Request Forgery&lt;/h2&gt;&lt;p&gt;跨站伪造请求攻击的根本原因是同一个浏览器同时打开两个链接。网页中所有手动发起的请求操作，其实质是通过HTML+JavaScript向服务器发起请求。进入该课程是这样的页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;我们需要发送一封恶意邮件给新闻组，每当我们发送一封邮件时，对方的Message List就会收到这条消息。我们在邮件中写如下代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;img src=&lt;span class=&quot;string&quot;&gt;&quot;http://localhost/WebGoat/attack?Screen=175&amp;amp;menu=900&amp;amp;Num=18&amp;amp;transferFunds=5000&quot;&lt;/span&gt; width=&lt;span class=&quot;string&quot;&gt;&quot;1&quot;&lt;/span&gt; height=&lt;span class=&quot;string&quot;&gt;&quot;1&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;被攻击者点开消息的时候，却找不到transferFunds参数了，提交的请求如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;修改该请求，在参数后面加“&amp;amp;transferFunds=4000”，攻击成功了。&lt;/p&gt;
+&lt;h2 id=&quot;HTTPOnly-Text&quot;&gt;&lt;a href=&quot;#HTTPOnly-Text&quot; class=&quot;headerlink&quot; title=&quot;HTTPOnly Text&quot;&gt;&lt;/a&gt;HTTPOnly Text&lt;/h2&gt;&lt;p&gt;HTTPOnly是为了防止跨站脚本攻击的，一般跨站脚本攻击是为了偷cookie，而HTTPOnly是微软为cookie增加的一个属性值。如果在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，也无法改写cookie信息。这节课程就是用来熟悉HTTPOnly的。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;一共提供了这两个cookie，前者立了HttpOnly的标签，后者没有。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
+&lt;p&gt;分别选择是否打开HTTPOnly属性，在打开和不打开HTTPOnly属性的情况下，分别选择读这两个cookie和改写这两个cookie。&lt;br&gt;可以看到，在没开HTTPOnly属性的时候，这两个cookie均可以被读取和被改写。开了HTTPOnly的时候，前一个cookie就不能被读取和被改写了。&lt;/p&gt;
+&lt;h2 id=&quot;Cross-Site-Tracing-Attacks&quot;&gt;&lt;a href=&quot;#Cross-Site-Tracing-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Cross Site Tracing Attacks&quot;&gt;&lt;/a&gt;Cross Site Tracing Attacks&lt;/h2&gt;&lt;p&gt;这节讲跨站跟踪攻击。HTTP方法包括：HEAD、GET、POST、TRACE、PUT、DELETE等。tomact支持HTTP TRACE命令。&lt;br&gt;XST攻击描述：攻击者将恶意代码嵌入一台已经被控制的主机上的web文件，当访问者浏览时恶意代码在浏览器中执行，然后访问者的cookie、http基本验证以及html验证信息将被发送到已经被控制的主机，同时传送Trace请求给目标主机，导致cookie欺骗或者是中间人攻击。&lt;br&gt;XST攻击条件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;需要目标web服务器允许Trace参数；&lt;/li&gt;
+&lt;li&gt;需要一个用来插入XST代码的地方； &lt;/li&gt;
+&lt;li&gt;目标站点存在跨域漏洞。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;这是一个购物车页面。在最后一栏，enter your three digit access code那里添加如下代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ( navigator.appName.indexOf(&lt;span class=&quot;string&quot;&gt;&quot;Microsoft&quot;&lt;/span&gt;) !=&lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xmlHttp = newActiveXObject(&lt;span class=&quot;string&quot;&gt;&quot;Microsoft.XMLHTTP&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xmlHttp.open(&lt;span class=&quot;string&quot;&gt;&quot;TRACE&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;./&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xmlHttp.send();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	str1=xmlHttp.responseText; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (str1.indexOf(&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;) &amp;gt; &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) str1 = str1.replace(&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;br&amp;gt;&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.write(str1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;提交后攻击成功。&lt;/p&gt;
+&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;防止这些攻击的方法就是对用户输入进行验证，过滤或者转义掉一些关键字符。  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之XSS/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之XSS/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Phishing-with-XSS&quot;&gt;&lt;a href=&quot;#Phishing-with-XSS&quot; class=&quot;headerlink&quot; title=&quot;Phishing with XSS&quot;&gt;&lt;/a&gt;Phishing with XSS&lt;/h2&gt;&lt;p&gt;如下所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;这是一个标准的输入搜索框，点击搜索之后，会在下方分别呈现要求和搜索结果。&lt;br&gt;要求注入html和js代码，搜集证书，并把其发送给一个网站。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
+    
+      <category term="XSS" scheme="http://qimingyu.github.io/tags/XSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WebGoat之Authentication Flaws</title>
+    <link href="http://qimingyu.github.io/2016/05/03/Webgoat%E4%B9%8BAuthentication_Flaws/"/>
+    <id>http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/</id>
+    <published>2016-05-03T13:15:52.000Z</published>
+    <updated>2016-05-04T06:25:52.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;Forget-Password&quot;&gt;&lt;a href=&quot;#Forget-Password&quot; class=&quot;headerlink&quot; title=&quot;Forget Password&quot;&gt;&lt;/a&gt;Forget Password&lt;/h2&gt;&lt;p&gt;这一节是关于找回密码功能的。密码找回功能设置过于简单时，别人可以猜对答案。本节课程要求找回用户名为admin的密码，需要回答正确最喜欢的颜色是什么，猜测green是对的，通过。&lt;/p&gt;
+&lt;h2 id=&quot;Basic-Authentication&quot;&gt;&lt;a href=&quot;#Basic-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Basic Authentication&quot;&gt;&lt;/a&gt;Basic Authentication&lt;/h2&gt;&lt;p&gt;关于HTTP的基本认证，&lt;a href=&quot;http://blog.csdn.net/kiwi_coder/article/details/28677651&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;讲的比较详细了。这一节讲基本的身份验证，基本的身份验证是用来保护服务器端资源的，当客户端向服务器请求一个URL，如果服务器这个资源需要身份认证的话，服务器将发送401认证请求与所请求的资源响应。例如，以我们登陆WebGoat的过程为例。&lt;br&gt;这是客户端传过去的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;这是服务端的响应：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;页面显示如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/4.png&quot; alt=&quot;4&quot;&gt;&lt;/p&gt;
+&lt;p&gt;然后输入用户名和密码提交，发送请求如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;可见在请求头部增加了一个认证字段，这个认证字段的内容是浏览器将刚刚输入的用户名和密码使用Base64编码方式进行编码，并将这些凭据发送给Web服务器。Web服务器会验证这些凭据，如果凭据正确，则返回所请求的资源。&lt;br&gt;服务器传过来的回应如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;它给浏览器传了一个set-cookie字段，这个set-cookie是一个JSESSIONID，以后浏览器给服务器传东西都要用这个cookie进行身份的认证。&lt;/p&gt;
+&lt;h3 id=&quot;Stage-1&quot;&gt;&lt;a href=&quot;#Stage-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;第一阶段是需要我们输入认证信息的头和认证信息解密后的内容：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;我们以上一节Forgot Password为例：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/8.png&quot; alt=&quot;8&quot;&gt;&lt;/p&gt;
+&lt;p&gt;输入用户名后点击提交，下面是burpsuit拦截到的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;注意cookie和Authentication两个字段，可以看到cookie就是之前登陆的时候服务传给我们的set-cookie，而认证字段里面的值，经过Base64解密之后为：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/10.png&quot; alt=&quot;10&quot;&gt;&lt;/p&gt;
+&lt;p&gt;因此在课程页面输入“Authorization”，“guest:guest”，提交后通过。&lt;/p&gt;
+&lt;h3 id=&quot;Stage-2&quot;&gt;&lt;a href=&quot;#Stage-2&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;这一部分是让我们明白cookie是如何用来进行会话管理的，同时基本认证头是如何用来进行认证的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，cookie也是正确的，没有影响，服务器会定位到当前工作页面。&lt;/li&gt;
+&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，而cookie是不正确的，服务器会给客户端传一个新的set-cookie，并且定位到Webgoat开始的地方，历史记录会存在。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上两点可以看出，cookie影响的是客户端和服务器端的会话。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是正确的，没有影响。&lt;/li&gt;
+&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是错误的或者没有，服务会需要重新输入用户名和密码进行验证。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上两点看出，服务器先验证cookie，再看Authorization字段。&lt;/p&gt;
+&lt;p&gt;同时删除Authorization和cookie，服务器会要求输入新的用户名和密码。&lt;br&gt;而此时认证提交给服务器的数据：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前相同，那么就是新用户老会话&lt;/li&gt;
+&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前不同，那么就是新用户新会话&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当达到后一点时，该课程就通过了。&lt;/p&gt;
+&lt;p&gt;也就是首先修改提交数据，同时删除Authorization和cookie，强迫让服务器进行重新验证。而重新验证的时候一般发送时会带有原来会话的cookie，在提交的时候删除该cookie即可成功。这时对服务器而言就是一个新的用户和新的会话，可以看到原来通过的课程都没有标记了。再次点击这一关，显示通过了。&lt;/p&gt;
+&lt;h2 id=&quot;Multi-Level-Login-1&quot;&gt;&lt;a href=&quot;#Multi-Level-Login-1&quot; class=&quot;headerlink&quot; title=&quot;Multi Level Login 1&quot;&gt;&lt;/a&gt;Multi Level Login 1&lt;/h2&gt;&lt;p&gt;这是一个多级登陆，对于多级登陆的系统，往往会要求首先输入用户名和密码，进入之后，会要求再输入一个什么密码，而这个密码有点像密保卡一样，密保卡只有用户本人拥有，系统随机要求输入第几行第几列的数字组合，用户照着密保卡上面的数字按照系统提示的规则输入进去就行了。这个多级登陆的方式在原来的《大话西游》网游中曾经用过。&lt;/p&gt;
+&lt;h3 id=&quot;Stage-1-1&quot;&gt;&lt;a href=&quot;#Stage-1-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;这部分是要求我们了解多级登陆的流程，按照要求输入即可通过。&lt;/p&gt;
+&lt;h3 id=&quot;Stage-2-1&quot;&gt;&lt;a href=&quot;#Stage-2-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;现在一名黑客已经拿到了某个人的用户名和密码，以及他的第一个业务码，但其他的业务码不知道。而问题在于第一个业务码会经常被用到，黑客如果照他的用户名和密码进行登录之后进行操作的话，系统会要求其输入其他的业务码，如何解决该问题？&lt;br&gt;进去之后，依然提交第一个业务码，然后抓包之后修改提交参数，把hidden_tan的值由2改为1即可。&lt;/p&gt;
+&lt;h2 id=&quot;Multi-Level-login-2&quot;&gt;&lt;a href=&quot;#Multi-Level-login-2&quot; class=&quot;headerlink&quot; title=&quot;Multi Level login 2&quot;&gt;&lt;/a&gt;Multi Level login 2&lt;/h2&gt;&lt;p&gt;我是WebGoat财务系统中正常的一名客户Joe，我拥有我应该有的所有密码。现在要求利用多级登陆的漏洞，在仅仅知道Jane的名字的情况下，我要以Jane的身份登陆进去。&lt;br&gt;同样在提交业务码的时候，抓包之后修改隐藏的提交参数，把hidden_user的值由Joe改为Jane即可。&lt;/p&gt;
+&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;有时候安全系统越复杂，往往看起来更安全，但实际上可能隐藏的漏洞也更多。简单而高效才是真正的牛逼。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
+    
+      <category term="认证安全" scheme="http://qimingyu.github.io/tags/%E8%AE%A4%E8%AF%81%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
