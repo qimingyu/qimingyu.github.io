@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2016-08-29T15:32:54.000Z</updated>
+  <updated>2017-01-06T09:14:06.095Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>差分隐私（一）</title>
+    <link href="http://qimingyu.github.io/2017/01/06/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://qimingyu.github.io/2017/01/06/差分隐私（一）/</id>
+    <published>2017-01-06T09:10:03.000Z</published>
+    <updated>2017-01-06T09:14:06.095Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;为什么要做差分隐私？&quot;&gt;&lt;a href=&quot;#为什么要做差分隐私？&quot; class=&quot;headerlink&quot; title=&quot;为什么要做差分隐私？&quot;&gt;&lt;/a&gt;为什么要做差分隐私？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;实际工程意义&lt;/strong&gt;&lt;br&gt;随着大数据和人工智能技术的兴起，越来越多的企业都在尽可能多的从用户数据中挖掘其价值，随之而来带来的一个问题是：&lt;code&gt;大数据下个人隐私数据保护的问题&lt;/code&gt;。虽然目前该问题在工业界还没有得到实际的重视，但未来一定会成为制约大数据发展的一个瓶颈，人工智能的发展有赖于计算能力和数据量的提升，差分隐私解决了&lt;code&gt;收集用户隐私&lt;/code&gt;和&lt;code&gt;改善服务&lt;/code&gt;之间的矛盾，因此这样的技术，工业界包括互联网公司，应该是有实际需求的。包括我们做威胁情报，实际上也是收集数据的同时为用户提供服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;理论研究意义&lt;/strong&gt;&lt;br&gt;目前国际上保护隐私一共有三个解决方案：&lt;code&gt;差分隐私&lt;/code&gt;（Differential Privacy）、&lt;code&gt;同态加密&lt;/code&gt;（Homomorphic encryption）、&lt;code&gt;零知识证明&lt;/code&gt;（Zero-knowledge proof）。差分隐私作为一种严格数学意义上定义的隐私保护框架，具有理论研究意义。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;差分隐私怎么来的？&quot;&gt;&lt;a href=&quot;#差分隐私怎么来的？&quot; class=&quot;headerlink&quot; title=&quot;差分隐私怎么来的？&quot;&gt;&lt;/a&gt;差分隐私怎么来的？&lt;/h3&gt;&lt;p&gt;在2006年，美国的Netflix公司（一家在线影片租赁提供商）办了一个机器学习的比赛，旨在提高自己推荐系统的准确度。相当于淘宝的“猜你喜欢”功能，在这个比赛中，Netflix公布了一个数据集，里面包含了一些真实用户的浏览数据，为了保护隐私，该公司把&lt;code&gt;用户ID&lt;/code&gt;和&lt;code&gt;识别码&lt;/code&gt;一类的可以唯一识别用户的信息都抹去了。Netflix声称这样我们就保护了用户的隐私。实际上，这也是目前很多公司的做法，就是&lt;strong&gt;对敏感数据直接抹去之后，再发布数据&lt;/strong&gt;。然而，事实上在这个数据集发布一个月后，两个学者利用&lt;code&gt;record linkage&lt;/code&gt;的技术，挖掘出了这个数据集中某些记录对应的用户是谁。原理就是从网上（比如IMDB，类似于中国的豆瓣电影）挖掘一些包含用户信息的电影浏览记录，然后把这些记录和Netflix数据集里的浏览记录进行匹配，就可以反向推理出在Netflix数据集中的个体对应的是哪些人，即攻击者从其他渠道获得了关于该数据集的背景知识，于是这些人在Netflix中的购买记录等隐私就泄露了。&lt;/p&gt;
+&lt;p&gt;这个事件告诉我们：&lt;strong&gt;如果你要公布一个数据集，仅仅粗暴的移除其中的ID这类敏感信息是完全不足以保护隐私的&lt;/strong&gt;。于是在该事件发生之后的同一年，微软的C. Dwork提出了一个概念，叫做Differential Privacy，也就是差分隐私，由此诞生了差分隐私的定义。此后数十年，很多学者相继开始该领域的研究。&lt;/p&gt;
+&lt;h3 id=&quot;差分隐私是什么？&quot;&gt;&lt;a href=&quot;#差分隐私是什么？&quot; class=&quot;headerlink&quot; title=&quot;差分隐私是什么？&quot;&gt;&lt;/a&gt;差分隐私是什么？&lt;/h3&gt;&lt;p&gt;通俗的说，差分隐私的思路就是，假如我现在想公布一个数据集，给大众做数据分析或者数据挖掘，但我又想保护里面每一个个体的信息不泄露，那么一种可行的手段就是给这个数据集注入一些噪音或者扰动。当然这个扰动不能随便加，否则数据就丧失了可用性。然而扰动也不能太小，否则就起不到保护隐私的作用了。C. Dwork在他的论文中提出了一个数学上的描述，来测量一个扰动机制究竟能够带来多大程度上的保密性。简单来说就是，你给我一个数据集A，假如我有一个扰动机制，可以让我先对A做一个扰动得到A’，再从原数据集A里随意拿掉一行记录得到B，对这个数据集B做扰动得到B‘，如果得到的A’和B’几乎是一模一样的（对同一随机算法这两个数据集的输出概率分布几乎相同），那么我就认为这个扰动机制可以保护隐私。因为在这个扰动机制下，A里面任何单独一行数据存在或不存在都几乎不影响结果。&lt;br&gt;更简单的说，就是：&lt;strong&gt;我在或者不在这个数据集中，对查询结果没有影响&lt;/strong&gt;。反过来说：&lt;strong&gt;攻击者通过对该数据集的任何查询或者背景知识都无法准确推断出我是否在这个数据集中&lt;/strong&gt;。&lt;br&gt;这是一种最强大的隐私保护定义。为什么是最强大呢？因为既然你在不在这个数据集中都不会影响最终的查询结果，那么我们可以认为你就不在这个数据集中，而如果你都不在这个数据集中，你的数据自然不会泄露。&lt;br&gt;事实上，不管各路学者怎么定义或者研究隐私保护，最终都会落到差分隐私上来，差分隐私是研究隐私保护问题无法绕过的。&lt;/p&gt;
+&lt;h4 id=&quot;目前的一些研究方向&quot;&gt;&lt;a href=&quot;#目前的一些研究方向&quot; class=&quot;headerlink&quot; title=&quot;目前的一些研究方向&quot;&gt;&lt;/a&gt;目前的一些研究方向&lt;/h4&gt;&lt;p&gt;分两个方面，一个是理论研究层次，另一个是应用研究层次。&lt;/p&gt;
+&lt;h5 id=&quot;理论型研究：&quot;&gt;&lt;a href=&quot;#理论型研究：&quot; class=&quot;headerlink&quot; title=&quot;理论型研究：&quot;&gt;&lt;/a&gt;理论型研究：&lt;/h5&gt;&lt;p&gt;主要是&lt;code&gt;数据发布机制&lt;/code&gt;和&lt;code&gt;数据挖掘机制&lt;/code&gt;的研究。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数据发布机制&lt;/strong&gt;&lt;br&gt;分为交互式发布和直接发布。交互式发布有点像数据库的中间件，就是针对用户每一次的查询，数据库算出结果之后，该结果进行差分隐私算法处理之后再呈现给用户。用户无法拿到原始的数据，而只能通过对数据库的查询获得加噪音处理后的结果。直接发布就是把整个数据集一次性的进行差分隐私处理后完整公开，用户可以拿到这份数据，但是单一的每条记录可能都是改过的，只是在统计学意义上，依然保留原始数据的特征。依然可以进行数据挖掘、分类等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据挖掘机制&lt;/strong&gt;&lt;br&gt;主要是对传统的机器学习算法进行修改使其符合差分隐私的定义。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这两个方向的难点都是如何做到&lt;code&gt;数据有用性&lt;/code&gt;与&lt;code&gt;隐私保护性&lt;/code&gt;的平衡，主要是设计一套合理的机制及算法。&lt;/p&gt;
+&lt;h5 id=&quot;应用型研究：&quot;&gt;&lt;a href=&quot;#应用型研究：&quot; class=&quot;headerlink&quot; title=&quot;应用型研究：&quot;&gt;&lt;/a&gt;应用型研究：&lt;/h5&gt;&lt;ol&gt;
+&lt;li&gt;差分隐私应用于推荐系统。目前的推荐系统需要利用大量用户数据进行&lt;code&gt;协同过滤&lt;/code&gt;，而在这点上，推荐系统中用户数据的隐私保护就成为了一个问题。如何即能保证用户数据的隐私，又能给其进行合理的推荐，是值得研究的一个点。（在微博的情感分析、主题挖掘模型中加入差分隐私，也属于这一类）&lt;/li&gt;
+&lt;li&gt;差分隐私解决基于位置服务（LBS）的隐私保护问题。现在很多手机有定位功能，位置信息属于个人隐私信息，而有很多APP是基于位置的服务的（外卖、地图等），如何保护个人位置隐私数据的同时，商家又能够提供相应的服务，传统基于位置的隐私保护多用的是近似算法或一些模糊算法，能否和如何将差分隐私引入该领域去解决这一问题？&lt;/li&gt;
+&lt;li&gt;差分隐私与分布式的结合。未来数据分析者、数据拥有者和服务提供方，这三者一定是分开的。设计一套机制将这三者统筹结合。基于云端的服务，每个人在本地将自己的数据按照约定的算法差分隐私化处理后上传至云端，那么云端获得的数据集全是隐私保护处理后的数据，但这些数据集依然可以供数据分析者进行挖掘分析，最后将结果给服务提供方。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&quot;&gt;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;为什么要做差分隐私？&quot;&gt;&lt;a href=&quot;#为什么要做差分隐私？&quot; class=&quot;headerlink&quot; title=&quot;为什么要做差分隐私？&quot;&gt;&lt;/a&gt;为什么要做差分隐私？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;实际工程意义&lt;/strong&gt;&lt;br&gt;随着大数据
+    
+    </summary>
+    
+      <category term="云安全" scheme="http://qimingyu.github.io/categories/%E4%BA%91%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="差分隐私" scheme="http://qimingyu.github.io/tags/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/"/>
+    
+  </entry>
   
   <entry>
     <title>什么才叫好工作？</title>
@@ -274,11 +318,11 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -417,9 +461,9 @@
       <category term="笔试面经" scheme="http://qimingyu.github.io/categories/%E7%AC%94%E8%AF%95%E9%9D%A2%E7%BB%8F/"/>
     
     
-      <category term="百度" scheme="http://qimingyu.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
-    
       <category term="高通" scheme="http://qimingyu.github.io/tags/%E9%AB%98%E9%80%9A/"/>
+    
+      <category term="百度" scheme="http://qimingyu.github.io/tags/%E7%99%BE%E5%BA%A6/"/>
     
       <category term="可信计算" scheme="http://qimingyu.github.io/tags/%E5%8F%AF%E4%BF%A1%E8%AE%A1%E7%AE%97/"/>
     
@@ -826,66 +870,6 @@
       <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="XSS" scheme="http://qimingyu.github.io/tags/XSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WebGoat之Authentication Flaws</title>
-    <link href="http://qimingyu.github.io/2016/05/03/Webgoat%E4%B9%8BAuthentication_Flaws/"/>
-    <id>http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/</id>
-    <published>2016-05-03T13:15:52.000Z</published>
-    <updated>2016-05-04T06:25:52.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;Forget-Password&quot;&gt;&lt;a href=&quot;#Forget-Password&quot; class=&quot;headerlink&quot; title=&quot;Forget Password&quot;&gt;&lt;/a&gt;Forget Password&lt;/h2&gt;&lt;p&gt;这一节是关于找回密码功能的。密码找回功能设置过于简单时，别人可以猜对答案。本节课程要求找回用户名为admin的密码，需要回答正确最喜欢的颜色是什么，猜测green是对的，通过。&lt;/p&gt;
-&lt;h2 id=&quot;Basic-Authentication&quot;&gt;&lt;a href=&quot;#Basic-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Basic Authentication&quot;&gt;&lt;/a&gt;Basic Authentication&lt;/h2&gt;&lt;p&gt;关于HTTP的基本认证，&lt;a href=&quot;http://blog.csdn.net/kiwi_coder/article/details/28677651&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;讲的比较详细了。这一节讲基本的身份验证，基本的身份验证是用来保护服务器端资源的，当客户端向服务器请求一个URL，如果服务器这个资源需要身份认证的话，服务器将发送401认证请求与所请求的资源响应。例如，以我们登陆WebGoat的过程为例。&lt;br&gt;这是客户端传过去的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;这是服务端的响应：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;页面显示如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/4.png&quot; alt=&quot;4&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后输入用户名和密码提交，发送请求如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;可见在请求头部增加了一个认证字段，这个认证字段的内容是浏览器将刚刚输入的用户名和密码使用Base64编码方式进行编码，并将这些凭据发送给Web服务器。Web服务器会验证这些凭据，如果凭据正确，则返回所请求的资源。&lt;br&gt;服务器传过来的回应如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;它给浏览器传了一个set-cookie字段，这个set-cookie是一个JSESSIONID，以后浏览器给服务器传东西都要用这个cookie进行身份的认证。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-1&quot;&gt;&lt;a href=&quot;#Stage-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;第一阶段是需要我们输入认证信息的头和认证信息解密后的内容：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;我们以上一节Forgot Password为例：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/8.png&quot; alt=&quot;8&quot;&gt;&lt;/p&gt;
-&lt;p&gt;输入用户名后点击提交，下面是burpsuit拦截到的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;注意cookie和Authentication两个字段，可以看到cookie就是之前登陆的时候服务传给我们的set-cookie，而认证字段里面的值，经过Base64解密之后为：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/10.png&quot; alt=&quot;10&quot;&gt;&lt;/p&gt;
-&lt;p&gt;因此在课程页面输入“Authorization”，“guest:guest”，提交后通过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-2&quot;&gt;&lt;a href=&quot;#Stage-2&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;这一部分是让我们明白cookie是如何用来进行会话管理的，同时基本认证头是如何用来进行认证的。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，cookie也是正确的，没有影响，服务器会定位到当前工作页面。&lt;/li&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，而cookie是不正确的，服务器会给客户端传一个新的set-cookie，并且定位到Webgoat开始的地方，历史记录会存在。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;以上两点可以看出，cookie影响的是客户端和服务器端的会话。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是正确的，没有影响。&lt;/li&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是错误的或者没有，服务会需要重新输入用户名和密码进行验证。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;以上两点看出，服务器先验证cookie，再看Authorization字段。&lt;/p&gt;
-&lt;p&gt;同时删除Authorization和cookie，服务器会要求输入新的用户名和密码。&lt;br&gt;而此时认证提交给服务器的数据：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前相同，那么就是新用户老会话&lt;/li&gt;
-&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前不同，那么就是新用户新会话&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;当达到后一点时，该课程就通过了。&lt;/p&gt;
-&lt;p&gt;也就是首先修改提交数据，同时删除Authorization和cookie，强迫让服务器进行重新验证。而重新验证的时候一般发送时会带有原来会话的cookie，在提交的时候删除该cookie即可成功。这时对服务器而言就是一个新的用户和新的会话，可以看到原来通过的课程都没有标记了。再次点击这一关，显示通过了。&lt;/p&gt;
-&lt;h2 id=&quot;Multi-Level-Login-1&quot;&gt;&lt;a href=&quot;#Multi-Level-Login-1&quot; class=&quot;headerlink&quot; title=&quot;Multi Level Login 1&quot;&gt;&lt;/a&gt;Multi Level Login 1&lt;/h2&gt;&lt;p&gt;这是一个多级登陆，对于多级登陆的系统，往往会要求首先输入用户名和密码，进入之后，会要求再输入一个什么密码，而这个密码有点像密保卡一样，密保卡只有用户本人拥有，系统随机要求输入第几行第几列的数字组合，用户照着密保卡上面的数字按照系统提示的规则输入进去就行了。这个多级登陆的方式在原来的《大话西游》网游中曾经用过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-1-1&quot;&gt;&lt;a href=&quot;#Stage-1-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;这部分是要求我们了解多级登陆的流程，按照要求输入即可通过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-2-1&quot;&gt;&lt;a href=&quot;#Stage-2-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;现在一名黑客已经拿到了某个人的用户名和密码，以及他的第一个业务码，但其他的业务码不知道。而问题在于第一个业务码会经常被用到，黑客如果照他的用户名和密码进行登录之后进行操作的话，系统会要求其输入其他的业务码，如何解决该问题？&lt;br&gt;进去之后，依然提交第一个业务码，然后抓包之后修改提交参数，把hidden_tan的值由2改为1即可。&lt;/p&gt;
-&lt;h2 id=&quot;Multi-Level-login-2&quot;&gt;&lt;a href=&quot;#Multi-Level-login-2&quot; class=&quot;headerlink&quot; title=&quot;Multi Level login 2&quot;&gt;&lt;/a&gt;Multi Level login 2&lt;/h2&gt;&lt;p&gt;我是WebGoat财务系统中正常的一名客户Joe，我拥有我应该有的所有密码。现在要求利用多级登陆的漏洞，在仅仅知道Jane的名字的情况下，我要以Jane的身份登陆进去。&lt;br&gt;同样在提交业务码的时候，抓包之后修改隐藏的提交参数，把hidden_user的值由Joe改为Jane即可。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;有时候安全系统越复杂，往往看起来更安全，但实际上可能隐藏的漏洞也更多。简单而高效才是真正的牛逼。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="认证安全" scheme="http://qimingyu.github.io/tags/%E8%AE%A4%E8%AF%81%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
