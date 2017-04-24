@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2017-01-06T10:33:47.778Z</updated>
+  <updated>2017-01-06T10:33:47.000Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://qimingyu.github.io/2017/01/06/%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>http://qimingyu.github.io/2017/01/06/差分隐私（一）/</id>
     <published>2017-01-06T09:10:03.000Z</published>
-    <updated>2017-01-06T10:33:47.778Z</updated>
+    <updated>2017-01-06T10:33:47.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;为什么要做差分隐私？&quot;&gt;&lt;a href=&quot;#为什么要做差分隐私？&quot; class=&quot;headerlink&quot; title=&quot;为什么要做差分隐私？&quot;&gt;&lt;/a&gt;为什么要做差分隐私？&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;实际工程意义&lt;/strong&gt;&lt;br&gt;随着大数据和人工智能技术的兴起，越来越多的企业都在尽可能多的从用户数据中挖掘其价值，随之而来带来的一个问题是：&lt;code&gt;大数据下个人隐私数据保护的问题&lt;/code&gt;。虽然目前该问题在工业界还没有得到实际的重视，但未来一定会成为制约大数据发展的一个瓶颈，人工智能的发展有赖于计算能力和数据量的提升，差分隐私解决了&lt;code&gt;收集用户隐私&lt;/code&gt;和&lt;code&gt;改善服务&lt;/code&gt;之间的矛盾，因此这样的技术，工业界包括互联网公司，应该是有实际需求的。包括我们做威胁情报，实际上也是收集数据的同时为用户提供服务。&lt;/li&gt;
@@ -107,7 +107,7 @@
     <link href="http://qimingyu.github.io/2016/08/07/Summer_Party%E6%9C%89%E6%84%9F/"/>
     <id>http://qimingyu.github.io/2016/08/07/Summer_Party有感/</id>
     <published>2016-08-07T09:29:43.000Z</published>
-    <updated>2016-08-07T09:33:28.460Z</updated>
+    <updated>2016-08-07T09:33:28.000Z</updated>
     
     <content type="html">&lt;p&gt;今天百度举行了一年一度的Summer Party，请了一些明星，当然现场有各种小礼品，这一场下来，应该也得花些钱。而我思考的是，站在企业的角度上，是否应该花这笔钱，这笔钱是否值得花，这就是商人的账，应该怎么去算？&lt;/p&gt;
 &lt;p&gt;表面上，这是一种浪费，而实际上这是一种企业宣传和文化鼓舞。小公司在钱上斤斤计较，这样的公司必定做不大。因此对公司而言，谈节约，去计较每一笔开销并不一定是好事。有些钱，就得花，并且还要大方的花，毫不计较的花。不仅要花，还要花的有价值，商人的账就是应该这样算，不能用普通人的思维去考虑。关键时刻还要有肚量，考虑什么是最关键的，在战略上什么是最重要的，是什么东西值得你为之花这么多钱的。因此，商人看世界，或者说老板看世界，与普通眼中的世界是不一样的，他能一眼看出价值，你值多少钱或者这件事值多少钱。&lt;/p&gt;
@@ -139,7 +139,7 @@
     <link href="http://qimingyu.github.io/2016/07/31/%E5%9F%BA%E4%BA%8EWIFI%E7%9A%84%E6%89%8B%E6%9C%BA%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B/"/>
     <id>http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/</id>
     <published>2016-07-31T07:13:34.000Z</published>
-    <updated>2016-07-31T07:48:13.129Z</updated>
+    <updated>2016-07-31T07:48:13.000Z</updated>
     
     <content type="html">&lt;p&gt;这是去年（2015年）暑假我们团队参加“华为杯”全国大学生智能设计竞赛获得&lt;a href=&quot;http://sse.ustc.edu.cn/pages/xxll.php?newsid=1198&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;全国一等奖&lt;/a&gt;的参赛项目的介绍。该项目由于是团队劳动成果，因此具体代码和详细设计文档这里暂不给出，如有需要可联系本人索取。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/2016-07-31/0001.jpg&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0002.jpg&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0003.jpg&quot; alt=&quot;3&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0004.jpg&quot; alt=&quot;4&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0005.jpg&quot; alt=&quot;5&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0006.jpg&quot; alt=&quot;6&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0007.jpg&quot; alt=&quot;7&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0008.jpg&quot; alt=&quot;8&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0009.jpg&quot; alt=&quot;9&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0010.jpg&quot; alt=&quot;10&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0011.jpg&quot; alt=&quot;11&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0012.jpg&quot; alt=&quot;12&quot;&gt;  &lt;/p&gt;
@@ -167,7 +167,7 @@
     <link href="http://qimingyu.github.io/2016/07/23/%E8%A7%A3%E5%86%B3Hadoop%E5%92%8CSpark%E6%9C%AC%E5%9C%B0%E7%89%88%E6%9C%AC%E5%BA%93%E4%B8%8D%E7%BB%9F%E4%B8%80%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/</id>
     <published>2016-07-23T12:40:34.000Z</published>
-    <updated>2016-07-23T12:42:38.795Z</updated>
+    <updated>2016-07-23T12:42:38.000Z</updated>
     
     <content type="html">&lt;p&gt;就是报以下这个警告的，也不知道对运行程序究竟会产生什么样的影响，但看着就是不爽，还耽误了我几天时间，把它给解决了，这里记一下，方便以后查找。&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;unable to load native-hadoop library &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; your platform... using &lt;span class=&quot;built_in&quot;&gt;builtin&lt;/span&gt;-java classes &lt;span class=&quot;built_in&quot;&gt;where&lt;/span&gt; applicable&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;先是运行Hadoop的时候报该错误，当时发现是由于Hadoop所需要的版本库和系统本地的glibc的版本库不一致导致的，但是有一个问题是系统本地库的地址是在根目录的lib和lib64下面，由于对服务器没有root权限，是无法修改该库的版本的，因此到这里，网上说的大部分解决方案都不行了。&lt;/p&gt;
@@ -201,7 +201,7 @@
     <link href="http://qimingyu.github.io/2016/06/29/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%9B%B4%E6%96%B0%E4%BA%86%E5%9F%9F%E5%90%8D/"/>
     <id>http://qimingyu.github.io/2016/06/29/为博客更新了域名/</id>
     <published>2016-06-29T11:50:13.000Z</published>
-    <updated>2016-06-29T12:14:24.395Z</updated>
+    <updated>2016-06-29T12:14:24.000Z</updated>
     
     <content type="html">&lt;p&gt;之前的域名是：qimingyu.github.com，现在更新为：qimingyu.com。也就是说花了45元特意去注册了一个域名，使用期限是一年。&lt;/p&gt;
 &lt;p&gt;起因是最近搞威胁情报接触到Whois服务，whois服务是输入域名地址或IP地址，返回给你相应的一些注册信息的服务。然后就研究了一下域名，联想到之前看到有人专门靠倒卖域名赚钱的，这其实也是一个产业，相当于抢注域名，然后养域名，静静等待买家的出现，最后转手卖掉赚钱。&lt;/p&gt;
@@ -261,7 +261,7 @@
     <link href="http://qimingyu.github.io/2016/06/27/%E5%85%B3%E4%BA%8E%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     <id>http://qimingyu.github.io/2016/06/27/关于机器学习/</id>
     <published>2016-06-27T13:26:01.000Z</published>
-    <updated>2016-07-04T09:21:54.687Z</updated>
+    <updated>2016-07-04T09:21:54.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近搞spark和hadoop的机器学习，简直是搞成傻逼了。太他妈难了，简直搞的想哭。之前接触机器学习，都是在单机上面能够跑的机器学习，还没有和大数据结合起来，更没有和这些大数据的平台结合起来。一旦变成集群之后，首先是对远程控制服务器全命令行的不熟，然后是对大数据平台本身的不熟，结果真是变成一脸懵逼了。报一个错完全不知所措了。&lt;/p&gt;
 &lt;h2 id=&quot;我对机器学习的理解&quot;&gt;&lt;a href=&quot;#我对机器学习的理解&quot; class=&quot;headerlink&quot; title=&quot;我对机器学习的理解&quot;&gt;&lt;/a&gt;我对机器学习的理解&lt;/h2&gt;&lt;ul&gt;
@@ -295,7 +295,7 @@
     <link href="http://qimingyu.github.io/2016/06/27/%E6%88%91%E5%AF%B9%E2%80%9C%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8%E2%80%9D%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
     <id>http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/</id>
     <published>2016-06-27T05:39:59.000Z</published>
-    <updated>2016-06-27T06:22:47.988Z</updated>
+    <updated>2016-06-27T06:22:47.000Z</updated>
     
     <content type="html">&lt;p&gt;最近安全圈传的比较火的就是一位白帽子黑客，脱了“世纪佳缘”厂商的一些库，然后厂商一方面认可了他提的漏洞，另一方面却报警把他抓了起来。这个事情引发了安全界广泛的讨论。具体可看以下链接：&lt;a href=&quot;https://zhuanlan.zhihu.com/p/21417658?refer=hi301&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《“白帽”黑客被抓事件，我想说….》&lt;/a&gt;、&lt;a href=&quot;https://zhuanlan.zhihu.com/p/21428012?refer=hi301&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《别踩白帽子上位、也别总拿未授权说事》&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;而在这件事中，我从个人道路选择的角度上给出我的一些看法。首先不可否认的是，白帽子黑客们确实为安全整体水平的提升做了很大的贡献，这点要感谢他们。但站在一个更宏观的层面来说，我觉得这些都是安全攻防中一城一地的较量与得失。有点像单兵作战和单挑。在功与防之间，即使安全工作者们战胜了黑客们，但也只是单次的胜利，我始终觉得这些工作都只是“术”，而没有上升为“道”。&lt;/p&gt;
@@ -320,9 +320,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -331,7 +331,7 @@
     <link href="http://qimingyu.github.io/2016/06/24/%E6%88%91%E5%AF%B9%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9C%8B%E6%B3%95/"/>
     <id>http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/</id>
     <published>2016-06-24T02:29:24.000Z</published>
-    <updated>2016-08-09T03:32:48.301Z</updated>
+    <updated>2016-08-09T03:32:48.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;什么是“威胁情报”&quot;&gt;&lt;a href=&quot;#什么是“威胁情报”&quot; class=&quot;headerlink&quot; title=&quot;什么是“威胁情报”&quot;&gt;&lt;/a&gt;什么是“威胁情报”&lt;/h2&gt;&lt;p&gt;威胁情报分为如下5个部分：&lt;br&gt;&lt;img src=&quot;/images/threat_intelligence/1.JPG&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
 &lt;ul&gt;
