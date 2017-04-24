@@ -68,7 +68,6 @@
 <meta property="og:description" content="开始大约花了两天做了一套360公司的2015年技术类校园招聘的笔试题，感觉非常基础，但有难度。下面对里面有意思的部分解析一下：
 一组容易混淆的代码1234char a;int *ptr=(int*)(&amp;amp;a+1);int *ptr=(int*)(&amp;amp;a)+1;int *ptr=(int*)((int)a+1);">
 <meta property="og:image" content="http://qimingyu.github.io/images/third_blog/1.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2016-03-21T12:32:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="360校园招聘2015届笔试题部分解析">
@@ -322,7 +321,9 @@
 <p>第一题选B，理由: b是地址常量,只能指向本身的内存空间,不可以指向字符串常量”Hello!”的首地址。<br>第二题选A，理由: 字符串是以’\0’结束的, 所以加上”good!”就是6个字节, 而数组的大小才是5,所以空间不够, 大小至少为6, 改为 char str[6]=”good!”;或者char str[]=”good!”;都可以,后者根据字符串的字符个数自动匹配数组大小。<br>关于字符数组的赋值问题，把握一条原则，首先数组名本身就是个指针,指向了数组的第一个元素的地址。另外数组名是个指针常量，或者叫地址常量，也就是当定义一个数组时, 数组名就指向了本身的地址空间, 是个常量, 不可以再指向别的地址。第一题中的B选项就是把字符串的指针赋值给了这个数组名指针常量，是错误的。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>把这套试题完完整整的做了一遍，收获还是挺大的，发现自己基础非常不牢固，还有很大的提高空间，和这类大公司的要求还有一段距离。接下来，好好学习巩固基础的C、C++、Java等语言概念，TCP/IP、操作系统、数据结构与算法以及信安专业课。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"><br>本文永久链接：<a href="http://qimingyu.github.io/2016/03/21/360校园招聘2015届笔试题部分解析/">http://qimingyu.github.io/2016/03/21/360校园招聘2015届笔试题部分解析/</a></p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--><br>本文永久链接：<a href="http://qimingyu.github.io/2016/03/21/360校园招聘2015届笔试题部分解析/">http://qimingyu.github.io/2016/03/21/360校园招聘2015届笔试题部分解析/</a></p>
 
       
     </div>

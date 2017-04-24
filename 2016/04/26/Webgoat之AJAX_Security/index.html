@@ -101,7 +101,6 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/26.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/27.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_ajax_security/28.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2016-05-03T11:15:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebGoat之AJAX Security">
@@ -364,7 +363,7 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
 </blockquote>
 <h3 id="Stage-2"><a href="#Stage-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>这部分是要用image标签创建一个JavaScript Alert对话框出来。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=x onerror=;;alert(<span class="string">'xss'</span>)/&gt;</span><br></pre></td></tr></table></figure></p>
 <p>得到网页弹出其对话框</p>
-<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这部分要求用iframe标签创建JavaScript Alert对话框。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"javascript:alert('xss');"</span>&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Stage-3"><a href="#Stage-3" class="headerlink" title="Stage 3"></a>Stage 3</h3><p>这部分要求用iframe标签创建JavaScript Alert对话框。<br>输入如下内容，然后提交<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe src=<span class="string">"javascript:alert('xss');"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>得到网页的输入框</p>
 <h3 id="Stage-4"><a href="#Stage-4" class="headerlink" title="Stage 4"></a>Stage 4</h3><p>要求在提交数据中创建虚假的输入框，骗取用户的密码。<br>在输入框中输入如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Please enter your password:&lt;BR&gt;&lt;input type = "password" name="pass"/&gt;&lt;button</span><br><span class="line">onClick="javascript:alert('I have your password: ' +</span><br><span class="line">pass.value);"&gt;Submit&lt;/button&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br><span class="line">&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;</span><br></pre></td></tr></table></figure></p>
 <p>得到如下界面：<br><img src="/images/webgoat_ajax_security/6.png" alt="6"></p>
@@ -431,7 +430,9 @@ HTML DOM-针对HTML文档的标准模型（HTML DOM是关于如何获取、修�
 <h3 id="Stage-2-2"><a href="#Stage-2-2" class="headerlink" title="Stage 2"></a>Stage 2</h3><p>要求我们绕过客户端的验证，提交订单却不花钱。这个需要在客户端修改价格，利用firebug，在HTML中找到readonly=””,删除该属性，则可在页面上随意修改商品价格，然后提交免费的订单！</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>这一节主要是Ajax安全，有很多内容，在客户端修改，拦截服务器的响应修改等，非常实用，并且拓宽了自己的知识面。</p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"><br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/">http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/</a></p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--><br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/">http://qimingyu.github.io/2016/04/26/Webgoat之AJAX_Security/</a></p>
 
       
     </div>

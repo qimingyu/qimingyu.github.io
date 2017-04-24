@@ -41,7 +41,9 @@
 &lt;p&gt; 打开浏览器访问网址：&lt;a href=&quot;http://localhost:8080/WebGoat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/WebGoat&lt;/a&gt;&lt;br&gt; 即可进入实验课程，一步步做实验，左边是全部的课程，每做完一个会有一个小的对勾。&lt;br&gt;&lt;img src=&quot;\images\webgoat_environment/1492067999094.png&quot; alt=&quot;6&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;p&gt;【1】&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;OWASP WebGoat Project&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&quot;&gt;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&quot;&gt;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -90,7 +92,9 @@
 &lt;li&gt;差分隐私与分布式的结合。未来数据分析者、数据拥有者和服务提供方，这三者一定是分开的。设计一套机制将这三者统筹结合。基于云端的服务，每个人在本地将自己的数据按照约定的算法差分隐私化处理后上传至云端，那么云端获得的数据集全是隐私保护处理后的数据，但这些数据集依然可以供数据分析者进行挖掘分析，最后将结果给服务提供方。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&quot;&gt;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&quot;&gt;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -126,7 +130,9 @@
 &lt;p&gt;我有一个感受，就是对于公司而言，不同的发展阶段就应该定不同的位。只要把细分市场做好，并且做到该细分市场的老大，先活下来，然后再寻找机会。企业级的云端服务稍微落后于个人级的云端服务，而深信服差不多有5年的技术积累，在这个前提下以这个时间窗口进入云计算与虚拟化领域，应该说时机是把握的相当准确的。但我感到，就整个安全观念和他们的工作状态来说，并不是探索未知的全新的蓝海（例如百度做无人车等），而是在已有技术基础上，把一个市场做饱满，虽然很踏实，也很符合他们自身发展的实际，但整个观念上，不够前沿。&lt;/p&gt;
 &lt;p&gt;最后，一定要记住，在任何平台上，都一定要体现自己存在的价值。&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/08/29/什么才叫好工作？/&quot;&gt;http://qimingyu.github.io/2016/08/29/什么才叫好工作？/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/08/29/什么才叫好工作？/&quot;&gt;http://qimingyu.github.io/2016/08/29/什么才叫好工作？/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -163,7 +169,9 @@
 &lt;p&gt;那么，这样的思维，对于我平时做事，给我一些启发。&lt;br&gt;第一，一定要有忧患意识。要随时做好接受市场挑战的准备，要把自己的价值放在市场上去衡量，时刻明白自己的真实斤两。有了这个前提，平时做事，就一定要以提高自己的社会价值为唯一标准。这个社会价值与其自身能力是画等号的，并不与任何外界物质相关，即创造和打造好自己在社会上别人无法替代的“身份标识”。这个基于个人的“身份标识”真是太重要了，我觉得这是一个人年轻的时候，所唯一应该追求的东西。很多时候，只需做好了这个，后面的厚积薄发往往是水到渠成的事情。而这个“身份标识”关乎很多事情，它代表你平时的每一个行为，每一场报告，每一封邮件，每一篇周报，每一个由你完成的任务等等在别人心中所留下的整体印象和水平。马克思说“人的本质是一切社会关系的总和”。只有真正理解好了这句话，就会意识到唯一的价值来源在于人本身。所谓“天时地利人和”，表面上是三个原因，而“势”由人所造，在我看来，任何一件事情能否做成，归根到底都是“人”的原因。&lt;br&gt;第二，一定要有创业意识。要执着并坚信互联网的未来，要执着并坚信技术改变世界，未来几十年，一定要坚信这两点。因为现在时代发展变化太快了，选择也太多了，道路也更多了，稍有不慎，就会选择错误，误入歧途。因此，在看得见的未来，对于自身所面临的一切选择，一定要基于这两个信念作为评判标准，这样才不至于在社会的大潮中迷失方向。虽然现在在当员工，现在也很年轻，但一定要思考，“十年之后，我还能拿什么去与未来的年轻人去竞争？”，一定要时刻让自己去思考这个问题。将创业当做自己人生的最终目标，因此年轻时的一切准备，都要服从该目标。&lt;br&gt;第三，一定要有精英意识。今年百度Summer Party的口号是“爱百度，Du Better”，我们会做得更好。应该时刻要求自己去精益求精的做事，一丝不苟的做事，踏踏实实的做事，当然在做事的同时，不要停止对这个社会，这个时代，以及自身圈子及出路的思考。与高质量的思维模式相伴随，让精英意识贯穿于自己的每一个细胞中去。一定不要经常去羡慕别人，或者以认识某某人为荣，想通过他人或者平台来提高自己，这是错误的。应该思考，自己能做什么，自己能为公司，为团队带来什么。不要依附于他人的品牌，要去打造自己的品牌。&lt;/p&gt;
 &lt;p&gt;最后，始终提醒自己，勿忘初心，我会一直在路上，在安全领域有所作为。&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/08/07/Summer_Party有感/&quot;&gt;http://qimingyu.github.io/2016/08/07/Summer_Party有感/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/08/07/Summer_Party有感/&quot;&gt;http://qimingyu.github.io/2016/08/07/Summer_Party有感/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -192,7 +200,9 @@
     <content type="html">&lt;p&gt;这是去年（2015年）暑假我们团队参加“华为杯”全国大学生智能设计竞赛获得&lt;a href=&quot;http://sse.ustc.edu.cn/pages/xxll.php?newsid=1198&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;全国一等奖&lt;/a&gt;的参赛项目的介绍。该项目由于是团队劳动成果，因此具体代码和详细设计文档这里暂不给出，如有需要可联系本人索取。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/2016-07-31/0001.jpg&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0002.jpg&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0003.jpg&quot; alt=&quot;3&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0004.jpg&quot; alt=&quot;4&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0005.jpg&quot; alt=&quot;5&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0006.jpg&quot; alt=&quot;6&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0007.jpg&quot; alt=&quot;7&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0008.jpg&quot; alt=&quot;8&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0009.jpg&quot; alt=&quot;9&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0010.jpg&quot; alt=&quot;10&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0011.jpg&quot; alt=&quot;11&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2016-07-31/0012.jpg&quot; alt=&quot;12&quot;&gt;  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/&quot;&gt;http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/&quot;&gt;http://qimingyu.github.io/2016/07/31/基于WIFI的手机室内定位项目简介/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -224,7 +234,9 @@
 &lt;p&gt;以上就解决了Hadoop的版本库的问题，可是打开Spark，发现Spark还报版本库的错误，网上给的&lt;a href=&quot;http://stackoverflow.com/questions/30369380/hadoop-unable-to-load-native-hadoop-library-for-your-platform-error-on-docker&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;该解决方案&lt;/a&gt;并不能解决该问题，后来在spark-env.sh中增加了&lt;code&gt;lib64&lt;/code&gt;的地址，最终边为如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;export LD_LIBRARY_PATH=$SPARK_SUBMIT_LIBRARY_PATH:$HADOOP_HOME/lib/native:/home/work/local/lib/:/home/work/local/lib64/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;再SCP到所有集群上面，遂解决。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&quot;&gt;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&quot;&gt;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -259,7 +271,9 @@
 &lt;p&gt;然后在source文件中增加一个CNAME的文件，里面写：qimingyu.com，然后通过hexo g生成之后，hexo d再推送到远端。这样就搞定了。&lt;/p&gt;
 &lt;p&gt;不过45元其实还包括很多服务，邮箱什么的，还有阿里云的一整套其他东西，后面再慢慢了解吧。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&quot;&gt;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&quot;&gt;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -287,7 +301,9 @@
 &lt;p&gt;随着计算机技术的发展，技术的成长是突飞猛进的，因此做一件事一定要站在巨人的肩膀上，考虑实际需求之后，快速学会使用别人的工具达到自己所做事情的完美结果即可。站在企业的角度上招人也是，对于大企业，有其本身的技术积累，也有很多的技术基础设施的建设（大数据平台），要学会好好利用这些资源，而不要自己在那里YY，意淫，重复造轮子浪费时间。而在使用工具的过程中，遇到问题了，再去深入，这才是对的。&lt;/p&gt;
 &lt;h3 id=&quot;7月11日更新&quot;&gt;&lt;a href=&quot;#7月11日更新&quot; class=&quot;headerlink&quot; title=&quot;7月11日更新&quot;&gt;&lt;/a&gt;7月11日更新&lt;/h3&gt;&lt;p&gt;虽然说不要重复造轮子，但是对轮子的理解太重要了。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&quot;&gt;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&quot;&gt;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -322,7 +338,9 @@
 &lt;p&gt;数据处理引擎之于大数据就像CPU之于计算机，或大脑之于人类。Spark只是一个通用计算框架，利用Spark实现的应用才是其真正价值所在。&lt;/p&gt;
 &lt;p&gt;弹性分布式数据集是spark对分步式数据和计算的基本抽象&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/关于机器学习/&quot;&gt;http://qimingyu.github.io/2016/06/27/关于机器学习/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/关于机器学习/&quot;&gt;http://qimingyu.github.io/2016/06/27/关于机器学习/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -354,7 +372,9 @@
 &lt;p&gt;在技术方面，Java ——&amp;gt; hadoop/spark ——&amp;gt; 机器学习，这一整条路线都是工具，这些工具是用来解决实际安全业务问题的，然后是数据，这些数据与安全相关，如何处理这些数据，最后得到一个比较好的解决方案，这是对相关安全从事人员的要求。而在解决具体问题中，每个人所展现出的联想性与创造性，则是每个人综合能力的体现，看论文的能力，数学能力等等。&lt;/p&gt;
 &lt;p&gt;因此，对个人的定位应该是立足安全，对技术采取兼容并包的态度，凡是好的都可以拿来用，但是以解决安全问题为根本。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&quot;&gt;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&quot;&gt;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -417,7 +437,9 @@
 &lt;p&gt;可见对相关从业人员的要求之高，然而更重要的，对于创业型企业来考虑（如果拿威胁情报作为创业项目的话），他们更重要的是没有数据来源渠道，因此，这个方向的创业，门槛还是相当高的，小企业不要轻易尝试。但不可否认的是，在安全领域而言，威胁情报确实是未来的一个趋势。&lt;/p&gt;
 &lt;p&gt;还有一点是，我们在做事情或者写程序的时候，一定要考虑上层的架构。也就是说虽然是做的下层的事，但有时往往上层架构搭的不好，导致下面会非常混乱。因此，一定要从架构师的角度去思考问题。专注于一个领域，做好一件事，这就是本事。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&quot;&gt;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&quot;&gt;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -463,7 +485,9 @@
 &lt;p&gt;指定了网站的前缀域名，之后就正常了。&lt;/p&gt;
 &lt;h2 id=&quot;额外&quot;&gt;&lt;a href=&quot;#额外&quot; class=&quot;headerlink&quot; title=&quot;额外&quot;&gt;&lt;/a&gt;额外&lt;/h2&gt;&lt;p&gt;之前是用dropbox同步网站的，经常出现被墙的情况，于是换了坚果云进行同步。&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&quot;&gt;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&quot;&gt;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -497,7 +521,9 @@
 &lt;/ol&gt;
 &lt;p&gt;去百度之后，好好学习。要有自己的方向及自己的思考，此最为关键。基于自己独立的思考和判断，可以听别人的意见，但决定一定自己做出，一定要不拘一格走出自己的道路，并且有自己的个性。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/27/关于两份实习offer的选择与比较/&quot;&gt;http://qimingyu.github.io/2016/05/27/关于两份实习offer的选择与比较/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/27/关于两份实习offer的选择与比较/&quot;&gt;http://qimingyu.github.io/2016/05/27/关于两份实习offer的选择与比较/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -574,7 +600,9 @@
 &lt;h3 id=&quot;Level-13&quot;&gt;&lt;a href=&quot;#Level-13&quot; class=&quot;headerlink&quot; title=&quot;Level 13&quot;&gt;&lt;/a&gt;Level 13&lt;/h3&gt;&lt;p&gt;网址：&lt;a href=&quot;http://www.try2hack.nl/levels/level13-olwehfdow.xhtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.try2hack.nl/levels/level13-olwehfdow.xhtml&lt;/a&gt;&lt;br&gt;终于来到最后一关了，显示页面如下：&lt;br&gt;&lt;img src=&quot;/images/try2hack/31.png&quot; alt=&quot;31&quot;&gt;&lt;br&gt;显示需要下载文件，这个文件比较大，有60多兆。&lt;br&gt;Sleuth Kit是一个用来分析磁盘映像和恢复文件的开源取证工具。&lt;br&gt;这是Linux的一个文件系统，我们需要挂载该文件系统。&lt;br&gt;最后得到密码为：f1ff950850ac2f1f51fa82d839f0bd1b&lt;br&gt;然后出现如下页面：&lt;br&gt;&lt;img src=&quot;/images/try2hack/32.png&quot; alt=&quot;32&quot;&gt;&lt;br&gt;已经全部通关了。&lt;br&gt;&lt;strong&gt;总结：这部分考查对Linux系统的了解。&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;Web攻击学无止境，关键在于把基本知识掌握之后，要熟悉很多常见的漏洞及利用方式，然后再加以创造性的综合利用，渗透工程师是一门非常需要积累和经验的工作。而做一名安全构架师，则更是任重而道远。这是需要花时间和精力去认真修炼打磨的。积累自己的势能。&lt;br&gt;这个try2hack网站太老了，很多技术都已经过时，不过用来训练思维还是不错的。&lt;br&gt;任何语言都是可以反编译的。还需要提高自己逆向的能力以及加强对底层的了解。&lt;br&gt;基础还不够，必须要精通一门语言才行，例如第十一关，写一段小代码都要写半天。&lt;br&gt;最后，Level10-13还有待修改完善，以及原理还有待弄懂。未完，待续。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&quot;&gt;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&quot;&gt;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -602,7 +630,9 @@
     <content type="html">&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;大约历时一个月左右，系统学完了WebGoat5.2标准版的所有教程。虽然有些东西学的还是比较浅显，但还是加深了很多地方的理解。&lt;br&gt;人从一无所有出生，再到一无所有的离开，区区一辈子，80载，人世走一遭，总得留下些什么。因此一定要做一个有梦想的人，特别是在年轻的时候，在面临很多选择的时候，一定要坚持自己的梦想，不能有一丝一毫的妥协。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;学的越多，往往真有一种学无止境的感觉，学习是为了产出，学习是为了指导实践，学习是为了创造价值。因此，学习过程应该和产出过程相结合，构成良性循环。而世上知识千千万万，一个人要有所作为，则只能专于一点，我给自己定位于信息安全行业，希望能为中国的信息安全行业贡献自己的一份力量。&lt;br&gt;曾经在一篇博客里面看到这样一句话：做正确的事，然后等着被开除。当时我就为之一震，而如今我更深切的体会到说这句话更是需要勇气的，在公司往往会受迫于很多琐事，而无法专注于你希望做的事。这往往是个人理想与社会现实的偏差，这样的偏差并不可怕，也很正常。而面对这样的偏差时，我们一方面要积极修正自己的方向，因为这是来自于外界的反馈，另一方面，要有自己的独到的个性与不可替代性，这是自身价值的体现。&lt;br&gt;要让自己变得厚重、深沉而有魅力，应该永远关注自身势能的提高。学习信安十年，然后在行业内深深积累十年，然后再创业十年，这是我的大方向。深刻的剖析自身，要让自己变得透明，要敢于面对最真实的自己。无畏向前。&lt;/p&gt;
 &lt;h2 id=&quot;成果&quot;&gt;&lt;a href=&quot;#成果&quot; class=&quot;headerlink&quot; title=&quot;成果&quot;&gt;&lt;/a&gt;成果&lt;/h2&gt;&lt;p&gt;如下是WebGoat课程的报告清单，也是我的学习成果，其中没有通过的是因为需要在开发版上才能完成。&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/3.png&quot; alt=&quot;3&quot;&gt;  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&quot;&gt;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&quot;&gt;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -675,7 +705,9 @@
 &lt;p&gt;使没创建一个新用户的时候，自动为其填充为我们所希望的邮箱。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;SQL注入需要对数据库熟悉，并且对后台代码了解，内容还是比较多的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -723,7 +755,9 @@
 &lt;p&gt;&lt;img src=&quot;/images/webgoat_web_services/11.png&quot; alt=&quot;11&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;这一节实验花了较多的时间，主要是对于Web Services基础理解不熟，然后在做第三小节的时候，先是用Webscarab攻击成功之后，看源码，再在burpsuit里面做的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -764,7 +798,9 @@
 &lt;p&gt;说明对于浏览器A而言，他用169美元买了1799美元的商品。&lt;br&gt;这个原因在于浏览器B的更新时，浏览器A受影响了，服务器没有很好的处理多线程的问题。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;多线程和并发安全在网络安全中也是需要考虑的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -809,7 +845,9 @@
 &lt;p&gt;将后面的SID修改为qimingyu，无需输入用户名和密码，就可以以受害者Jane的身份登陆该系统了。&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/22.png&quot; alt=&quot;22&quot;&gt;&lt;br&gt;这是一连串精心构造的攻击，其关键漏洞是网站依靠URL来传递SID的值，容易被人截取并修改。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;第一节是通过暴力猜对cookie绕过验证进行登陆。&lt;br&gt;第二节是通过观察猜对cookie绕过验证进行登陆。&lt;br&gt;第三节是诱骗受害者以固定的Session登陆，然后攻击者再通过该Session绕过验证直接登陆。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -855,7 +893,9 @@
 &lt;p&gt;因此需要更细粒度一点。我们在刷新该页面的时候，针对服务器传回来的响应进行拦截之后，将判断验证部分的JS代码全部删掉，这样同样也绕过了客户端的验证。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;关于网络渗透一定要有中间人的意识，数据随时都有可能被中间人修改的。在基础扎实的基础上，思维要开阔。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">

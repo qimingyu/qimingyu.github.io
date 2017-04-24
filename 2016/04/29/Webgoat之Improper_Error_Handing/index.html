@@ -68,7 +68,6 @@
 <meta property="og:description" content="Fail Open Authentication Scheme这节讲不当的错误处理。打开认证失败。Java代码中异常处理部分为成功认证行为进行异常捕获。该异常产生是因为密码字段使用了空指针。
 打开是这样的页面：">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_improper_error_handing/1.png">
-<meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2016-04-29T08:23:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webgoat之Improper Error Handing">
@@ -315,7 +314,9 @@
 <p>我们可以浏览器打开代理之后，用burpsuit抓到请求之后，直接删除password字段，提交给服务器，这时服务器会报错，因为password是空指针，进入错误处理流程，由于它处理不当，我们就可以登录了。</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>这又是一个绕过登录的方法。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"><br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/29/Webgoat之Improper_Error_Handing/">http://qimingyu.github.io/2016/04/29/Webgoat之Improper_Error_Handing/</a></p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.github.io/">戚名钰的博客</a>（ <a href="http://qimingyu.github.io/">http://qimingyu.github.io/</a> ），欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.github.io/">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com<br>欢迎关注我的微信公众号：科技锐新<br><!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--><br>本文永久链接：<a href="http://qimingyu.github.io/2016/04/29/Webgoat之Improper_Error_Handing/">http://qimingyu.github.io/2016/04/29/Webgoat之Improper_Error_Handing/</a></p>
 
       
     </div>
