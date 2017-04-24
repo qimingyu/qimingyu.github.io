@@ -388,9 +388,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
@@ -466,7 +466,7 @@
     <link href="http://qimingyu.github.io/2016/06/05/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E/"/>
     <id>http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/</id>
     <published>2016-06-05T15:31:40.000Z</published>
-    <updated>2016-06-06T04:34:03.000Z</updated>
+    <updated>2017-04-24T12:47:28.285Z</updated>
     
     <content type="html">&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;开始写博客不久，自认为只是为了促进自我学习，所以文章写得也并不十分精细。可这几天一反常态，陆陆续续在微博上总有人加我。直到一天在微博上收到了这样的一封私信：&lt;br&gt;&lt;img src=&quot;/images/copyright/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/copyright/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;开始我并没在意，觉得自己写的文章居然还有人看上了，并且是有着79万粉丝的微博大咖，内心还是感觉不错的。于是很单纯的按照其指示加微信及QQ好友，可是申请虽提交了，对方却毫无回应，既没同意也没反对，于是我也就没放心上，就当这事儿过去了。&lt;/p&gt;
 &lt;p&gt;可是之后还是陆陆续续总有人微博粉我，刚好今天下午我很闲，于是就在微博里面搜索了下自己的名字，结果出现了这样的画面：&lt;br&gt;&lt;img src=&quot;/images/copyright/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
@@ -484,6 +484,8 @@
 &lt;p&gt;此时出现了另外一个问题，就是文末的永久链接地址，出现了如下所示的情况：&lt;br&gt;&lt;img src=&quot;/images/copyright/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;即在永久链接出现空格处，就停止了，于是我又把所有文章的命名凡是有空格的地方改为加下划线代替，这里指的是post文件的命名，但正式文件里面文章的名称没变，这样也就不影响阅读了。&lt;br&gt;还有一个问题是所自动生成的链接，前面给出的网址是http:yoursite.com（如上图所示），当我push上去之后还是这个前缀，于是我修改网站的配置文件_config.yml，加了如下代码：&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#定义访问的域名&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;url: http://qimingyu.github.io                  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;root: /&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;指定了网站的前缀域名，之后就正常了。&lt;/p&gt;
 &lt;h2 id=&quot;额外&quot;&gt;&lt;a href=&quot;#额外&quot; class=&quot;headerlink&quot; title=&quot;额外&quot;&gt;&lt;/a&gt;额外&lt;/h2&gt;&lt;p&gt;之前是用dropbox同步网站的，经常出现被墙的情况，于是换了坚果云进行同步。&lt;/p&gt;
+&lt;h2 id=&quot;添加赞赏功能&quot;&gt;&lt;a href=&quot;#添加赞赏功能&quot; class=&quot;headerlink&quot; title=&quot;添加赞赏功能&quot;&gt;&lt;/a&gt;添加赞赏功能&lt;/h2&gt;&lt;p&gt;（2017年4月20日更新）&lt;/p&gt;
+&lt;p&gt;在主题配置文件中添加如下代码即可：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wechatpay: /path/to/wechat-reward-image&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;alipay: /path/to/alipay-reward-image&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;  &lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
 ![kejiruixin](/images/about/kejiruixin.jpg) 
