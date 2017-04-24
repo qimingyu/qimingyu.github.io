@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2017-01-06T10:33:47.000Z</updated>
+  <updated>2017-04-24T11:47:44.762Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WebGoat之实验环境安装</title>
+    <link href="http://qimingyu.github.io/2017/04/24/WebGoat%E4%B9%8B%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"/>
+    <id>http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/</id>
+    <published>2017-04-24T11:39:18.000Z</published>
+    <updated>2017-04-24T11:47:44.762Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;WebGoat简介&quot;&gt;&lt;a href=&quot;#WebGoat简介&quot; class=&quot;headerlink&quot; title=&quot;WebGoat简介&quot;&gt;&lt;/a&gt;WebGoat简介&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WebGoat是OWASP组织研制出的用于进行Web漏洞实验的应用平台，用来说明Web应用中存在的安全漏洞。WebGoat运行在带有Java虚拟机的平台之上，当前提供的训练课程有30多个，其中包括：跨站点脚本攻击（XSS）、访问控制、线程安全、操作隐藏字段、操纵参数、弱会话Cookie、SQL盲注、数字型SQL注入、字符串型SQL注入、web服务、Open Authentication失效、危险的HTML注释等等。&lt;/li&gt;
+&lt;li&gt;本系列实验采用的是WebGoat 7.1稳定版，服务器是Tomcat（已经被集成在下载的包里面），Web应用是WebGoat。&lt;/li&gt;
+&lt;li&gt;本系列实验的目的是掌握一般的Web安全及其防御手段，同时学会渗透测试工具burpsuite等的使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;实验环境安装步奏&quot;&gt;&lt;a href=&quot;#实验环境安装步奏&quot; class=&quot;headerlink&quot; title=&quot;实验环境安装步奏&quot;&gt;&lt;/a&gt;实验环境安装步奏&lt;/h2&gt;&lt;p&gt;整体实验环境安装分为两步，第一步是安装Java环境，第二步是运行WebGoat。&lt;/p&gt;
+&lt;h3 id=&quot;1-下载Java-JDK&quot;&gt;&lt;a href=&quot;#1-下载Java-JDK&quot; class=&quot;headerlink&quot; title=&quot;1.下载Java JDK&quot;&gt;&lt;/a&gt;1.下载Java JDK&lt;/h3&gt;&lt;p&gt;下载地址在：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/webgoat_environment/1492065952899.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;这里选用JDK 1.8版本&lt;br&gt;如果电脑操作系统是32位，选择x86&lt;br&gt;如果电脑操作系统是64位，选择x64&lt;/p&gt;
+&lt;h3 id=&quot;2-安装Java运行环境&quot;&gt;&lt;a href=&quot;#2-安装Java运行环境&quot; class=&quot;headerlink&quot; title=&quot;2.安装Java运行环境&quot;&gt;&lt;/a&gt;2.安装Java运行环境&lt;/h3&gt;&lt;p&gt;直接双击下载的文件就行了，同时注意这里的安装路径，后面设置环境变量要用到。&lt;br&gt;&lt;img src=&quot;/images/webgoat_environment/1492066280240.png&quot; alt=&quot;2&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;3-设置Java环境变量&quot;&gt;&lt;a href=&quot;#3-设置Java环境变量&quot; class=&quot;headerlink&quot; title=&quot;3.设置Java环境变量&quot;&gt;&lt;/a&gt;3.设置Java环境变量&lt;/h3&gt;&lt;p&gt;依次打开：计算机——&amp;gt; 右键属性 ——&amp;gt; 高级系统变量 ——&amp;gt;  环境变量&lt;br&gt;&lt;img src=&quot;/images/webgoat_environment/1492066494767.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在系统变量里面做三件事情：&lt;br&gt;(1)&lt;strong&gt;新建&lt;/strong&gt;-&amp;gt;变量名&lt;code&gt;JAVA_HOME&lt;/code&gt;，变量值&lt;code&gt;C:\Program Files\Java\jdk1.8.0_121&lt;/code&gt;（即上面第二步中JDK的安装路径）&lt;br&gt;(2)&lt;strong&gt;编辑&lt;/strong&gt;-&amp;gt;变量名&lt;code&gt;Path&lt;/code&gt;，在原变量值的最后面加上&lt;code&gt;;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin&lt;/code&gt;&lt;br&gt;(3)&lt;strong&gt;新建&lt;/strong&gt;-&amp;gt;变量名&lt;code&gt;CLASSPATH&lt;/code&gt;,变量值&lt;code&gt;.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-检查Java环境是否安装正确&quot;&gt;&lt;a href=&quot;#4-检查Java环境是否安装正确&quot; class=&quot;headerlink&quot; title=&quot;4.检查Java环境是否安装正确&quot;&gt;&lt;/a&gt;4.检查Java环境是否安装正确&lt;/h3&gt;&lt;p&gt;在Windows的&lt;code&gt;cmd&lt;/code&gt;里面输入如下三个命令：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;.java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;.javac&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;.java -version&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;如果都能正常运行说明Java环境安装正确&lt;br&gt;&lt;img src=&quot;/images/webgoat_environment/3W7@1Z[QH9B5M11J6RG.png&quot; alt=&quot;4&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;5-下载WebGoat包&quot;&gt;&lt;a href=&quot;#5-下载WebGoat包&quot; class=&quot;headerlink&quot; title=&quot;5.下载WebGoat包&quot;&gt;&lt;/a&gt;5.下载WebGoat包&lt;/h3&gt;&lt;p&gt;下载地址：&lt;a href=&quot;https://github.com/WebGoat/WebGoat/wiki/Running-WebGoat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/WebGoat/WebGoat/wiki/Running-WebGoat&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/webgoat_environment/1492067616160.png&quot; alt=&quot;5&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;6-运行WebGoat&quot;&gt;&lt;a href=&quot;#6-运行WebGoat&quot; class=&quot;headerlink&quot; title=&quot;6. 运行WebGoat&quot;&gt;&lt;/a&gt;6. 运行WebGoat&lt;/h3&gt;&lt;p&gt;上面的图片已经告诉我们如何运行WebGoat了，先找到刚刚下载的包的位置，然后在&lt;code&gt;cmd&lt;/code&gt;里面输入如下命令：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;java -jar webgoat-container-&lt;span class=&quot;number&quot;&gt;7.1&lt;/span&gt;-exec.jar&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt; 打开浏览器访问网址：&lt;a href=&quot;http://localhost:8080/WebGoat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/WebGoat&lt;/a&gt;&lt;br&gt; 即可进入实验课程，一步步做实验，左边是全部的课程，每做完一个会有一个小的对勾。&lt;br&gt;&lt;img src=&quot;\images\webgoat_environment/1492067999094.png&quot; alt=&quot;6&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;p&gt;【1】OWASP WebGoat Project：&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&quot;&gt;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;WebGoat简介&quot;&gt;&lt;a href=&quot;#WebGoat简介&quot; class=&quot;headerlink&quot; title=&quot;WebGoat简介&quot;&gt;&lt;/a&gt;WebGoat简介&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WebGoat是OWASP组织研制出的用于进行Web漏洞实验的应用平台，
+    
+    </summary>
+    
+      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
+    
+      <category term="实验环境" scheme="http://qimingyu.github.io/tags/%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
   
   <entry>
     <title>差分隐私（一）</title>
@@ -318,11 +362,11 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -824,52 +868,6 @@
       <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="参数篡改" scheme="http://qimingyu.github.io/tags/%E5%8F%82%E6%95%B0%E7%AF%A1%E6%94%B9/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之XSS</title>
-    <link href="http://qimingyu.github.io/2016/05/04/Webgoat%E4%B9%8BXSS/"/>
-    <id>http://qimingyu.github.io/2016/05/04/Webgoat之XSS/</id>
-    <published>2016-05-04T06:37:39.000Z</published>
-    <updated>2016-05-10T03:21:33.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Phishing-with-XSS&quot;&gt;&lt;a href=&quot;#Phishing-with-XSS&quot; class=&quot;headerlink&quot; title=&quot;Phishing with XSS&quot;&gt;&lt;/a&gt;Phishing with XSS&lt;/h2&gt;&lt;p&gt;如下所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;这是一个标准的输入搜索框，点击搜索之后，会在下方分别呈现要求和搜索结果。&lt;br&gt;要求注入html和js代码，搜集证书，并把其发送给一个网站。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;Stored-XSS-Attacks&quot;&gt;&lt;a href=&quot;#Stored-XSS-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Stored XSS Attacks&quot;&gt;&lt;/a&gt;Stored XSS Attacks&lt;/h2&gt;&lt;p&gt;这节讲存储型的XSS攻击。如图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;该页面就像模拟一个贴吧一样。注入代码之后会被存储到后台，然后会被显示出来，浏览器显示的时候会执行该脚本。&lt;/p&gt;
-&lt;h2 id=&quot;Reflected-XSS-Attacks&quot;&gt;&lt;a href=&quot;#Reflected-XSS-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Reflected XSS Attacks&quot;&gt;&lt;/a&gt;Reflected XSS Attacks&lt;/h2&gt;&lt;p&gt;这节讲反射型的XSS。就是不经过服务器，直接在浏览器端输入JS脚本后显示出来了。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/8.png&quot; alt=&quot;8&quot;&gt;&lt;br&gt;如图是购物篮页面，直接在enter your three digit access code添加代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt; alert(&lt;span class=&quot;string&quot;&gt;&#39;XSS&#39;&lt;/span&gt;) &amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后点击update或purchase，不经过服务器，先在浏览器端显示出来了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/9.png&quot; alt=&quot;9&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Cross-Site-Request-Forgery&quot;&gt;&lt;a href=&quot;#Cross-Site-Request-Forgery&quot; class=&quot;headerlink&quot; title=&quot;Cross Site Request Forgery&quot;&gt;&lt;/a&gt;Cross Site Request Forgery&lt;/h2&gt;&lt;p&gt;跨站伪造请求攻击的根本原因是同一个浏览器同时打开两个链接。网页中所有手动发起的请求操作，其实质是通过HTML+JavaScript向服务器发起请求。进入该课程是这样的页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;我们需要发送一封恶意邮件给新闻组，每当我们发送一封邮件时，对方的Message List就会收到这条消息。我们在邮件中写如下代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;img src=&lt;span class=&quot;string&quot;&gt;&quot;http://localhost/WebGoat/attack?Screen=175&amp;amp;menu=900&amp;amp;Num=18&amp;amp;transferFunds=5000&quot;&lt;/span&gt; width=&lt;span class=&quot;string&quot;&gt;&quot;1&quot;&lt;/span&gt; height=&lt;span class=&quot;string&quot;&gt;&quot;1&quot;&lt;/span&gt; /&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;被攻击者点开消息的时候，却找不到transferFunds参数了，提交的请求如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;修改该请求，在参数后面加“&amp;amp;transferFunds=4000”，攻击成功了。&lt;/p&gt;
-&lt;h2 id=&quot;HTTPOnly-Text&quot;&gt;&lt;a href=&quot;#HTTPOnly-Text&quot; class=&quot;headerlink&quot; title=&quot;HTTPOnly Text&quot;&gt;&lt;/a&gt;HTTPOnly Text&lt;/h2&gt;&lt;p&gt;HTTPOnly是为了防止跨站脚本攻击的，一般跨站脚本攻击是为了偷cookie，而HTTPOnly是微软为cookie增加的一个属性值。如果在cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，也无法改写cookie信息。这节课程就是用来熟悉HTTPOnly的。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;一共提供了这两个cookie，前者立了HttpOnly的标签，后者没有。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
-&lt;p&gt;分别选择是否打开HTTPOnly属性，在打开和不打开HTTPOnly属性的情况下，分别选择读这两个cookie和改写这两个cookie。&lt;br&gt;可以看到，在没开HTTPOnly属性的时候，这两个cookie均可以被读取和被改写。开了HTTPOnly的时候，前一个cookie就不能被读取和被改写了。&lt;/p&gt;
-&lt;h2 id=&quot;Cross-Site-Tracing-Attacks&quot;&gt;&lt;a href=&quot;#Cross-Site-Tracing-Attacks&quot; class=&quot;headerlink&quot; title=&quot;Cross Site Tracing Attacks&quot;&gt;&lt;/a&gt;Cross Site Tracing Attacks&lt;/h2&gt;&lt;p&gt;这节讲跨站跟踪攻击。HTTP方法包括：HEAD、GET、POST、TRACE、PUT、DELETE等。tomact支持HTTP TRACE命令。&lt;br&gt;XST攻击描述：攻击者将恶意代码嵌入一台已经被控制的主机上的web文件，当访问者浏览时恶意代码在浏览器中执行，然后访问者的cookie、http基本验证以及html验证信息将被发送到已经被控制的主机，同时传送Trace请求给目标主机，导致cookie欺骗或者是中间人攻击。&lt;br&gt;XST攻击条件：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;需要目标web服务器允许Trace参数；&lt;/li&gt;
-&lt;li&gt;需要一个用来插入XST代码的地方； &lt;/li&gt;
-&lt;li&gt;目标站点存在跨域漏洞。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;这是一个购物车页面。在最后一栏，enter your three digit access code那里添加如下代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ( navigator.appName.indexOf(&lt;span class=&quot;string&quot;&gt;&quot;Microsoft&quot;&lt;/span&gt;) !=&lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xmlHttp = newActiveXObject(&lt;span class=&quot;string&quot;&gt;&quot;Microsoft.XMLHTTP&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xmlHttp.open(&lt;span class=&quot;string&quot;&gt;&quot;TRACE&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;./&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xmlHttp.send();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	str1=xmlHttp.responseText; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (str1.indexOf(&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;) &amp;gt; &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt;) str1 = str1.replace(&lt;span class=&quot;string&quot;&gt;&quot;\n&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;&amp;lt;br&amp;gt;&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.write(str1);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;提交后攻击成功。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;防止这些攻击的方法就是对用户输入进行验证，过滤或者转义掉一些关键字符。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之XSS/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之XSS/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Phishing-with-XSS&quot;&gt;&lt;a href=&quot;#Phishing-with-XSS&quot; class=&quot;headerlink&quot; title=&quot;Phishing with XSS&quot;&gt;&lt;/a&gt;Phishing with XSS&lt;/h2&gt;&lt;p&gt;如下所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;这是一个标准的输入搜索框，点击搜索之后，会在下方分别呈现要求和搜索结果。&lt;br&gt;要求注入html和js代码，搜集证书，并把其发送给一个网站。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="XSS" scheme="http://qimingyu.github.io/tags/XSS/"/>
     
   </entry>
   
