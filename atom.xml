@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2017-04-24T11:55:53.071Z</updated>
+  <updated>2017-04-28T06:35:33.486Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,147 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自建CA实现HTTPS教程</title>
+    <link href="http://qimingyu.github.io/2017/04/28/%E8%87%AA%E5%BB%BACA%E5%AE%9E%E7%8E%B0HTTPS%E6%95%99%E7%A8%8B/"/>
+    <id>http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/</id>
+    <published>2017-04-28T06:30:22.000Z</published>
+    <updated>2017-04-28T06:35:33.486Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;实验前的准备&quot;&gt;&lt;a href=&quot;#实验前的准备&quot; class=&quot;headerlink&quot; title=&quot;实验前的准备&quot;&gt;&lt;/a&gt;实验前的准备&lt;/h3&gt;&lt;h4 id=&quot;涉及知识点&quot;&gt;&lt;a href=&quot;#涉及知识点&quot; class=&quot;headerlink&quot; title=&quot;涉及知识点&quot;&gt;&lt;/a&gt;涉及知识点&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;对称密码体制和非对称密码体制&lt;/li&gt;
+&lt;li&gt;Apache的安装配置及使用&lt;/li&gt;
+&lt;li&gt;OpenSSL的使用&lt;/li&gt;
+&lt;li&gt;HTTPS的认证机制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，HTTPS的认证机制分为两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;双向验证：服务器和客户端都需要相互验证（常见于银行类网站）&lt;/li&gt;
+&lt;li&gt;单向验证：只需验证服务器端&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本实验教程我们做的是单向验证。&lt;/p&gt;
+&lt;h4 id=&quot;实验环境&quot;&gt;&lt;a href=&quot;#实验环境&quot; class=&quot;headerlink&quot; title=&quot;实验环境&quot;&gt;&lt;/a&gt;实验环境&lt;/h4&gt;&lt;p&gt;本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别）&lt;/p&gt;
+&lt;h4 id=&quot;理清三个关系和两个概念&quot;&gt;&lt;a href=&quot;#理清三个关系和两个概念&quot; class=&quot;headerlink&quot; title=&quot;理清三个关系和两个概念&quot;&gt;&lt;/a&gt;理清三个关系和两个概念&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;客户端、服务器和CA机构的关系&lt;br&gt;在该实验中，我们需要在同一台电脑上同时扮演三个角色，即：&lt;code&gt;客户端&lt;/code&gt;、&lt;code&gt;服务器&lt;/code&gt;、&lt;code&gt;CA机构&lt;/code&gt;。也就是说在现实生活中，这三者都是分开的，但是在本实验中，我们要用一台计算机同时扮演这三个角色，&lt;strong&gt;客户端由我们的浏览器扮演，服务器由我们的Apache扮演，CA机构由我们的根证书扮演&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;根证书和其他证书的概念&lt;br&gt;在网络关系中，是存在一个信任链条的，但必须有一个源头，因此在HTTPS的证书信任链条中，是有根证书、一级证书、二级证书以及后面的多级证书的。这些证书中，我们必须要假定根证书是绝对安全且值得信任的，才有后面信任链条的存在。因此在本实验中&lt;strong&gt;根证书是自签名证书（自己认证自己），而服务器证书需要由根证书来签名&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;实验过程&quot;&gt;&lt;a href=&quot;#实验过程&quot; class=&quot;headerlink&quot; title=&quot;实验过程&quot;&gt;&lt;/a&gt;实验过程&lt;/h3&gt;&lt;h4 id=&quot;第一步：安装Apache&quot;&gt;&lt;a href=&quot;#第一步：安装Apache&quot; class=&quot;headerlink&quot; title=&quot;第一步：安装Apache&quot;&gt;&lt;/a&gt;第一步：安装Apache&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;下载安装Apache&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install httpd&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改Apache的配置文件&lt;br&gt;配置文件位置在：&lt;code&gt;/etc/httpd/conf/httpd.conf&lt;/code&gt;&lt;br&gt;主要改以下两个地方：&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Listen &lt;span class=&quot;number&quot;&gt;120.76&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;142.16&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;80&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ServerName &lt;span class=&quot;number&quot;&gt;120.76&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;142.16&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;80&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;开启Apache&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;httpd -k start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看Apache是否配置成功&lt;br&gt;浏览器访问：&lt;code&gt;http://120.76.142.16/&lt;/code&gt;，如果出现页面，则说明Apache配置成功&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;第二步：安装OpenSSL&quot;&gt;&lt;a href=&quot;#第二步：安装OpenSSL&quot; class=&quot;headerlink&quot; title=&quot;第二步：安装OpenSSL&quot;&gt;&lt;/a&gt;第二步：安装OpenSSL&lt;/h4&gt;&lt;p&gt;一般Linux或者CentOS都会自带OpenSSL，没有的话则自行安装。&lt;/p&gt;
+&lt;h4 id=&quot;第三步：生成CA根证书&quot;&gt;&lt;a href=&quot;#第三步：生成CA根证书&quot; class=&quot;headerlink&quot; title=&quot;第三步：生成CA根证书&quot;&gt;&lt;/a&gt;第三步：生成CA根证书&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;生成一个RSA密钥，为2048位长度（1024位已经被证明容易被破解），并将该密钥用DES对称加密，并输入加密密钥：qimingyuCA。&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl genrsa -des3 -out root-ca.key &lt;span class=&quot;number&quot;&gt;2048&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  这里输入的加密密钥是对RSA私钥的加密密钥&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;生成根证书签发请求文件，采用第一步生成的私钥进行签名&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl req -new -key root-ca.key -out root-ca.req&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里生成证书签发请求文件需要填一些信息。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;参数&lt;code&gt;-new&lt;/code&gt;表示新证书签发请求&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;自签发根证书&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl x509 -req -days &lt;span class=&quot;number&quot;&gt;365&lt;/span&gt; -signkey root-ca.key &lt;span class=&quot;nomarkup&quot;&gt;-in&lt;/span&gt; root-ca.req -out root-ca.cer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看刚刚生成的根证书&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl x509 -noout -text &lt;span class=&quot;nomarkup&quot;&gt;-in&lt;/span&gt; root-ca.cer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&quot;第四步：生成服务器端证书&quot;&gt;&lt;a href=&quot;#第四步：生成服务器端证书&quot; class=&quot;headerlink&quot; title=&quot;第四步：生成服务器端证书&quot;&gt;&lt;/a&gt;第四步：生成服务器端证书&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;生成服务器私钥，并将该密钥用DES对称加密，并输入加密密钥：qimingyuSERVER。&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl genrsa -des3 -out server.key &lt;span class=&quot;number&quot;&gt;2048&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;生成服务器证书请求签发文件&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl req -new -key server.key -out server.req&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;填信息的时候注意这一栏要是你HTTPS网址的域名（红色部分为所填的内容）&lt;br&gt;Common Name (eg, your name or your server’s hostname) []:&lt;code&gt;qimingyu.com&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;使用根证书签发服务端证书&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl ca -config /usr/local/openssl/ssl/openssl.cnf  &lt;span class=&quot;nomarkup&quot;&gt;-in&lt;/span&gt; server.req -out server.cer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;注意这里要根据OpenSSL的配置文件的信息，新建目录及拷贝重命名过去，并且在serial里面填入相应的数值。如果签名不成功，报错匹配问题的，需要修改OpenSSL的配置文件。&lt;/li&gt;
+&lt;li&gt;注意这里服务器端证书的生成与前面根证书的生成不一样，这里服务器端的证书生成是用根证书进行签名的，而根证书的生成是自己给自己签名的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;验证生成的证书是否正确&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl verify -CAfile root-ca.cer server.cer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第一个为根证书，第二个为需要验证的子证书。如果返回结果是OK，则证明证书生成正确。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;第五步：安装Apache支持SSL模块&quot;&gt;&lt;a href=&quot;#第五步：安装Apache支持SSL模块&quot; class=&quot;headerlink&quot; title=&quot;第五步：安装Apache支持SSL模块&quot;&gt;&lt;/a&gt;第五步：安装Apache支持SSL模块&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装模块&lt;code&gt;mod_ssl&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;yum install mod_ssl -y&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;修改其配置文件&lt;br&gt;位置为：&lt;code&gt;/etc/httpd/conf.d/ssl.conf&lt;/code&gt;&lt;br&gt;主要更改以下内容：&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Listen &lt;span class=&quot;number&quot;&gt;120.76&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;142.16&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;443&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;此时用HTTPS访问该网址，会出现不安全的报警&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;继续修改配置文件&lt;br&gt;主要修改服务器证书及密钥的位置，指定对位置&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;SSLCertificateFile /etc/pki/tls/certs/server.crt&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SSLCertificateKeyFile /etc/pki/tls/private/server.key&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;重启Apache服务器&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;httpd -k stop&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;httpd -k start&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;此时会要求输入服务器的密码：qimingyuSERVER&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;验证是否成功&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;openssl s_client -connect &lt;span class=&quot;number&quot;&gt;120.76&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;142.16&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;443&lt;/span&gt; -CAfile /root/root-ca.cer&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果返回结果是OK，则证明实验成功&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将根证书导入浏览器之后再进行访问，不再报警&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;实验补充&quot;&gt;&lt;a href=&quot;#实验补充&quot; class=&quot;headerlink&quot; title=&quot;实验补充&quot;&gt;&lt;/a&gt;实验补充&lt;/h3&gt;&lt;h4 id=&quot;心脏滴血漏洞原理&quot;&gt;&lt;a href=&quot;#心脏滴血漏洞原理&quot; class=&quot;headerlink&quot; title=&quot;心脏滴血漏洞原理&quot;&gt;&lt;/a&gt;心脏滴血漏洞原理&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/ca_https/20140413_075036_665.jpg&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/ca_https/20140413_075039_644.jpg&quot; alt=&quot;2&quot;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/&quot;&gt;http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;实验前的准备&quot;&gt;&lt;a href=&quot;#实验前的准备&quot; class=&quot;headerlink&quot; title=&quot;实验前的准备&quot;&gt;&lt;/a&gt;实验前的准备&lt;/h3&gt;&lt;h4 id=&quot;涉及知识点&quot;&gt;&lt;a href=&quot;#涉及知识点&quot; class=&quot;headerlink&quot; title=
+    
+    </summary>
+    
+      <category term="网站技术" scheme="http://qimingyu.github.io/categories/%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="HTTPS" scheme="http://qimingyu.github.io/tags/HTTPS/"/>
+    
+      <category term="CA" scheme="http://qimingyu.github.io/tags/CA/"/>
+    
+      <category term="OpenSSL" scheme="http://qimingyu.github.io/tags/OpenSSL/"/>
+    
+  </entry>
   
   <entry>
     <title>WebGoat之实验环境安装</title>
@@ -388,9 +529,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -866,54 +1007,6 @@
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
     
       <category term="会话管理" scheme="http://qimingyu.github.io/tags/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之Parameter Tampering</title>
-    <link href="http://qimingyu.github.io/2016/05/04/Webgoat%E4%B9%8BParameter_Tampering/"/>
-    <id>http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/</id>
-    <published>2016-05-04T07:58:31.000Z</published>
-    <updated>2016-05-04T09:54:18.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Exploit-Hidden-Fields&quot;&gt;&lt;a href=&quot;#Exploit-Hidden-Fields&quot; class=&quot;headerlink&quot; title=&quot;Exploit Hidden Fields&quot;&gt;&lt;/a&gt;Exploit Hidden Fields&lt;/h2&gt;&lt;p&gt;这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;Exploit-Unchecked-Email&quot;&gt;&lt;a href=&quot;#Exploit-Unchecked-Email&quot; class=&quot;headerlink&quot; title=&quot;Exploit Unchecked Email&quot;&gt;&lt;/a&gt;Exploit Unchecked Email&lt;/h2&gt;&lt;p&gt;多数网站都允许一个非验证的用户给别人发送电子邮件。如下所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/2.png&quot; alt=&quot;2&quot;&gt;&lt;/p&gt;
-&lt;p&gt;这是一个网站的页面。可以看到上面是一个可选项，当输入自己的email用户名和密码时，就是用自己的邮箱去发送评论。当默认时，就是用网站的邮箱发送评论。有两个要求，第一个是发送一封具有XSS攻击的邮件。第二个是修改默认的收件人，使其能够发送给你想发送的人。相当于用第三方网站的邮箱给别人发送恶意邮件，爽滋滋。&lt;/p&gt;
-&lt;p&gt;邮件内容为：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script&amp;gt;alert(&lt;span class=&quot;string&quot;&gt;&quot;XSS&quot;&lt;/span&gt;)&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;点发送就完成了第一个要求。然后用burpsuit抓包，修改默认收件人，如下图所示：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/webgoat_xss/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
-&lt;p&gt;最后点击发送就成功了。&lt;/p&gt;
-&lt;h2 id=&quot;Bypass-Client-Side-JS-Validation&quot;&gt;&lt;a href=&quot;#Bypass-Client-Side-JS-Validation&quot; class=&quot;headerlink&quot; title=&quot;Bypass Client Side JS Validation&quot;&gt;&lt;/a&gt;Bypass Client Side JS Validation&lt;/h2&gt;&lt;p&gt;这节讲的是绕过客户端的JS验证。有时我们需要在浏览器中输入一些数据，这些数据一定要符合一定的规则或要求，例如大小写，位数等。而所有这些输入的验证应该同时在客户端和服务器端进行验证才是安全的。单纯的客户端验证不应该被认为是一种安全的方法验证参数。攻击者可以用各种方法轻易的绕过这种机制。任何客户端验证都应该复制到服务器端。这将大大减少不安全的参数在应用程序中使用的可能性。&lt;/p&gt;
-&lt;p&gt;这部分内容要求我们绕过客户端的验证机制，破坏这些规则，从而向服务器输入不允许输入的字符。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/4.png&quot; alt=&quot;4&quot;&gt;&lt;/p&gt;
-&lt;p&gt;有两种方案可以做到：&lt;/p&gt;
-&lt;h3 id=&quot;方案一&quot;&gt;&lt;a href=&quot;#方案一&quot; class=&quot;headerlink&quot; title=&quot;方案一&quot;&gt;&lt;/a&gt;方案一&lt;/h3&gt;&lt;p&gt;该方案的思路主要是通过中间人修改客户端数据的方式来绕过验证&lt;br&gt;用burpsuit拦截后分别修改，再提交，如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;这是因为在浏览器的输入是符合规范的，然后点击提交，点击提交的时候，触发了客户端的JS验证输入合法性的函数，函数判断是OK的，之后再发送（如果这里JS判断不OK，是不会进行下一步发送的，burpsuit也就不会拦截到），而发送之后会被burpsuit拦截掉了，然后修改。&lt;/p&gt;
-&lt;h3 id=&quot;方案二&quot;&gt;&lt;a href=&quot;#方案二&quot; class=&quot;headerlink&quot; title=&quot;方案二&quot;&gt;&lt;/a&gt;方案二&lt;/h3&gt;&lt;p&gt;该方案的思路主要是修改客户端的代码，使其不能验证，来绕过。&lt;br&gt;我们通过firebug查看submit按钮对应的函数是validate()：&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/5.png&quot; alt=&quot;5&quot;&gt;&lt;/p&gt;
-&lt;p&gt;该函数的定义是在一段JS脚本中，通过查看页面源代码：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;SCRIPT&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex1=&lt;span class=&quot;regexp&quot;&gt;/^[a-z]&amp;#123;3&amp;#125;$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex2=&lt;span class=&quot;regexp&quot;&gt;/^[0-9]&amp;#123;3&amp;#125;$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex3=&lt;span class=&quot;regexp&quot;&gt;/^[a-zA-Z0-9 ]*$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex4=&lt;span class=&quot;regexp&quot;&gt;/^(one|two|three|four|five|six|seven|eight|nine)$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex5=&lt;span class=&quot;regexp&quot;&gt;/^\d&amp;#123;5&amp;#125;$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex6=&lt;span class=&quot;regexp&quot;&gt;/^\d&amp;#123;5&amp;#125;(-\d&amp;#123;4&amp;#125;)?$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;regex7=&lt;span class=&quot;regexp&quot;&gt;/^[2-9]\d&amp;#123;2&amp;#125;-?\d&amp;#123;3&amp;#125;-?\d&amp;#123;4&amp;#125;$/&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;validate&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;msg=&lt;span class=&quot;string&quot;&gt;&#39;JavaScript found form errors&#39;&lt;/span&gt;; err=&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex1.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field1.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field1&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex2.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field2.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field2&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex3.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field3.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field3&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex4.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field4.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field4&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex5.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field5.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field5&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex6.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field6.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field6&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!regex7.test(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.field7.value)) &amp;#123;err+=&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;; msg+=&lt;span class=&quot;string&quot;&gt;&#39;\n  bad field7&#39;&lt;/span&gt;;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ( err &amp;gt; &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; ) alert(msg);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.form.submit();&lt;span class=&quot;comment&quot;&gt;//验证完后符合，才发送&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/SCRIPT&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;以上JS代码定义了该按钮的功能，可知如果直接在html中删除如下代码，该按钮就不能运行了。&lt;/p&gt;
-&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;onclick=&lt;span class=&quot;string&quot;&gt;&quot;validate()&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;因此需要更细粒度一点。我们在刷新该页面的时候，针对服务器传回来的响应进行拦截之后，将判断验证部分的JS代码全部删掉，这样同样也绕过了客户端的验证。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;关于网络渗透一定要有中间人的意识，数据随时都有可能被中间人修改的。在基础扎实的基础上，思维要开阔。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Parameter_Tampering/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Exploit-Hidden-Fields&quot;&gt;&lt;a href=&quot;#Exploit-Hidden-Fields&quot; class=&quot;headerlink&quot; title=&quot;Exploit Hidden Fields&quot;&gt;&lt;/a&gt;Exploit Hidden Fields&lt;/h2&gt;&lt;p&gt;这是一个购物篮，我们点击购买，要求购买的价格低于正常价格。&lt;br&gt;&lt;img src=&quot;/images/webgoat_xss/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;用burpsuit拦截之后观察所提交的参数，发现有一项是单价price，因此我们可以修改该price后发送。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="参数篡改" scheme="http://qimingyu.github.io/tags/%E5%8F%82%E6%95%B0%E7%AF%A1%E6%94%B9/"/>
     
   </entry>
   
