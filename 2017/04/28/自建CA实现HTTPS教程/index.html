@@ -70,8 +70,7 @@ HTTPS的认证机制
 双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
 单向验证：只需验证服务器端
 
-本实验教程我们做的是单向验证。
-实验环境本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别">
+本实验教程我们做的是单向验证。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自建CA实现HTTPS教程">
 <meta property="og:url" content="http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/index.html">
@@ -87,11 +86,10 @@ HTTPS的认证机制
 双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
 单向验证：只需验证服务器端
 
-本实验教程我们做的是单向验证。
-实验环境本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别">
+本实验教程我们做的是单向验证。">
 <meta property="og:image" content="http://qimingyu.github.io/images/ca_https/20140413_075036_665.jpg">
 <meta property="og:image" content="http://qimingyu.github.io/images/ca_https/20140413_075039_644.jpg">
-<meta property="og:updated_time" content="2017-04-28T06:35:33.486Z">
+<meta property="og:updated_time" content="2017-04-28T06:46:41.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自建CA实现HTTPS教程">
 <meta name="twitter:description" content="实验前的准备涉及知识点
@@ -105,8 +103,7 @@ HTTPS的认证机制
 双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
 单向验证：只需验证服务器端
 
-本实验教程我们做的是单向验证。
-实验环境本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别">
+本实验教程我们做的是单向验证。">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/ca_https/20140413_075036_665.jpg">
 
 
@@ -353,15 +350,9 @@ HTTPS的认证机制
 <li>单向验证：只需验证服务器端</li>
 </ul>
 <p>本实验教程我们做的是单向验证。</p>
-<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><p>本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别）</p>
-<h4 id="理清三个关系和两个概念"><a href="#理清三个关系和两个概念" class="headerlink" title="理清三个关系和两个概念"></a>理清三个关系和两个概念</h4><ul>
-<li>客户端、服务器和CA机构的关系<br>在该实验中，我们需要在同一台电脑上同时扮演三个角色，即：<code>客户端</code>、<code>服务器</code>、<code>CA机构</code>。也就是说在现实生活中，这三者都是分开的，但是在本实验中，我们要用一台计算机同时扮演这三个角色，<strong>客户端由我们的浏览器扮演，服务器由我们的Apache扮演，CA机构由我们的根证书扮演</strong>。</li>
-<li>根证书和其他证书的概念<br>在网络关系中，是存在一个信任链条的，但必须有一个源头，因此在HTTPS的证书信任链条中，是有根证书、一级证书、二级证书以及后面的多级证书的。这些证书中，我们必须要假定根证书是绝对安全且值得信任的，才有后面信任链条的存在。因此在本实验中<strong>根证书是自签名证书（自己认证自己），而服务器证书需要由根证书来签名</strong>。</li>
-</ul>
-<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><h4 id="第一步：安装Apache"><a href="#第一步：安装Apache" class="headerlink" title="第一步：安装Apache"></a>第一步：安装Apache</h4><ol>
-<li><p>下载安装Apache</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd</span><br></pre></td></tr></table></figure>
-</li>
+<a id="more"></a>　<br><br>#### 实验环境<br>本教程采用阿里云服务器，操作系统为：CentOS release 6.8（与Ubuntu系统稍有区别）<br><br>#### 理清三个关系和两个概念<br><em> 客户端、服务器和CA机构的关系<br>在该实验中，我们需要在同一台电脑上同时扮演三个角色，即：<code>客户端</code>、<code>服务器</code>、<code>CA机构</code>。也就是说在现实生活中，这三者都是分开的，但是在本实验中，我们要用一台计算机同时扮演这三个角色，<strong>客户端由我们的浏览器扮演，服务器由我们的Apache扮演，CA机构由我们的根证书扮演</strong>。
+</em> 根证书和其他证书的概念<br>在网络关系中，是存在一个信任链条的，但必须有一个源头，因此在HTTPS的证书信任链条中，是有根证书、一级证书、二级证书以及后面的多级证书的。这些证书中，我们必须要假定根证书是绝对安全且值得信任的，才有后面信任链条的存在。因此在本实验中<strong>根证书是自签名证书（自己认证自己），而服务器证书需要由根证书来签名</strong>。<br><br><br>### 实验过程<br><br>#### 第一步：安装Apache<br>1. 下载安装Apache<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install httpd</span><br></pre></td></tr></table></figure>
+<ol>
 <li><p>修改Apache的配置文件<br>配置文件位置在：<code>/etc/httpd/conf/httpd.conf</code><br>主要改以下两个地方：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Listen <span class="number">120.76</span>.<span class="number">142.16</span>:<span class="number">80</span></span><br><span class="line">ServerName <span class="number">120.76</span>.<span class="number">142.16</span>:<span class="number">80</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -376,17 +367,12 @@ HTTPS的认证机制
 <li>生成一个RSA密钥，为2048位长度（1024位已经被证明容易被破解），并将该密钥用DES对称加密，并输入加密密钥：qimingyuCA。<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out root-ca.key <span class="number">2048</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<blockquote>
-<p>  这里输入的加密密钥是对RSA私钥的加密密钥</p>
-</blockquote>
+<p>这里输入的加密密钥是对RSA私钥的加密密钥</p>
 <ol>
 <li>生成根证书签发请求文件，采用第一步生成的私钥进行签名<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key root-ca.key -out root-ca.req</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>这里生成证书签发请求文件需要填一些信息。</p>
-<blockquote>
-<p>参数<code>-new</code>表示新证书签发请求</p>
-</blockquote>
+<p>这里生成证书签发请求文件需要填一些信息。参数<code>-new</code>表示新证书签发请求</p>
 <ol>
 <li><p>自签发根证书</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -days <span class="number">365</span> -signkey root-ca.key <span class="nomarkup">-in</span> root-ca.req -out root-ca.cer</span><br></pre></td></tr></table></figure>
@@ -403,26 +389,21 @@ HTTPS的认证机制
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key server.key -out server.req</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<blockquote>
 <p>填信息的时候注意这一栏要是你HTTPS网址的域名（红色部分为所填的内容）<br>Common Name (eg, your name or your server’s hostname) []:<code>qimingyu.com</code></p>
-</blockquote>
 <ol>
-<li>使用根证书签发服务端证书<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ca -config /usr/local/openssl/ssl/openssl.cnf  <span class="nomarkup">-in</span> server.req -out server.cer</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<ol>
+<li><p>使用根证书签发服务端证书</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ca -config /usr/local/openssl/ssl/openssl.cnf  <span class="nomarkup">-in</span> server.req -out server.cer</span><br></pre></td></tr></table></figure>
+<ul>
 <li>注意这里要根据OpenSSL的配置文件的信息，新建目录及拷贝重命名过去，并且在serial里面填入相应的数值。如果签名不成功，报错匹配问题的，需要修改OpenSSL的配置文件。</li>
 <li>注意这里服务器端证书的生成与前面根证书的生成不一样，这里服务器端的证书生成是用根证书进行签名的，而根证书的生成是自己给自己签名的。</li>
+</ul>
+</li>
 </ol>
-</blockquote>
 <ol>
 <li>验证生成的证书是否正确<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl verify -CAfile root-ca.cer server.cer</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<blockquote>
 <p>第一个为根证书，第二个为需要验证的子证书。如果返回结果是OK，则证明证书生成正确。</p>
-</blockquote>
 <h4 id="第五步：安装Apache支持SSL模块"><a href="#第五步：安装Apache支持SSL模块" class="headerlink" title="第五步：安装Apache支持SSL模块"></a>第五步：安装Apache支持SSL模块</h4><ol>
 <li><p>安装模块<code>mod_ssl</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mod_ssl -y</span><br></pre></td></tr></table></figure>
@@ -433,16 +414,14 @@ HTTPS的认证机制
 </ol>
 <p>此时用HTTPS访问该网址，会出现不安全的报警</p>
 <ol>
-<li><p>继续修改配置文件<br>主要修改服务器证书及密钥的位置，指定对位置</p>
+<li><p>继续修改配置文件<br>主要修改服务器证书及密钥的位置，指定到对应的位置</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSLCertificateFile /etc/pki/tls/certs/server.crt</span><br><span class="line">SSLCertificateKeyFile /etc/pki/tls/private/server.key</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重启Apache服务器</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">httpd -k stop</span><br><span class="line">httpd -k start</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<blockquote>
 <p>此时会要求输入服务器的密码：qimingyuSERVER</p>
-</blockquote>
 <ol>
 <li>验证是否成功<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect <span class="number">120.76</span>.<span class="number">142.16</span>:<span class="number">443</span> -CAfile /root/root-ca.cer</span><br></pre></td></tr></table></figure>
 </li>
@@ -718,7 +697,7 @@ HTTPS的认证机制
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验前的准备"><span class="nav-number">1.</span> <span class="nav-text">实验前的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#涉及知识点"><span class="nav-number">1.1.</span> <span class="nav-text">涉及知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验环境"><span class="nav-number">1.2.</span> <span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理清三个关系和两个概念"><span class="nav-number">1.3.</span> <span class="nav-text">理清三个关系和两个概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验过程"><span class="nav-number">2.</span> <span class="nav-text">实验过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步：安装Apache"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：安装Apache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步：安装OpenSSL"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：安装OpenSSL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三步：生成CA根证书"><span class="nav-number">2.3.</span> <span class="nav-text">第三步：生成CA根证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四步：生成服务器端证书"><span class="nav-number">2.4.</span> <span class="nav-text">第四步：生成服务器端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五步：安装Apache支持SSL模块"><span class="nav-number">2.5.</span> <span class="nav-text">第五步：安装Apache支持SSL模块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验补充"><span class="nav-number">3.</span> <span class="nav-text">实验补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#心脏滴血漏洞原理"><span class="nav-number">3.1.</span> <span class="nav-text">心脏滴血漏洞原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验前的准备"><span class="nav-number">1.</span> <span class="nav-text">实验前的准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#涉及知识点"><span class="nav-number">1.1.</span> <span class="nav-text">涉及知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步：安装OpenSSL"><span class="nav-number">1.2.</span> <span class="nav-text">第二步：安装OpenSSL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三步：生成CA根证书"><span class="nav-number">1.3.</span> <span class="nav-text">第三步：生成CA根证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四步：生成服务器端证书"><span class="nav-number">1.4.</span> <span class="nav-text">第四步：生成服务器端证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五步：安装Apache支持SSL模块"><span class="nav-number">1.5.</span> <span class="nav-text">第五步：安装Apache支持SSL模块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验补充"><span class="nav-number">2.</span> <span class="nav-text">实验补充</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#心脏滴血漏洞原理"><span class="nav-number">2.1.</span> <span class="nav-text">心脏滴血漏洞原理</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
