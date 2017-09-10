@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2017-07-09T12:03:47.593Z</updated>
+  <updated>2017-09-10T10:20:08.860Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -16,11 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>读《安全简史》有感</title>
+    <link href="http://qimingyu.github.io/2017/09/10/%E8%AF%BB%E3%80%8A%E5%AE%89%E5%85%A8%E7%AE%80%E5%8F%B2%E3%80%8B%E6%9C%89%E6%84%9F/"/>
+    <id>http://qimingyu.github.io/2017/09/10/读《安全简史》有感/</id>
+    <published>2017-09-10T10:16:58.000Z</published>
+    <updated>2017-09-10T10:20:08.860Z</updated>
+    
+    <content type="html">&lt;p&gt;看完《安全简史》，对安全有了一个更宏观的认识。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;　　&lt;br&gt;&lt;br&gt;小学、初中、高中甚至大学所普及的教育，都是经典教育，往往只考诉受教育者是这样的结论，而结论如何来的，经历了怎样的一个百家曾鸣和反反复复的过程，这些经典的教科书更加不会告诉你。当然，一方面也受限于老师或教授的水平有限。因此，这方面知识的学习，只能得助于自己与寻找，同时自己结合自身的经历去慢慢思考，去慢慢悟，才能所有得。&lt;br&gt;&lt;br&gt;简简单单的香农信息熵的理论，在信息论的那本书里面有，但我们对经典的公式、定理，包括算发的理解，还是太浅了。包括对经典的品读，一定要是反反复复的，才会有所体会。&lt;br&gt;&lt;br&gt;在大四即将升研究生的时候，我给导师打电话，问信安专业的研究生，您有什么书推荐我看的，可以提前学一下。原以为导师会说一些具体的编程方面的书籍，没想到导师当时却说让我读读《信息论》，当时的我没有太在意，直到研究生阶段读完。今天看到这本《安全简史》，才明白导师当时的良苦用心。可以这样理解，信息安全就是保障信息的不可篡改性、保密性、完整性等，而信息论从本质上定义信息，从这个角度上说，我们学信息安全，却不懂信息论，显得相当滑稽。&lt;br&gt;&lt;br&gt;这本书没有涉及具体的技术性细节，是从系统工程、控制论、信息论等更宏观的角度论述信息安全，当然也包括了安全心理学、安全管理学等部分，是一本相当综合的书籍。看完本书，我只能感叹个人力量的渺小与薄弱，常怀谦卑与感恩之心。科技的发展，技术的进步，在做学问与开公司之间，做学问站的角度更高，它解决的是未来的问题，而办企业，解决的是当下的问题，两者是相辅相成的。在企业待久了，确实要读一读教授们写的书，洗涤心灵。&lt;br&gt;&lt;br&gt;看完这本书，顺便在知乎搜了一下关于杨义先的信息，出乎意料，居然大部分都是关于他的负面意见。然而我又想到知乎黑百度的事情，也就可以理解了。现在网络社区鱼龙混杂，整体认知水准是偏低的。于是我也就看到社会精英阶层与普通大众之间的认知存在多么巨大的鸿沟。&lt;br&gt;杨义先写过一篇母亲剥削论的文章，主旨是驳导师剥削论，我是赞成其观点的，但无奈大众却总是喜欢扭曲文辞，曲解其意，以致网上一片骂声。就像之前一位很著名的北大经济学家薛兆丰老师，关于春节有人买不到火车票回家的事情，他高呼提高火车票的价格，结果同样招致一片骂声一样。普通大众是不懂经济学的，更是不懂这位经济学家才是真正在为老百姓呐喊，以及他的良苦用心，自由市场与自由经济，才能真正促进社会的发展与进步，也才能最终让每个人都能回家过年。&lt;br&gt;&lt;br&gt;刚正式入职两个月，给自己这一年订一个小目标：这一年，弄清楚安全行业的市场大概面貌，真正的进入业内，争取能翻译一本书，同时完整的提高自己的技术基础能力，系统性的提高起来。&lt;br&gt;&lt;br&gt;—&lt;br&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;
+&lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/09/10/读《安全简史》有感/&quot;&gt;http://qimingyu.github.io/2017/09/10/读《安全简史》有感/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;看完《安全简史》，对安全有了一个更宏观的认识。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
+    
+    
+      <category term="滴滴专车" scheme="http://qimingyu.github.io/tags/%E6%BB%B4%E6%BB%B4%E4%B8%93%E8%BD%A6/"/>
+    
+      <category term="市场调查" scheme="http://qimingyu.github.io/tags/%E5%B8%82%E5%9C%BA%E8%B0%83%E6%9F%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>滴滴专车研究调查报告</title>
     <link href="http://qimingyu.github.io/2017/07/09/%E6%BB%B4%E6%BB%B4%E4%B8%93%E8%BD%A6%E7%A0%94%E7%A9%B6%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A-1/"/>
     <id>http://qimingyu.github.io/2017/07/09/滴滴专车研究调查报告-1/</id>
     <published>2017-07-09T09:15:00.000Z</published>
-    <updated>2017-07-09T12:03:47.593Z</updated>
+    <updated>2017-09-10T10:18:43.122Z</updated>
     
     <content type="html">&lt;p&gt;前言：看看自己本科阶段的市场营销知识都忘了没有&lt;/p&gt;
 &lt;p&gt;完成时间：2017年6月15日-2017年7月1日&lt;/p&gt;
@@ -740,9 +769,9 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="学习成果" scheme="http://qimingyu.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C/"/>
     
@@ -815,9 +844,9 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="注入攻击" scheme="http://qimingyu.github.io/tags/%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/"/>
     
@@ -871,9 +900,9 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="Web服务漏洞" scheme="http://qimingyu.github.io/tags/Web%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E/"/>
     
@@ -909,9 +938,9 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="并发性" scheme="http://qimingyu.github.io/tags/%E5%B9%B6%E5%8F%91%E6%80%A7/"/>
     
@@ -955,9 +984,9 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="会话管理" scheme="http://qimingyu.github.io/tags/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
     
@@ -1003,9 +1032,9 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="参数篡改" scheme="http://qimingyu.github.io/tags/%E5%8F%82%E6%95%B0%E7%AF%A1%E6%94%B9/"/>
     
@@ -1051,73 +1080,11 @@
       <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
+    
+      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
     
       <category term="XSS" scheme="http://qimingyu.github.io/tags/XSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WebGoat之Authentication Flaws</title>
-    <link href="http://qimingyu.github.io/2016/05/03/Webgoat%E4%B9%8BAuthentication_Flaws/"/>
-    <id>http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/</id>
-    <published>2016-05-03T13:15:52.000Z</published>
-    <updated>2016-05-04T06:25:52.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;Forget-Password&quot;&gt;&lt;a href=&quot;#Forget-Password&quot; class=&quot;headerlink&quot; title=&quot;Forget Password&quot;&gt;&lt;/a&gt;Forget Password&lt;/h2&gt;&lt;p&gt;这一节是关于找回密码功能的。密码找回功能设置过于简单时，别人可以猜对答案。本节课程要求找回用户名为admin的密码，需要回答正确最喜欢的颜色是什么，猜测green是对的，通过。&lt;/p&gt;
-&lt;h2 id=&quot;Basic-Authentication&quot;&gt;&lt;a href=&quot;#Basic-Authentication&quot; class=&quot;headerlink&quot; title=&quot;Basic Authentication&quot;&gt;&lt;/a&gt;Basic Authentication&lt;/h2&gt;&lt;p&gt;关于HTTP的基本认证，&lt;a href=&quot;http://blog.csdn.net/kiwi_coder/article/details/28677651&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;讲的比较详细了。这一节讲基本的身份验证，基本的身份验证是用来保护服务器端资源的，当客户端向服务器请求一个URL，如果服务器这个资源需要身份认证的话，服务器将发送401认证请求与所请求的资源响应。例如，以我们登陆WebGoat的过程为例。&lt;br&gt;这是客户端传过去的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;这是服务端的响应：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;页面显示如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/4.png&quot; alt=&quot;4&quot;&gt;&lt;/p&gt;
-&lt;p&gt;然后输入用户名和密码提交，发送请求如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;可见在请求头部增加了一个认证字段，这个认证字段的内容是浏览器将刚刚输入的用户名和密码使用Base64编码方式进行编码，并将这些凭据发送给Web服务器。Web服务器会验证这些凭据，如果凭据正确，则返回所请求的资源。&lt;br&gt;服务器传过来的回应如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;它给浏览器传了一个set-cookie字段，这个set-cookie是一个JSESSIONID，以后浏览器给服务器传东西都要用这个cookie进行身份的认证。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-1&quot;&gt;&lt;a href=&quot;#Stage-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;第一阶段是需要我们输入认证信息的头和认证信息解密后的内容：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;我们以上一节Forgot Password为例：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/8.png&quot; alt=&quot;8&quot;&gt;&lt;/p&gt;
-&lt;p&gt;输入用户名后点击提交，下面是burpsuit拦截到的请求：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;注意cookie和Authentication两个字段，可以看到cookie就是之前登陆的时候服务传给我们的set-cookie，而认证字段里面的值，经过Base64解密之后为：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/10.png&quot; alt=&quot;10&quot;&gt;&lt;/p&gt;
-&lt;p&gt;因此在课程页面输入“Authorization”，“guest:guest”，提交后通过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-2&quot;&gt;&lt;a href=&quot;#Stage-2&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;这一部分是让我们明白cookie是如何用来进行会话管理的，同时基本认证头是如何用来进行认证的。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，cookie也是正确的，没有影响，服务器会定位到当前工作页面。&lt;/li&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中Authorization字段是正确的，而cookie是不正确的，服务器会给客户端传一个新的set-cookie，并且定位到Webgoat开始的地方，历史记录会存在。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;以上两点可以看出，cookie影响的是客户端和服务器端的会话。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是正确的，没有影响。&lt;/li&gt;
-&lt;li&gt;如果客户端传给服务器的请求头中没有Authorization字段，而cookie是错误的或者没有，服务会需要重新输入用户名和密码进行验证。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;以上两点看出，服务器先验证cookie，再看Authorization字段。&lt;/p&gt;
-&lt;p&gt;同时删除Authorization和cookie，服务器会要求输入新的用户名和密码。&lt;br&gt;而此时认证提交给服务器的数据：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前相同，那么就是新用户老会话&lt;/li&gt;
-&lt;li&gt;用户名和密码是另一个用户的，如果cookie与之前不同，那么就是新用户新会话&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;当达到后一点时，该课程就通过了。&lt;/p&gt;
-&lt;p&gt;也就是首先修改提交数据，同时删除Authorization和cookie，强迫让服务器进行重新验证。而重新验证的时候一般发送时会带有原来会话的cookie，在提交的时候删除该cookie即可成功。这时对服务器而言就是一个新的用户和新的会话，可以看到原来通过的课程都没有标记了。再次点击这一关，显示通过了。&lt;/p&gt;
-&lt;h2 id=&quot;Multi-Level-Login-1&quot;&gt;&lt;a href=&quot;#Multi-Level-Login-1&quot; class=&quot;headerlink&quot; title=&quot;Multi Level Login 1&quot;&gt;&lt;/a&gt;Multi Level Login 1&lt;/h2&gt;&lt;p&gt;这是一个多级登陆，对于多级登陆的系统，往往会要求首先输入用户名和密码，进入之后，会要求再输入一个什么密码，而这个密码有点像密保卡一样，密保卡只有用户本人拥有，系统随机要求输入第几行第几列的数字组合，用户照着密保卡上面的数字按照系统提示的规则输入进去就行了。这个多级登陆的方式在原来的《大话西游》网游中曾经用过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-1-1&quot;&gt;&lt;a href=&quot;#Stage-1-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;这部分是要求我们了解多级登陆的流程，按照要求输入即可通过。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-2-1&quot;&gt;&lt;a href=&quot;#Stage-2-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;现在一名黑客已经拿到了某个人的用户名和密码，以及他的第一个业务码，但其他的业务码不知道。而问题在于第一个业务码会经常被用到，黑客如果照他的用户名和密码进行登录之后进行操作的话，系统会要求其输入其他的业务码，如何解决该问题？&lt;br&gt;进去之后，依然提交第一个业务码，然后抓包之后修改提交参数，把hidden_tan的值由2改为1即可。&lt;/p&gt;
-&lt;h2 id=&quot;Multi-Level-login-2&quot;&gt;&lt;a href=&quot;#Multi-Level-login-2&quot; class=&quot;headerlink&quot; title=&quot;Multi Level login 2&quot;&gt;&lt;/a&gt;Multi Level login 2&lt;/h2&gt;&lt;p&gt;我是WebGoat财务系统中正常的一名客户Joe，我拥有我应该有的所有密码。现在要求利用多级登陆的漏洞，在仅仅知道Jane的名字的情况下，我要以Jane的身份登陆进去。&lt;br&gt;同样在提交业务码的时候，抓包之后修改隐藏的提交参数，把hidden_user的值由Joe改为Jane即可。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;有时候安全系统越复杂，往往看起来更安全，但实际上可能隐藏的漏洞也更多。简单而高效才是真正的牛逼。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰的博客&lt;/a&gt;（ &lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;http://qimingyu.github.io/&lt;/a&gt; ），欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.github.io/&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：mingyuqi.java@qq.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Password-Strength&quot;&gt;&lt;a href=&quot;#Password-Strength&quot; class=&quot;headerlink&quot; title=&quot;Password Strength&quot;&gt;&lt;/a&gt;Password Strength&lt;/h2&gt;&lt;p&gt;这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到&lt;a href=&quot;https://www.cnlab.ch/codecheck&quot;&gt;这个网站&lt;/a&gt;去测试，然后给出测试结果即可。&lt;br&gt;由于这个网站关闭了，找到了&lt;a href=&quot;https://howsecureismypassword.net/&quot;&gt;这个网站&lt;/a&gt;用于测试密码强度。该课程设定如下结果会通过：&lt;br&gt;&lt;img src=&quot;/images/webgoat_authentication_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="认证安全" scheme="http://qimingyu.github.io/tags/%E8%AE%A4%E8%AF%81%E5%AE%89%E5%85%A8/"/>
     
   </entry>
   
