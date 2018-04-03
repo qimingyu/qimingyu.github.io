@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2018-04-03T08:01:03.697Z</updated>
+  <updated>2018-04-03T08:07:41.087Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://qimingyu.github.io/2018/04/03/%E4%B8%80%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%9A%E9%A9%AC%E9%80%8A%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>http://qimingyu.github.io/2018/04/03/一道有趣的亚马逊面试题/</id>
     <published>2018-04-03T07:32:00.000Z</published>
-    <updated>2018-04-03T08:01:03.697Z</updated>
+    <updated>2018-04-03T08:07:41.087Z</updated>
     
     <content type="html">&lt;p&gt;一个朋友投亚马逊的云计算岗位，在二面结束的时候对方出了一道面试题，给两天时间做，然后再去进行第三面面试。也就是说这道题是三面的面试题，由于是Hadoop，云计算相关的题目，因此朋友求助于我。我花了一天左右的时间终于帮其解答出来了，由于这道题目设计的十分精巧，解答过程也是像福尔摩斯一样千回百转，最终柳暗花明，不得不感慨外企招人的严谨，因此将自己的解题过程分享成这篇文章。&lt;/p&gt;
 &lt;h4 id=&quot;面试题目如下&quot;&gt;&lt;a href=&quot;#面试题目如下&quot; class=&quot;headerlink&quot; title=&quot;面试题目如下&quot;&gt;&lt;/a&gt;面试题目如下&lt;/h4&gt;&lt;p&gt;这道题的网址链接：&lt;a href=&quot;https://s3.cn-north-1.amazonaws.com.cn/emrhiretest/0x001C2F.html?nsukey=mR6f2aOKalu0gyFwjFSOLPanLQcbneOxRYoKnOL0aS8HVdRrcZTtI%2BAgltUWbI6dWYByUovdk0CXMJErakGLS%2FP84mCr5FdDP5DKdBSVDtYzGOpc9lGH83k6sHLUwWRnGa7eo%2BZQ4lrtikITMqEeX9yhkKSct0Yx7fOoeryEJDneKQnUVKGkndHpRhFMaQwPfxeOb39cItLmDL9m9EZ%2Biw%3D%3D&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;请点击此处&lt;/a&gt;。&lt;/p&gt;
@@ -31,7 +31,7 @@
 &lt;p&gt;{&lt;br&gt;    “ClusterId”: “j-2U472I5YFBLC5”&lt;br&gt;}&lt;/p&gt;
 &lt;p&gt;But when query the cluster status, it was failed to launch with error message:&lt;br&gt;“On the master instance (i-039aa2cc9a1167f99), bootstrap action 1 returned a non-zero return code”&lt;/p&gt;
 &lt;p&gt;We suspect the issue was caused by the related configure in the launch command, but we cannot fix the issue.&lt;/p&gt;
-&lt;p&gt;[{“Classification”:”emrfs-site”,”Properties”:{“fs.s3.cse.enabled”:”true”,”fs.s3.cse.encryptionMaterialsProvider.uri”:”s3://emrhiretest/emrhire.jar”,”fs.s3.customAWSCredentialsProvider”:”com.liulishuo.data.LLSAWSCredentialsProvider”},”Configurations”:[]}]&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;Classification&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;emrfs-site&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;Properties&quot;&lt;/span&gt;:&amp;#123;&lt;span class=&quot;string&quot;&gt;&quot;fs.s3.cse.enabled&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;true&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;fs.s3.cse.encryptionMaterialsProvider.uri&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;s3://emrhiretest/emrhire.jar&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;fs.s3.customAWSCredentialsProvider&quot;&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&quot;com.liulishuo.data.LLSAWSCredentialsProvider&quot;&lt;/span&gt;&amp;#125;,&lt;span class=&quot;string&quot;&gt;&quot;Configurations&quot;&lt;/span&gt;:[]&amp;#125;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;Please help us investigate the issue.&lt;/p&gt;
 &lt;h5 id=&quot;0x2-Resource-You-Got&quot;&gt;&lt;a href=&quot;#0x2-Resource-You-Got&quot; class=&quot;headerlink&quot; title=&quot;0x2 Resource You Got&quot;&gt;&lt;/a&gt;0x2 Resource You Got&lt;/h5&gt;&lt;p&gt;working instance IP: 54.223.217.12&lt;br&gt;ssh key:  &lt;a href=&quot;https://s3.cn-north-1.amazonaws.com.cn/emrhiretest/emr-hire.pem&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://s3.cn-north-1.amazonaws.com.cn/emrhiretest/emr-hire.pem&lt;/a&gt;&lt;br&gt;You can use the instance to read the error log and run EMR launch command to reproduce and fix the issue.&lt;br&gt;$ ssh -i emr-hire.pem ec2-user@54.223.217.12 to login&lt;/p&gt;
 &lt;h5 id=&quot;0x3-Related-Documents&quot;&gt;&lt;a href=&quot;#0x3-Related-Documents&quot; class=&quot;headerlink&quot; title=&quot;0x3 Related Documents&quot;&gt;&lt;/a&gt;0x3 Related Documents&lt;/h5&gt;&lt;p&gt;The related documents are start point for you reference, you may need read more than these to get the problem solved.&lt;/p&gt;
@@ -57,7 +57,7 @@
 &lt;h5 id=&quot;第五步：换个思路&quot;&gt;&lt;a href=&quot;#第五步：换个思路&quot; class=&quot;headerlink&quot; title=&quot;第五步：换个思路&quot;&gt;&lt;/a&gt;第五步：换个思路&lt;/h5&gt;&lt;p&gt;之前一直考虑的是在提交命令行中给予权限配置，但是没有这样的配置给我们走这条路。因此，想到引导程序是在配置软件之前做的，在配置软件中既然没有权限，在创建集群并初始化的时候，很可能有权限。因此可以将第三步提到第二步上面去做，以解决这个问题。&lt;br&gt;于是写了一个这样的脚本&lt;code&gt;copy_jar_file.sh&lt;/code&gt;,内容如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo aws s3 cp s3://emrhiretest/emrhire.jar /usr/share/aws/emr/emrfs/auxlib/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;我们希望把这个脚本加到引导程序里面去执行。可是发现，本地的脚本文件根本没有权限上传到s3上面去。&lt;/p&gt;
 &lt;h5 id=&quot;第六步，问题解决&quot;&gt;&lt;a href=&quot;#第六步，问题解决&quot; class=&quot;headerlink&quot; title=&quot;第六步，问题解决&quot;&gt;&lt;/a&gt;第六步，问题解决&lt;/h5&gt;&lt;p&gt;然后我们查看s3目录上面有些什么东西，结果令人惊喜，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./1522739928217.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/20180403/1522739928217.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
 &lt;p&gt;也就是说出题者早就给我们准备好了一个现成的脚本&lt;code&gt;bootregion.sh&lt;/code&gt;，在那里等着，哈哈。&lt;/p&gt;
 &lt;p&gt;于是将提交命令修改为如下：&lt;br&gt;&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;aws emr create-cluster --applications Name=Hadoop --bootstrap-actions &lt;span class=&quot;string&quot;&gt;&#39;[&amp;#123;&quot;Path&quot;:&quot;s3://emrhiretest/emrhire.jar&quot;&amp;#125;]&#39;&lt;/span&gt; --ec2-attributes &lt;span class=&quot;string&quot;&gt;&#39;&amp;#123;&quot;KeyName&quot;:&quot;emr-hire&quot;,&quot;InstanceProfile&quot;:&quot;EMR_EC2_DefaultRole&quot;,&quot;SubnetId&quot;:&quot;subnet-8265d4e6&quot;,&quot;EmrManagedSlaveSecurityGroup&quot;:&quot;sg-b96a61dd&quot;,&quot;EmrManagedMasterSecurityGroup&quot;:&quot;sg-646d6600&quot;&amp;#125;&#39;&lt;/span&gt; --release-label emr-&lt;span class=&quot;number&quot;&gt;5.12&lt;/span&gt;.&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt; --log-uri &lt;span class=&quot;string&quot;&gt;&#39;s3n://aws-logs-368436158483-cn-north-1/elasticmapreduce/&#39;&lt;/span&gt; --instance-groups &lt;span class=&quot;string&quot;&gt;&#39;[&amp;#123;&quot;InstanceCount&quot;:1,&quot;EbsConfiguration&quot;:&amp;#123;&quot;EbsBlockDeviceConfigs&quot;:[&amp;#123;&quot;VolumeSpecification&quot;:&amp;#123;&quot;SizeInGB&quot;:32,&quot;VolumeType&quot;:&quot;gp2&quot;&amp;#125;,&quot;VolumesPerInstance&quot;:1&amp;#125;]&amp;#125;,&quot;InstanceGroupType&quot;:&quot;MASTER&quot;,&quot;InstanceType&quot;:&quot;m4.large&quot;,&quot;Name&quot;:&quot;Master - 1&quot;&amp;#125;,&amp;#123;&quot;InstanceCount&quot;:1,&quot;EbsConfiguration&quot;:&amp;#123;&quot;EbsBlockDeviceConfigs&quot;:[&amp;#123;&quot;VolumeSpecification&quot;:&amp;#123;&quot;SizeInGB&quot;:32,&quot;VolumeType&quot;:&quot;gp2&quot;&amp;#125;,&quot;VolumesPerInstance&quot;:1&amp;#125;]&amp;#125;,&quot;InstanceGroupType&quot;:&quot;CORE&quot;,&quot;InstanceType&quot;:&quot;m4.large&quot;,&quot;Name&quot;:&quot;Core - 2&quot;&amp;#125;]&#39;&lt;/span&gt; --configurations &lt;span class=&quot;string&quot;&gt;&#39;[&amp;#123;&quot;Classification&quot;:&quot;emrfs-site&quot;,&quot;Properties&quot;:&amp;#123;&quot;fs.s3.cse.enabled&quot;:&quot;true&quot;,&quot;fs.s3.customAWSCredentialsProvider&quot;:&quot;com.liulishuo.data.LLSAWSCredentialsProvider&quot;&amp;#125;,&quot;Configurations&quot;:[]&amp;#125;]&#39;&lt;/span&gt; --auto-scaling-role EMR_AutoScaling_DefaultRole --ebs-root-volume-size &lt;span class=&quot;number&quot;&gt;10&lt;/span&gt; --service-role EMR_DefaultRole --enable-debugging --name &lt;span class=&quot;string&quot;&gt;&#39;emr-hire&#39;&lt;/span&gt; --scale-down-behavior TERMINATE_AT_TASK_COMPLETION --region cn-north-&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;成功创建集群，问题得到解决。&lt;/p&gt;
@@ -619,11 +619,11 @@
       <category term="安全感悟" scheme="http://qimingyu.github.io/categories/%E5%AE%89%E5%85%A8%E6%84%9F%E6%82%9F/"/>
     
     
-      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+      <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -686,9 +686,9 @@
     
       <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
       <category term="微步在线" scheme="http://qimingyu.github.io/tags/%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF/"/>
     
