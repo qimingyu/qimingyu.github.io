@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2018-04-03T07:55:39.716Z</updated>
+  <updated>2018-04-03T08:01:03.697Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://qimingyu.github.io/2018/04/03/%E4%B8%80%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%9A%E9%A9%AC%E9%80%8A%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>http://qimingyu.github.io/2018/04/03/一道有趣的亚马逊面试题/</id>
     <published>2018-04-03T07:32:00.000Z</published>
-    <updated>2018-04-03T07:55:39.716Z</updated>
+    <updated>2018-04-03T08:01:03.697Z</updated>
     
     <content type="html">&lt;p&gt;一个朋友投亚马逊的云计算岗位，在二面结束的时候对方出了一道面试题，给两天时间做，然后再去进行第三面面试。也就是说这道题是三面的面试题，由于是Hadoop，云计算相关的题目，因此朋友求助于我。我花了一天左右的时间终于帮其解答出来了，由于这道题目设计的十分精巧，解答过程也是像福尔摩斯一样千回百转，最终柳暗花明，不得不感慨外企招人的严谨，因此将自己的解题过程分享成这篇文章。&lt;/p&gt;
 &lt;h4 id=&quot;面试题目如下&quot;&gt;&lt;a href=&quot;#面试题目如下&quot; class=&quot;headerlink&quot; title=&quot;面试题目如下&quot;&gt;&lt;/a&gt;面试题目如下&lt;/h4&gt;&lt;p&gt;这道题的网址链接：&lt;a href=&quot;https://s3.cn-north-1.amazonaws.com.cn/emrhiretest/0x001C2F.html?nsukey=mR6f2aOKalu0gyFwjFSOLPanLQcbneOxRYoKnOL0aS8HVdRrcZTtI%2BAgltUWbI6dWYByUovdk0CXMJErakGLS%2FP84mCr5FdDP5DKdBSVDtYzGOpc9lGH83k6sHLUwWRnGa7eo%2BZQ4lrtikITMqEeX9yhkKSct0Yx7fOoeryEJDneKQnUVKGkndHpRhFMaQwPfxeOb39cItLmDL9m9EZ%2Biw%3D%3D&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;请点击此处&lt;/a&gt;。&lt;/p&gt;
@@ -77,7 +77,7 @@
       <category term="笔试面经" scheme="http://qimingyu.github.io/categories/%E7%AC%94%E8%AF%95%E9%9D%A2%E7%BB%8F/"/>
     
     
-      <category term="hadoop" scheme="http://qimingyu.github.io/tags/hadoop/"/>
+      <category term="Hadoop" scheme="http://qimingyu.github.io/tags/Hadoop/"/>
     
       <category term="云计算" scheme="http://qimingyu.github.io/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/"/>
     
