@@ -1,0 +1,958 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PacketBeat,Cassandra,MongoDB,Elasticsearch," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="戚名钰的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
+
+PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
+ElasticSearch：ES数据库
+Kibina：基于ES的一个可视化图形展示系统
+
+原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Packetbeat监控Cassandra和MongoDB">
+<meta property="og:url" content="http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/index.html">
+<meta property="og:site_name" content="戚名钰的博客">
+<meta property="og:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
+
+PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
+ElasticSearch：ES数据库
+Kibina：基于ES的一个可视化图形展示系统
+
+原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663680073.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663699694.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663709185.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663736277.png">
+<meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663753676.png">
+<meta property="og:updated_time" content="2018-05-30T11:14:13.232Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Packetbeat监控Cassandra和MongoDB">
+<meta name="twitter:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
+
+PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
+ElasticSearch：ES数据库
+Kibina：基于ES的一个可视化图形展示系统
+
+原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/2018-05-30/1527663680073.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 利用Packetbeat监控Cassandra和MongoDB | 戚名钰的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c5bfe2b28edd6628f3b2177186e0772";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">戚名钰的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">怀揣创业梦的信安践行者</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用Packetbeat监控Cassandra和MongoDB
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-30T19:02:00+08:00" content="2018-05-30">
+              2018-05-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/30/利用Packetbeat监控Cassandra和MongoDB/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="MongoDB与Cassandra的监控"><a href="#MongoDB与Cassandra的监控" class="headerlink" title="MongoDB与Cassandra的监控"></a>MongoDB与Cassandra的监控</h4><p>由于<code>Cassandra</code>数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在<code>Cassandra</code>中增加了一个监控，其技术栈为：</p>
+<ul>
+<li><code>PacketBeat</code>：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议</li>
+<li><code>ElasticSearch</code>：ES数据库</li>
+<li><code>Kibina</code>：基于ES的一个可视化图形展示系统</li>
+</ul>
+<p>原理为：<strong>利用<code>PacketBeat</code>监听网卡的数据包，进行解析之后将数据写入到<code>ES</code>数据库中，然后通过<code>Kibina</code>可视化的展示出来</strong>。</p>
+<p>这样监控的好处是不影响数据库本身的性能，它是作为一个独立的监控存在，与数据库完全隔离开来，并且可以定制化的对数据库的各个维度进行分析。并且目前基于<code>Cassandra</code>和<code>MongoDB</code>的开源成熟监控工具并不多。</p>
+<p>具体配置过程参照官网：<a href="https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html" target="_blank" rel="external">https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html</a></p>
+<h4 id="遇到的问题与解决"><a href="#遇到的问题与解决" class="headerlink" title="遇到的问题与解决"></a>遇到的问题与解决</h4><p>下面主要是具体实施过程中遇到的一些问题及解决方法。</p>
+<h5 id="问题一：没有数据"><a href="#问题一：没有数据" class="headerlink" title="问题一：没有数据"></a>问题一：没有数据</h5><p>配置<code>Packetbeat</code>开始运行之后，发现数据没有写到<code>ES</code>中。<br>出现这样的问题的原因是，<code>ES</code>配置文件里面设置成不允许自动创建索引，导致数据写不进去。<br>因此这里需要动态修改<code>ES</code>集群的配置，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">  &quot;persistent&quot;: &#123;</span><br><span class="line">    &quot;action.auto_create_index&quot;:&quot;true&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改之后再运行程序，会发现<code>ES</code>中终于有数据进来了。</p>
+<h5 id="问题二：莫名其妙的OOM"><a href="#问题二：莫名其妙的OOM" class="headerlink" title="问题二：莫名其妙的OOM"></a>问题二：莫名其妙的OOM</h5><p>当终于看到数据后，会非常兴奋。可是用<code>Packetbeat</code>来抓<code>Cassandra</code>的数据包的时候，发现程序运行不到一分钟，<code>packetbeat</code>进程和<code>cassandra</code>进行都挂了。查看系统日志<code>/var/log/message</code>之后发现由于<code>packetbeat</code>程序占用了太大的内存，导致其它程序没有内存可以使用了，于是操作系统内核基于保护措施，把<code>packetbeat</code>进程给Kill掉了。而<code>Cassandra</code>进程是由于内存被它挤用了，内存不够导致<code>Cassandra</code>挂了。</p>
+<p>但是奇怪的是，同样的配置，用<code>Packetbeat</code>来抓<code>MongoDB</code>包的时候，没有出现<code>Out of Memory</code>的错误。网上有<a href="https://www.jianshu.com/p/19f3cd699167" target="_blank" rel="external">一篇帖子</a>说是由于滚雪球导致数据包指数级的增长，最终导致这个错误。</p>
+<p>但是我这里仔细看了一下，<code>Cassandra</code>数据库与<code>ES</code>之间，不应该有滚雪球的抓包，于是我一个一个的过滤，最后终于发现是由于<code>Cassandra</code>协议中有一类<code>op</code>为<code>RESULT</code>的数据包导致其程序不断占用内存增大的，最终被Kill了。因此在配置文件<code>packetbeat.yml</code>中将这类包过滤掉，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">packetbeat.protocols:</span><br><span class="line">- type: cassandra</span><br><span class="line">  ports: [9042]</span><br><span class="line">  ignored_ops: [&quot;RESULT&quot;]</span><br></pre></td></tr></table></figure>
+<h5 id="问题三：Cassandra与MonogDB的不同"><a href="#问题三：Cassandra与MonogDB的不同" class="headerlink" title="问题三：Cassandra与MonogDB的不同"></a>问题三：Cassandra与MonogDB的不同</h5><p>用<code>PacketBeat</code>监控<code>Cassandra</code>与<code>MongoDB</code>还有一些地方稍有不同：</p>
+<ul>
+<li><code>Cassandra</code>数据库是P2P完全对等的，因此该抓包程序需要在每一个部署有<code>Cassandra</code>的物理机器上均运行。</li>
+<li>由于<code>MongoDB</code>的部署分为路由节点与数据节点，因此该抓包程序只需在部署有路由节点的物理机器上运行即可。</li>
+</ul>
+<h4 id="最终的效果"><a href="#最终的效果" class="headerlink" title="最终的效果"></a>最终的效果</h4><p>由于抓包得到的数据都存在<code>ES</code>里面，最终想怎么展示或者怎么分析，那就很随意了，可以定制化制作一些<code>Dashboard</code>什么的，下面是展示截图：</p>
+<p><img src="/images/2018-05-30/1527663680073.png" alt="2018-05-30"></p>
+<p><img src="/images/2018-05-30/1527663699694.png" alt="Alt text"></p>
+<p><img src="/images/2018-05-30/1527663709185.png" alt="Alt text"></p>
+<p><img src="/images/2018-05-30/1527663736277.png" alt="Alt text"></p>
+<p><img src="/images/2018-05-30/1527663753676.png" alt="Alt text"></p>
+<h4 id="思考与感想"><a href="#思考与感想" class="headerlink" title="思考与感想"></a>思考与感想</h4><p>强烈安利<code>ELK</code>，即：<code>Elasticsearch</code>、<code>Logstash</code>、<code>Kibana</code>，这真的是非常成熟的集中式日志系统，非常方便。任何在线的实时的服务或者数据流，其所使用的技术系统是一整套，列举如下：</p>
+<ol>
+<li>大数据分析的一整套：Spark、Hadoop、Hive、HBase、HDFS</li>
+<li>大数据流式处理的一整套：Flink、Storm</li>
+<li>大数据存储的一整套：Redis、MongoDB、Cassandra、Elasticsearch</li>
+<li>消息中间件：Kafka</li>
+<li>能力及服务的输出：Django、Gunicorn、Nginx</li>
+</ol>
+<hr>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com/" target="_blank" rel="external">戚名钰的博客</a>（<a href="http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com" target="_blank" rel="external">http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com</a><br>欢迎关注我的微信公众号：科技锐新<br><!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--><br>本文永久链接：<a href="http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/">http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton", disable="enable", onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}", style="cursor: pointer; border: 0; outline: 0; border-radius: 100%; padding: 0; margin: 0; letter-spacing: normal; text-transform: none; text-indent: 0px; text-shadow: none">
+    <span onmouseover="this.style.color='rgb(236,96,0)';this.style.background='rgb(204,204,204)'" onMouseOut="this.style.color='#fff';this.style.background='rgb(236,96,0)'" style="display: inline-block; width: 70px; height: 70px; border-radius: 100%; line-height: 81px; color: #fff; font: 400 35px/75px 'microsofty'; background: rgb(236,96,0)">赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/donate/weixin.JPG" alt="戚名钰 WeChat Pay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>微信打赏</p>
+      </div>
+    
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/donate/zhifubao.JPG" alt="戚名钰 Alipay" style="width: 200px; max-width: 100%; display: inline-block"/>
+        <p>支付宝打赏</p>
+      </div>
+    
+  </div>
+<div>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PacketBeat/" rel="tag">#PacketBeat</a>
+          
+            <a href="/tags/Cassandra/" rel="tag">#Cassandra</a>
+          
+            <a href="/tags/MongoDB/" rel="tag">#MongoDB</a>
+          
+            <a href="/tags/Elasticsearch/" rel="tag">#Elasticsearch</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/11/Django的认证性能优化/" rel="next" title="Django的认证性能优化">
+                <i class="fa fa-chevron-left"></i> Django的认证性能优化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/30/利用Packetbeat监控Cassandra和MongoDB/"
+           data-title="利用Packetbeat监控Cassandra和MongoDB" data-url="http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="戚名钰" />
+          <p class="site-author-name" itemprop="name">戚名钰</p>
+          <p class="site-description motion-element" itemprop="description">做一名优秀的安全工程师</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">67</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qimingyu" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100005196408914" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Facebook
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2608780242?refer_flag=1005050010_&is_all=1" target="_blank">
+                  
+                    <i class="fa fa-weibo"></i> Weibo
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qi-ming-yu-45" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 知乎
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/qimy/" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 豆瓣
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">友情链接</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.tianjun.me/" target="_blank">Tian Jun</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB与Cassandra的监控"><span class="nav-number">1.</span> <span class="nav-text">MongoDB与Cassandra的监控</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题与解决"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题一：没有数据"><span class="nav-number">2.1.</span> <span class="nav-text">问题一：没有数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题二：莫名其妙的OOM"><span class="nav-number">2.2.</span> <span class="nav-text">问题二：莫名其妙的OOM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题三：Cassandra与MonogDB的不同"><span class="nav-number">2.3.</span> <span class="nav-text">问题三：Cassandra与MonogDB的不同</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最终的效果"><span class="nav-number">3.</span> <span class="nav-text">最终的效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思考与感想"><span class="nav-number">4.</span> <span class="nav-text">思考与感想</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">戚名钰</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=0.5.0"></script>
+
+
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qimingyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+
+
+</body>
+</html>

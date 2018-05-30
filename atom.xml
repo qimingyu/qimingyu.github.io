@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2018-05-11T16:11:14.324Z</updated>
+  <updated>2018-05-30T11:14:13.232Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -16,11 +16,78 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>利用Packetbeat监控Cassandra和MongoDB</title>
+    <link href="http://qimingyu.github.io/2018/05/30/%E5%88%A9%E7%94%A8Packetbeat%E7%9B%91%E6%8E%A7Cassandra%E5%92%8CMongoDB/"/>
+    <id>http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/</id>
+    <published>2018-05-30T11:02:00.000Z</published>
+    <updated>2018-05-30T11:14:13.232Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;MongoDB与Cassandra的监控&quot;&gt;&lt;a href=&quot;#MongoDB与Cassandra的监控&quot; class=&quot;headerlink&quot; title=&quot;MongoDB与Cassandra的监控&quot;&gt;&lt;/a&gt;MongoDB与Cassandra的监控&lt;/h4&gt;&lt;p&gt;由于&lt;code&gt;Cassandra&lt;/code&gt;数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在&lt;code&gt;Cassandra&lt;/code&gt;中增加了一个监控，其技术栈为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PacketBeat&lt;/code&gt;：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ElasticSearch&lt;/code&gt;：ES数据库&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Kibina&lt;/code&gt;：基于ES的一个可视化图形展示系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;原理为：&lt;strong&gt;利用&lt;code&gt;PacketBeat&lt;/code&gt;监听网卡的数据包，进行解析之后将数据写入到&lt;code&gt;ES&lt;/code&gt;数据库中，然后通过&lt;code&gt;Kibina&lt;/code&gt;可视化的展示出来&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这样监控的好处是不影响数据库本身的性能，它是作为一个独立的监控存在，与数据库完全隔离开来，并且可以定制化的对数据库的各个维度进行分析。并且目前基于&lt;code&gt;Cassandra&lt;/code&gt;和&lt;code&gt;MongoDB&lt;/code&gt;的开源成熟监控工具并不多。&lt;/p&gt;
+&lt;p&gt;具体配置过程参照官网：&lt;a href=&quot;https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&quot;遇到的问题与解决&quot;&gt;&lt;a href=&quot;#遇到的问题与解决&quot; class=&quot;headerlink&quot; title=&quot;遇到的问题与解决&quot;&gt;&lt;/a&gt;遇到的问题与解决&lt;/h4&gt;&lt;p&gt;下面主要是具体实施过程中遇到的一些问题及解决方法。&lt;/p&gt;
+&lt;h5 id=&quot;问题一：没有数据&quot;&gt;&lt;a href=&quot;#问题一：没有数据&quot; class=&quot;headerlink&quot; title=&quot;问题一：没有数据&quot;&gt;&lt;/a&gt;问题一：没有数据&lt;/h5&gt;&lt;p&gt;配置&lt;code&gt;Packetbeat&lt;/code&gt;开始运行之后，发现数据没有写到&lt;code&gt;ES&lt;/code&gt;中。&lt;br&gt;出现这样的问题的原因是，&lt;code&gt;ES&lt;/code&gt;配置文件里面设置成不允许自动创建索引，导致数据写不进去。&lt;br&gt;因此这里需要动态修改&lt;code&gt;ES&lt;/code&gt;集群的配置，命令如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;PUT /_cluster/settings&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;quot;persistent&amp;quot;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;quot;action.auto_create_index&amp;quot;:&amp;quot;true&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;修改之后再运行程序，会发现&lt;code&gt;ES&lt;/code&gt;中终于有数据进来了。&lt;/p&gt;
+&lt;h5 id=&quot;问题二：莫名其妙的OOM&quot;&gt;&lt;a href=&quot;#问题二：莫名其妙的OOM&quot; class=&quot;headerlink&quot; title=&quot;问题二：莫名其妙的OOM&quot;&gt;&lt;/a&gt;问题二：莫名其妙的OOM&lt;/h5&gt;&lt;p&gt;当终于看到数据后，会非常兴奋。可是用&lt;code&gt;Packetbeat&lt;/code&gt;来抓&lt;code&gt;Cassandra&lt;/code&gt;的数据包的时候，发现程序运行不到一分钟，&lt;code&gt;packetbeat&lt;/code&gt;进程和&lt;code&gt;cassandra&lt;/code&gt;进行都挂了。查看系统日志&lt;code&gt;/var/log/message&lt;/code&gt;之后发现由于&lt;code&gt;packetbeat&lt;/code&gt;程序占用了太大的内存，导致其它程序没有内存可以使用了，于是操作系统内核基于保护措施，把&lt;code&gt;packetbeat&lt;/code&gt;进程给Kill掉了。而&lt;code&gt;Cassandra&lt;/code&gt;进程是由于内存被它挤用了，内存不够导致&lt;code&gt;Cassandra&lt;/code&gt;挂了。&lt;/p&gt;
+&lt;p&gt;但是奇怪的是，同样的配置，用&lt;code&gt;Packetbeat&lt;/code&gt;来抓&lt;code&gt;MongoDB&lt;/code&gt;包的时候，没有出现&lt;code&gt;Out of Memory&lt;/code&gt;的错误。网上有&lt;a href=&quot;https://www.jianshu.com/p/19f3cd699167&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一篇帖子&lt;/a&gt;说是由于滚雪球导致数据包指数级的增长，最终导致这个错误。&lt;/p&gt;
+&lt;p&gt;但是我这里仔细看了一下，&lt;code&gt;Cassandra&lt;/code&gt;数据库与&lt;code&gt;ES&lt;/code&gt;之间，不应该有滚雪球的抓包，于是我一个一个的过滤，最后终于发现是由于&lt;code&gt;Cassandra&lt;/code&gt;协议中有一类&lt;code&gt;op&lt;/code&gt;为&lt;code&gt;RESULT&lt;/code&gt;的数据包导致其程序不断占用内存增大的，最终被Kill了。因此在配置文件&lt;code&gt;packetbeat.yml&lt;/code&gt;中将这类包过滤掉，如下所示：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;packetbeat.protocols:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;- type: cassandra&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ports: [9042]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ignored_ops: [&amp;quot;RESULT&amp;quot;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h5 id=&quot;问题三：Cassandra与MonogDB的不同&quot;&gt;&lt;a href=&quot;#问题三：Cassandra与MonogDB的不同&quot; class=&quot;headerlink&quot; title=&quot;问题三：Cassandra与MonogDB的不同&quot;&gt;&lt;/a&gt;问题三：Cassandra与MonogDB的不同&lt;/h5&gt;&lt;p&gt;用&lt;code&gt;PacketBeat&lt;/code&gt;监控&lt;code&gt;Cassandra&lt;/code&gt;与&lt;code&gt;MongoDB&lt;/code&gt;还有一些地方稍有不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Cassandra&lt;/code&gt;数据库是P2P完全对等的，因此该抓包程序需要在每一个部署有&lt;code&gt;Cassandra&lt;/code&gt;的物理机器上均运行。&lt;/li&gt;
+&lt;li&gt;由于&lt;code&gt;MongoDB&lt;/code&gt;的部署分为路由节点与数据节点，因此该抓包程序只需在部署有路由节点的物理机器上运行即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;最终的效果&quot;&gt;&lt;a href=&quot;#最终的效果&quot; class=&quot;headerlink&quot; title=&quot;最终的效果&quot;&gt;&lt;/a&gt;最终的效果&lt;/h4&gt;&lt;p&gt;由于抓包得到的数据都存在&lt;code&gt;ES&lt;/code&gt;里面，最终想怎么展示或者怎么分析，那就很随意了，可以定制化制作一些&lt;code&gt;Dashboard&lt;/code&gt;什么的，下面是展示截图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-05-30/1527663680073.png&quot; alt=&quot;2018-05-30&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-05-30/1527663699694.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-05-30/1527663709185.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-05-30/1527663736277.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2018-05-30/1527663753676.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;h4 id=&quot;思考与感想&quot;&gt;&lt;a href=&quot;#思考与感想&quot; class=&quot;headerlink&quot; title=&quot;思考与感想&quot;&gt;&lt;/a&gt;思考与感想&lt;/h4&gt;&lt;p&gt;强烈安利&lt;code&gt;ELK&lt;/code&gt;，即：&lt;code&gt;Elasticsearch&lt;/code&gt;、&lt;code&gt;Logstash&lt;/code&gt;、&lt;code&gt;Kibana&lt;/code&gt;，这真的是非常成熟的集中式日志系统，非常方便。任何在线的实时的服务或者数据流，其所使用的技术系统是一整套，列举如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;大数据分析的一整套：Spark、Hadoop、Hive、HBase、HDFS&lt;/li&gt;
+&lt;li&gt;大数据流式处理的一整套：Flink、Storm&lt;/li&gt;
+&lt;li&gt;大数据存储的一整套：Redis、MongoDB、Cassandra、Elasticsearch&lt;/li&gt;
+&lt;li&gt;消息中间件：Kafka&lt;/li&gt;
+&lt;li&gt;能力及服务的输出：Django、Gunicorn、Nginx&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;（&lt;a href=&quot;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
+![kejiruixin](/images/about/kejiruixin.jpg) 
+--&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/&quot;&gt;http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;MongoDB与Cassandra的监控&quot;&gt;&lt;a href=&quot;#MongoDB与Cassandra的监控&quot; class=&quot;headerlink&quot; title=&quot;MongoDB与Cassandra的监控&quot;&gt;&lt;/a&gt;MongoDB与Cassandra的监控&lt;/h4&gt;&lt;
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+    
+      <category term="PacketBeat" scheme="http://qimingyu.github.io/tags/PacketBeat/"/>
+    
+      <category term="Cassandra" scheme="http://qimingyu.github.io/tags/Cassandra/"/>
+    
+      <category term="MongoDB" scheme="http://qimingyu.github.io/tags/MongoDB/"/>
+    
+      <category term="Elasticsearch" scheme="http://qimingyu.github.io/tags/Elasticsearch/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Django的认证性能优化</title>
     <link href="http://qimingyu.github.io/2018/05/11/Django%E7%9A%84%E8%AE%A4%E8%AF%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     <id>http://qimingyu.github.io/2018/05/11/Django的认证性能优化/</id>
     <published>2018-05-11T15:14:00.000Z</published>
-    <updated>2018-05-11T16:11:14.324Z</updated>
+    <updated>2018-05-11T16:11:14.000Z</updated>
     
     <content type="html">&lt;h4 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h4&gt;&lt;p&gt;由于公司业务发展，需要开发一套RESTFul API接口。在技术选型上，最开始采用的是最为轻量级的Bottle框架进行开发，后来由于要解决与数据库交互的时候有频繁短连接的问题，同时希望功能稍微多一些（例如管理后台），因此决定选用&lt;code&gt;Django&lt;/code&gt;这种稍微重一点的Web框架进行开发，同时加上&lt;code&gt;Django REST framework&lt;/code&gt;来做&lt;code&gt;RESTFul API&lt;/code&gt;接口。&lt;/p&gt;
 &lt;h4 id=&quot;存在的问题&quot;&gt;&lt;a href=&quot;#存在的问题&quot; class=&quot;headerlink&quot; title=&quot;存在的问题&quot;&gt;&lt;/a&gt;存在的问题&lt;/h4&gt;&lt;p&gt;最终开发出来的&lt;code&gt;Django&lt;/code&gt;数据输出平台，去掉了框架自带的&lt;code&gt;Sqlite3&lt;/code&gt;数据库，其后台所依赖的数据库和作用分别如下：&lt;/p&gt;
@@ -82,7 +149,7 @@
     <link href="http://qimingyu.github.io/2018/04/03/%E4%B8%80%E9%81%93%E6%9C%89%E8%B6%A3%E7%9A%84%E4%BA%9A%E9%A9%AC%E9%80%8A%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
     <id>http://qimingyu.github.io/2018/04/03/一道有趣的亚马逊面试题/</id>
     <published>2018-04-03T07:32:00.000Z</published>
-    <updated>2018-04-03T08:07:41.087Z</updated>
+    <updated>2018-04-03T08:07:41.000Z</updated>
     
     <content type="html">&lt;p&gt;一个朋友投亚马逊的云计算岗位，在二面结束的时候对方出了一道面试题，给两天时间做，然后再去进行第三面面试。也就是说这道题是三面的面试题，由于是Hadoop，云计算相关的题目，因此朋友求助于我。我花了一天左右的时间终于帮其解答出来了，由于这道题目设计的十分精巧，解答过程也是像福尔摩斯一样千回百转，最终柳暗花明，不得不感慨外企招人的严谨，因此将自己的解题过程分享成这篇文章。&lt;/p&gt;
 &lt;h4 id=&quot;面试题目如下&quot;&gt;&lt;a href=&quot;#面试题目如下&quot; class=&quot;headerlink&quot; title=&quot;面试题目如下&quot;&gt;&lt;/a&gt;面试题目如下&lt;/h4&gt;&lt;p&gt;这道题的网址链接：&lt;a href=&quot;https://s3.cn-north-1.amazonaws.com.cn/emrhiretest/0x001C2F.html?nsukey=mR6f2aOKalu0gyFwjFSOLPanLQcbneOxRYoKnOL0aS8HVdRrcZTtI%2BAgltUWbI6dWYByUovdk0CXMJErakGLS%2FP84mCr5FdDP5DKdBSVDtYzGOpc9lGH83k6sHLUwWRnGa7eo%2BZQ4lrtikITMqEeX9yhkKSct0Yx7fOoeryEJDneKQnUVKGkndHpRhFMaQwPfxeOb39cItLmDL9m9EZ%2Biw%3D%3D&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;请点击此处&lt;/a&gt;。&lt;/p&gt;
@@ -152,7 +219,7 @@
     <link href="http://qimingyu.github.io/2017/09/10/%E8%AF%BB%E3%80%8A%E5%AE%89%E5%85%A8%E7%AE%80%E5%8F%B2%E3%80%8B%E6%9C%89%E6%84%9F/"/>
     <id>http://qimingyu.github.io/2017/09/10/读《安全简史》有感/</id>
     <published>2017-09-10T10:16:58.000Z</published>
-    <updated>2017-09-10T10:20:08.860Z</updated>
+    <updated>2017-09-10T10:20:08.000Z</updated>
     
     <content type="html">&lt;p&gt;看完《安全简史》，对安全有了一个更宏观的认识。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;　　&lt;br&gt;&lt;br&gt;小学、初中、高中甚至大学所普及的教育，都是经典教育，往往只考诉受教育者是这样的结论，而结论如何来的，经历了怎样的一个百家曾鸣和反反复复的过程，这些经典的教科书更加不会告诉你。当然，一方面也受限于老师或教授的水平有限。因此，这方面知识的学习，只能得助于自己与寻找，同时自己结合自身的经历去慢慢思考，去慢慢悟，才能所有得。&lt;br&gt;&lt;br&gt;简简单单的香农信息熵的理论，在信息论的那本书里面有，但我们对经典的公式、定理，包括算发的理解，还是太浅了。包括对经典的品读，一定要是反反复复的，才会有所体会。&lt;br&gt;&lt;br&gt;在大四即将升研究生的时候，我给导师打电话，问信安专业的研究生，您有什么书推荐我看的，可以提前学一下。原以为导师会说一些具体的编程方面的书籍，没想到导师当时却说让我读读《信息论》，当时的我没有太在意，直到研究生阶段读完。今天看到这本《安全简史》，才明白导师当时的良苦用心。可以这样理解，信息安全就是保障信息的不可篡改性、保密性、完整性等，而信息论从本质上定义信息，从这个角度上说，我们学信息安全，却不懂信息论，显得相当滑稽。&lt;br&gt;&lt;br&gt;这本书没有涉及具体的技术性细节，是从系统工程、控制论、信息论等更宏观的角度论述信息安全，当然也包括了安全心理学、安全管理学等部分，是一本相当综合的书籍。看完本书，我只能感叹个人力量的渺小与薄弱，常怀谦卑与感恩之心。科技的发展，技术的进步，在做学问与开公司之间，做学问站的角度更高，它解决的是未来的问题，而办企业，解决的是当下的问题，两者是相辅相成的。在企业待久了，确实要读一读教授们写的书，洗涤心灵。&lt;br&gt;&lt;br&gt;看完这本书，顺便在知乎搜了一下关于杨义先的信息，出乎意料，居然大部分都是关于他的负面意见。然而我又想到知乎黑百度的事情，也就可以理解了。现在网络社区鱼龙混杂，整体认知水准是偏低的。于是我也就看到社会精英阶层与普通大众之间的认知存在多么巨大的鸿沟。&lt;br&gt;杨义先写过一篇母亲剥削论的文章，主旨是驳导师剥削论，我是赞成其观点的，但无奈大众却总是喜欢扭曲文辞，曲解其意，以致网上一片骂声。就像之前一位很著名的北大经济学家薛兆丰老师，关于春节有人买不到火车票回家的事情，他高呼提高火车票的价格，结果同样招致一片骂声一样。普通大众是不懂经济学的，更是不懂这位经济学家才是真正在为老百姓呐喊，以及他的良苦用心，自由市场与自由经济，才能真正促进社会的发展与进步，也才能最终让每个人都能回家过年。&lt;br&gt;&lt;br&gt;刚正式入职两个月，给自己这一年订一个小目标：这一年，弄清楚安全行业的市场大概面貌，真正的进入业内，争取能翻译一本书，同时完整的提高自己的技术基础能力，系统性的提高起来。&lt;br&gt;&lt;br&gt;—&lt;br&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;（&lt;a href=&quot;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
@@ -181,7 +248,7 @@
     <link href="http://qimingyu.github.io/2017/07/09/%E6%BB%B4%E6%BB%B4%E4%B8%93%E8%BD%A6%E7%A0%94%E7%A9%B6%E8%B0%83%E6%9F%A5%E6%8A%A5%E5%91%8A-1/"/>
     <id>http://qimingyu.github.io/2017/07/09/滴滴专车研究调查报告-1/</id>
     <published>2017-07-09T09:15:00.000Z</published>
-    <updated>2017-09-10T10:18:43.122Z</updated>
+    <updated>2017-07-09T12:03:47.000Z</updated>
     
     <content type="html">&lt;p&gt;前言：看看自己本科阶段的市场营销知识都忘了没有&lt;/p&gt;
 &lt;p&gt;完成时间：2017年6月15日-2017年7月1日&lt;/p&gt;
@@ -336,7 +403,7 @@
     <link href="http://qimingyu.github.io/2017/04/28/%E8%87%AA%E5%BB%BACA%E5%AE%9E%E7%8E%B0HTTPS%E6%95%99%E7%A8%8B/"/>
     <id>http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/</id>
     <published>2017-04-28T06:30:00.000Z</published>
-    <updated>2017-04-28T08:19:44.534Z</updated>
+    <updated>2017-04-28T08:19:44.000Z</updated>
     
     <content type="html">&lt;h3 id=&quot;实验前的准备&quot;&gt;&lt;a href=&quot;#实验前的准备&quot; class=&quot;headerlink&quot; title=&quot;实验前的准备&quot;&gt;&lt;/a&gt;实验前的准备&lt;/h3&gt;&lt;h4 id=&quot;涉及知识点&quot;&gt;&lt;a href=&quot;#涉及知识点&quot; class=&quot;headerlink&quot; title=&quot;涉及知识点&quot;&gt;&lt;/a&gt;涉及知识点&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;对称密码体制和非对称密码体制&lt;/li&gt;
@@ -424,7 +491,7 @@
     <link href="http://qimingyu.github.io/2017/04/24/WebGoat%E4%B9%8B%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"/>
     <id>http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/</id>
     <published>2017-04-24T11:39:18.000Z</published>
-    <updated>2017-04-24T11:55:53.071Z</updated>
+    <updated>2017-04-24T11:55:53.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;WebGoat简介&quot;&gt;&lt;a href=&quot;#WebGoat简介&quot; class=&quot;headerlink&quot; title=&quot;WebGoat简介&quot;&gt;&lt;/a&gt;WebGoat简介&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;WebGoat是OWASP组织研制出的用于进行Web漏洞实验的应用平台，用来说明Web应用中存在的安全漏洞。WebGoat运行在带有Java虚拟机的平台之上，当前提供的训练课程有30多个，其中包括：跨站点脚本攻击（XSS）、访问控制、线程安全、操作隐藏字段、操纵参数、弱会话Cookie、SQL盲注、数字型SQL注入、字符串型SQL注入、web服务、Open Authentication失效、危险的HTML注释等等。&lt;/li&gt;
@@ -761,7 +828,7 @@
     <link href="http://qimingyu.github.io/2016/06/05/%E4%B8%BA%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E6%B7%BB%E5%8A%A0%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E/"/>
     <id>http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/</id>
     <published>2016-06-05T15:31:40.000Z</published>
-    <updated>2017-04-24T12:47:28.285Z</updated>
+    <updated>2017-04-24T12:47:28.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;开始写博客不久，自认为只是为了促进自我学习，所以文章写得也并不十分精细。可这几天一反常态，陆陆续续在微博上总有人加我。直到一天在微博上收到了这样的一封私信：&lt;br&gt;&lt;img src=&quot;/images/copyright/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;/images/copyright/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;开始我并没在意，觉得自己写的文章居然还有人看上了，并且是有着79万粉丝的微博大咖，内心还是感觉不错的。于是很单纯的按照其指示加微信及QQ好友，可是申请虽提交了，对方却毫无回应，既没同意也没反对，于是我也就没放心上，就当这事儿过去了。&lt;/p&gt;
 &lt;p&gt;可是之后还是陆陆续续总有人微博粉我，刚好今天下午我很闲，于是就在微博里面搜索了下自己的名字，结果出现了这样的画面：&lt;br&gt;&lt;img src=&quot;/images/copyright/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
@@ -1075,52 +1142,6 @@
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
     
       <category term="并发性" scheme="http://qimingyu.github.io/tags/%E5%B9%B6%E5%8F%91%E6%80%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之Session Management Flaws</title>
-    <link href="http://qimingyu.github.io/2016/05/04/Webgoat%E4%B9%8BSession_Management_Flaws/"/>
-    <id>http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/</id>
-    <published>2016-05-04T10:00:59.000Z</published>
-    <updated>2016-05-05T06:32:43.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Hijack-a-Session&quot;&gt;&lt;a href=&quot;#Hijack-a-Session&quot; class=&quot;headerlink&quot; title=&quot;Hijack a Session&quot;&gt;&lt;/a&gt;Hijack a Session&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;如图是一个登陆页面，现在要求在不知道用户名和密码的情况下登陆进去。现在我们已经知道的是如果传过去的cookie是对的话，服务器端会跳过验证用户名和密码的环节。也就是说用户名和密码可以随便填写，关键是猜对cookie，并且这个cookie需要是正在使用的会话cookie。我们先随便抓一个看看所提交的是哪些数据：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;可以看到在请求头中cookie有两个，一个是WEAKID，一个是JSESSION，我们主要是猜对请求头的WEAKID，这是我们的会话ID。首先我们连续刷新该页面，观察服务器传过来的cookie的变化。也就是说在刷新该页面的时候，需要删掉WEAKID后再发送请求，这样每次服务器都会传过来一个WEAKID，我们可以观察其规律。先试第一个，我们提交一个请求后，服务器传过来的响应是这样的：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;继续提交一个请求，服务器传过来的响应是这样的：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;可以发现WEAKID由两部分组成，减号前面是依次递增的，减号后面也是递增的，这是我们观察之后的结论。下面继续验证，采用burpsuit提供的自动化发包工具，提交一个数据，抓到之后删掉WEAKID，然后点击Action发送到Sequencer。然后进行相应的设置：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/5.png&quot; alt=&quot;5&quot;&gt;&lt;br&gt;上面是选择tooken出现的地方。&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;上面是选择运行的线程个数。然后点击Start live capture，开始抓包：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;上面表示已经发送的请求和已经抓到的tooken。此时点击copy token，再回到Manual load，点击Paste：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/8.png&quot; alt=&quot;8&quot;&gt;&lt;br&gt;上图可以看到这是我们抓到的所有token，都是连续的，但是只有16964和16966之间却缺少了16965，因此我们猜测这个token是一个已经登录进去的会话，我们可以利用这个会话进行登录。现在我们需要猜测减号后面的那部分数据，它是在1462418466736到1462418466754之间的，下面使用暴力破解，我们将请求继续发送到Intruder，如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;给cookie的最后两位数增加变量，然后给该变量设置范围，burpsuit会根据你设定的范围一个个的去试，如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/10.png&quot; alt=&quot;10&quot;&gt;&lt;br&gt;上面对相关变量的一些设置。然后点击Stack Attack。&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/11.png&quot; alt=&quot;11&quot;&gt;&lt;br&gt;可以看到有一条记录服务器响应的长度与其他记录不一样，而上图下方显示的是该条记录具体发送的内容和服务器的响应。最后可以看到以该内容作为请求发送时，成功登陆了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/12.png&quot; alt=&quot;12&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Spoof-an-Anthentication-cookie&quot;&gt;&lt;a href=&quot;#Spoof-an-Anthentication-cookie&quot; class=&quot;headerlink&quot; title=&quot;Spoof an Anthentication cookie&quot;&gt;&lt;/a&gt;Spoof an Anthentication cookie&lt;/h2&gt;&lt;p&gt;如下登陆页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/13.png&quot; alt=&quot;13&quot;&gt;&lt;br&gt;我们有两个用户名和密码，分别为：webgoat/webgoat、aspect/aspect，现在我们还知道alice的用户名却不知道其密码，要求我们以alice的身份登陆。&lt;br&gt;我们尝试以webgoat的身份进行登陆，发现登陆时的请求为：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/14.png&quot; alt=&quot;14&quot;&gt;&lt;br&gt;服务器端的响应为：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/15.png&quot; alt=&quot;15&quot;&gt;&lt;br&gt;可见登陆的时候是没有AuthCookie的，登陆之后服务器传给浏览器一个AuthCookie，我们观察其值。&lt;br&gt;下面以aspect身份进行登陆，看到：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/16.png&quot; alt=&quot;16&quot;&gt;&lt;br&gt;观察如下：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;webgoat  ——&amp;gt;  65432ubphcfs&lt;br&gt;aspect   ——&amp;gt;  65432udfqtb&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;可以找到规律了，就是把字母反过来，再向后移动一位。&lt;br&gt;那么猜测alice的AuthCookie为：65432fdjmb，在用户名和密码那里什么都不填，直接提交，burpsuit拦截后修改cookie如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/17.png&quot; alt=&quot;17&quot;&gt;&lt;br&gt;然后成功登陆:&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/18.png&quot; alt=&quot;18&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Session-Fixation&quot;&gt;&lt;a href=&quot;#Session-Fixation&quot; class=&quot;headerlink&quot; title=&quot;Session Fixation&quot;&gt;&lt;/a&gt;Session Fixation&lt;/h2&gt;&lt;p&gt;通过会话固定盗取Session。服务器通过每个用户唯一的Session ID来确认其合法性。如果用户已登录，并且授权服务器不必重新验证授权后，当该用户需要重新登录进入系统时，他的Session ID 依然被服务器认为是合法的。&lt;br&gt;在一些程序中，可能会在GET-REQUEST请求中传递Session ID。这就是攻击的起点。一个攻击者可以用一个选定的Session ID给受害人发送一个超链接。例如，这里有一个准备好的邮件，它看起来像是一个从应用程序管理员发来的官方邮件。如果受害者点击了这个链接，并且该受害者以攻击者指定的Session ID登录了系统，那么攻击者可以不经授权直接使用与受害者相同的Session ID来访问该页面。&lt;br&gt;在实际课程中需要我们同时扮演攻击者和受害者，攻击者是Hacker，受害者是Jane。&lt;br&gt;首先由Hacker向Jane发一封看起来很正常的邮件，该邮件是关于银行对账单的。需要诱导受害者点击该邮件的链接。该邮件为：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/20.png&quot; alt=&quot;20&quot;&gt;&lt;br&gt;邮件中间是一个超链接，对应的代码为：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/19.png&quot; alt=&quot;19&quot;&gt;&lt;br&gt;然后受害者点击了该超链接，进入他的银行系统的登陆页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/21.png&quot; alt=&quot;21&quot;&gt;&lt;br&gt;该页面的链接地址为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://localhost:8443/WebGoat/attack?Screen=16&amp;amp;menu=1700&amp;amp;SID=qimingyu&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://localhost:8443/WebGoat/attack?Screen=16&amp;amp;menu=1700&amp;amp;SID=qimingyu&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;受害者本人要登陆系统，肯定知道自己的账号和密码。于是输入账号：Jane，密码：tarzan，进入系统。受害者进入系统之后，他的sessionID已经通过验证，就是有效的了。这时，黑客也进入该银行系统的登陆页面，此时的地址为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://localhost:8443/WebGoat/attack?Screen=16&amp;amp;menu=1700&amp;amp;SID=NOVALIDSESSION&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://localhost:8443/WebGoat/attack?Screen=16&amp;amp;menu=1700&amp;amp;SID=NOVALIDSESSION&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;将后面的SID修改为qimingyu，无需输入用户名和密码，就可以以受害者Jane的身份登陆该系统了。&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/22.png&quot; alt=&quot;22&quot;&gt;&lt;br&gt;这是一连串精心构造的攻击，其关键漏洞是网站依靠URL来传递SID的值，容易被人截取并修改。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;第一节是通过暴力猜对cookie绕过验证进行登陆。&lt;br&gt;第二节是通过观察猜对cookie绕过验证进行登陆。&lt;br&gt;第三节是诱骗受害者以固定的Session登陆，然后攻击者再通过该Session绕过验证直接登陆。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;（&lt;a href=&quot;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com/），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com/)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;&lt;br&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Hijack-a-Session&quot;&gt;&lt;a href=&quot;#Hijack-a-Session&quot; class=&quot;headerlink&quot; title=&quot;Hijack a Session&quot;&gt;&lt;/a&gt;Hijack a Session&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;如图是一个登陆页面，现在要求在不知道用户名和密码的情况下登陆进去。现在我们已经知道的是如果传过去的cookie是对的话，服务器端会跳过验证用户名和密码的环节。也就是说用户名和密码可以随便填写，关键是猜对cookie，并且这个cookie需要是正在使用的会话cookie。我们先随便抓一个看看所提交的是哪些数据：&lt;br&gt;&lt;img src=&quot;/images/webgoat_session_management_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="会话管理" scheme="http://qimingyu.github.io/tags/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   
