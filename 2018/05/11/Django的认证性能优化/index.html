@@ -67,11 +67,13 @@
 <meta property="og:site_name" content="戚名钰的博客">
 <meta property="og:description" content="背景由于业务发展，需要开发一套RESTFul API接口。在技术选型上，最开始采用的是最为轻量级的Bottle框架进行开发，后来由于要解决与数据库交互的时候有频繁短连接的问题，同时希望功能稍微多一些（例如管理后台），因此决定选用Django这种稍微重一点的Web框架进行开发，同时加上Django REST framework来做RESTFul API接口。
 存在的问题最终开发出来的Django数据">
+<meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2018-05-31T02:18:48.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django的认证性能优化">
 <meta name="twitter:description" content="背景由于业务发展，需要开发一套RESTFul API接口。在技术选型上，最开始采用的是最为轻量级的Bottle框架进行开发，后来由于要解决与数据库交互的时候有频繁短连接的问题，同时希望功能稍微多一些（例如管理后台），因此决定选用Django这种稍微重一点的Web框架进行开发，同时加上Django REST framework来做RESTFul API接口。
 存在的问题最终开发出来的Django数据">
+<meta name="twitter:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 
 
 
@@ -336,10 +338,8 @@
 <p>如果我在Views中指定了认证类，其真正起作用的会是Views中指定的认证类。</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>虽然对<code>Django</code>进行了优化，但是由于Python语言的特性（存在全局锁），其<code>RESTFul API</code>的性能依然无法达到其本身数据库读写的峰值，再怎么优化，基于Python语言构建的Web服务总有其本身的性能瓶颈所在，并且无法真正利用机器的CPU多核资源。因此如果对性能有较高要求（例如要求QPS达到10W+）的网站或是API服务，最好采用Go语言。在一个项目最开始的技术选型是很重要的，会减少很多无用功和无用的折腾，这也间接说明了，在一个项目中，一个好的架构师的重要性。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>. (<a href="http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com" target="_blank" rel="external">http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com</a><br>欢迎关注我的微信公众号：科技锐新</p>
-<!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
--->
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2018/05/11/Django的认证性能优化/">http://qimingyu.github.io/2018/05/11/Django的认证性能优化/</a></p>
 
       

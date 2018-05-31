@@ -58,10 +58,8 @@
 &lt;li&gt;能力及服务的输出：Django、Gunicorn、Nginx&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/&quot;&gt;http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -122,10 +120,8 @@
 &lt;p&gt;如果我在Views中指定了认证类，其真正起作用的会是Views中指定的认证类。&lt;/p&gt;
 &lt;h4 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h4&gt;&lt;p&gt;虽然对&lt;code&gt;Django&lt;/code&gt;进行了优化，但是由于Python语言的特性（存在全局锁），其&lt;code&gt;RESTFul API&lt;/code&gt;的性能依然无法达到其本身数据库读写的峰值，再怎么优化，基于Python语言构建的Web服务总有其本身的性能瓶颈所在，并且无法真正利用机器的CPU多核资源。因此如果对性能有较高要求（例如要求QPS达到10W+）的网站或是API服务，最好采用Go语言。在一个项目最开始的技术选型是很重要的，会减少很多无用功和无用的折腾，这也间接说明了，在一个项目中，一个好的架构师的重要性。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2018/05/11/Django的认证性能优化/&quot;&gt;http://qimingyu.github.io/2018/05/11/Django的认证性能优化/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -196,10 +192,8 @@
 &lt;p&gt;成功创建集群，问题得到解决。&lt;/p&gt;
 &lt;h4 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h4&gt;&lt;p&gt;这道面试题，非常考验被面试者对Hadoop集群及大数据和分布式云计算实际理解深度以及熟练程度，非常考察被面试者的综合能力水平，包括定位问题，解决问题的能力。如果没有亲自搭建集群等的经验，这题还是很难下手的。在解答这道题目的过程中感谢田兴邦同学的支持，也从侧面说明，前年暑假我在百度实习的时候，搭建了Hadoop和Spark集群，这个经验还是很有用的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2018/04/03/一道有趣的亚马逊面试题/&quot;&gt;http://qimingyu.github.io/2018/04/03/一道有趣的亚马逊面试题/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -228,15 +222,23 @@
     <updated>2017-09-10T10:20:08.000Z</updated>
     
     <content type="html">&lt;p&gt;看完《安全简史》，对安全有了一个更宏观的认识。&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;　　&lt;br&gt;&lt;br&gt;小学、初中、高中甚至大学所普及的教育，都是经典教育，往往只考诉受教育者是这样的结论，而结论如何来的，经历了怎样的一个百家曾鸣和反反复复的过程，这些经典的教科书更加不会告诉你。当然，一方面也受限于老师或教授的水平有限。因此，这方面知识的学习，只能得助于自己与寻找，同时自己结合自身的经历去慢慢思考，去慢慢悟，才能所有得。&lt;br&gt;&lt;br&gt;简简单单的香农信息熵的理论，在信息论的那本书里面有，但我们对经典的公式、定理，包括算发的理解，还是太浅了。包括对经典的品读，一定要是反反复复的，才会有所体会。&lt;br&gt;&lt;br&gt;在大四即将升研究生的时候，我给导师打电话，问信安专业的研究生，您有什么书推荐我看的，可以提前学一下。原以为导师会说一些具体的编程方面的书籍，没想到导师当时却说让我读读《信息论》，当时的我没有太在意，直到研究生阶段读完。今天看到这本《安全简史》，才明白导师当时的良苦用心。可以这样理解，信息安全就是保障信息的不可篡改性、保密性、完整性等，而信息论从本质上定义信息，从这个角度上说，我们学信息安全，却不懂信息论，显得相当滑稽。&lt;br&gt;&lt;br&gt;这本书没有涉及具体的技术性细节，是从系统工程、控制论、信息论等更宏观的角度论述信息安全，当然也包括了安全心理学、安全管理学等部分，是一本相当综合的书籍。看完本书，我只能感叹个人力量的渺小与薄弱，常怀谦卑与感恩之心。科技的发展，技术的进步，在做学问与开公司之间，做学问站的角度更高，它解决的是未来的问题，而办企业，解决的是当下的问题，两者是相辅相成的。在企业待久了，确实要读一读教授们写的书，洗涤心灵。&lt;br&gt;&lt;br&gt;看完这本书，顺便在知乎搜了一下关于杨义先的信息，出乎意料，居然大部分都是关于他的负面意见。然而我又想到知乎黑百度的事情，也就可以理解了。现在网络社区鱼龙混杂，整体认知水准是偏低的。于是我也就看到社会精英阶层与普通大众之间的认知存在多么巨大的鸿沟。&lt;br&gt;杨义先写过一篇母亲剥削论的文章，主旨是驳导师剥削论，我是赞成其观点的，但无奈大众却总是喜欢扭曲文辞，曲解其意，以致网上一片骂声。就像之前一位很著名的北大经济学家薛兆丰老师，关于春节有人买不到火车票回家的事情，他高呼提高火车票的价格，结果同样招致一片骂声一样。普通大众是不懂经济学的，更是不懂这位经济学家才是真正在为老百姓呐喊，以及他的良苦用心，自由市场与自由经济，才能真正促进社会的发展与进步，也才能最终让每个人都能回家过年。&lt;br&gt;&lt;br&gt;刚正式入职两个月，给自己这一年订一个小目标：这一年，弄清楚安全行业的市场大概面貌，真正的进入业内，争取能翻译一本书，同时完整的提高自己的技术基础能力，系统性的提高起来。&lt;br&gt;&lt;br&gt;—&lt;br&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;br&gt;&lt;br&gt;&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;　　&lt;/p&gt;
+&lt;p&gt;小学、初中、高中甚至大学所普及的教育，都是经典教育，往往只考诉受教育者是这样的结论，而结论如何来的，经历了怎样的一个百家曾鸣和反反复复的过程，这些经典的教科书更加不会告诉你。当然，一方面也受限于老师或教授的水平有限。因此，这方面知识的学习，只能得助于自己与寻找，同时自己结合自身的经历去慢慢思考，去慢慢悟，才能所有得。&lt;/p&gt;
+&lt;p&gt;简简单单的香农信息熵的理论，在信息论的那本书里面有，但我们对经典的公式、定理，包括算发的理解，还是太浅了。包括对经典的品读，一定要是反反复复的，才会有所体会。&lt;/p&gt;
+&lt;p&gt;在大四即将升研究生的时候，我给导师打电话，问信安专业的研究生，您有什么书推荐我看的，可以提前学一下。原以为导师会说一些具体的编程方面的书籍，没想到导师当时却说让我读读《信息论》，当时的我没有太在意，直到研究生阶段读完。今天看到这本《安全简史》，才明白导师当时的良苦用心。可以这样理解，信息安全就是保障信息的不可篡改性、保密性、完整性等，而信息论从本质上定义信息，从这个角度上说，我们学信息安全，却不懂信息论，显得相当滑稽。&lt;/p&gt;
+&lt;p&gt;这本书没有涉及具体的技术性细节，是从系统工程、控制论、信息论等更宏观的角度论述信息安全，当然也包括了安全心理学、安全管理学等部分，是一本相当综合的书籍。看完本书，我只能感叹个人力量的渺小与薄弱，常怀谦卑与感恩之心。科技的发展，技术的进步，在做学问与开公司之间，做学问站的角度更高，它解决的是未来的问题，而办企业，解决的是当下的问题，两者是相辅相成的。在企业待久了，确实要读一读教授们写的书，洗涤心灵。&lt;/p&gt;
+&lt;p&gt;看完这本书，顺便在知乎搜了一下关于杨义先的信息，出乎意料，居然大部分都是关于他的负面意见。然而我又想到知乎黑百度的事情，也就可以理解了。现在网络社区鱼龙混杂，整体认知水准是偏低的。于是我也就看到社会精英阶层与普通大众之间的认知存在多么巨大的鸿沟。&lt;br&gt;杨义先写过一篇母亲剥削论的文章，主旨是驳导师剥削论，我是赞成其观点的，但无奈大众却总是喜欢扭曲文辞，曲解其意，以致网上一片骂声。就像之前一位很著名的北大经济学家薛兆丰老师，关于春节有人买不到火车票回家的事情，他高呼提高火车票的价格，结果同样招致一片骂声一样。普通大众是不懂经济学的，更是不懂这位经济学家才是真正在为老百姓呐喊，以及他的良苦用心，自由市场与自由经济，才能真正促进社会的发展与进步，也才能最终让每个人都能回家过年。&lt;/p&gt;
+&lt;p&gt;刚正式入职两个月，给自己这一年订一个小目标：这一年，弄清楚安全行业的市场大概面貌，真正的进入业内，争取能翻译一本书，同时完整的提高自己的技术基础能力，系统性的提高起来。  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/09/10/读《安全简史》有感/&quot;&gt;http://qimingyu.github.io/2017/09/10/读《安全简史》有感/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
       &lt;p&gt;看完《安全简史》，对安全有了一个更宏观的认识。&lt;/p&gt;
+&lt;p&gt;
     
     </summary>
     
@@ -382,10 +384,8 @@
 &lt;p&gt;[10] 周换换. 滴滴专车平台的竞争策略分析[D].南京大学,2016.&lt;/p&gt;
 &lt;p&gt;[11] 艾瑞咨询.中国移动端出行服务市场研究报告[j].2016&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/07/09/滴滴专车研究调查报告-1/&quot;&gt;http://qimingyu.github.io/2017/07/09/滴滴专车研究调查报告-1/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -461,10 +461,8 @@
 &lt;p&gt;如果返回结果是OK，则证明实验成功&lt;/p&gt;
 &lt;h5 id=&quot;6-将根证书导入浏览器之后再进行访问，不再报警&quot;&gt;&lt;a href=&quot;#6-将根证书导入浏览器之后再进行访问，不再报警&quot; class=&quot;headerlink&quot; title=&quot;6.将根证书导入浏览器之后再进行访问，不再报警&quot;&gt;&lt;/a&gt;6.将根证书导入浏览器之后再进行访问，不再报警&lt;/h5&gt;&lt;h3 id=&quot;实验补充&quot;&gt;&lt;a href=&quot;#实验补充&quot; class=&quot;headerlink&quot; title=&quot;实验补充&quot;&gt;&lt;/a&gt;实验补充&lt;/h3&gt;&lt;h4 id=&quot;心脏滴血漏洞原理&quot;&gt;&lt;a href=&quot;#心脏滴血漏洞原理&quot; class=&quot;headerlink&quot; title=&quot;心脏滴血漏洞原理&quot;&gt;&lt;/a&gt;心脏滴血漏洞原理&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;/images/ca_https/20140413_075036_665.jpg&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/ca_https/20140413_075039_644.jpg&quot; alt=&quot;2&quot;&gt;  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/&quot;&gt;http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -522,10 +520,8 @@
 &lt;p&gt; 打开浏览器访问网址：&lt;a href=&quot;http://localhost:8080/WebGoat&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:8080/WebGoat&lt;/a&gt;&lt;br&gt; 即可进入实验课程，一步步做实验，左边是全部的课程，每做完一个会有一个小的对勾。&lt;br&gt;&lt;img src=&quot;\images\webgoat_environment/1492067999094.png&quot; alt=&quot;6&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;p&gt;【1】&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;OWASP WebGoat Project&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&quot;&gt;http://qimingyu.github.io/2017/04/24/WebGoat之实验环境安装/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -575,10 +571,8 @@
 &lt;li&gt;差分隐私与分布式的结合。未来数据分析者、数据拥有者和服务提供方，这三者一定是分开的。设计一套机制将这三者统筹结合。基于云端的服务，每个人在本地将自己的数据按照约定的算法差分隐私化处理后上传至云端，那么云端获得的数据集全是隐私保护处理后的数据，但这些数据集依然可以供数据分析者进行挖掘分析，最后将结果给服务提供方。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&quot;&gt;http://qimingyu.github.io/2017/01/06/差分隐私（一）/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -610,10 +604,8 @@
 &lt;p&gt;以上就解决了Hadoop的版本库的问题，可是打开Spark，发现Spark还报版本库的错误，网上给的&lt;a href=&quot;http://stackoverflow.com/questions/30369380/hadoop-unable-to-load-native-hadoop-library-for-your-platform-error-on-docker&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;该解决方案&lt;/a&gt;并不能解决该问题，后来在spark-env.sh中增加了&lt;code&gt;lib64&lt;/code&gt;的地址，最终边为如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;export LD_LIBRARY_PATH=$SPARK_SUBMIT_LIBRARY_PATH:$HADOOP_HOME/lib/native:/home/work/local/lib/:/home/work/local/lib64/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;再SCP到所有集群上面，遂解决。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&quot;&gt;http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -649,10 +641,8 @@
 &lt;p&gt;然后在source文件中增加一个CNAME的文件，里面写：qimingyu.com，然后通过hexo g生成之后，hexo d再推送到远端。这样就搞定了。&lt;/p&gt;
 &lt;p&gt;不过45元其实还包括很多服务，邮箱什么的，还有阿里云的一整套其他东西，后面再慢慢了解吧。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&quot;&gt;http://qimingyu.github.io/2016/06/29/为博客更新了域名/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -681,10 +671,8 @@
 &lt;p&gt;随着计算机技术的发展，技术的成长是突飞猛进的，因此做一件事一定要站在巨人的肩膀上，考虑实际需求之后，快速学会使用别人的工具达到自己所做事情的完美结果即可。站在企业的角度上招人也是，对于大企业，有其本身的技术积累，也有很多的技术基础设施的建设（大数据平台），要学会好好利用这些资源，而不要自己在那里YY，意淫，重复造轮子浪费时间。而在使用工具的过程中，遇到问题了，再去深入，这才是对的。&lt;/p&gt;
 &lt;h3 id=&quot;7月11日更新&quot;&gt;&lt;a href=&quot;#7月11日更新&quot; class=&quot;headerlink&quot; title=&quot;7月11日更新&quot;&gt;&lt;/a&gt;7月11日更新&lt;/h3&gt;&lt;p&gt;虽然说不要重复造轮子，但是对轮子的理解太重要了。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&quot;&gt;http://qimingyu.github.io/2016/06/28/不要重复造轮子/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -720,10 +708,8 @@
 &lt;p&gt;数据处理引擎之于大数据就像CPU之于计算机，或大脑之于人类。Spark只是一个通用计算框架，利用Spark实现的应用才是其真正价值所在。&lt;/p&gt;
 &lt;p&gt;弹性分布式数据集是spark对分步式数据和计算的基本抽象&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/关于机器学习/&quot;&gt;http://qimingyu.github.io/2016/06/27/关于机器学习/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -756,10 +742,8 @@
 &lt;p&gt;在技术方面，Java ——&amp;gt; hadoop/spark ——&amp;gt; 机器学习，这一整条路线都是工具，这些工具是用来解决实际安全业务问题的，然后是数据，这些数据与安全相关，如何处理这些数据，最后得到一个比较好的解决方案，这是对相关安全从事人员的要求。而在解决具体问题中，每个人所展现出的联想性与创造性，则是每个人综合能力的体现，看论文的能力，数学能力等等。&lt;/p&gt;
 &lt;p&gt;因此，对个人的定位应该是立足安全，对技术采取兼容并包的态度，凡是好的都可以拿来用，但是以解决安全问题为根本。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&quot;&gt;http://qimingyu.github.io/2016/06/27/我对“数据驱动安全”的一些理解/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -774,9 +758,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -823,10 +807,8 @@
 &lt;p&gt;可见对相关从业人员的要求之高，然而更重要的，对于创业型企业来考虑（如果拿威胁情报作为创业项目的话），他们更重要的是没有数据来源渠道，因此，这个方向的创业，门槛还是相当高的，小企业不要轻易尝试。但不可否认的是，在安全领域而言，威胁情报确实是未来的一个趋势。&lt;/p&gt;
 &lt;p&gt;还有一点是，我们在做事情或者写程序的时候，一定要考虑上层的架构。也就是说虽然是做的下层的事，但有时往往上层架构搭的不好，导致下面会非常混乱。因此，一定要从架构师的角度去思考问题。专注于一个领域，做好一件事，这就是本事。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&quot;&gt;http://qimingyu.github.io/2016/06/24/我对威胁情报的一些看法/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -841,9 +823,9 @@
     
       <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
     
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
       <category term="微步在线" scheme="http://qimingyu.github.io/tags/%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF/"/>
     
@@ -875,10 +857,8 @@
 &lt;h2 id=&quot;添加赞赏功能&quot;&gt;&lt;a href=&quot;#添加赞赏功能&quot; class=&quot;headerlink&quot; title=&quot;添加赞赏功能&quot;&gt;&lt;/a&gt;添加赞赏功能&lt;/h2&gt;&lt;p&gt;（2017年4月20日更新）&lt;/p&gt;
 &lt;p&gt;在主题配置文件中添加如下代码即可：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;wechatpay: /path/to/wechat-reward-image&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;alipay: /path/to/alipay-reward-image&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&quot;&gt;http://qimingyu.github.io/2016/06/05/为博客文章添加版权声明/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -952,10 +932,8 @@
 &lt;h3 id=&quot;Level-13&quot;&gt;&lt;a href=&quot;#Level-13&quot; class=&quot;headerlink&quot; title=&quot;Level 13&quot;&gt;&lt;/a&gt;Level 13&lt;/h3&gt;&lt;p&gt;网址：&lt;a href=&quot;http://www.try2hack.nl/levels/level13-olwehfdow.xhtml&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.try2hack.nl/levels/level13-olwehfdow.xhtml&lt;/a&gt;&lt;br&gt;终于来到最后一关了，显示页面如下：&lt;br&gt;&lt;img src=&quot;/images/try2hack/31.png&quot; alt=&quot;31&quot;&gt;&lt;br&gt;显示需要下载文件，这个文件比较大，有60多兆。&lt;br&gt;Sleuth Kit是一个用来分析磁盘映像和恢复文件的开源取证工具。&lt;br&gt;这是Linux的一个文件系统，我们需要挂载该文件系统。&lt;br&gt;最后得到密码为：f1ff950850ac2f1f51fa82d839f0bd1b&lt;br&gt;然后出现如下页面：&lt;br&gt;&lt;img src=&quot;/images/try2hack/32.png&quot; alt=&quot;32&quot;&gt;&lt;br&gt;已经全部通关了。&lt;br&gt;&lt;strong&gt;总结：这部分考查对Linux系统的了解。&lt;/strong&gt;&lt;/p&gt;
 &lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;Web攻击学无止境，关键在于把基本知识掌握之后，要熟悉很多常见的漏洞及利用方式，然后再加以创造性的综合利用，渗透工程师是一门非常需要积累和经验的工作。而做一名安全构架师，则更是任重而道远。这是需要花时间和精力去认真修炼打磨的。积累自己的势能。&lt;br&gt;这个try2hack网站太老了，很多技术都已经过时，不过用来训练思维还是不错的。&lt;br&gt;任何语言都是可以反编译的。还需要提高自己逆向的能力以及加强对底层的了解。&lt;br&gt;基础还不够，必须要精通一门语言才行，例如第十一关，写一段小代码都要写半天。&lt;br&gt;最后，Level10-13还有待修改完善，以及原理还有待弄懂。未完，待续。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&quot;&gt;http://qimingyu.github.io/2016/05/12/try2hack通关教程/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -984,10 +962,8 @@
     <content type="html">&lt;h2 id=&quot;总结&quot;&gt;&lt;a href=&quot;#总结&quot; class=&quot;headerlink&quot; title=&quot;总结&quot;&gt;&lt;/a&gt;总结&lt;/h2&gt;&lt;p&gt;大约历时一个月左右，系统学完了WebGoat5.2标准版的所有教程。虽然有些东西学的还是比较浅显，但还是加深了很多地方的理解。&lt;br&gt;人从一无所有出生，再到一无所有的离开，区区一辈子，80载，人世走一遭，总得留下些什么。因此一定要做一个有梦想的人，特别是在年轻的时候，在面临很多选择的时候，一定要坚持自己的梦想，不能有一丝一毫的妥协。&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;学的越多，往往真有一种学无止境的感觉，学习是为了产出，学习是为了指导实践，学习是为了创造价值。因此，学习过程应该和产出过程相结合，构成良性循环。而世上知识千千万万，一个人要有所作为，则只能专于一点，我给自己定位于信息安全行业，希望能为中国的信息安全行业贡献自己的一份力量。&lt;br&gt;曾经在一篇博客里面看到这样一句话：做正确的事，然后等着被开除。当时我就为之一震，而如今我更深切的体会到说这句话更是需要勇气的，在公司往往会受迫于很多琐事，而无法专注于你希望做的事。这往往是个人理想与社会现实的偏差，这样的偏差并不可怕，也很正常。而面对这样的偏差时，我们一方面要积极修正自己的方向，因为这是来自于外界的反馈，另一方面，要有自己的独到的个性与不可替代性，这是自身价值的体现。&lt;br&gt;要让自己变得厚重、深沉而有魅力，应该永远关注自身势能的提高。学习信安十年，然后在行业内深深积累十年，然后再创业十年，这是我的大方向。深刻的剖析自身，要让自己变得透明，要敢于面对最真实的自己。无畏向前。&lt;/p&gt;
 &lt;h2 id=&quot;成果&quot;&gt;&lt;a href=&quot;#成果&quot; class=&quot;headerlink&quot; title=&quot;成果&quot;&gt;&lt;/a&gt;成果&lt;/h2&gt;&lt;p&gt;如下是WebGoat课程的报告清单，也是我的学习成果，其中没有通过的是因为需要在开发版上才能完成。&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/webgoat_report_card/3.png&quot; alt=&quot;3&quot;&gt;  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&quot;&gt;http://qimingyu.github.io/2016/05/10/Webgoat之Report_Card（完结篇）/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -1061,10 +1037,8 @@
 &lt;p&gt;使没创建一个新用户的时候，自动为其填充为我们所希望的邮箱。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;SQL注入需要对数据库熟悉，并且对后台代码了解，内容还是比较多的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -1113,10 +1087,8 @@
 &lt;p&gt;&lt;img src=&quot;/images/webgoat_web_services/11.png&quot; alt=&quot;11&quot;&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;这一节实验花了较多的时间，主要是对于Web Services基础理解不熟，然后在做第三小节的时候，先是用Webscarab攻击成功之后，看源码，再在burpsuit里面做的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&lt;/a&gt;&lt;/p&gt;
 </content>
     
@@ -1158,10 +1130,8 @@
 &lt;p&gt;说明对于浏览器A而言，他用169美元买了1799美元的商品。&lt;br&gt;这个原因在于浏览器B的更新时，浏览器A受影响了，服务器没有很好的处理多线程的问题。&lt;/p&gt;
 &lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;多线程和并发安全在网络安全中也是需要考虑的。  &lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;. (&lt;a href=&quot;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;/a&gt;&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;!-- 
-![kejiruixin](/images/about/kejiruixin.jpg) 
---&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
 &lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/&lt;/a&gt;&lt;/p&gt;
 </content>
     
