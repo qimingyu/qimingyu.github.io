@@ -312,9 +312,11 @@
 <p>以上就解决了Hadoop的版本库的问题，可是打开Spark，发现Spark还报版本库的错误，网上给的<a href="http://stackoverflow.com/questions/30369380/hadoop-unable-to-load-native-hadoop-library-for-your-platform-error-on-docker" target="_blank" rel="external">该解决方案</a>并不能解决该问题，后来在spark-env.sh中增加了<code>lib64</code>的地址，最终边为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$SPARK_SUBMIT_LIBRARY_PATH:$HADOOP_HOME/lib/native:/home/work/local/lib/:/home/work/local/lib64/</span><br></pre></td></tr></table></figure></p>
 <p>再SCP到所有集群上面，遂解决。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>.（<a href="http://qimingyu.com），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com" target="_blank" rel="external">http://qimingyu.com），欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com</a><br>欢迎关注我的微信公众号：科技锐新<br><!-- 
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>. (<a href="http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com" target="_blank" rel="external">http://qimingyu.com)，欢迎转载，但是必须保留本文的署名[戚名钰](http://qimingyu.com)（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com</a><br>欢迎关注我的微信公众号：科技锐新</p>
+<!-- 
 ![kejiruixin](/images/about/kejiruixin.jpg) 
---><br>–&gt;<br>本文永久链接：<a href="http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/">http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/</a></p>
+-->
+<p>本文永久链接：<a href="http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/">http://qimingyu.github.io/2016/07/23/解决Hadoop和Spark本地版本库不统一的问题/</a></p>
 
       
     </div>
