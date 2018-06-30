@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2018-06-30T02:05:13.886Z</updated>
+  <updated>2018-06-30T06:47:43.892Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django性能的继续优化</title>
+    <link href="http://qimingyu.github.io/2018/06/30/Django%E6%80%A7%E8%83%BD%E7%9A%84%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96/"/>
+    <id>http://qimingyu.github.io/2018/06/30/Django性能的继续优化/</id>
+    <published>2018-06-30T05:30:00.000Z</published>
+    <updated>2018-06-30T06:47:43.892Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h4&gt;&lt;p&gt;前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。&lt;/p&gt;
+&lt;p&gt;权限的优化是这样的  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
+&lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2018/06/30/Django性能的继续优化/&quot;&gt;http://qimingyu.github.io/2018/06/30/Django性能的继续优化/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;开始&quot;&gt;&lt;a href=&quot;#开始&quot; class=&quot;headerlink&quot; title=&quot;开始&quot;&gt;&lt;/a&gt;开始&lt;/h4&gt;&lt;p&gt;前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。&lt;/p&gt;
+&lt;p&gt;权限的优化是这样的  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p
+    
+    </summary>
+    
+      <category term="网站技术" scheme="http://qimingyu.github.io/categories/%E7%BD%91%E7%AB%99%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Django" scheme="http://qimingyu.github.io/tags/Django/"/>
+    
+      <category term="性能优化" scheme="http://qimingyu.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>Kafka重复消费的问题</title>
@@ -798,9 +831,9 @@
     
       <category term="机器学习" scheme="http://qimingyu.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
-    
       <category term="数据驱动安全" scheme="http://qimingyu.github.io/tags/%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E5%AE%89%E5%85%A8/"/>
+    
+      <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -863,9 +896,9 @@
     
       <category term="360公司" scheme="http://qimingyu.github.io/tags/360%E5%85%AC%E5%8F%B8/"/>
     
-      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
-    
       <category term="大数据" scheme="http://qimingyu.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="威胁情报" scheme="http://qimingyu.github.io/tags/%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5/"/>
     
       <category term="微步在线" scheme="http://qimingyu.github.io/tags/%E5%BE%AE%E6%AD%A5%E5%9C%A8%E7%BA%BF/"/>
     
@@ -1096,62 +1129,6 @@
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
     
       <category term="注入攻击" scheme="http://qimingyu.github.io/tags/%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之Web Services</title>
-    <link href="http://qimingyu.github.io/2016/05/05/Webgoat%E4%B9%8BWeb_Services/"/>
-    <id>http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/</id>
-    <published>2016-05-05T07:51:40.000Z</published>
-    <updated>2016-05-06T06:20:57.000Z</updated>
-    
-    <content type="html">&lt;p&gt;什么是Web Service？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Web Service就是一种基于Web 的服务，但这个服务需要供求双方按照规定去做才能实现的服务。&lt;/li&gt;
-&lt;li&gt;Web Service就是一个应用程序，它向外界暴露出一个能够通过Web进行调用的API。这就是说，你能够用编程的方法通过Web来调用这个应用程序。我们把能调用这个Web service 的应用程序叫做客户端程序。&lt;/li&gt;
-&lt;li&gt;Web Service希望实现不同的系统之间能够用“软件-软件对话”的方式相互调用，打破了软件应用、网站和各种设备之间的格格不入的状态，实现“基于Web无缝集成”的目标。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;详细内容见&lt;a href=&quot;http://blog.csdn.net/weiguolee/article/details/6881411&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;这里&lt;/a&gt;，它有三要素：WSDL用来描述服务；UDDI用来注册和查找服务；SOAP用来在消费者和服务提供者之间传送消息。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Create-a-SOAP-Request&quot;&gt;&lt;a href=&quot;#Create-a-SOAP-Request&quot; class=&quot;headerlink&quot; title=&quot;Create a SOAP Request&quot;&gt;&lt;/a&gt;Create a SOAP Request&lt;/h2&gt;&lt;p&gt;第一部分要求我们创建一个SOAP的请求。&lt;br&gt;以下显示的是WSDL文档：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;我们展开portType：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;发现有四种操作。因此WSDL中定义了4种操作。&lt;br&gt;第二步要填写方法getFirstNameRequest方法中参数的类型&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/12.png&quot; alt=&quot;12&quot;&gt;&lt;br&gt;由上图可以看出是int类型的。&lt;br&gt;然后接着要发送一个SOAP的请求，点击按钮“Press to generate an HTTP request”，然后用burp进行拦截，拦截之后修改请求符合SOAP标准，如下：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;POST https://localhost:8443/WebGoat/services/SoapRequest HTTP/1.1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host: localhost:8443&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Accept: textml,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Accept-Encoding: gzip, deflate, br&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Referer: https://localhost:8443/WebGoat/attack?Screen=32&amp;amp;menu=1800&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Cookie: JSESSIONID=B0E2BCDE68B32C2894064DF30A545EAA&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Authorization: Basic Z3Vlc3Q6Z3Vlc3Q=&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Connection: close&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-Type: text/xml&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SOAPAction:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-Length: 445&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;SOAP-ENV:Envelope&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xmlns:SOAP-ENV&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&lt;span class=&quot;attr&quot;&gt;xmlns:xsd&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;SOAP-ENV:Body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ns1:getFirstName&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;SOAP-ENV:encodingStyle&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://schemas.xmlsoap.org/soap/encoding/&quot;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&lt;span class=&quot;attr&quot;&gt;xmlns:ns1&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;http://lessons&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;xsi:type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;xsd:int&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;101&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;ns1:getFirstName&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;SOAP-ENV:Body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;SOAP-ENV:Envelope&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;注意以上代码的Host，Post，Content-Type，SOAPAction字段。&lt;/p&gt;
-&lt;p&gt;此时服务器会有一个响应：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/10.png&quot; alt=&quot;10&quot;&gt;&lt;br&gt;传回来的值为：Joe&lt;br&gt;此时再将xml中的函数getFirstName两处改为getLastName，再发送一次请求，服务器返回：Snow&lt;br&gt;这关就过了。&lt;/p&gt;
-&lt;h2 id=&quot;WSDL-Scanning&quot;&gt;&lt;a href=&quot;#WSDL-Scanning&quot; class=&quot;headerlink&quot; title=&quot;WSDL Scanning&quot;&gt;&lt;/a&gt;WSDL Scanning&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/webgoat_web_services/3.png&quot; alt=&quot;3&quot;&gt;&lt;br&gt;做这个实验的时候，我也是醉了，因为这样点击的时候，下面的SNOW一直出不来，其他函数也出不来，搞不清楚是什么问题。后来发现我用的https，然后改为http后就好了。在网络应用中，可以在配置文件里面要求强制转换为https，也可以同时保留http和https，这些的前提是服务器一定配了https。&lt;br&gt;这部分课程是要我们用到所有WSDL中定义的API操作，并且有返回值。我们知道WSDL中实际上有四种操作，而这里只列出了三种，我们可以查看WSDL文档后，将其修改为我们需要的操作。如图所示，把请求更改为这样：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;最后出现结果为如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/5.png&quot; alt=&quot;5&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Web-Service-SAX-Injection&quot;&gt;&lt;a href=&quot;#Web-Service-SAX-Injection&quot; class=&quot;headerlink&quot; title=&quot;Web Service SAX Injection&quot;&gt;&lt;/a&gt;Web Service SAX Injection&lt;/h2&gt;&lt;p&gt;有些Web界面在后台使用的是Web Services。而Web Services通过SOAP请求进行通信。该节课程需要我们修改除了用户101以外的另一个用户的密码：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;拦截后，把请求修改为如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;最后成功修改了编号102的密码：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/8.png&quot; alt=&quot;8&quot;&gt;&lt;br&gt;图片下面部分显示的是我们发送过去的请求。&lt;br&gt;其原理就是：SAX解析器会解析任何格式正常的XML文件，例如：匹配到有效的标记符号及闭合符号即认为正确。当您向原有的XML文件中添加新的changePAssword元素时，如果id和password等标记都正确，那么解析器将很乐意帮您去修改另一个userid的密码。我们在password字段增加了多余的恶意代码。&lt;/p&gt;
-&lt;h2 id=&quot;Web-Service-SQL-Injection&quot;&gt;&lt;a href=&quot;#Web-Service-SQL-Injection&quot; class=&quot;headerlink&quot; title=&quot;Web Service SQL Injection&quot;&gt;&lt;/a&gt;Web Service SQL Injection&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/webgoat_web_services/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;要求我们查看WSDL文件，并尝试获取多个客户的信用卡帐号。&lt;br&gt;这一节与第一节一样，需要我们自己构造一个SOAP请求，构造如下请求发送：&lt;br&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;POST http://127.0.0.1:8080/WebGoat/services/WsSqlInjection HTTP/1.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Accept: application/soap+xml, application/dime, multipart/related, text/*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host: 127.0.0.1:8080&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-Type: text/xml; charset=utf-8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;SOAPAction: &quot;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-length: 584&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Authorization: Basic Z3Vlc3Q6Z3Vlc3Q=&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;wsns0:Envelope&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;xmlns:wsns1&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://www.w3.org/2001/XMLSchema-instance&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;xmlns:xsd&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://www.w3.org/2001/XMLSchema&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;xmlns:wsns0&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://schemas.xmlsoap.org/soap/envelope/&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;wsns0:Body&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;wsns0:encodingStyle&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://schemas.xmlsoap.org/soap/encoding/&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;  &amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;wsns2:getCreditCard&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;          &lt;span class=&quot;attr&quot;&gt;xmlns:wsns2&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://lessons.webgoat.owasp.org&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;    &amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;        &lt;span class=&quot;attr&quot;&gt;xsi:type&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;xsd:string&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;              &lt;span class=&quot;attr&quot;&gt;xmlns:xsi&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&#39;http://www.w3.org/2001/XMLSchema-instance&#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;      &amp;gt;&lt;/span&gt;1 or 1=1&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;id&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ns2:getCreditCard&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ns0:Body&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;ns0:Envelope&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这里主要注意上面的ID是：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;1 or 1=1&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;并且注意这里POST的地址与第一小节的地址是不一样的。&lt;br&gt;并且在getCreditCard之间加了一个id，写为string，然后传为以上值。攻击成功。服务器返回所有人的信用卡值：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/webgoat_web_services/11.png&quot; alt=&quot;11&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;这一节实验花了较多的时间，主要是对于Web Services基础理解不熟，然后在做第三小节的时候，先是用Webscarab攻击成功之后，看源码，再在burpsuit里面做的。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
-&lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&quot;&gt;http://qimingyu.github.io/2016/05/05/Webgoat之Web_Services/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;什么是Web Service？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Web Service就是一种基于Web 的服务，但这个服务需要供求双方按照规定去做才能实现的服务。&lt;/li&gt;
-&lt;li&gt;Web Service就是一个应用程序，它向外界暴露出一个能够通过Web进行调用的API。这就是说，你能够用编程的方法通过Web来调用这个应用程序。我们把能调用这个Web service 的应用程序叫做客户端程序。&lt;/li&gt;
-&lt;li&gt;Web Service希望实现不同的系统之间能够用“软件-软件对话”的方式相互调用，打破了软件应用、网站和各种设备之间的格格不入的状态，实现“基于Web无缝集成”的目标。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;详细内容见&lt;a href=&quot;http://blog.csdn.net/weiguolee/article/details/6881411&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;这里&lt;/a&gt;，它有三要素：WSDL用来描述服务；UDDI用来注册和查找服务；SOAP用来在消费者和服务提供者之间传送消息。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="Web服务漏洞" scheme="http://qimingyu.github.io/tags/Web%E6%9C%8D%E5%8A%A1%E6%BC%8F%E6%B4%9E/"/>
     
   </entry>
   

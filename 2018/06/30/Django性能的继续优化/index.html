@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="WebGoat,网络渗透,不安全存储,网络编码," />
+  <meta name="keywords" content="Django,性能优化," />
 
 
 
@@ -59,19 +59,19 @@
 
 
 
-<meta name="description" content="Encoding Basics在Web应用程序中会根据不同的应用选择不同的编码方案。每一个编码方案都有与其相关的算法。编码和加密是不一样的。下面讲解几种常用的编码/加密方法。这章是Web安全的编码基础。">
-<meta name="keywords" content="WebGoat,网络渗透,不安全存储,网络编码">
+<meta name="description" content="开始前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。 权限的优化是这样的    【版权声明】本文首发于戚名钰的博客，欢迎转载，但是必须保留本文的署名戚名钰（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com欢迎关注我的微信公众号：科技锐新   本文永久链接：http://qimingyu.githu">
+<meta name="keywords" content="Django,性能优化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Webgoat之Insecure Storage">
-<meta property="og:url" content="http://qimingyu.github.io/2016/04/26/Webgoat之Insecurity_Storage/index.html">
+<meta property="og:title" content="Django性能的继续优化">
+<meta property="og:url" content="http://qimingyu.github.io/2018/06/30/Django性能的继续优化/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="Encoding Basics在Web应用程序中会根据不同的应用选择不同的编码方案。每一个编码方案都有与其相关的算法。编码和加密是不一样的。下面讲解几种常用的编码/加密方法。这章是Web安全的编码基础。">
+<meta property="og:description" content="开始前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。 权限的优化是这样的    【版权声明】本文首发于戚名钰的博客，欢迎转载，但是必须保留本文的署名戚名钰（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com欢迎关注我的微信公众号：科技锐新   本文永久链接：http://qimingyu.githu">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
-<meta property="og:updated_time" content="2016-05-20T08:53:57.000Z">
+<meta property="og:updated_time" content="2018-06-30T06:47:43.892Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Webgoat之Insecure Storage">
-<meta name="twitter:description" content="Encoding Basics在Web应用程序中会根据不同的应用选择不同的编码方案。每一个编码方案都有与其相关的算法。编码和加密是不一样的。下面讲解几种常用的编码/加密方法。这章是Web安全的编码基础。">
+<meta name="twitter:title" content="Django性能的继续优化">
+<meta name="twitter:description" content="开始前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。 权限的优化是这样的    【版权声明】本文首发于戚名钰的博客，欢迎转载，但是必须保留本文的署名戚名钰（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com欢迎关注我的微信公众号：科技锐新   本文永久链接：http://qimingyu.githu">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 
 
@@ -90,7 +90,7 @@
   };
 </script>
 
-  <title> Webgoat之Insecure Storage | 戚名钰的博客 </title>
+  <title> Django性能的继续优化 | 戚名钰的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +241,7 @@
             
             
               
-                Webgoat之Insecure Storage
+                Django性能的继续优化
               
             
           </h1>
@@ -253,8 +253,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T15:40:04+08:00" content="2016-04-26">
-              2016-04-26
+            <time itemprop="dateCreated" datetime="2018-06-30T13:30:00+08:00" content="2018-06-30">
+              2018-06-30
             </time>
           </span>
 
@@ -267,8 +267,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/应用安全/" itemprop="url" rel="index">
-                    <span itemprop="name">应用安全</span>
+                  <a href="/categories/网站技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网站技术</span>
                   </a>
                 </span>
 
@@ -283,8 +283,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/26/Webgoat之Insecurity_Storage/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/Webgoat之Insecurity_Storage/" itemprop="commentsCount"></span>
+                <a href="/2018/06/30/Django性能的继续优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/30/Django性能的继续优化/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -306,24 +306,12 @@
       
 
       
-        <h2 id="Encoding-Basics"><a href="#Encoding-Basics" class="headerlink" title="Encoding Basics"></a>Encoding Basics</h2><p>在Web应用程序中会根据不同的应用选择不同的编码方案。每一个编码方案都有与其相关的算法。<br>编码和加密是不一样的。下面讲解几种常用的编码/加密方法。这章是Web安全的编码基础。<br><a id="more"></a>　</p>
-<h3 id="Base64"><a href="#Base64" class="headerlink" title="Base64"></a>Base64</h3><p>Base64是将普通字符编码成二进制数据。</p>
-<h3 id="Entity"><a href="#Entity" class="headerlink" title="Entity"></a>Entity</h3><p>HTML中常用的特殊字符实体编码</p>
-<h3 id="PBE"><a href="#PBE" class="headerlink" title="PBE"></a>PBE</h3><p>PBE算法是一种基于口令的加密算法，其特点是使用口令代替了密钥，而口令由用户自己掌管，采用随机数杂凑多重加密等方法保证数据的安全性。</p>
-<h3 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h3><p>MD5是一种单向散列的哈希算法</p>
-<h3 id="SHA-256"><a href="#SHA-256" class="headerlink" title="SHA-256"></a>SHA-256</h3><p>也是一种单向散列的哈希算法</p>
-<h3 id="Unicode-encoding"><a href="#Unicode-encoding" class="headerlink" title="Unicode encoding"></a>Unicode encoding</h3><p>Unicode是国际组织制定的可以容纳世界上所有文字和符号的字符编码方案。</p>
-<h3 id="URL-encoding"><a href="#URL-encoding" class="headerlink" title="URL encoding"></a>URL encoding</h3><p>URL编码是一种浏览器用来打包表单输入的格式。浏览器从表单中获取所有的name和其中的值 ，将它们以name/value参数编码（移去那些不能传送的字符，将数据排行等等）作为URL的一部分或者分离地发给服务器。</p>
-<h3 id="Hex-encoding"><a href="#Hex-encoding" class="headerlink" title="Hex encoding"></a>Hex encoding</h3><p>16进制编码</p>
-<h3 id="Rot13"><a href="#Rot13" class="headerlink" title="Rot13"></a>Rot13</h3><p>Rot13编码是一种简单的编码，目的是让文本不可读，但它很容易被还原并且不具有安全性</p>
-<h3 id="Double-URL-encoding"><a href="#Double-URL-encoding" class="headerlink" title="Double URL encoding"></a>Double URL encoding</h3><p>当使用地址栏提交查询参数时，如果不编码，非英文字符会按照操作系统的字符集进行编码提交到服务器，服务器会按照配置的字符集进行解码，所以如果两者不一致就会导致乱码。</p>
-<p>encodeURI函数采用UTF-8对URL进行编码，所以如果服务器在进行解码时使用的是其他的编码方式就会出现乱码，默认的服务器配置的解码字符集都不是UTF-8，所以大部分情况下地址栏提交中文查询参数时会产生乱码；针对这种情况，可以连续使用两次encodeURI在客户端(主要指浏览器)对非英文字符进行编码，然后在服务端使用Java.net.URLDecoder(String.”UTF-8”)解码，即可得到正确的中文。</p>
-<h3 id="Double-unicode-encoding"><a href="#Double-unicode-encoding" class="headerlink" title="Double unicode encoding"></a>Double unicode encoding</h3><h3 id="XOR"><a href="#XOR" class="headerlink" title="XOR"></a>XOR</h3><p>异或运算的加密</p>
-<h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>工作了一整天，感觉好疲惫。要学的东西还有好多。书到用时方恨少。  </p>
+        <h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><p>前一篇讲到Django认证部分的优化，认证优化之后发现还不够，还有权限的优化。</p>
+<p>权限的优化是这样的  </p>
 <hr>
 <p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
-<p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/26/Webgoat之Insecurity_Storage/">http://qimingyu.github.io/2016/04/26/Webgoat之Insecurity_Storage/</a></p>
+<p>本文永久链接：<a href="http://qimingyu.github.io/2018/06/30/Django性能的继续优化/">http://qimingyu.github.io/2018/06/30/Django性能的继续优化/</a></p>
 
       
     </div>
@@ -359,13 +347,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/WebGoat/" rel="tag">#WebGoat</a>
+            <a href="/tags/Django/" rel="tag">#Django</a>
           
-            <a href="/tags/网络渗透/" rel="tag">#网络渗透</a>
-          
-            <a href="/tags/不安全存储/" rel="tag">#不安全存储</a>
-          
-            <a href="/tags/网络编码/" rel="tag">#网络编码</a>
+            <a href="/tags/性能优化/" rel="tag">#性能优化</a>
           
         </div>
       
@@ -374,17 +358,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/Webgoat之DOS/" rel="next" title="WebGoat之DOS">
-                <i class="fa fa-chevron-left"></i> WebGoat之DOS
+              <a href="/2018/06/30/Kafka重复消费的问题/" rel="next" title="Kafka重复消费的问题">
+                <i class="fa fa-chevron-left"></i> Kafka重复消费的问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/27/Webgoat之Insecure_Configuration/" rel="prev" title="Webgoat之Insecure Configuration">
-                Webgoat之Insecure Configuration <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -436,8 +416,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/26/Webgoat之Insecurity_Storage/"
-           data-title="Webgoat之Insecure Storage" data-url="http://qimingyu.github.io/2016/04/26/Webgoat之Insecurity_Storage/">
+      <div class="ds-thread" data-thread-key="2018/06/30/Django性能的继续优化/"
+           data-title="Django性能的继续优化" data-url="http://qimingyu.github.io/2018/06/30/Django性能的继续优化/">
       </div>
     
   </div>
@@ -592,7 +572,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoding-Basics"><span class="nav-number">1.</span> <span class="nav-text">Encoding Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Base64"><span class="nav-number">1.1.</span> <span class="nav-text">Base64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity"><span class="nav-number">1.2.</span> <span class="nav-text">Entity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PBE"><span class="nav-number">1.3.</span> <span class="nav-text">PBE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5"><span class="nav-number">1.4.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHA-256"><span class="nav-number">1.5.</span> <span class="nav-text">SHA-256</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unicode-encoding"><span class="nav-number">1.6.</span> <span class="nav-text">Unicode encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL-encoding"><span class="nav-number">1.7.</span> <span class="nav-text">URL encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hex-encoding"><span class="nav-number">1.8.</span> <span class="nav-text">Hex encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rot13"><span class="nav-number">1.9.</span> <span class="nav-text">Rot13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-URL-encoding"><span class="nav-number">1.10.</span> <span class="nav-text">Double URL encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Double-unicode-encoding"><span class="nav-number">1.11.</span> <span class="nav-text">Double unicode encoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XOR"><span class="nav-number">1.12.</span> <span class="nav-text">XOR</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summarize"><span class="nav-number">2.</span> <span class="nav-text">Summarize</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#开始"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
