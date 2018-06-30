@@ -68,7 +68,7 @@
 <meta property="og:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。
 原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
 <meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
-<meta property="og:updated_time" content="2018-06-30T02:00:57.288Z">
+<meta property="og:updated_time" content="2018-06-30T02:05:13.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka重复消费的问题">
 <meta name="twitter:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。
@@ -260,6 +260,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -289,7 +308,7 @@
 
       
         <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。</p>
-<h4 id="原消费代码"><a href="#原消费代码" class="headerlink" title="原消费代码"></a>原消费代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例代码</span></span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> KafkaConsumer</span><br><span class="line"></span><br><span class="line">topic = <span class="string">"test"</span></span><br><span class="line">groupid = <span class="string">"qimingyu"</span></span><br><span class="line">clientid = <span class="string">"0"</span></span><br><span class="line">server_list = [<span class="string">"127.0.0.1:9092"</span>]</span><br><span class="line">consumer = KafkaConsumer(topic, group_id=groupid,</span><br><span class="line">						client_id=clientid,</span><br><span class="line">						bootstrap_servers=server_list)</span><br><span class="line"><span class="keyword">for</span> message <span class="keyword">in</span> consumer:</span><br><span class="line">	<span class="keyword">print</span> message.partition, message.offset</span><br></pre></td></tr></table></figure>
+<h4 id="原消费代码"><a href="#原消费代码" class="headerlink" title="原消费代码"></a>原消费代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例代码</span></span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> KafkaConsumer</span><br><span class="line"></span><br><span class="line">topic = <span class="string">"test"</span></span><br><span class="line">groupid = <span class="string">"qimingyu"</span></span><br><span class="line">clientid = <span class="string">"0"</span></span><br><span class="line">server_list = [<span class="string">"127.0.0.1:9092"</span>]</span><br><span class="line">consumer = KafkaConsumer(topic, group_id=groupid,</span><br><span class="line">                         client_id=clientid,</span><br><span class="line">                         bootstrap_servers=server_list)</span><br><span class="line"><span class="keyword">for</span> message <span class="keyword">in</span> consumer:</span><br><span class="line">	<span class="keyword">print</span> message.partition, message.offset</span><br></pre></td></tr></table></figure>
 <p>这是一个多进程的消费程序，假设所消费的topic分区数目是n，则起n个这样的进程，分别指定不同的clientid。理想情况下，一个进程会对应一个分区进行消费，这是由Kafka自带的reblance（消费者平衡）机制决定的。</p>
 <h4 id="根源分析"><a href="#根源分析" class="headerlink" title="根源分析"></a>根源分析</h4><p>但是就是这样的代码，在生产环境中使用的时候，出现了数据被大量重复消费的情况。为什么会有这种情况？</p>
 <p>首先出于性能考虑，该段代码采用的是自动提交offset，并且采用的是默认时间，每隔5秒，由消费者进程提交一次offset。</p>
@@ -297,9 +316,9 @@
 <p>因此假设进程A正在消费分区1的信息，并提交了偏移量，之后又消费了10条数据，还没来得及提交偏移量的时候，reblance机制让进程B来继续消费分区1的信息，此时进程B会从上次进程A提交偏移量的地方开始消费，因此这10条数据就是重复消费的。</p>
 <p>当reblance比较频繁的时候，就会造成大量数据的重复。</p>
 <h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><p><strong>将消费者进程与分区静态绑定</strong>，这样Kafka不会采用自动reblance机制，就不会重复消费数据。</p>
-<p>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改后的示例代码</span></span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> KafkaConsumer</span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> TopicPartition</span><br><span class="line"></span><br><span class="line">topic = <span class="string">"test"</span></span><br><span class="line">server_list = [<span class="string">"127.0.0.1:9092"</span>]</span><br><span class="line">groupid = <span class="string">"qimingyu"</span></span><br><span class="line">clientid = <span class="string">"0"</span></span><br><span class="line">       </span><br><span class="line">consumer = KafkaConsumer(group_id=groupid,</span><br><span class="line">						client_id=clientid,  </span><br><span class="line">                    	bootstrap_servers=server_list,</span><br><span class="line">                      value_deserializer=valuedeserializer)</span><br><span class="line">partition = TopicPartition(topic, int(clientid))</span><br><span class="line">consumer.assign([partition])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> message <span class="keyword">in</span> consumer：</span><br><span class="line">	<span class="keyword">print</span> message.partition, message.offset</span><br></pre></td></tr></table></figure></p>
+<p>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改后的示例代码</span></span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> KafkaConsumer</span><br><span class="line"><span class="keyword">from</span> kafka <span class="keyword">import</span> TopicPartition</span><br><span class="line"></span><br><span class="line">topic = <span class="string">"test"</span></span><br><span class="line">server_list = [<span class="string">"127.0.0.1:9092"</span>]</span><br><span class="line">groupid = <span class="string">"qimingyu"</span></span><br><span class="line">clientid = <span class="string">"0"</span></span><br><span class="line">       </span><br><span class="line">consumer = KafkaConsumer(group_id=groupid,</span><br><span class="line">                         client_id=clientid,</span><br><span class="line">                         bootstrap_servers=server_list,</span><br><span class="line">                      value_deserializer=valuedeserializer)</span><br><span class="line">partition = TopicPartition(topic, int(clientid))</span><br><span class="line">consumer.assign([partition])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> message <span class="keyword">in</span> consumer：</span><br><span class="line">	<span class="keyword">print</span> message.partition, message.offset</span><br></pre></td></tr></table></figure></p>
 <p>该段代码将分区与消费者进程一一绑定，取消了动态的reblance机制，因此这种情况下，不会再出现重复消费的问题。</p>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>重新改写代码，运行24小时，经过日志检查，确实不再有重复消费的数据。经过对比，有几个进程依然采用原来的方式进行消费的，查看日志有900多条数据重复。说明这个方法能够解决Kafka中重复消费的问题。</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>重新改写代码，运行24小时，经过日志检查，确实不再有重复消费的数据。经过对比，有几个进程依然采用原来的方式进行消费的，查看日志有900多条数据重复。说明这个方法能够解决Kafka中重复消费的问题。  </p>
 <hr>
 <p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
