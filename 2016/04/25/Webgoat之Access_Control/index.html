@@ -60,11 +60,13 @@
 
 
 <meta name="description" content="Using an Access Control MatrixRBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：">
+<meta name="keywords" content="WebGoat,网络渗透,访问控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebGoat之Access Control">
 <meta property="og:url" content="http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
 <meta property="og:description" content="Using an Access Control MatrixRBAC（Role Based Access Control）模型，基于角色的访问控制模型有三个原则：最小权限原则、责任分离原则和数据抽象原则。不同的人对不同的资源有不同的访问权限。这一步的作用是用来熟悉该站点所使用的访问控制规则，以下是该实验中的不同角色权限：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/8.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_access_control/2.png">
@@ -351,14 +353,14 @@
 <h3 id="Add-Data-Layer-Access-Control"><a href="#Add-Data-Layer-Access-Control" class="headerlink" title="Add Data Layer Access Control"></a>Add Data Layer Access Control</h3><p>这一步需要添加数据访问控制层以修复上一步的漏洞。这里需要在与第二步一样的地方，添加如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!action.isAuthorizedForEmployee(s, getUserId(s),s.getParser().getIntParameter(RoleBasedAccessControl.EMPLOYEE_ID, <span class="number">0</span>)))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">throw</span> <span class="keyword">new</span> UnauthorizedException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="Remote-Admin-Access"><a href="#Remote-Admin-Access" class="headerlink" title="Remote Admin Access"></a>Remote Admin Access</h2><p>远程原理员访问。应用程序通常会有一个管理界面，这个界面一般用户无法访问到，只有具有特权的用户才能访问。很多网站开发人员在脚本中预留了相关的参数接口，一旦该参数被后台程序确认，则访问者的权限会被放大，浏览到先前不能访问的资源，如：程序调试日志、隐藏功能菜单等。在URL里面加上一个参数admin=true，例如：</p>
 <blockquote>
-<p><a href="http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true" target="_blank" rel="external">http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true</a></p>
+<p><a href="http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true" target="_blank" rel="noopener">http://localhost:8080/WebGoat/attack?Screen=86&amp;menu=200&amp;admin=true</a></p>
 </blockquote>
 <p>这就是URL里面隐藏参数的识别。此时，在左侧栏的“Admin Function”，子功能下增加了另三个功能，如下图所示：<br><img src="/images/webgoat_access_control/9.png" alt="9"></p>
 <p>然后通过发送请求的时候，在URL上加参数，如下图所示：<br><img src="/images/webgoat_access_control/10.png" alt="10"></p>
 <p>最后均可成功显示。</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>这一节主要讲Web应用程序的访问控制，之前在本科学过访问控制，大概知道有很多种不同类型的访问控制模型。直到今天，才真正理解了访问控制的作用，看来凡事不实际操作，永远只是停留在表层的，继续努力！  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/">http://qimingyu.github.io/2016/04/25/Webgoat之Access_Control/</a></p>
 

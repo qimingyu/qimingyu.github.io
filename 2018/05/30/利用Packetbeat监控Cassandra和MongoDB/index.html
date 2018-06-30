@@ -59,24 +59,14 @@
 
 
 
-<meta name="description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
-
-PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
-ElasticSearch：ES数据库
-Kibina：基于ES的一个可视化图形展示系统
-
-原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta name="description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：  PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议 ElasticSearch：ES数据库 Kibina：基于ES的一个可视化图形展示系统  原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta name="keywords" content="PacketBeat,Cassandra,MongoDB,Elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Packetbeat监控Cassandra和MongoDB">
 <meta property="og:url" content="http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
-
-PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
-ElasticSearch：ES数据库
-Kibina：基于ES的一个可视化图形展示系统
-
-原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta property="og:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：  PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议 ElasticSearch：ES数据库 Kibina：基于ES的一个可视化图形展示系统  原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663680073.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663699694.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/2018-05-30/1527663709185.png">
@@ -86,13 +76,7 @@ Kibina：基于ES的一个可视化图形展示系统
 <meta property="og:updated_time" content="2018-05-30T11:14:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Packetbeat监控Cassandra和MongoDB">
-<meta name="twitter:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：
-
-PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议
-ElasticSearch：ES数据库
-Kibina：基于ES的一个可视化图形展示系统
-
-原理为：利用PacketBeat监听网卡的数据包，进行解析之">
+<meta name="twitter:description" content="MongoDB与Cassandra的监控由于Cassandra数据库经常存在不稳定与报警的情况，为了弄清楚其真实原因，在Cassandra中增加了一个监控，其技术栈为：  PacketBeat：一个第三方的网络抓包工具，其兼容了各大数据库的网络协议 ElasticSearch：ES数据库 Kibina：基于ES的一个可视化图形展示系统  原理为：利用PacketBeat监听网卡的数据包，进行解析之">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/2018-05-30/1527663680073.png">
 
 
@@ -335,12 +319,12 @@ Kibina：基于ES的一个可视化图形展示系统
 </ul>
 <p>原理为：<strong>利用<code>PacketBeat</code>监听网卡的数据包，进行解析之后将数据写入到<code>ES</code>数据库中，然后通过<code>Kibina</code>可视化的展示出来</strong>。</p>
 <p>这样监控的好处是不影响数据库本身的性能，它是作为一个独立的监控存在，与数据库完全隔离开来，并且可以定制化的对数据库的各个维度进行分析。并且目前基于<code>Cassandra</code>和<code>MongoDB</code>的开源成熟监控工具并不多。</p>
-<p>具体配置过程参照官网：<a href="https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html" target="_blank" rel="external">https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html</a></p>
+<p>具体配置过程参照官网：<a href="https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/beats/packetbeat/current/packetbeat-getting-started.html</a></p>
 <h4 id="遇到的问题与解决"><a href="#遇到的问题与解决" class="headerlink" title="遇到的问题与解决"></a>遇到的问题与解决</h4><p>下面主要是具体实施过程中遇到的一些问题及解决方法。</p>
 <h5 id="问题一：没有数据"><a href="#问题一：没有数据" class="headerlink" title="问题一：没有数据"></a>问题一：没有数据</h5><p>配置<code>Packetbeat</code>开始运行之后，发现数据没有写到<code>ES</code>中。<br>出现这样的问题的原因是，<code>ES</code>配置文件里面设置成不允许自动创建索引，导致数据写不进去。<br>因此这里需要动态修改<code>ES</code>集群的配置，命令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PUT /_cluster/settings</span><br><span class="line">&#123;</span><br><span class="line">  &quot;persistent&quot;: &#123;</span><br><span class="line">    &quot;action.auto_create_index&quot;:&quot;true&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>修改之后再运行程序，会发现<code>ES</code>中终于有数据进来了。</p>
 <h5 id="问题二：莫名其妙的OOM"><a href="#问题二：莫名其妙的OOM" class="headerlink" title="问题二：莫名其妙的OOM"></a>问题二：莫名其妙的OOM</h5><p>当终于看到数据后，会非常兴奋。可是用<code>Packetbeat</code>来抓<code>Cassandra</code>的数据包的时候，发现程序运行不到一分钟，<code>packetbeat</code>进程和<code>cassandra</code>进行都挂了。查看系统日志<code>/var/log/message</code>之后发现由于<code>packetbeat</code>程序占用了太大的内存，导致其它程序没有内存可以使用了，于是操作系统内核基于保护措施，把<code>packetbeat</code>进程给Kill掉了。而<code>Cassandra</code>进程是由于内存被它挤用了，内存不够导致<code>Cassandra</code>挂了。</p>
-<p>但是奇怪的是，同样的配置，用<code>Packetbeat</code>来抓<code>MongoDB</code>包的时候，没有出现<code>Out of Memory</code>的错误。网上有<a href="https://www.jianshu.com/p/19f3cd699167" target="_blank" rel="external">一篇帖子</a>说是由于滚雪球导致数据包指数级的增长，最终导致这个错误。</p>
+<p>但是奇怪的是，同样的配置，用<code>Packetbeat</code>来抓<code>MongoDB</code>包的时候，没有出现<code>Out of Memory</code>的错误。网上有<a href="https://www.jianshu.com/p/19f3cd699167" target="_blank" rel="noopener">一篇帖子</a>说是由于滚雪球导致数据包指数级的增长，最终导致这个错误。</p>
 <p>但是我这里仔细看了一下，<code>Cassandra</code>数据库与<code>ES</code>之间，不应该有滚雪球的抓包，于是我一个一个的过滤，最后终于发现是由于<code>Cassandra</code>协议中有一类<code>op</code>为<code>RESULT</code>的数据包导致其程序不断占用内存增大的，最终被Kill了。因此在配置文件<code>packetbeat.yml</code>中将这类包过滤掉，如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">packetbeat.protocols:</span><br><span class="line">- type: cassandra</span><br><span class="line">  ports: [9042]</span><br><span class="line">  ignored_ops: [&quot;RESULT&quot;]</span><br></pre></td></tr></table></figure>
 <h5 id="问题三：Cassandra与MonogDB的不同"><a href="#问题三：Cassandra与MonogDB的不同" class="headerlink" title="问题三：Cassandra与MonogDB的不同"></a>问题三：Cassandra与MonogDB的不同</h5><p>用<code>PacketBeat</code>监控<code>Cassandra</code>与<code>MongoDB</code>还有一些地方稍有不同：</p>
@@ -363,7 +347,7 @@ Kibina：基于ES的一个可视化图形展示系统
 <li>能力及服务的输出：Django、Gunicorn、Nginx</li>
 </ol>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/">http://qimingyu.github.io/2018/05/30/利用Packetbeat监控Cassandra和MongoDB/</a></p>
 

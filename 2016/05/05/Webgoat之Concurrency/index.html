@@ -59,14 +59,14 @@
 
 
 
-<meta name="description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。
-Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
+<meta name="description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。 Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
+<meta name="keywords" content="WebGoat,网络渗透,并发性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webgoat之Concurrency">
 <meta property="og:url" content="http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。
-Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
+<meta property="og:description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。 Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_concurrency/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_concurrency/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_concurrency/3.png">
@@ -77,8 +77,7 @@ Thread Safety Problems线程的安全问题。假设有两个用户同时登陆�
 <meta property="og:updated_time" content="2016-05-05T07:47:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webgoat之Concurrency">
-<meta name="twitter:description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。
-Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
+<meta name="twitter:description" content="这一节主要是讲线程安全的问题，考虑并发性。一个Web服务器总是同时服务很多人的，并且是同时处理很多的HTTP请求的，如果开发人员使用的变量不是线程安全的话，会存在并发带来的安全威胁。因为所有的线程共享同一个方法区，而所有的类变量都存储在方法区，多个线程试图同时使用相同的类变量，会造成错误。 Thread Safety Problems线程的安全问题。假设有两个用户同时登陆一个网站查看自己的账户，如">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_concurrency/1.png">
 
 
@@ -321,7 +320,7 @@ Thread Safety Problems线程的安全问题。假设有两个用户同时登陆�
 <p>说明对于浏览器A而言，他用169美元买了1799美元的商品。<br>这个原因在于浏览器B的更新时，浏览器A受影响了，服务器没有很好的处理多线程的问题。</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>多线程和并发安全在网络安全中也是需要考虑的。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/">http://qimingyu.github.io/2016/05/05/Webgoat之Concurrency/</a></p>
 

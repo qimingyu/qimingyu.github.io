@@ -60,11 +60,13 @@
 
 
 <meta name="description" content="攻击效果与目标HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。">
+<meta name="keywords" content="WebGoat,网络渗透,Http Splitting">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebGoat之Http Splitting攻击">
 <meta property="og:url" content="http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
 <meta property="og:description" content="攻击效果与目标HTTP应答拆分攻击的效果会使用户接收不到正确的服务器回发的信息，而是接收错误的经过伪装的信息，比如挂了马的网页、含有垃圾信息的网页等。采用的是攻击服务器的缓存，所以并不是针对Http服务器的攻击，而是针对具体用户的攻击。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_splitting/3.png">
@@ -321,11 +323,11 @@
 <h2 id="实战演练"><a href="#实战演练" class="headerlink" title="实战演练"></a>实战演练</h2><h3 id="设置浏览器代理"><a href="#设置浏览器代理" class="headerlink" title="设置浏览器代理"></a>设置浏览器代理</h3><p><img src="/images/webgoat_splitting/1.png" alt="1"><br>同样burpsuite也要打开8008的侦听端口：<br><img src="/images/webgoat_splitting/2.png" alt="2"><br>这样就实现了通过burpsuite抓取浏览器的所有数据。</p>
 <h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><p><img src="/images/webgoat_splitting/3.png" alt="3"><br>这是我们在浏览器端输入“en”，点击go之后，浏览器传输给服务端的请求数据：<br><img src="/images/webgoat_splitting/4.png" alt="4"><br>可以看到我们的参数“en”传过去了，此时的数据传到了中间代理件burpsuite中，点击forward，burpsuite将这些数据发送给真正的服务器。<br>再继续看服务器传过来的应答：<br><img src="/images/webgoat_splitting/5.png" alt="5"><br>这是服务器针对这条请求传给浏览器的应答，可见是“302 Move temporarity”表示浏览器端请求的资源被重定向了，需要浏览器再次向服务器发送以后的请求。注意这里服务器传过来的Location：</p>
 <blockquote>
-<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en" target="_blank" rel="external">http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en</a></p>
+<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en" target="_blank" rel="noopener">http://localhost/WebGoat/attack?Screen=2&amp;menu=100&amp;fromRedirect=yes&amp;language=en</a></p>
 </blockquote>
 <p>我们之前的请求地址是：</p>
 <blockquote>
-<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100" target="_blank" rel="external">http://localhost/WebGoat/attack?Screen=2&amp;menu=100</a></p>
+<p><a href="http://localhost/WebGoat/attack?Screen=2&amp;menu=100" target="_blank" rel="noopener">http://localhost/WebGoat/attack?Screen=2&amp;menu=100</a></p>
 </blockquote>
 <p>可见我们在前一个页面输入的参数，作为响应被服务器传回来了。<br>由于这是一个302响应，当浏览器接到这个响应时，会根据收到的响应自动再发送一个请求到服务器：<br><img src="/images/webgoat_splitting/6.png" alt="6"><br>服务器在传回其相应：<br><img src="/images/webgoat_splitting/7.png" alt="7"></p>
 <p>整个过程存在的漏洞是什么？</p>
@@ -351,10 +353,10 @@
 <h2 id="如何防御"><a href="#如何防御" class="headerlink" title="如何防御"></a>如何防御</h2><p>防御CRLF攻击，就是检查用户输入，进行过滤。</p>
 <p>附参考资料：</p>
 <ol>
-<li><a href="http://blog.techbeta.me/2015/12/wireshark-Loopback/" target="_blank" rel="external">解决wireshark抓取本地包的问题</a></li>
+<li><a href="http://blog.techbeta.me/2015/12/wireshark-Loopback/" target="_blank" rel="noopener">解决wireshark抓取本地包的问题</a></li>
 </ol>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/">http://qimingyu.github.io/2016/04/18/Webgoat之Http_Splitting攻击/</a></p>
 

@@ -59,24 +59,14 @@
 
 
 
-<meta name="description" content="环境搭建
-环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。
-将自己的服务器端php文件放在www文件夹中，首页为index.php文件。
-所给的myzoo文件夹就是运行在服务器端的文件。
-需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。
-
-XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
+<meta name="description" content="环境搭建 环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。 将自己的服务器端php文件放在www文件夹中，首页为index.php文件。 所给的myzoo文件夹就是运行在服务器端的文件。 需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。  XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
+<meta name="keywords" content="XSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次跨站脚本攻击（XSS）实例">
 <meta property="og:url" content="http://qimingyu.github.io/2016/04/09/记一次跨站脚本攻击（XSS）实例/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="环境搭建
-环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。
-将自己的服务器端php文件放在www文件夹中，首页为index.php文件。
-所给的myzoo文件夹就是运行在服务器端的文件。
-需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。
-
-XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
+<meta property="og:description" content="环境搭建 环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。 将自己的服务器端php文件放在www文件夹中，首页为index.php文件。 所给的myzoo文件夹就是运行在服务器端的文件。 需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。  XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/eighth_blog/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/eighth_blog/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/eighth_blog/3.png">
@@ -94,13 +84,7 @@ XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
 <meta property="og:updated_time" content="2016-05-19T10:46:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次跨站脚本攻击（XSS）实例">
-<meta name="twitter:description" content="环境搭建
-环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。
-将自己的服务器端php文件放在www文件夹中，首页为index.php文件。
-所给的myzoo文件夹就是运行在服务器端的文件。
-需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。
-
-XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
+<meta name="twitter:description" content="环境搭建 环境搭建，在linux环境下，需要安装apache2（服务器）、mysql（数据库）、php（服务器端语言）。 将自己的服务器端php文件放在www文件夹中，首页为index.php文件。 所给的myzoo文件夹就是运行在服务器端的文件。 需要创建一个数据库。其中apache2与mysql的配置，要和php文件里面的内容配套。  XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/eighth_blog/1.png">
 
 
@@ -363,7 +347,7 @@ XSS原理XSS攻击，是指黑客通过“HTML注入”篡改了网">
 <li>采用HTTPONLY，让其cookie不可读，不可改写。这是符合同源策略的。但HTTPONLY的作用也仅止于此，只是让XSS偷不到cookie罢了。</li>
 </ol>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/09/记一次跨站脚本攻击（XSS）实例/">http://qimingyu.github.io/2016/04/09/记一次跨站脚本攻击（XSS）实例/</a></p>
 

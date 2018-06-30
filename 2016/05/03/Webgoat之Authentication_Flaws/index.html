@@ -60,11 +60,13 @@
 
 
 <meta name="description" content="Password Strength这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到这个网站去测试，然后给出测试结果即可。由于这个网站关闭了，找到了这个网站用于测试密码强度。该课程设定如下结果会通过：">
+<meta name="keywords" content="WebGoat,网络渗透,认证安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebGoat之Authentication Flaws">
 <meta property="og:url" content="http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
 <meta property="og:description" content="Password Strength这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到这个网站去测试，然后给出测试结果即可。由于这个网站关闭了，找到了这个网站用于测试密码强度。该课程设定如下结果会通过：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_authentication_flaws/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_authentication_flaws/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_authentication_flaws/3.png">
@@ -314,10 +316,10 @@
       
 
       
-        <h2 id="Password-Strength"><a href="#Password-Strength" class="headerlink" title="Password Strength"></a>Password Strength</h2><p>这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到<a href="https://www.cnlab.ch/codecheck" target="_blank" rel="external">这个网站</a>去测试，然后给出测试结果即可。<br>由于这个网站关闭了，找到了<a href="https://howsecureismypassword.net/" target="_blank" rel="external">这个网站</a>用于测试密码强度。该课程设定如下结果会通过：<br><img src="/images/webgoat_authentication_flaws/1.png" alt="1"></p>
+        <h2 id="Password-Strength"><a href="#Password-Strength" class="headerlink" title="Password Strength"></a>Password Strength</h2><p>这一节主要是讲密码强度的，一个好的密码应该由大写字母，小写字母，数字组成。需要我们把密码都拿到<a href="https://www.cnlab.ch/codecheck" target="_blank" rel="noopener">这个网站</a>去测试，然后给出测试结果即可。<br>由于这个网站关闭了，找到了<a href="https://howsecureismypassword.net/" target="_blank" rel="noopener">这个网站</a>用于测试密码强度。该课程设定如下结果会通过：<br><img src="/images/webgoat_authentication_flaws/1.png" alt="1"></p>
 <a id="more"></a>
 <h2 id="Forget-Password"><a href="#Forget-Password" class="headerlink" title="Forget Password"></a>Forget Password</h2><p>这一节是关于找回密码功能的。密码找回功能设置过于简单时，别人可以猜对答案。本节课程要求找回用户名为admin的密码，需要回答正确最喜欢的颜色是什么，猜测green是对的，通过。</p>
-<h2 id="Basic-Authentication"><a href="#Basic-Authentication" class="headerlink" title="Basic Authentication"></a>Basic Authentication</h2><p>关于HTTP的基本认证，<a href="http://blog.csdn.net/kiwi_coder/article/details/28677651" target="_blank" rel="external">这篇文章</a>讲的比较详细了。这一节讲基本的身份验证，基本的身份验证是用来保护服务器端资源的，当客户端向服务器请求一个URL，如果服务器这个资源需要身份认证的话，服务器将发送401认证请求与所请求的资源响应。例如，以我们登陆WebGoat的过程为例。<br>这是客户端传过去的请求：<br><img src="/images/webgoat_authentication_flaws/2.png" alt="2"><br>这是服务端的响应：<br><img src="/images/webgoat_authentication_flaws/3.png" alt="3"><br>页面显示如下：<br><img src="/images/webgoat_authentication_flaws/4.png" alt="4"></p>
+<h2 id="Basic-Authentication"><a href="#Basic-Authentication" class="headerlink" title="Basic Authentication"></a>Basic Authentication</h2><p>关于HTTP的基本认证，<a href="http://blog.csdn.net/kiwi_coder/article/details/28677651" target="_blank" rel="noopener">这篇文章</a>讲的比较详细了。这一节讲基本的身份验证，基本的身份验证是用来保护服务器端资源的，当客户端向服务器请求一个URL，如果服务器这个资源需要身份认证的话，服务器将发送401认证请求与所请求的资源响应。例如，以我们登陆WebGoat的过程为例。<br>这是客户端传过去的请求：<br><img src="/images/webgoat_authentication_flaws/2.png" alt="2"><br>这是服务端的响应：<br><img src="/images/webgoat_authentication_flaws/3.png" alt="3"><br>页面显示如下：<br><img src="/images/webgoat_authentication_flaws/4.png" alt="4"></p>
 <p>然后输入用户名和密码提交，发送请求如下：<br><img src="/images/webgoat_authentication_flaws/5.png" alt="5"><br>可见在请求头部增加了一个认证字段，这个认证字段的内容是浏览器将刚刚输入的用户名和密码使用Base64编码方式进行编码，并将这些凭据发送给Web服务器。Web服务器会验证这些凭据，如果凭据正确，则返回所请求的资源。<br>服务器传过来的回应如下：<br><img src="/images/webgoat_authentication_flaws/6.png" alt="6"><br>它给浏览器传了一个set-cookie字段，这个set-cookie是一个JSESSIONID，以后浏览器给服务器传东西都要用这个cookie进行身份的认证。</p>
 <h3 id="Stage-1"><a href="#Stage-1" class="headerlink" title="Stage 1"></a>Stage 1</h3><p>第一阶段是需要我们输入认证信息的头和认证信息解密后的内容：<br><img src="/images/webgoat_authentication_flaws/7.png" alt="7"><br>我们以上一节Forgot Password为例：<br><img src="/images/webgoat_authentication_flaws/8.png" alt="8"></p>
 <p>输入用户名后点击提交，下面是burpsuit拦截到的请求：<br><img src="/images/webgoat_authentication_flaws/9.png" alt="9"><br>注意cookie和Authentication两个字段，可以看到cookie就是之前登陆的时候服务传给我们的set-cookie，而认证字段里面的值，经过Base64解密之后为：</p>
@@ -347,7 +349,7 @@
 <h2 id="Multi-Level-login-2"><a href="#Multi-Level-login-2" class="headerlink" title="Multi Level login 2"></a>Multi Level login 2</h2><p>我是WebGoat财务系统中正常的一名客户Joe，我拥有我应该有的所有密码。现在要求利用多级登陆的漏洞，在仅仅知道Jane的名字的情况下，我要以Jane的身份登陆进去。<br>同样在提交业务码的时候，抓包之后修改隐藏的提交参数，把hidden_user的值由Joe改为Jane即可。</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>有时候安全系统越复杂，往往看起来更安全，但实际上可能隐藏的漏洞也更多。简单而高效才是真正的牛逼。</p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/">http://qimingyu.github.io/2016/05/03/Webgoat之Authentication_Flaws/</a></p>
 

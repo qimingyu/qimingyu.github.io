@@ -59,52 +59,21 @@
 
 
 
-<meta name="description" content="实验前的准备涉及知识点
-对称密码体制和非对称密码体制
-Apache的安装配置及使用
-OpenSSL的使用
-HTTPS的认证机制
-
-其中，HTTPS的认证机制分为两种：
-
-双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
-单向验证：只需验证服务器端
-
-本实验教程我们做的是单向验证。">
+<meta name="description" content="实验前的准备涉及知识点 对称密码体制和非对称密码体制 Apache的安装配置及使用 OpenSSL的使用 HTTPS的认证机制  其中，HTTPS的认证机制分为两种：  双向验证：服务器和客户端都需要相互验证（常见于银行类网站） 单向验证：只需验证服务器端  本实验教程我们做的是单向验证。">
+<meta name="keywords" content="HTTPS,CA,OpenSSL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自建CA实现HTTPS教程">
 <meta property="og:url" content="http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="实验前的准备涉及知识点
-对称密码体制和非对称密码体制
-Apache的安装配置及使用
-OpenSSL的使用
-HTTPS的认证机制
-
-其中，HTTPS的认证机制分为两种：
-
-双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
-单向验证：只需验证服务器端
-
-本实验教程我们做的是单向验证。">
+<meta property="og:description" content="实验前的准备涉及知识点 对称密码体制和非对称密码体制 Apache的安装配置及使用 OpenSSL的使用 HTTPS的认证机制  其中，HTTPS的认证机制分为两种：  双向验证：服务器和客户端都需要相互验证（常见于银行类网站） 单向验证：只需验证服务器端  本实验教程我们做的是单向验证。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/ca_https/20140413_075036_665.jpg">
 <meta property="og:image" content="http://qimingyu.github.io/images/ca_https/20140413_075039_644.jpg">
 <meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2017-04-28T08:19:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自建CA实现HTTPS教程">
-<meta name="twitter:description" content="实验前的准备涉及知识点
-对称密码体制和非对称密码体制
-Apache的安装配置及使用
-OpenSSL的使用
-HTTPS的认证机制
-
-其中，HTTPS的认证机制分为两种：
-
-双向验证：服务器和客户端都需要相互验证（常见于银行类网站）
-单向验证：只需验证服务器端
-
-本实验教程我们做的是单向验证。">
+<meta name="twitter:description" content="实验前的准备涉及知识点 对称密码体制和非对称密码体制 Apache的安装配置及使用 OpenSSL的使用 HTTPS的认证机制  其中，HTTPS的认证机制分为两种：  双向验证：服务器和客户端都需要相互验证（常见于银行类网站） 单向验证：只需验证服务器端  本实验教程我们做的是单向验证。">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/ca_https/20140413_075036_665.jpg">
 
 
@@ -387,7 +356,7 @@ HTTPS的认证机制
 <p>如果返回结果是OK，则证明实验成功</p>
 <h5 id="6-将根证书导入浏览器之后再进行访问，不再报警"><a href="#6-将根证书导入浏览器之后再进行访问，不再报警" class="headerlink" title="6.将根证书导入浏览器之后再进行访问，不再报警"></a>6.将根证书导入浏览器之后再进行访问，不再报警</h5><h3 id="实验补充"><a href="#实验补充" class="headerlink" title="实验补充"></a>实验补充</h3><h4 id="心脏滴血漏洞原理"><a href="#心脏滴血漏洞原理" class="headerlink" title="心脏滴血漏洞原理"></a>心脏滴血漏洞原理</h4><p><img src="/images/ca_https/20140413_075036_665.jpg" alt="1"><br><img src="/images/ca_https/20140413_075039_644.jpg" alt="2">  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/">http://qimingyu.github.io/2017/04/28/自建CA实现HTTPS教程/</a></p>
 

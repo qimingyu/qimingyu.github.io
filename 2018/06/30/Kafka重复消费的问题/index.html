@@ -59,20 +59,19 @@
 
 
 
-<meta name="description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。
-原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
+<meta name="description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。 原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
+<meta name="keywords" content="Kafka,重复消费">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka重复消费的问题">
 <meta property="og:url" content="http://qimingyu.github.io/2018/06/30/Kafka重复消费的问题/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。
-原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
+<meta property="og:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。 原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 <meta property="og:updated_time" content="2018-06-30T02:05:13.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka重复消费的问题">
-<meta name="twitter:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。
-原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
+<meta name="twitter:description" content="背景消费Kafka数据采用的是kafka-python这个包，原消费代码与官网示例一样。但是在生产环境中使用的时候，发现数据有一些莫名其妙的重复，1000条数据里面，完全去重之后大概有600条，这样的重复率算很高的了。于是进一步排查定位，为什么会出现重复消费的问题。 原消费代码123456789101112# 示例代码from kafka import KafkaConsumertopic = &quot;">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/about/kejiruixin.jpg">
 
 
@@ -320,7 +319,7 @@
 <p>该段代码将分区与消费者进程一一绑定，取消了动态的reblance机制，因此这种情况下，不会再出现重复消费的问题。</p>
 <h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>重新改写代码，运行24小时，经过日志检查，确实不再有重复消费的数据。经过对比，有几个进程依然采用原来的方式进行消费的，查看日志有900多条数据重复。说明这个方法能够解决Kafka中重复消费的问题。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2018/06/30/Kafka重复消费的问题/">http://qimingyu.github.io/2018/06/30/Kafka重复消费的问题/</a></p>
 

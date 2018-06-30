@@ -59,14 +59,14 @@
 
 
 
-<meta name="description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示：
-该过程直接用burpsuit抓取即可。">
+<meta name="description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示： 该过程直接用burpsuit抓取即可。">
+<meta name="keywords" content="WebGoat,网络渗透,通信安全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webgoat之Insecure Communication">
 <meta property="og:url" content="http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Communication/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示：
-该过程直接用burpsuit抓取即可。">
+<meta property="og:description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示： 该过程直接用burpsuit抓取即可。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_insecure_communication/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_insecure_communication/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_insecure_communication/3.png">
@@ -74,8 +74,7 @@
 <meta property="og:updated_time" content="2016-04-29T05:23:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webgoat之Insecure Communication">
-<meta name="twitter:description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示：
-该过程直接用burpsuit抓取即可。">
+<meta name="twitter:description" content="Insecure Login该课程第一步需要抓取HTTP传送时的密码，如下图所示： 该过程直接用burpsuit抓取即可。">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/webgoat_insecure_communication/2.png">
 
 
@@ -341,8 +340,8 @@
 <p>其中非对称加密算法用于在握手过程中加密生成的密码，对称加密算法用于对真正传输的数据进行加密，而HASH算法用于验证数据的完整性。由于浏览器生成的密码是整个数据加密的关键，因此在传输的时候使用了非对称加密算法对其加密。非对称加密算法会生成公钥和私钥，公钥只能用于加密数据，因此可以随意传输，而网站的私钥用于对数据进行解密，所以网站都会非常小心的保管自己的私钥，防止泄漏。</p>
 <p>TLS握手过程中如果有任何错误，都会使加密连接断开，从而阻止了隐私信息的传输。</p>
 <h3 id="如何用burpsuit抓取HTTPS"><a href="#如何用burpsuit抓取HTTPS" class="headerlink" title="如何用burpsuit抓取HTTPS"></a>如何用burpsuit抓取HTTPS</h3><p>以上过程解释了为何不配置的话，用burpsuit是抓取不到HTTPS的。因为burpsuit相当于是在浏览器和服务器之间的中间人，数据都是经过它来做中间转发的，对于HTTPS协议而言，它是需要同时验证浏览器和服务器的，而浏览器传输数据的第一站是burpsuit，如果不在浏览器中添加hurpsuit的证书，浏览器不会信任它，所以与它之间的连接就建立不起来了。</p>
-<p>关于burpsuit抓取HTTPS的配置可以见官网：[点击这里][<a href="https://support.portswigger.net/customer/portal/articles/1783075-installing-burp-s-ca-certificate-in-your-browser]，需要注意的是要把代理设置为burpsuit后，才能访问http://burp网址，并且下载证书。" target="_blank" rel="external">https://support.portswigger.net/customer/portal/articles/1783075-installing-burp-s-ca-certificate-in-your-browser]，需要注意的是要把代理设置为burpsuit后，才能访问http://burp网址，并且下载证书。</a></p>
-<h3 id="如何配置tomcat服务器为HTTPS"><a href="#如何配置tomcat服务器为HTTPS" class="headerlink" title="如何配置tomcat服务器为HTTPS"></a>如何配置tomcat服务器为HTTPS</h3><p>其实这只是配置服务器的<a href="http://my.oschina.net/nearzk/blog/485652" target="_blank" rel="external">单向认证</a>的过程，将tomcat配置为支持HTTPS传输，就需要在HTTP基础上加一层协议进去。详细配置过程见<a href="http://blog.csdn.net/jimmy609/article/details/18557955" target="_blank" rel="external">这里</a>。</p>
+<p>关于burpsuit抓取HTTPS的配置可以见官网：[点击这里][<a href="https://support.portswigger.net/customer/portal/articles/1783075-installing-burp-s-ca-certificate-in-your-browser]，需要注意的是要把代理设置为burpsuit后，才能访问http://burp网址，并且下载证书。" target="_blank" rel="noopener">https://support.portswigger.net/customer/portal/articles/1783075-installing-burp-s-ca-certificate-in-your-browser]，需要注意的是要把代理设置为burpsuit后，才能访问http://burp网址，并且下载证书。</a></p>
+<h3 id="如何配置tomcat服务器为HTTPS"><a href="#如何配置tomcat服务器为HTTPS" class="headerlink" title="如何配置tomcat服务器为HTTPS"></a>如何配置tomcat服务器为HTTPS</h3><p>其实这只是配置服务器的<a href="http://my.oschina.net/nearzk/blog/485652" target="_blank" rel="noopener">单向认证</a>的过程，将tomcat配置为支持HTTPS传输，就需要在HTTP基础上加一层协议进去。详细配置过程见<a href="http://blog.csdn.net/jimmy609/article/details/18557955" target="_blank" rel="noopener">这里</a>。</p>
 <p><img src="/images/webgoat_insecure_communication/1.png" alt="1"><br><img src="/images/webgoat_insecure_communication/3.png" alt="3"><br>这张图片是tomcat里面conf里面server.xml配置文件中关于HTTPS的部分。</p>
 <h2 id="绝望"><a href="#绝望" class="headerlink" title="绝望"></a>绝望</h2><p>搞了两天都没有搞好，我已经绝望了。主要问题及流程是这样的：</p>
 <ol>
@@ -355,7 +354,7 @@
 </ol>
 <h2 id="剩下待的问题"><a href="#剩下待的问题" class="headerlink" title="剩下待的问题"></a>剩下待的问题</h2><p>为何wireshark抓已经配置成https的包之后，只有一堆TCP的包，而没有TSLV一类的协议包。求有大神看见的，也帮忙解答一下这究竟是为什么？</p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Communication/">http://qimingyu.github.io/2016/04/27/Webgoat之Insecure_Communication/</a></p>
 

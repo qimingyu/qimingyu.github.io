@@ -59,22 +59,14 @@
 
 
 
-<meta name="description" content="开始用两种方式实现使用同一个系统调用：
-
-库函数API
-C代码中内嵌汇编
-
-本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
+<meta name="description" content="开始用两种方式实现使用同一个系统调用：  库函数API C代码中内嵌汇编  本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
+<meta name="keywords" content="Linux内核">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核分析（四）">
 <meta property="og:url" content="http://qimingyu.github.io/2016/04/08/Linux内核分析（四）/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
-<meta property="og:description" content="开始用两种方式实现使用同一个系统调用：
-
-库函数API
-C代码中内嵌汇编
-
-本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
+<meta property="og:description" content="开始用两种方式实现使用同一个系统调用：  库函数API C代码中内嵌汇编  本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/linux_4/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/linux_4/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/linux_4/3.png">
@@ -83,12 +75,7 @@ C代码中内嵌汇编
 <meta property="og:updated_time" content="2016-04-16T14:48:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核分析（四）">
-<meta name="twitter:description" content="开始用两种方式实现使用同一个系统调用：
-
-库函数API
-C代码中内嵌汇编
-
-本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
+<meta name="twitter:description" content="开始用两种方式实现使用同一个系统调用：  库函数API C代码中内嵌汇编  本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。">
 <meta name="twitter:image" content="http://qimingyu.github.io/images/linux_4/1.png">
 
 
@@ -329,10 +316,10 @@ C代码中内嵌汇编
 <li>C代码中内嵌汇编</li>
 </ul>
 <p>本实验目的是为了熟悉Linux系统调用的相关知识，以及熟悉Linux和嵌入式汇编的写法。<br><a id="more"></a></p>
-<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>选择一个系统调用，列表见<a href="http://codelab.shiyanlou.com/xref/linux-3.18.6/arch/x86/syscalls/syscall_32.tbl" target="_blank" rel="external">这里</a>,我们选择write系统调用。<br>用C写一个文件test.c，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">   write(<span class="number">1</span>,<span class="string">"hello world!\n"</span>,<span class="number">13</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>选择一个系统调用，列表见<a href="http://codelab.shiyanlou.com/xref/linux-3.18.6/arch/x86/syscalls/syscall_32.tbl" target="_blank" rel="noopener">这里</a>,我们选择write系统调用。<br>用C写一个文件test.c，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   write(<span class="number">1</span>,<span class="string">"hello world!\n"</span>,<span class="number">13</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这里，write函数有三个参数，第一个表示写到终端屏幕上，1可以认为是屏幕的代号，第二个参数是写的内容，第三个参数是写入字符串的长度。<br>运行结果如下图所示：<br><img src="/images/linux_4/1.png" alt="1"></p>
 <p>然后需要把这段代码转化为嵌入式汇编的格式，嵌入式汇编的格式如下：<br><img src="/images/linux_4/2.png" alt="2"></p>
-<p>在test_asm.c中，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> *ch=<span class="string">"hello world!\n"</span>;</span><br><span class="line"></span><br><span class="line">    __asm__(</span><br><span class="line">      <span class="string">"movl $0x4,%%eax\n\t"</span><span class="comment">//系统调用号存入eax寄存器</span></span><br><span class="line">      <span class="string">"movl $0x1,%%ebx\n\t"</span><span class="comment">//ebx传递参数，第一个参数1</span></span><br><span class="line">      <span class="string">"movl %1,%%ecx\n\t"</span><span class="comment">//ecx存储输出位置，第二个参数字符串ch</span></span><br><span class="line">      <span class="string">"movl $0xd,%%edx\n\t"</span><span class="comment">//edx存储参数长度，第三个参数13</span></span><br><span class="line">      <span class="string">"int  $0x80\n\t"</span><span class="comment">//执行系统调用</span></span><br><span class="line">      <span class="string">"movl %%eax,%0\n\t"</span><span class="comment">//系统调用返回值存入eax</span></span><br><span class="line">      :<span class="string">"=m"</span>(a)<span class="comment">//输出</span></span><br><span class="line">      :<span class="string">"c"</span>(ch)<span class="comment">//输入</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在test_asm.c中，代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> *ch=<span class="string">"hello world!\n"</span>;</span><br><span class="line"></span><br><span class="line">    __asm__(</span><br><span class="line">      <span class="string">"movl $0x4,%%eax\n\t"</span><span class="comment">//系统调用号存入eax寄存器</span></span><br><span class="line">      <span class="string">"movl $0x1,%%ebx\n\t"</span><span class="comment">//ebx传递参数，第一个参数1</span></span><br><span class="line">      <span class="string">"movl %1,%%ecx\n\t"</span><span class="comment">//ecx存储输出位置，第二个参数字符串ch</span></span><br><span class="line">      <span class="string">"movl $0xd,%%edx\n\t"</span><span class="comment">//edx存储参数长度，第三个参数13</span></span><br><span class="line">      <span class="string">"int  $0x80\n\t"</span><span class="comment">//执行系统调用</span></span><br><span class="line">      <span class="string">"movl %%eax,%0\n\t"</span><span class="comment">//系统调用返回值存入eax</span></span><br><span class="line">      :<span class="string">"=m"</span>(a)<span class="comment">//输出</span></span><br><span class="line">      :<span class="string">"c"</span>(ch)<span class="comment">//输入</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>执行结果如下所示：<br><img src="/images/linux_4/3.png" alt="3"><br>这里代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"movl %1,%%ecx\n\t"</span><span class="comment">//ecx存储输出位置</span></span><br></pre></td></tr></table></figure></p>
 <p>中的%1，表示传递的第一个参数，它和后面的输入：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="string">"c"</span>(ch)<span class="comment">//输入</span></span><br></pre></td></tr></table></figure></p>
 <p>是相呼应的，c表示ecx，表示把字符串a存入ecx中。<br>而其他的代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"movl $0x1,%%ebx\n\t"</span><span class="comment">//ebx传递参数</span></span><br></pre></td></tr></table></figure></p>
@@ -350,7 +337,7 @@ C代码中内嵌汇编
 <li>在系统调用号(eax)之外,参数的个数不能超过6个(ebx,ecx,edx,esi,edi,ebp) </li>
 </ol>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/04/08/Linux内核分析（四）/">http://qimingyu.github.io/2016/04/08/Linux内核分析（四）/</a></p>
 

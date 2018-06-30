@@ -60,11 +60,13 @@
 
 
 <meta name="description" content="Hijack a Session如图是一个登陆页面，现在要求在不知道用户名和密码的情况下登陆进去。现在我们已经知道的是如果传过去的cookie是对的话，服务器端会跳过验证用户名和密码的环节。也就是说用户名和密码可以随便填写，关键是猜对cookie，并且这个cookie需要是正在使用的会话cookie。我们先随便抓一个看看所提交的是哪些数据：">
+<meta name="keywords" content="WebGoat,网络渗透,会话管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webgoat之Session Management Flaws">
 <meta property="og:url" content="http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/index.html">
 <meta property="og:site_name" content="戚名钰的博客">
 <meta property="og:description" content="Hijack a Session如图是一个登陆页面，现在要求在不知道用户名和密码的情况下登陆进去。现在我们已经知道的是如果传过去的cookie是对的话，服务器端会跳过验证用户名和密码的环节。也就是说用户名和密码可以随便填写，关键是猜对cookie，并且这个cookie需要是正在使用的会话cookie。我们先随便抓一个看看所提交的是哪些数据：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_session_management_flaws/1.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_session_management_flaws/2.png">
 <meta property="og:image" content="http://qimingyu.github.io/images/webgoat_session_management_flaws/3.png">
@@ -334,16 +336,16 @@
 <p>可以找到规律了，就是把字母反过来，再向后移动一位。<br>那么猜测alice的AuthCookie为：65432fdjmb，在用户名和密码那里什么都不填，直接提交，burpsuit拦截后修改cookie如下：<br><img src="/images/webgoat_session_management_flaws/17.png" alt="17"><br>然后成功登陆:<br><img src="/images/webgoat_session_management_flaws/18.png" alt="18"></p>
 <h2 id="Session-Fixation"><a href="#Session-Fixation" class="headerlink" title="Session Fixation"></a>Session Fixation</h2><p>通过会话固定盗取Session。服务器通过每个用户唯一的Session ID来确认其合法性。如果用户已登录，并且授权服务器不必重新验证授权后，当该用户需要重新登录进入系统时，他的Session ID 依然被服务器认为是合法的。<br>在一些程序中，可能会在GET-REQUEST请求中传递Session ID。这就是攻击的起点。一个攻击者可以用一个选定的Session ID给受害人发送一个超链接。例如，这里有一个准备好的邮件，它看起来像是一个从应用程序管理员发来的官方邮件。如果受害者点击了这个链接，并且该受害者以攻击者指定的Session ID登录了系统，那么攻击者可以不经授权直接使用与受害者相同的Session ID来访问该页面。<br>在实际课程中需要我们同时扮演攻击者和受害者，攻击者是Hacker，受害者是Jane。<br>首先由Hacker向Jane发一封看起来很正常的邮件，该邮件是关于银行对账单的。需要诱导受害者点击该邮件的链接。该邮件为：<br><img src="/images/webgoat_session_management_flaws/20.png" alt="20"><br>邮件中间是一个超链接，对应的代码为：<br><img src="/images/webgoat_session_management_flaws/19.png" alt="19"><br>然后受害者点击了该超链接，进入他的银行系统的登陆页面：<br><img src="/images/webgoat_session_management_flaws/21.png" alt="21"><br>该页面的链接地址为：</p>
 <blockquote>
-<p><a href="https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=qimingyu" target="_blank" rel="external">https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=qimingyu</a></p>
+<p><a href="https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=qimingyu" target="_blank" rel="noopener">https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=qimingyu</a></p>
 </blockquote>
 <p>受害者本人要登陆系统，肯定知道自己的账号和密码。于是输入账号：Jane，密码：tarzan，进入系统。受害者进入系统之后，他的sessionID已经通过验证，就是有效的了。这时，黑客也进入该银行系统的登陆页面，此时的地址为：</p>
 <blockquote>
-<p><a href="https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=NOVALIDSESSION" target="_blank" rel="external">https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=NOVALIDSESSION</a></p>
+<p><a href="https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=NOVALIDSESSION" target="_blank" rel="noopener">https://localhost:8443/WebGoat/attack?Screen=16&amp;menu=1700&amp;SID=NOVALIDSESSION</a></p>
 </blockquote>
 <p>将后面的SID修改为qimingyu，无需输入用户名和密码，就可以以受害者Jane的身份登陆该系统了。<br><img src="/images/webgoat_session_management_flaws/22.png" alt="22"><br>这是一连串精心构造的攻击，其关键漏洞是网站依靠URL来传递SID的值，容易被人截取并修改。</p>
 <h2 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h2><p>第一节是通过暴力猜对cookie绕过验证进行登陆。<br>第二节是通过观察猜对cookie绕过验证进行登陆。<br>第三节是诱骗受害者以固定的Session登陆，然后攻击者再通过该Session绕过验证直接登陆。  </p>
 <hr>
-<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="external">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
+<p><strong>【版权声明】</strong><br>本文首发于<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰的博客</a>，欢迎转载，但是必须保留本文的署名<a href="http://qimingyu.com" target="_blank" rel="noopener">戚名钰</a>（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com<br>欢迎关注我的微信公众号：科技锐新</p>
 <p><img src="/images/about/kejiruixin.jpg" alt="kejiruixin"> </p>
 <p>本文永久链接：<a href="http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/">http://qimingyu.github.io/2016/05/04/Webgoat之Session_Management_Flaws/</a></p>
 
