@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://qimingyu.github.io/"/>
-  <updated>2018-07-01T07:33:52.944Z</updated>
+  <updated>2019-03-30T02:09:43.224Z</updated>
   <id>http://qimingyu.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《北大金融学课》全年学习笔记</title>
+    <link href="http://qimingyu.github.io/2019/03/30/%E3%80%8A%E5%8C%97%E5%A4%A7%E9%87%91%E8%9E%8D%E5%AD%A6%E8%AF%BE%E3%80%8B%E5%85%A8%E5%B9%B4%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://qimingyu.github.io/2019/03/30/《北大金融学课》全年学习笔记/</id>
+    <published>2019-03-30T01:41:00.000Z</published>
+    <updated>2019-03-30T02:09:43.224Z</updated>
+    
+    <content type="html">&lt;p&gt;我们&lt;br&gt;&lt;img src=&quot;/images/seventh_blog/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2019-03-30/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2019-03-30/1.png&quot; alt=&quot;1&quot;&gt;  &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
+&lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2019/03/30/《北大金融学课》全年学习笔记/&quot;&gt;http://qimingyu.github.io/2019/03/30/《北大金融学课》全年学习笔记/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们&lt;br&gt;&lt;img src=&quot;/images/seventh_blog/1.png&quot; alt=&quot;1&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2019-03-30/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;&lt;img src=&quot;/images/2019-03-30/1.pn
+    
+    </summary>
+    
+      <category term="市场洞悉" scheme="http://qimingyu.github.io/categories/%E5%B8%82%E5%9C%BA%E6%B4%9E%E6%82%89/"/>
+    
+    
+      <category term="北大金融学" scheme="http://qimingyu.github.io/tags/%E5%8C%97%E5%A4%A7%E9%87%91%E8%9E%8D%E5%AD%A6/"/>
+    
+      <category term="香帅" scheme="http://qimingyu.github.io/tags/%E9%A6%99%E5%B8%85/"/>
+    
+      <category term="笔记" scheme="http://qimingyu.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Django性能的继续优化</title>
@@ -227,9 +258,9 @@
     
       <category term="Django" scheme="http://qimingyu.github.io/tags/Django/"/>
     
-      <category term="Redis" scheme="http://qimingyu.github.io/tags/Redis/"/>
-    
       <category term="性能优化" scheme="http://qimingyu.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="Redis" scheme="http://qimingyu.github.io/tags/Redis/"/>
     
       <category term="Python" scheme="http://qimingyu.github.io/tags/Python/"/>
     
@@ -1072,81 +1103,6 @@
       <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
     
       <category term="学习成果" scheme="http://qimingyu.github.io/tags/%E5%AD%A6%E4%B9%A0%E6%88%90%E6%9E%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Webgoat之Injection Flaws</title>
-    <link href="http://qimingyu.github.io/2016/05/06/Webgoat%E4%B9%8BInjection_Flaws/"/>
-    <id>http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/</id>
-    <published>2016-05-06T06:32:01.000Z</published>
-    <updated>2016-05-09T09:27:09.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;Command-Injection&quot;&gt;&lt;a href=&quot;#Command-Injection&quot; class=&quot;headerlink&quot; title=&quot;Command Injection&quot;&gt;&lt;/a&gt;Command Injection&lt;/h2&gt;&lt;p&gt;这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;p&gt;该页面就是一个选择所需查看的文档，然后下方显示文档内容的页面。其存在的漏洞就是后台可以执行用户输入的命令，当我们拦截之后，修改参数如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/2.png&quot; alt=&quot;2&quot;&gt;&lt;br&gt;可以看到把我们服务器所开端口情况全部显示出来了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/3.png&quot; alt=&quot;3&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Blind-SQL-Injection&quot;&gt;&lt;a href=&quot;#Blind-SQL-Injection&quot; class=&quot;headerlink&quot; title=&quot;Blind SQL Injection&quot;&gt;&lt;/a&gt;Blind SQL Injection&lt;/h2&gt;&lt;p&gt;这一节主要讲盲注入，某些SQL注入是没有明确返回信息的，只能通过条件的“真”和“假”进行判断。攻击者必须充分利用查询语句，构造子查询语句。&lt;br&gt;如下图：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/4.png&quot; alt=&quot;4&quot;&gt;&lt;br&gt;这个输入框输入不同的数字他会给不同的反应。它会提示你Account Number是正确的还是错误的。&lt;br&gt;输入如下代码：&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;101 and ( ascii( substr(&lt;span class=&quot;keyword&quot;&gt;select&lt;/span&gt; first_name &lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;user_data&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;where&lt;/span&gt; userid=&lt;span class=&quot;number&quot;&gt;15613&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;) ) &amp;lt; &lt;span class=&quot;number&quot;&gt;77&lt;/span&gt; )&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;从user_data数据库表中把userid字段等于15613的名字找出来，然后求其字符子串，从第一个字符开始截取，截取一个字符长度，这样得到的是名字的一个字母，然后求其ascii值，与77比较，整条语句判断真假。&lt;br&gt;就这样一个个试，可以得到第一个字母是J，第二个字母是o,最后得到Joesph输入，返回正确。&lt;/p&gt;
-&lt;h2 id=&quot;Numeric-SQL-Injection&quot;&gt;&lt;a href=&quot;#Numeric-SQL-Injection&quot; class=&quot;headerlink&quot; title=&quot;Numeric SQL Injection&quot;&gt;&lt;/a&gt;Numeric SQL Injection&lt;/h2&gt;&lt;p&gt;这节讲数字型注入攻击，如下图这是一个选择城市，然后出来相应天气预报的页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/6.png&quot; alt=&quot;6&quot;&gt;&lt;br&gt;通过截取数据分析发现，所提交的是城市的数字代码，我们把state字段改为如下即可以了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/7.png&quot; alt=&quot;7&quot;&gt;&lt;br&gt;最后攻击成功：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/5.png&quot; alt=&quot;5&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Log-Spoofing&quot;&gt;&lt;a href=&quot;#Log-Spoofing&quot; class=&quot;headerlink&quot; title=&quot;Log Spoofing&quot;&gt;&lt;/a&gt;Log Spoofing&lt;/h2&gt;&lt;p&gt;这节讲登陆欺骗，如图所示，这是一个登陆的页面，下面灰色部分是后台日志：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/8.png&quot; alt=&quot;8&quot;&gt;&lt;br&gt;现在是要求欺骗后台日志，也就是说一个人明明没有登陆进去，但它要在后台日志记录中显示登陆进去了。&lt;br&gt;因此可以插入如下内容：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Smith%0d%0aLogin Succeeded for username: admin&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;最后日志上面会显示成这样：&lt;br&gt;&lt;img src=&quot;/images/webgoat_web_services/9.png&quot; alt=&quot;9&quot;&gt;&lt;br&gt;这主要是说用户注入内容到后台日志中了。&lt;br&gt;而当输入如下内容时：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;admin &amp;lt;script&amp;gt;alert(&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.cookie)&amp;lt;&lt;span class=&quot;regexp&quot;&gt;/script&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;页面会显示如下：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/10.png&quot; alt=&quot;10&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;XPATH-Injection&quot;&gt;&lt;a href=&quot;#XPATH-Injection&quot; class=&quot;headerlink&quot; title=&quot;XPATH Injection&quot;&gt;&lt;/a&gt;XPATH Injection&lt;/h2&gt;&lt;p&gt;如下图所示，下面页面是输入账户名和密码查询工资的页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/11.png&quot; alt=&quot;11&quot;&gt;&lt;br&gt;我们的目标是看到其他员工的工资。XPATH 注入类似于SQL注入。通过未验证的输入创建一个XPATH 查询。&lt;br&gt;一般的XPATH查询，其页面代码如下：&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; dir = s.getContext().getRealPath(&lt;span class=&quot;string&quot;&gt;&quot;/lessons/XPATHInjection/EmployeesData.xml&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;File d = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; File(dir);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;XPathFactory factory = XPathFactory.newInstance();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;XPath xPath = factory.newXPath();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;InputSource inputSource = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; InputSource(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; FileInputStream(d));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;String&lt;/span&gt; expression = &lt;span class=&quot;string&quot;&gt;&quot;/employees/employee[loginID/text()=&#39;&quot;&lt;/span&gt; + username + &lt;span class=&quot;string&quot;&gt;&quot;&#39; and passwd/text()=&#39;&quot;&lt;/span&gt; + password + &lt;span class=&quot;string&quot;&gt;&quot;&#39;]&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nodes = (NodeList) xPath.evaluate(expression, inputSource, XPathConstants.NODESET);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;当我们在浏览器中输入如下内容时：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Smith’ or 1=1 or ‘a’=’a&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;则服务器获取的数据为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;expression = “/employees/employee[loginID/text()=’Smith’ or 1=1 or ‘a’=’a’ and passwd/text()=’password’]”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;服务器解析后的结果为：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;expression = “/employees/employee[ ( loginID/text()=’Smith’ or 1=1 ) OR ( ‘a’=’a’ and passwd/text()=’password’ ) ]”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;浏览器显示页面为：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/12.png&quot; alt=&quot;12&quot;&gt;&lt;br&gt;攻击成功。&lt;/p&gt;
-&lt;h2 id=&quot;SQL-Injection&quot;&gt;&lt;a href=&quot;#SQL-Injection&quot; class=&quot;headerlink&quot; title=&quot;SQL Injection&quot;&gt;&lt;/a&gt;SQL Injection&lt;/h2&gt;&lt;h3 id=&quot;Stage-1&quot;&gt;&lt;a href=&quot;#Stage-1&quot; class=&quot;headerlink&quot; title=&quot;Stage 1&quot;&gt;&lt;/a&gt;Stage 1&lt;/h3&gt;&lt;p&gt;第一步是字符串注入，要求以Neville的用户名，密码不知道的情况下登陆：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/16.png&quot; alt=&quot;16&quot;&gt;&lt;br&gt;因此需要拦截之后修改（一定要拦截后修改，因为直接在浏览器输入会有转义）：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/17.png&quot; alt=&quot;17&quot;&gt;&lt;br&gt;这样就可以顺利进入了。&lt;/p&gt;
-&lt;h3 id=&quot;Stage-2&quot;&gt;&lt;a href=&quot;#Stage-2&quot; class=&quot;headerlink&quot; title=&quot;Stage 2&quot;&gt;&lt;/a&gt;Stage 2&lt;/h3&gt;&lt;p&gt;这部分需要我们使用参数化查询阻止SQL注入。但是这部分内容只有在开发版上才能完成，我用的是标准版。&lt;br&gt;应该修改webgoat/lessons/SQLInjection/ViewProfile.java文件中的getEmployeeProfile方法，代码如下：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String query = &lt;span class=&quot;string&quot;&gt;&quot;SELECT employee.* &quot;&lt;/span&gt;+ &lt;span class=&quot;string&quot;&gt;&quot;FROM employee,ownership WHERE employee.userid = ownership.employee_id and &quot;&lt;/span&gt;+ &lt;span class=&quot;string&quot;&gt;&quot;ownership.employer_id = ? and ownership.employee_id = ?&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	Connection connection = WebSession.getConnections(s);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	PreparedStatement statement = connection.prepareStatement(query,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	statement.setString(&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, userId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	statement.setString(&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, subjectUserId);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	ResultSet answer_results = statement.executeQuery();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Stage-3&quot;&gt;&lt;a href=&quot;#Stage-3&quot; class=&quot;headerlink&quot; title=&quot;Stage 3&quot;&gt;&lt;/a&gt;Stage 3&lt;/h3&gt;&lt;p&gt;这一节需要我们以普通用户的身份看到老板的简介：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/20.png&quot; alt=&quot;20&quot;&gt;&lt;br&gt;先以普通用户Larry的身份登陆进去：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/21.png&quot; alt=&quot;21&quot;&gt;&lt;br&gt;再点击ViewProfile进行抓包，后修改：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/19.png&quot; alt=&quot;19&quot;&gt;&lt;br&gt;最后提交看到老板简介：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/18.png&quot; alt=&quot;18&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Stage-4&quot;&gt;&lt;a href=&quot;#Stage-4&quot; class=&quot;headerlink&quot; title=&quot;Stage 4&quot;&gt;&lt;/a&gt;Stage 4&lt;/h3&gt;&lt;p&gt;这部分需要通过参数化查询防止这类攻击，与Stage 2的方法差不多。&lt;/p&gt;
-&lt;h2 id=&quot;String-SQL-Injection&quot;&gt;&lt;a href=&quot;#String-SQL-Injection&quot; class=&quot;headerlink&quot; title=&quot;String SQL Injection&quot;&gt;&lt;/a&gt;String SQL Injection&lt;/h2&gt;&lt;p&gt;如下图所示是一个输入姓名查银行卡的页面：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/13.png&quot; alt=&quot;13&quot;&gt;&lt;br&gt;要求我们把所有人的银行卡信息都显示出来。输入如下代码：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Smith’ or 1=1 –&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;成功了：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/14.png&quot; alt=&quot;14&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Database-Backdoors&quot;&gt;&lt;a href=&quot;#Database-Backdoors&quot; class=&quot;headerlink&quot; title=&quot;Database Backdoors&quot;&gt;&lt;/a&gt;Database Backdoors&lt;/h2&gt;&lt;p&gt;这一节讲的数据库后门攻击。数据库通常作为一个Web应用程序的后端来使用。此外，它也用来作为存储的媒介。它也可以被用来作为存储恶意活动的地方，如触发器。触发器是在数据库管理系统上调用另一个数据库操作，如insert, select, update or delete。举个例子：攻击者可以创建一个触发器，该触发器在创建新用户时，将每个新用户的Email地址设置为攻击者的地址。&lt;br&gt;正常情况下在如下页面输入工号，进行查询一些信息：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/15.png&quot; alt=&quot;15&quot;&gt;&lt;br&gt;后来发现客户端输入的查询语句没有在服务器端进行验证。&lt;br&gt;当我们输入如下代码时：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;101; update employee set salary=10000&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;服务器为我们执行了更新。&lt;br&gt;因此我们可以创建如下触发器：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;101;CREATE TRIGGER myBackDoor BEFORE INSERT ON employee FOR EACH ROW BEGIN UPDATE employee SET email=’john@hackme.com’ WHERE userid = NEW.userid&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;使没创建一个新用户的时候，自动为其填充为我们所希望的邮箱。&lt;/p&gt;
-&lt;h2 id=&quot;Summarize&quot;&gt;&lt;a href=&quot;#Summarize&quot; class=&quot;headerlink&quot; title=&quot;Summarize&quot;&gt;&lt;/a&gt;Summarize&lt;/h2&gt;&lt;p&gt;SQL注入需要对数据库熟悉，并且对后台代码了解，内容还是比较多的。  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;【版权声明】&lt;/strong&gt;&lt;br&gt;本文首发于&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰的博客&lt;/a&gt;，欢迎转载，但是必须保留本文的署名&lt;a href=&quot;http://qimingyu.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;戚名钰&lt;/a&gt;（包含链接）。如您有任何商业合作或者授权方面的协商，请给我留言：qimingyu.security@foxmail.com&lt;br&gt;欢迎关注我的微信公众号：科技锐新&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/about/kejiruixin.jpg&quot; alt=&quot;kejiruixin&quot;&gt; &lt;/p&gt;
-&lt;p&gt;本文永久链接：&lt;a href=&quot;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&quot;&gt;http://qimingyu.github.io/2016/05/06/Webgoat之Injection_Flaws/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Command-Injection&quot;&gt;&lt;a href=&quot;#Command-Injection&quot; class=&quot;headerlink&quot; title=&quot;Command Injection&quot;&gt;&lt;/a&gt;Command Injection&lt;/h2&gt;&lt;p&gt;这一节讲的是命令注入攻击。该攻击对任何一个以参数驱动的站点来说都是一个严重威胁。如下图所示：&lt;br&gt;&lt;img src=&quot;/images/webgoat_injection_flaws/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="应用安全" scheme="http://qimingyu.github.io/categories/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebGoat" scheme="http://qimingyu.github.io/tags/WebGoat/"/>
-    
-      <category term="网络渗透" scheme="http://qimingyu.github.io/tags/%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/"/>
-    
-      <category term="注入攻击" scheme="http://qimingyu.github.io/tags/%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/"/>
     
   </entry>
   
